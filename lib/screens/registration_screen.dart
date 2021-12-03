@@ -9,7 +9,7 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
 
-  bool checkBoxChecked = false;
+
   TextEditingController controllerUsername = new TextEditingController();
 
   @override
@@ -25,8 +25,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final cityController = new TextEditingController();
 
   //Radio buttons
-  final TextEditingController _textEditingController= new TextEditingController();
-  
+  //final TextEditingController _textEditingController= new TextEditingController();
+  bool radioChecked = false;
+  var userType= 'veterinario';
 
   Widget build(BuildContext context) {
 
@@ -149,7 +150,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -183,7 +189,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     cityField,
                     SizedBox(height: 20),
 
-                    Row(
+                    RadioListTile(
+                        contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
+
+                        title: Text("Sono un veterinario"),
+                        value: 'veterinario',
+                        groupValue: userType,
+                        onChanged: (String? val){
+                          setState(() {
+                            if(val!=null){
+                              userType= val;
+                              radioChecked= true;
+                            }
+                          });
+                        }
+                    ),
+                    RadioListTile(
+                        contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
+                        title: Text("Sono un addestratore"),
+                        value: 'addestratore',
+                        groupValue: userType,
+                        onChanged: (String? val){
+                          setState(() {
+                            if(val!=null){
+                              userType= val;
+                            }
+                          });
+                        }
+
+                    ),
+                    regButton,
+                    SizedBox(height: 40),
+
+                    /*Row(
                       children: [
                         Checkbox(
                           value: this.checkBoxChecked,
@@ -207,11 +245,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ),
                         ): Container(),
                       ],
-                    ),
+                    ), */
 
-
-                    regButton,
-                    SizedBox(height: 40),
                   ]
               )
           ),

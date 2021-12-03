@@ -1,8 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pet360/screens/home_screen.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
-  bool _initialized = false;
+  /* bool _initialized = false;
   bool _error = false;
 
   // Define an async function to initialize FlutterFire
@@ -33,13 +34,16 @@ class _LoginScreenState extends State<LoginScreen> {
         _error = true;
       });
     }
-  }
+  } */
 
-  @override
+  final _auth = FirebaseAuth.instance;
+
+
+  /* @override
   void initState() {
     initializeFlutterFire();
     super.initState();
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +52,16 @@ class _LoginScreenState extends State<LoginScreen> {
       autofocus: false,
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Inserisci una e-mail!");
+        }
+        //reg expr
+        if (!RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-z]+").hasMatch(value)) {
+          return ("Inserisci una e-mail valida!");
+        }
+        return null;
+      },
       onSaved: (value) {
         emailController.text = value!;
       },
@@ -68,6 +82,15 @@ class _LoginScreenState extends State<LoginScreen> {
       autofocus: false,
       obscureText: true,
       controller: passwordController,
+      validator: (value) {
+        RegExp regE = new RegExp(r'^.{6,}$');
+        if (value!.isEmpty) {
+          return ("Inserisci la password!");
+        }
+        if (!regE.hasMatch(value)) {
+          return ("Inserisci una passoword valida (Almeno 6 caratteri)");
+        }
+      },
       onSaved: (value) {
         passwordController.text = value!;
       },
@@ -89,19 +112,12 @@ class _LoginScreenState extends State<LoginScreen> {
       color: Colors.lightGreen,
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 15, 10),
-        minWidth: MediaQuery.of(context).size.width,
-        onPressed: () async {
-          try {
-            UserCredential userCredential = await FirebaseAuth.instance
-                .signInWithEmailAndPassword(
-                    email: "test1@test.it", password: "test123");
-          } on FirebaseAuthException catch (e) {
-            if (e.code == 'user-not-found') {
-              print('No user found for that email.');
-            } else if (e.code == 'wrong-password') {
-              print('Wrong password provided for that user.');
-            }
-          }
+        minWidth: MediaQuery
+            .of(context)
+            .size
+            .width,
+        onPressed: () {
+          SignIn(emailController.text, passwordController.text);
         },
         child: Text(
           "Login",
@@ -142,7 +158,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("Non hai un account? "),
+                            Text("Non hai un account? ",
+                              style: TextStyle(
+                                  fontSize: 15),
+                            ),
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -168,4 +187,20 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+
+  void SignIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) =>
+      {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen())),
+      }).catchError((e) {
+
+      });
+    }
+  }
+
 }
