@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pet360/screens/login_screen.dart';
 
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
       ),
+      initialRoute: "/",
+
       home: LoginScreen(),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet360/components/appBackground.dart';
 import 'package:pet360/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet360/screens/home_screen.dart';
@@ -66,9 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
-
       //email decoration
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(Icons.mail),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
@@ -76,7 +78,6 @@ class _LoginScreenState extends State<LoginScreen> {
             borderRadius: BorderRadius.circular(20),
           )),
     );
-
     //password
     final passwordFilds = TextFormField(
       autofocus: false,
@@ -98,6 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
       //password decoration
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(Icons.password_rounded),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
@@ -128,59 +131,61 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: Form(
-                  key: _formKey,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                            height: 200,
-                            child: Image.asset(
-                              "assets/logoPet360.png",
-                              fit: BoxFit.contain,
-                            )),
-                        SizedBox(height: 45),
-                        emailFilds,
-                        SizedBox(height: 25),
-                        passwordFilds,
-                        SizedBox(height: 35),
-                        loginButton,
-                        SizedBox(height: 15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text("Non hai un account? ",
-                              style: TextStyle(
-                                  fontSize: 15),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            RegistrationScreen()));
-                              },
-                              child: Text(
-                                "Clicca qui!",
+    return AppBackground( 
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              color: Colors.transparent,
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Form(
+                    key: _formKey,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                              height: 200,
+                              child: Image.asset(
+                                "assets/logoPet360.png",
+                                fit: BoxFit.contain,
+                              )),
+                          SizedBox(height: 45),
+                          emailFilds,
+                          SizedBox(height: 25),
+                          passwordFilds,
+                          SizedBox(height: 35),
+                          loginButton,
+                          SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text("Non hai un account? ",
                                 style: TextStyle(
-                                    color: Colors.lightGreen,
-                                    fontWeight: FontWeight.w600,
                                     fontSize: 15),
                               ),
-                            ),
-                          ],
-                        )
-                      ])),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              RegistrationScreen()));
+                                },
+                                child: Text(
+                                  "Clicca qui!",
+                                  style: TextStyle(
+                                      color: Colors.lightGreen,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ],
+                          )
+                        ])),
+              ),
             ),
           ),
         ),
