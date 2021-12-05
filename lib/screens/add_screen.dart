@@ -26,9 +26,9 @@ Widget build(BuildContext context) {
 
 class AccordionPage extends StatelessWidget //__
 {
-static const _headerStyle = TextStyle(color: Colors.black,fontSize: 25, fontFamily: 'Montserrat');
-static const _contentStyleHeader = TextStyle(color: Color(0xff999999), fontFamily: 'Montserrat',fontSize: 14, fontWeight: FontWeight.w700);
-static const _contentStyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat',fontSize: 20, fontWeight: FontWeight.normal);
+static const _headerStyle = TextStyle(color: Colors.black,fontSize: 25, fontFamily: 'Roboto');
+static const _contentStyleHeader = TextStyle(color: Color(0xff999999), fontFamily: 'Roboto',fontSize: 14, fontWeight: FontWeight.w700);
+static const _contentStyle = TextStyle(color: Colors.black, fontFamily: 'Roboto',fontSize: 20, fontWeight: FontWeight.normal);
 
 
 final _formkey= GlobalKey<FormState>();
