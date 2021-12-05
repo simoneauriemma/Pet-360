@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
       borderRadius: BorderRadius.circular(20),
       color: Colors.lightGreen,
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 15, 10),
+        padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
         minWidth: MediaQuery
             .of(context)
             .size
