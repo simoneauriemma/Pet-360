@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet360/components/appBackground.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -42,6 +43,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
       //email decoration
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(Icons.supervised_user_circle_outlined),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Nome",
@@ -61,6 +64,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
       //email decoration
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(Icons.supervised_user_circle_outlined),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Cognome",
@@ -80,6 +85,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
       //email decoration
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(Icons.mail),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
@@ -99,6 +106,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
       //email decoration
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(Icons.password),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
@@ -118,9 +127,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
       //email decoration
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           prefixIcon: Icon(Icons.location_city),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Email",
+          hintText: "Città",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           )),
@@ -145,114 +156,116 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return AppBackground(
+      child: Scaffold(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: (){
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(36.0),
-          child: Form(
-              key: _formkey,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                        height: 200,
-                        child: Image.asset(
-                          "assets/logoPet360.png",
-                          fit: BoxFit.contain,
-                        )),
-                    SizedBox(height: 45),
-
-                    nameField,
-                    SizedBox(height: 20),
-
-                    surnameField,
-                    SizedBox(height: 20),
-
-                    emailField,
-                    SizedBox(height: 20),
-
-                    passwordField,
-                    SizedBox(height: 20),
-
-                    cityField,
-                    SizedBox(height: 20),
-
-                    RadioListTile(
-                        contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
-
-                        title: Text("Sono un veterinario"),
-                        value: 'veterinario',
-                        groupValue: userType,
-                        onChanged: (String? val){
-                          setState(() {
-                            if(val!=null){
-                              userType= val;
-                              radioChecked= true;
-                            }
-                          });
-                        }
-                    ),
-                    RadioListTile(
-                        contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
-                        title: Text("Sono un addestratore"),
-                        value: 'addestratore',
-                        groupValue: userType,
-                        onChanged: (String? val){
-                          setState(() {
-                            if(val!=null){
-                              userType= val;
-                            }
-                          });
-                        }
-
-                    ),
-                    regButton,
-                    SizedBox(height: 40),
-
-                    /*Row(
-                      children: [
-                        Checkbox(
-                          value: this.checkBoxChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.checkBoxChecked = value!;
-                              controllerUsername.clear();
-                            });
-                          },
-                        ),
-                        (checkBoxChecked)? Flexible(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: TextField(
-                              controller: controllerUsername,
-                              decoration: const InputDecoration(
-                                hintText: "Enter some text",
-                                isDense: true,
-                              ),
-                            ),
-                          ),
-                        ): Container(),
-                      ],
-                    ), */
-
-                  ]
-              )
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
           ),
         ),
-      ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(36.0),
+            child: Form(
+                key: _formkey,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                          height: 200,
+                          child: Image.asset(
+                            "assets/logoPet360.png",
+                            fit: BoxFit.contain,
+                          )),
+                      SizedBox(height: 45),
 
+                      nameField,
+                      SizedBox(height: 20),
+
+                      surnameField,
+                      SizedBox(height: 20),
+
+                      emailField,
+                      SizedBox(height: 20),
+
+                      passwordField,
+                      SizedBox(height: 20),
+
+                      cityField,
+                      SizedBox(height: 20),
+
+                      RadioListTile(
+                          contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
+
+                          title: Text("Sono un veterinario"),
+                          value: 'veterinario',
+                          groupValue: userType,
+                          onChanged: (String? val){
+                            setState(() {
+                              if(val!=null){
+                                userType= val;
+                                radioChecked= true;
+                              }
+                            });
+                          }
+                      ),
+                      RadioListTile(
+                          contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
+                          title: Text("Sono un addestratore"),
+                          value: 'addestratore',
+                          groupValue: userType,
+                          onChanged: (String? val){
+                            setState(() {
+                              if(val!=null){
+                                userType= val;
+                              }
+                            });
+                          }
+
+                      ),
+                      regButton,
+                      SizedBox(height: 40),
+
+                      /*Row(
+                        children: [
+                          Checkbox(
+                            value: this.checkBoxChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.checkBoxChecked = value!;
+                                controllerUsername.clear();
+                              });
+                            },
+                          ),
+                          (checkBoxChecked)? Flexible(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: TextField(
+                                controller: controllerUsername,
+                                decoration: const InputDecoration(
+                                  hintText: "Enter some text",
+                                  isDense: true,
+                                ),
+                              ),
+                            ),
+                          ): Container(),
+                        ],
+                      ), */
+
+                    ]
+                )
+            ),
+          ),
+        ),
+
+      ),
     );
 
   }
