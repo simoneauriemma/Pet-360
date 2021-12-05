@@ -37,14 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   } */
 
-  final _auth = FirebaseAuth.instance;
-
-
   /* @override
   void initState() {
     initializeFlutterFire();
     super.initState();
   } */
+
+  final _auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
                         ])),
               ),
             ),
