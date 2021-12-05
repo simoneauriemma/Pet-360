@@ -25,6 +25,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final passwordController = new TextEditingController();
   final cityController = new TextEditingController();
 
+
   //Radio buttons
   //final TextEditingController _textEditingController= new TextEditingController();
   bool radioChecked = false;
@@ -154,7 +155,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
 
-    Size size = MediaQuery.of(context).size;
 
     return AppBackground(
       child: Scaffold(
@@ -184,7 +184,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             "assets/icons/logoPet360.png",
                             fit: BoxFit.contain,
                           )),
+
                       SizedBox(height: 45),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Registrati qui a Pet360",
+                            style: TextStyle(
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 10),
 
                       nameField,
                       SizedBox(height: 20),
@@ -203,7 +216,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                       RadioListTile(
                           contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
-
                           title: Text("Sono un veterinario"),
                           value: 'veterinario',
                           groupValue: userType,
@@ -211,7 +223,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             setState(() {
                               if(val!=null){
                                 userType= val;
-                                radioChecked= true;
                               }
                             });
                           }
@@ -223,7 +234,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           groupValue: userType,
                           onChanged: (String? val){
                             setState(() {
-                              if(val!=null){
+                              if(val != null){
                                 userType= val;
                               }
                             });

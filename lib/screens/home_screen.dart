@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.location_on,
                           color: currentTab==1 ? Colors.lightGreen : Colors.grey,
                         ),
-                        Text('Traccia', style: TextStyle(color: currentTab==0 ? Colors.lightGreen : Colors.grey),)
+                        Text('Traccia', style: TextStyle(color: currentTab==1? Colors.lightGreen : Colors.grey),)
                       ],
                     ),
                   ),
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen= Dashboard();
+                        currentScreen= ChatScreen();
                         currentTab=2;
                       });
                     },
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.chat_rounded,
                           color: currentTab==2 ? Colors.lightGreen : Colors.grey,
                         ),
-                        Text('Chat', style: TextStyle(color: currentTab==0 ? Colors.lightGreen : Colors.grey),)
+                        Text('Chat', style: TextStyle(color: currentTab==2 ? Colors.lightGreen : Colors.grey),)
                       ],
                     ),
                   ),
@@ -133,12 +133,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.account_circle_rounded,
                           color: currentTab==3 ? Colors.lightGreen : Colors.grey,
                         ),
-                        Text('Profilo', style: TextStyle(color: currentTab==0 ? Colors.lightGreen : Colors.grey),)
+                        Text('Profilo', style: TextStyle(color: currentTab==3 ? Colors.lightGreen : Colors.grey),)
                       ],
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
