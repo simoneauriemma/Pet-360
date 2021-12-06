@@ -36,12 +36,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   //Radio buttons
   //final TextEditingController _textEditingController= new TextEditingController();
   bool radioChecked = false;
-  var userType= 'veterinario';
+  var userType = 'veterinario';
   bool checkBoxChecked = false;
-  bool checkBoxChecked2= false;
+  bool checkBoxChecked2 = false;
+
   //TextEditingController controllerUsername = new TextEditingController();
-
-
 
   Widget build(BuildContext context) {
     final nameField = TextFormField(
@@ -176,15 +175,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
 
-
     final shopNameField = TextFormField(
       autofocus: false,
       controller: shopNameController,
       keyboardType: TextInputType.name,
       onSaved: (value) {
-        cityController.text = value!;
+        shopNameController.text = value!;
       },
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.next,
 
       //email decoration
       decoration: InputDecoration(
@@ -198,6 +196,68 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           )),
     );
 
+    final phoneNumberField = TextFormField(
+      autofocus: false,
+      controller: phoneNumberController,
+      keyboardType: TextInputType.number,
+      onSaved: (value) {
+        phoneNumberController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+
+      //email decoration
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          prefixIcon: Icon(Icons.phone),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Numero di telefono",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          )),
+    );
+
+    final cityShopField = TextFormField(
+      autofocus: false,
+      controller: cityShopController,
+      keyboardType: TextInputType.text,
+      onSaved: (value) {
+        cityShopController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+
+      //email decoration
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          prefixIcon: Icon(Icons.apartment_rounded),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Città",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          )),
+    );
+
+    final shopAddressField = TextFormField(
+      autofocus: false,
+      controller: shopAddressController,
+      keyboardType: TextInputType.number,
+      onSaved: (value) {
+        shopAddressController.text = value!;
+      },
+      textInputAction: TextInputAction.done,
+
+      //email decoration
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          prefixIcon: Icon(Icons.home),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Indirizzo",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          )),
+    );
 
     return AppBackground(
       child: Scaffold(
@@ -232,8 +292,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Registrati qui a Pet360",
-                            style: TextStyle(fontSize: 20),
+                            "Registrazione",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  color: Colors.lightGreen.shade100,
+                                  offset: Offset(5.0, 5.0),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -248,73 +318,82 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       SizedBox(height: 20),
                       cityField,
                       SizedBox(height: 20),
-                      /*RadioListTile(
-                          contentPadding: EdgeInsets.only(
-                              left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
-                          title: Text("Sono un veterinario"),
-                          value: 'veterinario',
-                          groupValue: userType,
-                          onChanged: (String? val) {
-                            setState(() {
-                              if (val != null) {
-                                userType = val;
-                              }
-                            });
-                          }),
-                      RadioListTile(
-                          contentPadding: EdgeInsets.only(
-                              left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
-                          title: Text("Sono un addestratore"),
-                          value: 'addestratore',
-                          groupValue: userType,
-                          onChanged: (String? val) {
-                            setState(() {
-                              if (val != null) {
-                                userType = val;
-                              }
-                            });
-                          }), */
-                      regButton,
-                      SizedBox(height: 40),
-
                       Wrap(
                         children: [
-                          Row(
-                              children: [
-                                Checkbox(
-                                  value: this.checkBoxChecked,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      this.checkBoxChecked = value!;
-                                      controllerUsername.clear();
-                                    });
-                                  },
-                                ),
-
-                                Text("Sono un veterinario",
-                                  style: TextStyle(
-                                      fontSize: 20),
-                                ),
-                              ]
-                          ),
-
-                          (checkBoxChecked)? Flexible(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                shopNameField,
-                              ],
+                          Row(children: [
+                            Checkbox(
+                              value: this.checkBoxChecked,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.checkBoxChecked = value!;
+                                  checkBoxChecked2= false;
+                                });
+                              },
                             ),
-                          ): Column(),
+                            Text(
+                              "Sono un veterinario",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ]),
+                          Row(children: [
+                            Checkbox(
+                              value: this.checkBoxChecked2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.checkBoxChecked2 = value!;
+                                  checkBoxChecked= false;
+                                });
+                              },
+                            ),
+                            Text(
+                              "Sono un addestratore",
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ]),
 
-                          //CHECK BOX ADDESTRATORE
-                          //...
+                          (checkBoxChecked || checkBoxChecked2)
+                              ? Flexible(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(height: 20),
+                                      Text(
+                                        "Informazioni aggiuntive",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 10.0,
+                                              color: Colors.lightGreen.shade100,
+                                              offset: Offset(5.0, 5.0),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      shopNameField,
+                                      SizedBox(height: 20),
+                                      phoneNumberField,
+                                      SizedBox(height: 20),
+                                      cityShopField,
+                                      SizedBox(height: 20),
+                                      shopAddressField,
+                                      SizedBox(height: 40)
+                                    ],
+                                  ),
+                                )
+                              : Column(),
 
+                          //bottone "registrazione"
+
+                          regButton,
                         ],
-
                       ),
-
                     ])),
           ),
         ),

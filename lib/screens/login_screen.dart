@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: <Widget>[
                               Text("Non hai un account? ",
                                 style: TextStyle(
-                                    fontSize: 15),
+                                    fontSize: 18),
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -179,7 +179,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: TextStyle(
                                       color: Colors.lightGreen,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 15),
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 18),
                                 ),
                               ),
                             ],
