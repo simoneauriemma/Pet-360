@@ -64,7 +64,7 @@ backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
 
 body: SingleChildScrollView(
 scrollDirection: Axis.vertical,
-padding: const EdgeInsets.only(top:60),
+padding: const EdgeInsets.only(top:6),
 child: Column(children: <Widget>[
 //icona_bottone_back
 /*Container(
