@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class TrainerModel {
+class VeterinaryModel {
   String? uid;
   String? email;
   String? firstName;
@@ -13,7 +13,7 @@ class TrainerModel {
 
   int? typeOfUser;
 
-  TrainerModel({
+  VeterinaryModel({
     this.uid,
     this.email,
     this.firstName,
@@ -27,8 +27,8 @@ class TrainerModel {
   });
 
   //receive data from server
-  factory TrainerModel.fromMap(map) {
-    return TrainerModel(
+  factory VeterinaryModel.fromMap(map) {
+    return VeterinaryModel(
       uid: map['uid'],
       email: map['email'],
       firstName: map['name'],

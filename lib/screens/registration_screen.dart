@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet360/components/appBackground.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
+import 'package:pet360/model/veterinary_model.dart';
 
 import 'home_screen.dart';
 
@@ -158,13 +160,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         onPressed: () {
           //String email, String password, String firstName,
           //       String surnameName, String cityName, typeOfUser
+          var typeOfUser;
+          if (checkBoxChecked) {
+            typeOfUser = 1;
+          } else if (checkBoxChecked2) {
+            typeOfUser = 2;
+          } else {
+            typeOfUser = 0;
+          }
           SignUp(
               emailController.text,
               passwordController.text,
               nameController.text,
               surnameController.text,
               cityController.text,
-              0);
+              typeOfUser);
         },
         child: Text(
           "Registrati",
@@ -326,7 +336,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   this.checkBoxChecked = value!;
-                                  checkBoxChecked2= false;
+                                  checkBoxChecked2 = false;
                                 });
                               },
                             ),
@@ -341,7 +351,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   this.checkBoxChecked2 = value!;
-                                  checkBoxChecked= false;
+                                  checkBoxChecked = false;
                                 });
                               },
                             ),
@@ -403,22 +413,87 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   void SignUp(String email, String password, String firstName,
       String surnameName, String cityName, typeOfUser) async {
-    UserModel user;
-    await _auth
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((uid) => {
-              user = UserModel(
-                  uid: _auth.currentUser!.uid,
-                  email: email,
-                  firstName: firstName,
-                  surnameName: surnameName,
-                  cityName: cityName,
-                  typeOfUser: typeOfUser),
-              //ONLY FOR TESTING!!!!!
-              print("\n TESTING UID  " + user.uid.toString() + "\n"),
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomeScreen())),
-            })
-        .catchError((e) {});
+    switch (typeOfUser) {
+      case 0:
+        {
+          UserModel user = UserModel(
+              email: email,
+              firstName: firstName,
+              surnameName: surnameName,
+              cityName: cityName,
+              typeOfUser: typeOfUser);
+
+          await _auth
+              .createUserWithEmailAndPassword(email: email, password: password)
+              .then((uid) => {
+                    user.uid = _auth.currentUser!.uid,
+                    //ONLY FOR TESTING!!!!!
+                    print("\n TESTING UID  " + user.uid.toString() + "\n"),
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomeScreen())),
+                  })
+              .catchError((e) {});
+        }
+        break;
+      case 1:
+        {
+          VeterinaryModel veterinaryModel = VeterinaryModel(
+              email: email,
+              firstName: firstName,
+              surnameName: surnameName,
+              cityName: cityName,
+              typeOfUser: typeOfUser,
+              nameShop: shopNameController.text,
+              numberPhone: phoneNumberController.text,
+              cityShop: cityShopController.text,
+              addressShop: shopAddressController.text);
+
+          await _auth
+              .createUserWithEmailAndPassword(email: email, password: password)
+              .then((uid) => {
+                    veterinaryModel.uid = _auth.currentUser!.uid,
+                    //ONLY FOR TESTING!!!!!
+                    print("\n TESTING UID  " +
+                        veterinaryModel.uid.toString() +
+                        "\n"),
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomeScreen())),
+                  })
+              .catchError((e) {});
+        }
+        break;
+      case 2:
+        {
+          TrainerModel trainerModel = TrainerModel(
+              email: email,
+              firstName: firstName,
+              surnameName: surnameName,
+              cityName: cityName,
+              typeOfUser: typeOfUser,
+              nameShop: shopNameController.text,
+              numberPhone: phoneNumberController.text,
+              cityShop: cityShopController.text,
+              addressShop: shopAddressController.text);
+
+          await _auth
+              .createUserWithEmailAndPassword(email: email, password: password)
+              .then((uid) => {
+                    trainerModel.uid = _auth.currentUser!.uid,
+                    //ONLY FOR TESTING!!!!!
+                    print("\n TESTING UID  " +
+                        trainerModel.uid.toString() +
+                        "\n"),
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomeScreen())),
+                  })
+              .catchError((e) {});
+        }
+        break;
+      default:
+        {
+          print("This is default case");
+        }
+        break;
+    }
   }
 }
