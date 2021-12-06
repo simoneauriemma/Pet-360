@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Dashboard(),
     ChatScreen(),
     ProfileScreen(),
-    //AddNewAnimalScreen(),
+    AddNewAnimalScreen(),
     LocationScreen(),
     HomeScreen(),
   ];
@@ -41,7 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            currentScreen= AddNewAnimalScreen();
+            currentTab=0;
+            });
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
