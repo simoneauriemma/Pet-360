@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pet360/components/appBackground.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pet360/model/user_model.dart';
+
+import 'home_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
-  }
+}
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-
-
   TextEditingController controllerUsername = new TextEditingController();
 
   @override
@@ -18,21 +20,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     super.initState();
   }
 
-  final _formkey= GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
   final nameController = new TextEditingController();
   final surnameController = new TextEditingController();
   final emailController = new TextEditingController();
   final passwordController = new TextEditingController();
   final cityController = new TextEditingController();
-
+  final _auth = FirebaseAuth.instance;
 
   //Radio buttons
   //final TextEditingController _textEditingController= new TextEditingController();
   bool radioChecked = false;
-  var userType= 'veterinario';
+  var userType = 'veterinario';
 
   Widget build(BuildContext context) {
-
     final nameField = TextFormField(
       autofocus: false,
       controller: nameController,
@@ -145,7 +146,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 15, 10),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {},
+        onPressed: () {
+          //String email, String password, String firstName,
+          //       String surnameName, String cityName, typeOfUser
+          SignUp(
+              emailController.text,
+              passwordController.text,
+              nameController.text,
+              surnameController.text,
+              cityController.text,
+              0);
+        },
         child: Text(
           "Registrati",
           textAlign: TextAlign.center,
@@ -155,7 +166,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
 
-
     return AppBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -164,7 +174,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: (){
+            onPressed: () {
               Navigator.of(context).pop();
             },
           ),
@@ -184,63 +194,53 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             "assets/icons/logoPet360.png",
                             fit: BoxFit.contain,
                           )),
-
                       SizedBox(height: 45),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Registrati qui a Pet360",
-                            style: TextStyle(
-                                fontSize: 20),
+                          Text(
+                            "Registrati qui a Pet360",
+                            style: TextStyle(fontSize: 20),
                           ),
                         ],
                       ),
-
                       SizedBox(height: 10),
-
                       nameField,
                       SizedBox(height: 20),
-
                       surnameField,
                       SizedBox(height: 20),
-
                       emailField,
                       SizedBox(height: 20),
-
                       passwordField,
                       SizedBox(height: 20),
-
                       cityField,
                       SizedBox(height: 20),
-
                       RadioListTile(
-                          contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
+                          contentPadding: EdgeInsets.only(
+                              left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
                           title: Text("Sono un veterinario"),
                           value: 'veterinario',
                           groupValue: userType,
-                          onChanged: (String? val){
+                          onChanged: (String? val) {
                             setState(() {
-                              if(val!=null){
-                                userType= val;
+                              if (val != null) {
+                                userType = val;
                               }
                             });
-                          }
-                      ),
+                          }),
                       RadioListTile(
-                          contentPadding: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
+                          contentPadding: EdgeInsets.only(
+                              left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
                           title: Text("Sono un addestratore"),
                           value: 'addestratore',
                           groupValue: userType,
-                          onChanged: (String? val){
+                          onChanged: (String? val) {
                             setState(() {
-                              if(val != null){
-                                userType= val;
+                              if (val != null) {
+                                userType = val;
                               }
                             });
-                          }
-
-                      ),
+                          }),
                       regButton,
                       SizedBox(height: 40),
 
@@ -269,15 +269,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ): Container(),
                         ],
                       ), */
-
-                    ]
-                )
-            ),
+                    ])),
           ),
         ),
-
       ),
     );
+  }
 
+  void SignUp(String email, String password, String firstName,
+      String surnameName, String cityName, typeOfUser) async {
+    UserModel user;
+    await _auth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((uid) => {
+              user = UserModel(
+                  uid: _auth.currentUser!.uid,
+                  email: email,
+                  firstName: firstName,
+                  surnameName: surnameName,
+                  cityName: cityName,
+                  typeOfUser: typeOfUser),
+              //ONLY FOR TESTING!!!!!
+              print("\n TESTING UID  " + user.uid.toString() + "\n"),
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => HomeScreen())),
+            })
+        .catchError((e) {});
   }
 }
