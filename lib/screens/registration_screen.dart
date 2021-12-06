@@ -154,7 +154,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       borderRadius: BorderRadius.circular(20),
       color: Colors.lightGreen,
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 15, 10),
+        padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           //String email, String password, String firstName,
@@ -227,7 +227,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             "assets/icons/logoPet360.png",
                             fit: BoxFit.contain,
                           )),
-                      SizedBox(height: 45),
+                      SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -237,7 +237,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 20),
                       nameField,
                       SizedBox(height: 20),
                       surnameField,
