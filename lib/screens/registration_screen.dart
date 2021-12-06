@@ -28,10 +28,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final cityController = new TextEditingController();
   final _auth = FirebaseAuth.instance;
 
+  final shopNameController = new TextEditingController();
+  final phoneNumberController = new TextEditingController();
+  final cityShopController = new TextEditingController();
+  final shopAddressController = new TextEditingController();
+
   //Radio buttons
   //final TextEditingController _textEditingController= new TextEditingController();
   bool radioChecked = false;
-  var userType = 'veterinario';
+  var userType= 'veterinario';
+  bool checkBoxChecked = false;
+  bool checkBoxChecked2= false;
+  //TextEditingController controllerUsername = new TextEditingController();
+
+
 
   Widget build(BuildContext context) {
     final nameField = TextFormField(
@@ -166,6 +176,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
 
+
+    final shopNameField = TextFormField(
+      autofocus: false,
+      controller: shopNameController,
+      keyboardType: TextInputType.name,
+      onSaved: (value) {
+        cityController.text = value!;
+      },
+      textInputAction: TextInputAction.done,
+
+      //email decoration
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          prefixIcon: Icon(Icons.shop),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Nome negozio",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          )),
+    );
+
+
     return AppBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -215,7 +248,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       SizedBox(height: 20),
                       cityField,
                       SizedBox(height: 20),
-                      RadioListTile(
+                      /*RadioListTile(
                           contentPadding: EdgeInsets.only(
                               left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
                           title: Text("Sono un veterinario"),
@@ -240,35 +273,48 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 userType = val;
                               }
                             });
-                          }),
+                          }), */
                       regButton,
                       SizedBox(height: 40),
 
-                      /*Row(
+                      Wrap(
                         children: [
-                          Checkbox(
-                            value: this.checkBoxChecked,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.checkBoxChecked = value!;
-                                controllerUsername.clear();
-                              });
-                            },
-                          ),
-                          (checkBoxChecked)? Flexible(
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: TextField(
-                                controller: controllerUsername,
-                                decoration: const InputDecoration(
-                                  hintText: "Enter some text",
-                                  isDense: true,
+                          Row(
+                              children: [
+                                Checkbox(
+                                  value: this.checkBoxChecked,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      this.checkBoxChecked = value!;
+                                      controllerUsername.clear();
+                                    });
+                                  },
                                 ),
-                              ),
+
+                                Text("Sono un veterinario",
+                                  style: TextStyle(
+                                      fontSize: 20),
+                                ),
+                              ]
+                          ),
+
+                          (checkBoxChecked)? Flexible(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                shopNameField,
+                              ],
                             ),
-                          ): Container(),
+                          ): Column(),
+
+                          //CHECK BOX ADDESTRATORE
+                          //...
+
                         ],
-                      ), */
+
+                      ),
+
                     ])),
           ),
         ),
