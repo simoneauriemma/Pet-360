@@ -4,6 +4,7 @@ class UserModel {
   String? firstName;
   String? surnameName;
   String? cityName;
+  String? address;
   int? typeOfUser;
 
   UserModel(
@@ -12,6 +13,7 @@ class UserModel {
       this.firstName,
       this.surnameName,
       this.cityName,
+      this.address,
       this.typeOfUser});
 
   //receive data from server
@@ -22,6 +24,7 @@ class UserModel {
         firstName: map['name'],
         surnameName: map['surname'],
         cityName: map['city'],
+        address: map['address'],
         typeOfUser: map['typeOfUser']);
   }
   //sending data to server
@@ -33,7 +36,8 @@ class UserModel {
       'name': firstName,
       'surname': surnameName,
       'city': cityName,
-      'typeOfUser': typeOfUser
+      'typeOfUser': typeOfUser,
+      'address': address
     };
   }
 }
