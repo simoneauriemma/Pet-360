@@ -1,10 +1,10 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/components/appBackground.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
-
 import 'home_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -29,7 +29,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final passwordController = new TextEditingController();
   final cityController = new TextEditingController();
   final _auth = FirebaseAuth.instance;
-
   final shopNameController = new TextEditingController();
   final phoneNumberController = new TextEditingController();
   final cityShopController = new TextEditingController();
@@ -421,14 +420,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               firstName: firstName,
               surnameName: surnameName,
               cityName: cityName,
+              address: "prova", //TODO DA CAMBIARE
               typeOfUser: typeOfUser);
-
+          final DBRef = FirebaseDatabase.instance.reference().child("Utente");
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
                     user.uid = _auth.currentUser!.uid,
                     //ONLY FOR TESTING!!!!!
                     print("\n TESTING UID  " + user.uid.toString() + "\n"),
+                    DBRef.child(user.uid.toString()).set({
+                    'firstName':user.firstName,
+                    'surnameName':user.surnameName,
+                    'cityName':user.cityName,
+                    'address': user.address,
+                    }),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
@@ -447,7 +453,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               numberPhone: phoneNumberController.text,
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
-
+          final DBRef = FirebaseDatabase.instance.reference().child("Veterinario");
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
@@ -456,6 +462,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     print("\n TESTING UID  " +
                         veterinaryModel.uid.toString() +
                         "\n"),
+                    DBRef.child(veterinaryModel.uid.toString()).set({
+                      'firstName':veterinaryModel.firstName,
+                      'surnameName':veterinaryModel.surnameName,
+                      'cityName':veterinaryModel.cityName,
+                      'address': veterinaryModel.address,
+                      'nameShop': veterinaryModel.nameShop,
+                      'numberPhone': veterinaryModel.numberPhone,
+                      'cityShop': veterinaryModel.cityShop,
+                      'addressShop': veterinaryModel.addressShop,
+                    }),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
@@ -474,7 +490,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               numberPhone: phoneNumberController.text,
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
-
+          final DBRef = FirebaseDatabase.instance.reference().child("Addestratore");
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
@@ -483,6 +499,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     print("\n TESTING UID  " +
                         trainerModel.uid.toString() +
                         "\n"),
+                    DBRef.child(trainerModel.uid.toString()).set({
+                      'firstName':trainerModel.firstName,
+                      'surnameName':trainerModel.surnameName,
+                      'cityName':trainerModel.cityName,
+                      'address': trainerModel.address,
+                      'nameShop': trainerModel.nameShop,
+                      'numberPhone': trainerModel.numberPhone,
+                      'cityShop': trainerModel.cityShop,
+                      'addressShop': trainerModel.addressShop,
+                    }),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })

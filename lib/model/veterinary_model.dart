@@ -10,6 +10,7 @@ class VeterinaryModel {
   String? nameShop;
   String? cityShop;
   String? addressShop;
+  String? address;
 
   int? typeOfUser;
 
@@ -24,6 +25,7 @@ class VeterinaryModel {
     this.addressShop,
     this.cityShop,
     this.nameShop,
+    this.address,
   });
 
   //receive data from server
@@ -39,6 +41,7 @@ class VeterinaryModel {
       addressShop: map['addressShop'],
       cityShop: map['cityShop'],
       nameShop: map['nameShop'],
+      address: map['address'],
     );
   }
   //sending data to server
@@ -54,7 +57,8 @@ class VeterinaryModel {
       'numberPhone': numberPhone,
       'addressShop': addressShop,
       'cityShop': cityShop,
-      'nameShop': nameShop
+      'nameShop': nameShop,
+      'address': address,
     };
   }
 }

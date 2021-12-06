@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "492106919511",
+    "firebase_url": "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "pet360-43dfe",
     "storage_bucket": "pet360-43dfe.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "492106919511-aequuol5uspoufcror17opre20n5a7u3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "492106919511-9c9ilj09u1n70jpiadg5idm1c2s5h48b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.flutter.flutter.app"
+              }
             }
           ]
         }
