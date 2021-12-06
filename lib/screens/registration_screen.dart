@@ -6,6 +6,8 @@ import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'home_screen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -420,9 +422,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               firstName: firstName,
               surnameName: surnameName,
               cityName: cityName,
-              address: "prova", //TODO DA CAMBIARE
+              address: "prova",
+              //TODO DA CAMBIARE
               typeOfUser: typeOfUser);
           final DBRef = FirebaseDatabase.instance.reference().child("Utente");
+          getData();
+          //var document = getData();
+          // document.getEmail();
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
@@ -430,11 +436,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     //ONLY FOR TESTING!!!!!
                     print("\n TESTING UID  " + user.uid.toString() + "\n"),
                     DBRef.child(user.uid.toString()).set({
-                    'firstName':user.firstName,
-                    'surnameName':user.surnameName,
-                    'cityName':user.cityName,
-                    'address': user.address,
+                      'firstName': user.firstName,
+                      'surnameName': user.surnameName,
+                      'cityName': user.cityName,
+                      'address': user.address,
                     }),
+
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
@@ -453,7 +460,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               numberPhone: phoneNumberController.text,
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
-          final DBRef = FirebaseDatabase.instance.reference().child("Veterinario");
+          final DBRef =
+              FirebaseDatabase.instance.reference().child("Veterinario");
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
@@ -463,15 +471,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         veterinaryModel.uid.toString() +
                         "\n"),
                     DBRef.child(veterinaryModel.uid.toString()).set({
-                      'firstName':veterinaryModel.firstName,
-                      'surnameName':veterinaryModel.surnameName,
-                      'cityName':veterinaryModel.cityName,
+                      'firstName': veterinaryModel.firstName,
+                      'surnameName': veterinaryModel.surnameName,
+                      'cityName': veterinaryModel.cityName,
                       'address': veterinaryModel.address,
                       'nameShop': veterinaryModel.nameShop,
                       'numberPhone': veterinaryModel.numberPhone,
                       'cityShop': veterinaryModel.cityShop,
                       'addressShop': veterinaryModel.addressShop,
                     }),
+
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
@@ -490,7 +499,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               numberPhone: phoneNumberController.text,
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
-          final DBRef = FirebaseDatabase.instance.reference().child("Addestratore");
+          final DBRef =
+              FirebaseDatabase.instance.reference().child("Addestratore");
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
@@ -500,9 +510,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         trainerModel.uid.toString() +
                         "\n"),
                     DBRef.child(trainerModel.uid.toString()).set({
-                      'firstName':trainerModel.firstName,
-                      'surnameName':trainerModel.surnameName,
-                      'cityName':trainerModel.cityName,
+                      'firstName': trainerModel.firstName,
+                      'surnameName': trainerModel.surnameName,
+                      'cityName': trainerModel.cityName,
                       'address': trainerModel.address,
                       'nameShop': trainerModel.nameShop,
                       'numberPhone': trainerModel.numberPhone,
@@ -520,6 +530,30 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           print("This is default case");
         }
         break;
+    }
+  }
+
+  //SINGOLO ELEMENTO
+  /*Future<String> getEmail() async {
+    String result = (await FirebaseDatabase.instance
+            .reference()
+            .child("Addestratore/UKvCMmDzogfmMiFTubQRwgCYyoj1/cityName")
+            .once())
+        .value;
+    print(result);
+    return result;
+  }*/
+
+  getData() async {
+    var url = Uri.parse(
+        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//Addestratore//UKvCMmDzogfmMiFTubQRwgCYyoj1.json?");
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonResponse =
+          convert.jsonDecode(response.body) as Map<String, dynamic>;
+      print(jsonResponse);
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
     }
   }
 }
