@@ -40,6 +40,7 @@ dependencies:
   getflutter: ^1.0.11
   getwidget: ^2.0.4
   accordion: ^2.1.1
+  image_picker: ^0.8.3+1
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
   assets:
     - assets/icons/logoPet360.png
     - assets/icons/down-arrow.png
+    - assets/icons/add-photo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
