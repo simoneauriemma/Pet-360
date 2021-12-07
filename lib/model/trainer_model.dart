@@ -11,8 +11,7 @@ class TrainerModel {
   String? cityShop;
   String? addressShop;
   String? address;
-
-  int? typeOfUser;
+  String? typeOfUser;
 
   TrainerModel({
     this.uid,

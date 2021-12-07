@@ -5,7 +5,7 @@ class UserModel {
   String? surnameName;
   String? cityName;
   String? address;
-  int? typeOfUser;
+  String? typeOfUser;
 
   UserModel(
       {this.uid,

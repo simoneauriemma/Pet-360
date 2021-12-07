@@ -11,8 +11,7 @@ class VeterinaryModel {
   String? cityShop;
   String? addressShop;
   String? address;
-
-  int? typeOfUser;
+  String? typeOfUser;
 
   VeterinaryModel({
     this.uid,
