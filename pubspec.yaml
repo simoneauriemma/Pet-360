@@ -69,7 +69,7 @@ flutter:
     - assets/icons/logoPet360.png
     - assets/icons/down-arrow.png
     - assets/icons/add-photo.png
-
+    - assets/icons/ped-id.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
