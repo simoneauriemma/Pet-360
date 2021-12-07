@@ -3,8 +3,9 @@ import 'package:pet360/screens/addnewanimal_screen.dart';
 import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/location_screen.dart';
 import 'package:pet360/screens/profile_screen.dart';
-
+import 'dart:convert';
 import 'dashboard.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Dashboard();
+  var jsonBody;
 
   @override
   Widget build(BuildContext context) {
@@ -147,5 +149,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
     );
+  }
+  //getData("User","uid","surnameName")
+  getData(String typeOfUser, String uidUser, String path) async {
+    var url = Uri.parse(
+        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" + typeOfUser + "//" + uidUser + "//" + path + ".json?");
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      jsonBody = json.decode(response.body);
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
   }
 }

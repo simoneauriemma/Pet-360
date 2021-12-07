@@ -6,9 +6,6 @@ import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'home_screen.dart';
-import 'package:http/http.dart' as http;
-
-import 'dart:convert';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -19,8 +16,6 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController controllerUsername = new TextEditingController();
-
-  var jsonBody;
 
   @override
   void initState() {
@@ -166,11 +161,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           //       String surnameName, String cityName, typeOfUser
           var typeOfUser;
           if (checkBoxChecked) {
-            typeOfUser = 1;
+            typeOfUser = "Veterinario";
           } else if (checkBoxChecked2) {
-            typeOfUser = 2;
+            typeOfUser = "Addestratore";
           } else {
-            typeOfUser = 0;
+            typeOfUser = "Utente";
           }
           SignUp(
               emailController.text,
@@ -416,9 +411,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   void SignUp(String email, String password, String firstName,
-      String surnameName, String cityName, typeOfUser) async {
+      String surnameName, String cityName, String typeOfUser) async {
     switch (typeOfUser) {
-      case 0:
+      case "Utente":
         {
           UserModel user = UserModel(
               email: email,
@@ -428,8 +423,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               address: "prova",
               //TODO DA CAMBIARE
               typeOfUser: typeOfUser);
-          final DBRef = FirebaseDatabase.instance.reference().child("Utente");
-          getData();
+          final DBRef = FirebaseDatabase.instance.reference().child(typeOfUser);
           //var document = getData();
           // document.getEmail();
           await _auth
@@ -444,14 +438,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       'cityName': user.cityName,
                       'address': user.address,
                     }),
-
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
               .catchError((e) {});
         }
         break;
-      case 1:
+      case "Veterinario":
         {
           VeterinaryModel veterinaryModel = VeterinaryModel(
               email: email,
@@ -464,7 +457,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
           final DBRef =
-              FirebaseDatabase.instance.reference().child("Veterinario");
+              FirebaseDatabase.instance.reference().child(typeOfUser);
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
@@ -490,7 +483,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               .catchError((e) {});
         }
         break;
-      case 2:
+      case "Addestratore":
         {
           TrainerModel trainerModel = TrainerModel(
               email: email,
@@ -503,7 +496,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
           final DBRef =
-              FirebaseDatabase.instance.reference().child("Addestratore");
+              FirebaseDatabase.instance.reference().child(typeOfUser);
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
@@ -533,32 +526,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           print("This is default case");
         }
         break;
-    }
-  }
-
-  //SINGOLO ELEMENTO
-  /*Future<String> getEmail() async {
-    String result = (await FirebaseDatabase.instance
-            .reference()
-            .child("Addestratore/UKvCMmDzogfmMiFTubQRwgCYyoj1/cityName")
-            .once())
-        .value;
-    print(result);
-    return result;
-  }*/
-
-  getData() async {
-    var url = Uri.parse(
-        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//Addestratore//UKvCMmDzogfmMiFTubQRwgCYyoj1.json?");
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      jsonBody = json.decode(response.body);
-
-      print(jsonBody['cityName']);
-      //var jsonResponse = convert.jsonDecode(response.body) as JSON;
-      // print(jsonResponse);
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
     }
   }
 }
