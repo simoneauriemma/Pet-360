@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:492106919511:ios:70790877ca233e424d7d12</string>
+	<string>1:492106919511:ios:8060f2186e432caa4d7d12</string>
+	<key>DATABASE_URL</key>
+	<string>https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>
