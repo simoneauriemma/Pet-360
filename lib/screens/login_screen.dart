@@ -5,7 +5,6 @@ import 'package:pet360/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet360/screens/home_screen.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -37,14 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   } */
 
-  /* @override
-  void initState() {
-    initializeFlutterFire();
-    super.initState();
-  } */
-
   final _auth = FirebaseAuth.instance;
-
 
   @override
   Widget build(BuildContext context) {
@@ -115,10 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
       color: Colors.lightGreen,
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-        minWidth: MediaQuery
-            .of(context)
-            .size
-            .width,
+        minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           SignIn(emailController.text, passwordController.text);
         },
@@ -131,7 +120,15 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
-    return AppBackground( 
+    if (_auth.currentUser != null) {
+      Future.delayed(Duration.zero, () {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+            (route) => false);
+      });
+    }
+
+    return AppBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -162,9 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text("Non hai un account? ",
-                                style: TextStyle(
-                                    fontSize: 18),
+                              Text(
+                                "Non hai un account? ",
+                                style: TextStyle(fontSize: 18),
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -194,19 +191,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
   void SignIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) =>
-      {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomeScreen())),
-      }).catchError((e) {
-
-      });
+          .then((uid) => {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomeScreen())),
+              })
+          .catchError((e) {});
     }
   }
-
 }
