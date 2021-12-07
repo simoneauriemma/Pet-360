@@ -7,7 +7,8 @@ import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'home_screen.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+
+import 'dart:convert';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -18,6 +19,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController controllerUsername = new TextEditingController();
+
+  var jsonBody;
 
   @override
   void initState() {
@@ -549,9 +552,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//Addestratore//UKvCMmDzogfmMiFTubQRwgCYyoj1.json?");
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      var jsonResponse =
-          convert.jsonDecode(response.body) as Map<String, dynamic>;
-      print(jsonResponse);
+      jsonBody = json.decode(response.body);
+
+      print(jsonBody['cityName']);
+      //var jsonResponse = convert.jsonDecode(response.body) as JSON;
+      // print(jsonResponse);
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
