@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet360/screens/addNewAnimal_screen.dart';
+import 'package:pet360/screens/addnewanimal_screen.dart';
 import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/location_screen.dart';
 import 'package:pet360/screens/profile_screen.dart';
@@ -28,19 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Benvenuto"),
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-      ),
       body: PageStorage(
         bucket: bucket,
         child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Colors.lightGreen.shade300,
+        child: const Icon(Icons.add_outlined),
         onPressed: () {
           setState(() {
             currentScreen= AddNewAnimalScreen();
@@ -48,7 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
             });
         },
       ),
+
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
@@ -74,9 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           Icons.home_filled,
-                          color: currentTab==0 ? Colors.lightGreen : Colors.grey,
+                          color: currentTab==0 ? Colors.lightGreen.shade300 : Colors.grey,
                         ),
-                        Text('Home', style: TextStyle(color: currentTab==0 ? Colors.lightGreen : Colors.grey),)
+                        Text('Home', style: TextStyle(color: currentTab==0 ? Colors.lightGreen.shade300 : Colors.grey),)
                       ],
                     ),
                       ),
@@ -93,9 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           Icons.location_on,
-                          color: currentTab==1 ? Colors.lightGreen : Colors.grey,
+                          color: currentTab==1 ? Colors.lightGreen.shade300 : Colors.grey,
                         ),
-                        Text('Traccia', style: TextStyle(color: currentTab==1? Colors.lightGreen : Colors.grey),)
+                        Text('Traccia', style: TextStyle(color: currentTab==1? Colors.lightGreen.shade300 : Colors.grey),)
                       ],
                     ),
                   ),
@@ -117,9 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           Icons.chat_rounded,
-                          color: currentTab==2 ? Colors.lightGreen : Colors.grey,
+                          color: currentTab==2 ? Colors.lightGreen.shade300 : Colors.grey,
                         ),
-                        Text('Chat', style: TextStyle(color: currentTab==2 ? Colors.lightGreen : Colors.grey),)
+                        Text('Chat', style: TextStyle(color: currentTab==2 ? Colors.lightGreen.shade300 : Colors.grey),)
                       ],
                     ),
                   ),
@@ -136,9 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           Icons.account_circle_rounded,
-                          color: currentTab==3 ? Colors.lightGreen : Colors.grey,
+                          color: currentTab==3 ? Colors.lightGreen.shade300 : Colors.grey,
                         ),
-                        Text('Profilo', style: TextStyle(color: currentTab==3 ? Colors.lightGreen : Colors.grey),)
+                        Text('Profilo', style: TextStyle(color: currentTab==3 ? Colors.lightGreen.shade300 : Colors.grey),)
                       ],
                     ),
                   ),
@@ -148,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+
     );
   }
 }
