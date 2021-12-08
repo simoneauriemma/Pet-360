@@ -109,6 +109,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     final passwordField = TextFormField(
       autofocus: false,
+      obscureText: true,
       controller: passwordController,
       keyboardType: TextInputType.visiblePassword,
       onSaved: (value) {
@@ -152,7 +153,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final regButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(20),
-      color: Colors.lightGreen,
+      color: Colors.lightGreen.shade300,
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
         minWidth: MediaQuery.of(context).size.width,
