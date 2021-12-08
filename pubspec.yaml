@@ -46,6 +46,8 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   circular_bottom_navigation: ^2.0.0
   curved_navigation_bar: ^1.0.1
+  get: ^4.3.8
+  path_provider: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,9 @@ flutter:
     - assets/icons/down-arrow.png
     - assets/icons/add-photo.png
     - assets/icons/ped-id.png
+    - assets/icons/plus.png
+    - assets/icons/write.png
+    - assets/icons/dog.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
