@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = LocationScreen();
+                        currentScreen = ProfileScreen();
                         currentTab = 3;
                       });
                     },
