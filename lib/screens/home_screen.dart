@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/addnewanimal_screen.dart';
 import 'package:pet360/screens/chat_screen.dart';
@@ -9,7 +8,6 @@ import 'package:pet360/utils/usersharedpreferences.dart';
 import 'dart:convert';
 import 'dashboard.dart';
 import 'package:http/http.dart' as http;
-
 import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,17 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
     final uid = _auth.currentUser!.uid;
     if (UserSharedPreferences.getTypeOfUser() == "") {
-      //TODO:fare tutti i controlli....
-      //jsonBody = getData("", "", "");
+      getData("Utente", uid.toString(), "");
+      if(jsonBody == null){
+        getData("Addestratore", uid.toString(), "");
+      }
+      if(jsonBody == null){
+        getData("Veterinario", uid.toString(), "");
+      }
+      print("FATAL ERROR");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    print("jsonBody " + jsonBody.toString());
+    //print("Type{" + UserSharedPreferences.getTypeOfUser().toString() + "}");
 
     return Scaffold(
       body: PageStorage(
@@ -216,11 +219,15 @@ class _HomeScreenState extends State<HomeScreen> {
             "//" +
             path +
             ".json?");
-    print("URL->>>>>>>" + url.toString());
+    //print("URL->>>>>>>" + url.toString());
     var response = await http.get(url);
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
-      //print(jsonBody['cityName']);
+      if(jsonBody != null){
+        UserSharedPreferences.setTypeOfUser(typeOfUser);
+        //print("Settato: " + typeOfUser);
+      }
+      //print(jsonBody.toString());
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }

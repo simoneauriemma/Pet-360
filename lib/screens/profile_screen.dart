@@ -26,206 +26,210 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final passwordController = new TextEditingController();
   final cityController = new TextEditingController();
 
-  String typeOfUser = '';
-
   var jsonBody;
-
   @override
   void initState() {
     super.initState();
-
-    typeOfUser = UserSharedPreferences.getTypeOfUser() ?? '';
     final uid = _auth.currentUser!.uid;
-
-    print("type Of User->" + typeOfUser.toString() + " \t UID ->" + uid);
-    jsonBody = getData(typeOfUser, uid, "");
+    //per il click continuo
+    if(jsonBody == null){
+      getData(UserSharedPreferences.getTypeOfUser().toString(), uid, "");
+    }
   }
 
-  Widget build(BuildContext context) {
-    /*print("jsonBody-->" + jsonBody.toString());
-    print(jsonBody['firstName'].toString());*/
+  @override
+  Widget build(BuildContext context)  => FutureBuilder(
+      future: fetchData(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          //debugPrint('Step 3, build widget: ${snapshot.data}');
+          final nameField = TextFormField(
+            autofocus: false,
+            controller: nameController,
+            keyboardType: TextInputType.name,
+            onSaved: (value) {
+              nameController.text = value!;
+            },
+            textInputAction: TextInputAction.next,
 
-    final nameField = TextFormField(
-      autofocus: false,
-      controller: nameController,
-      keyboardType: TextInputType.name,
-      onSaved: (value) {
-        nameController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
+            //email decoration
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                hintText: jsonBody['firstName'].toString(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )),
+          );
 
-      //email decoration
-      decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: jsonBody['firstName'].toString(),
-          border: OutlineInputBorder(
+          final surnameField = TextFormField(
+            autofocus: false,
+            controller: surnameController,
+            keyboardType: TextInputType.name,
+            onSaved: (value) {
+              surnameController.text = value!;
+            },
+            textInputAction: TextInputAction.next,
+
+            //email decoration
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                hintText: jsonBody['surnameName'].toString(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )),
+          );
+
+          final emailField = TextFormField(
+            autofocus: false,
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (value) {
+              emailController.text = value!;
+            },
+            textInputAction: TextInputAction.next,
+
+            //email decoration
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                prefixIcon: Icon(Icons.mail),
+                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                hintText: _auth.currentUser!.email,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )),
+          );
+
+          final passwordField = TextFormField(
+            autofocus: false,
+            controller: passwordController,
+            keyboardType: TextInputType.visiblePassword,
+            onSaved: (value) {
+              passwordController.text = value!;
+            },
+            textInputAction: TextInputAction.next,
+
+            //email decoration
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                prefixIcon: Icon(Icons.password),
+                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                hintText: "Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )),
+          );
+
+          final cityField = TextFormField(
+            autofocus: false,
+            controller: cityController,
+            keyboardType: TextInputType.name,
+            onSaved: (value) {
+              cityController.text = value!;
+            },
+            textInputAction: TextInputAction.done,
+
+            //email decoration
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                prefixIcon: Icon(Icons.location_city),
+                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                hintText: jsonBody['cityName'].toString(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )),
+          );
+
+          final logoutButton = Material(
+            elevation: 5,
             borderRadius: BorderRadius.circular(20),
-          )),
-    );
+            color: Colors.lightGreen.shade300,
+            child: MaterialButton(
+              padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
+              minWidth: MediaQuery.of(context).size.width,
+              onPressed: () {
+                LogOut();
+              },
+              child: const Text(
+                "Logout",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ),
+          );
 
-    final surnameField = TextFormField(
-      autofocus: false,
-      controller: surnameController,
-      keyboardType: TextInputType.name,
-      onSaved: (value) {
-        surnameController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-
-      //email decoration
-      decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: jsonBody['surnameName'].toString(),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
-    );
-
-    final emailField = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (value) {
-        emailController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-
-      //email decoration
-      decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: _auth.currentUser!.email,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
-    );
-
-    final passwordField = TextFormField(
-      autofocus: false,
-      controller: passwordController,
-      keyboardType: TextInputType.visiblePassword,
-      onSaved: (value) {
-        passwordController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-
-      //email decoration
-      decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: Icon(Icons.password),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Password",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
-    );
-
-    final cityField = TextFormField(
-      autofocus: false,
-      controller: cityController,
-      keyboardType: TextInputType.name,
-      onSaved: (value) {
-        cityController.text = value!;
-      },
-      textInputAction: TextInputAction.done,
-
-      //email decoration
-      decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: Icon(Icons.location_city),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: jsonBody['cityName'].toString(),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
-    );
-
-    final logoutButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.lightGreen.shade300,
-      child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
-        minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
-          LogOut();
-        },
-        child: const Text(
-          "Logout",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(36.0),
-          child: Form(
-              key: _formkey,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Profilo",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 10.0,
-                                color: Colors.lightGreen.shade100,
-                                offset: Offset(5.0, 5.0),
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Form(
+                    key: _formkey,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Profilo",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  shadows: [
+                                    Shadow(
+                                      blurRadius: 10.0,
+                                      color: Colors.lightGreen.shade100,
+                                      offset: Offset(5.0, 5.0),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    nameField,
-                    SizedBox(height: 20),
-                    surnameField,
-                    SizedBox(height: 20),
-                    emailField,
-                    SizedBox(height: 20),
-                    passwordField,
-                    SizedBox(height: 20),
-                    cityField,
-                    SizedBox(height: 40),
-                    logoutButton,
-                  ])),
-        ),
-      ),
-    );
-  }
+                          SizedBox(height: 20),
+                          nameField,
+                          SizedBox(height: 20),
+                          surnameField,
+                          SizedBox(height: 20),
+                          emailField,
+                          SizedBox(height: 20),
+                          passwordField,
+                          SizedBox(height: 20),
+                          cityField,
+                          SizedBox(height: 40),
+                          logoutButton,
+                        ])),
+              ),
+            ),
+          );
+        } else {
+          // We can show the loading view until the data comes back.
+          //debugPrint('Step 1, build loading widget');
+          return CircularProgressIndicator();//TODO DA CAMBIARE
+        }
+     },
+  );
 
   void LogOut() async {
     await _auth.signOut();
@@ -243,7 +247,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             "//" +
             path +
             ".json?");
-
     var response = await http.get(url);
     if (response.statusCode == 200) {
       //print(url);
@@ -253,4 +256,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
+  Future<bool> fetchData() => Future.delayed(Duration(seconds: 2), () {
+    //debugPrint('Step 2, fetch data');
+    return true;
+  });
 }
