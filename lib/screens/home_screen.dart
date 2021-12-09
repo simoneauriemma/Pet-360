@@ -45,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
       if(jsonBody == null){
         getData("Veterinario", uid.toString(), "");
       }
-      print("FATAL ERROR");
     }
   }
 
