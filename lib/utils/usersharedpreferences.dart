@@ -6,6 +6,7 @@ class UserSharedPreferences {
 
   static Future<void> init() async {
     _preferences = await SharedPreferences.getInstance();
+    setTypeOfUser("");
   }
 
   static Future setTypeOfUser(String typeOfUser) async =>
