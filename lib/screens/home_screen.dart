@@ -5,6 +5,7 @@ import 'package:pet360/screens/addnewanimal_screen.dart';
 import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/location_screen.dart';
 import 'package:pet360/screens/profile_screen.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
 import 'dart:convert';
 import 'dashboard.dart';
 import 'package:http/http.dart' as http;
@@ -35,7 +36,20 @@ class _HomeScreenState extends State<HomeScreen> {
   var jsonBody;
 
   @override
+  void initState() {
+    super.initState();
+
+    final uid = _auth.currentUser!.uid;
+    if (UserSharedPreferences.getTypeOfUser() == "") {
+      //TODO:fare tutti i controlli....
+      //jsonBody = getData("", "", "");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("jsonBody " + jsonBody.toString());
+
     return Scaffold(
       body: PageStorage(
         bucket: bucket,
@@ -202,10 +216,11 @@ class _HomeScreenState extends State<HomeScreen> {
             "//" +
             path +
             ".json?");
+    print("URL->>>>>>>" + url.toString());
     var response = await http.get(url);
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
-      print(jsonBody['cityName']);
+      //print(jsonBody['cityName']);
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }

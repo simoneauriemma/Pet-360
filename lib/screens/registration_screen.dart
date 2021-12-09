@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
+
 import 'home_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -20,6 +22,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   void initState() {
     super.initState();
+
+    UserSharedPreferences.init();
   }
 
   final _formkey = GlobalKey<FormState>();
@@ -429,16 +433,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           // document.getEmail();
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
-              .then((uid) => {
+              .then((uid) =>
+          {
+                    UserSharedPreferences.setTypeOfUser(typeOfUser),
                     user.uid = _auth.currentUser!.uid,
                     //ONLY FOR TESTING!!!!!
-                    print("\n TESTING UID  " + user.uid.toString() + "\n"),
+                    //print("\n TESTING UID  " + user.uid.toString() + "\n"),
                     DBRef.child(user.uid.toString()).set({
                       'firstName': user.firstName,
                       'surnameName': user.surnameName,
                       'cityName': user.cityName,
                       'address': user.address,
                     }),
+                    //print(UserSharedPreferences.getTypeOfUser()),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
@@ -457,11 +464,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               numberPhone: phoneNumberController.text,
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
-          final DBRef =
-              FirebaseDatabase.instance.reference().child(typeOfUser);
+          final DBRef = FirebaseDatabase.instance.reference().child(typeOfUser);
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
+                    UserSharedPreferences.setTypeOfUser(typeOfUser),
                     veterinaryModel.uid = _auth.currentUser!.uid,
                     //ONLY FOR TESTING!!!!!
                     print("\n TESTING UID  " +
@@ -496,16 +503,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               numberPhone: phoneNumberController.text,
               cityShop: cityShopController.text,
               addressShop: shopAddressController.text);
-          final DBRef =
-              FirebaseDatabase.instance.reference().child(typeOfUser);
+          final DBRef = FirebaseDatabase.instance.reference().child(typeOfUser);
           await _auth
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((uid) => {
+                    UserSharedPreferences.setTypeOfUser(typeOfUser),
                     trainerModel.uid = _auth.currentUser!.uid,
                     //ONLY FOR TESTING!!!!!
-                    print("\n TESTING UID  " +
+                    /*print("\n TESTING UID  " +
                         trainerModel.uid.toString() +
-                        "\n"),
+                        "\n"),*/
                     DBRef.child(trainerModel.uid.toString()).set({
                       'firstName': trainerModel.firstName,
                       'surnameName': trainerModel.surnameName,
@@ -516,6 +523,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       'cityShop': trainerModel.cityShop,
                       'addressShop': trainerModel.addressShop,
                     }),
+                    print(UserSharedPreferences.getTypeOfUser()),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
