@@ -2,11 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 //import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/screens/login_screen.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  await UserSharedPreferences.init();
   runApp(const MyApp());
 }
 
@@ -44,15 +45,4 @@ class MyHomePage extends StatefulWidget {
 // case the title) provided by the parent (in this case the App widget) and
 // used by the build method of the State. Fields in a Widget subclass are
 // always marked "final".
-}
-
-@override
-Widget build(BuildContext context) {
-  // This method is rerun every time setState is called, for instance as done
-  // by the _incrementCounter method above.
-  //
-  // The Flutter framework has been optimized to make rerunning build methods
-  // fast, so that you can just rebuild anything that needs updating rather
-  // than having to individually change instances of widgets.
-  return Scaffold();
 }

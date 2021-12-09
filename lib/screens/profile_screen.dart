@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:pet360/utils/usersharedpreferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -20,12 +26,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final passwordController = new TextEditingController();
   final cityController = new TextEditingController();
 
-  var userType = 'veterinario';
+  String typeOfUser = '';
 
+  var jsonBody;
 
+  @override
+  void initState() {
+    super.initState();
 
+    typeOfUser = UserSharedPreferences.getTypeOfUser() ?? '';
+    final uid = _auth.currentUser!.uid;
+
+    print("type Of User->" + typeOfUser.toString() + " \t UID ->" + uid);
+    jsonBody = getData(typeOfUser, uid, "");
+  }
 
   Widget build(BuildContext context) {
+    /*print("jsonBody-->" + jsonBody.toString());
+    print(jsonBody['firstName'].toString());*/
 
     final nameField = TextFormField(
       autofocus: false,
@@ -42,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           fillColor: Colors.white,
           prefixIcon: Icon(Icons.supervised_user_circle_outlined),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Nome",
+          hintText: jsonBody['firstName'].toString(),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           )),
@@ -63,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           fillColor: Colors.white,
           prefixIcon: Icon(Icons.supervised_user_circle_outlined),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Cognome",
+          hintText: jsonBody['surnameName'].toString(),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           )),
@@ -84,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           fillColor: Colors.white,
           prefixIcon: Icon(Icons.mail),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Email",
+          hintText: _auth.currentUser!.email,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           )),
@@ -126,7 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           fillColor: Colors.white,
           prefixIcon: Icon(Icons.location_city),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Città",
+          hintText: jsonBody['cityName'].toString(),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           )),
@@ -151,68 +169,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
 
-
     return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(36.0),
-            child: Form(
-                key: _formkey,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Profilo",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 10.0,
-                                  color: Colors.lightGreen.shade100,
-                                  offset: Offset(5.0, 5.0),
-                                ),
-                              ],
-                            ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(36.0),
+          child: Form(
+              key: _formkey,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Profilo",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 10.0,
+                                color: Colors.lightGreen.shade100,
+                                offset: Offset(5.0, 5.0),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      nameField,
-                      SizedBox(height: 20),
-                      surnameField,
-                      SizedBox(height: 20),
-                      emailField,
-                      SizedBox(height: 20),
-                      passwordField,
-                      SizedBox(height: 20),
-                      cityField,
-                      SizedBox(height: 40),
-                      logoutButton,
-                    ])),
-          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    nameField,
+                    SizedBox(height: 20),
+                    surnameField,
+                    SizedBox(height: 20),
+                    emailField,
+                    SizedBox(height: 20),
+                    passwordField,
+                    SizedBox(height: 20),
+                    cityField,
+                    SizedBox(height: 40),
+                    logoutButton,
+                  ])),
         ),
-      );
+      ),
+    );
   }
 
   void LogOut() async {
     await _auth.signOut();
+    UserSharedPreferences.setTypeOfUser("");
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
+
+  getData(String typeOfUser, String uidUser, String path) async {
+    var url = Uri.parse(
+        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
+            typeOfUser +
+            "//" +
+            uidUser +
+            "//" +
+            path +
+            ".json?");
+
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      //print(url);
+      jsonBody = json.decode(response.body);
+      //print(jsonBody);
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
   }
 }
