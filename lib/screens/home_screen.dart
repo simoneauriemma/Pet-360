@@ -53,13 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
     //print("Type{" + UserSharedPreferences.getTypeOfUser().toString() + "}");
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       body: PageStorage(
         bucket: bucket,
         child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightGreen.shade300,
-        child: const Icon(Icons.add_outlined),
+        child: const Icon(Icons.add),
         onPressed: () {
           setState(() {
             currentScreen = AddNewAnimalScreen();
@@ -69,10 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
-          height: 60,
+          height: 70,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -92,10 +94,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.home_filled,
+                          Icons.home,
+                          size: 30,
                           color: currentTab == 0
                               ? Colors.lightGreen.shade300
-                              : Colors.grey,
+                              : Colors.grey.shade400,
                         ),
                         Text(
                           'Home',
@@ -120,9 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           Icons.location_on,
+                          size: 30,
                           color: currentTab == 1
                               ? Colors.lightGreen.shade300
-                              : Colors.grey,
+                              : Colors.grey.shade400,
                         ),
                         Text(
                           'Traccia',
@@ -151,10 +155,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.chat_rounded,
+                          Icons.message_outlined,
+                          size: 30,
                           color: currentTab == 2
                               ? Colors.lightGreen.shade300
-                              : Colors.grey,
+                              : Colors.grey.shade400,
                         ),
                         Text(
                           'Chat',
@@ -179,9 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           Icons.account_circle_rounded,
+                          size: 30,
                           color: currentTab == 3
                               ? Colors.lightGreen.shade300
-                              : Colors.grey,
+                              : Colors.grey.shade400,
                         ),
                         Text(
                           'Profilo',

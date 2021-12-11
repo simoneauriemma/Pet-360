@@ -23,97 +23,97 @@ File? pickedImage;
 
 void imagePickerOption(){
 Get.bottomSheet(
-  SingleChildScrollView(
-    child: ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(10.0),
-        topRight: Radius.circular(10.0),
-        ),
-    child: Container(
-      color: Colors.white,
-      height: 250,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              "Scegli immagine da",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton.icon(
-                onPressed: (){
-                  getImage(ImageSource.camera);
-                },
-                icon: const Icon(Icons.camera_alt_rounded),
-                label: const Text("CAMERA"),
-              ),
-              ElevatedButton.icon(
-                onPressed: (){
-                  getImage(ImageSource.gallery);
-                },
-                icon: const Icon(Icons.image),
-                label: const Text("GALLERIA"),
-              ),
-              const SizedBox(height: 10,),
-              ElevatedButton.icon(
-                onPressed: (){
-                  Get.back();
-                },
-                icon: const Icon(Icons.close),
-                label: const Text("CANCEL"),
-              ),
-          ],
-        ),
-      ),
-    ),
-  ),
+SingleChildScrollView(
+child: ClipRRect(
+borderRadius: const BorderRadius.only(
+topLeft: Radius.circular(10.0),
+topRight: Radius.circular(10.0),
+),
+child: Container(
+color: Colors.white,
+height: 250,
+child: Padding(
+padding: const EdgeInsets.all(8.0),
+child: Column(
+crossAxisAlignment: CrossAxisAlignment.stretch,
+children: [
+const Text(
+"Scegli immagine da",
+style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+textAlign: TextAlign.center,
+),
+const SizedBox(
+  height: 10,
+),
+ElevatedButton.icon(
+  onPressed: (){
+    getImage(ImageSource.camera);
+  },
+  icon: const Icon(Icons.camera_alt_rounded),
+  label: const Text("CAMERA"),
+),
+ElevatedButton.icon(
+  onPressed: (){
+    getImage(ImageSource.gallery);
+  },
+  icon: const Icon(Icons.image),
+  label: const Text("GALLERIA"),
+),
+const SizedBox(height: 10,),
+ElevatedButton.icon(
+  onPressed: (){
+    Get.back();
+  },
+  icon: const Icon(Icons.close),
+  label: const Text("CANCEL"),
+),
+],
+),
+),
+),
+),
 ),
 );
 }
 
 getImage(ImageSource imageType) async{
 try{
-  final image =await ImagePicker().pickImage(
-  source: imageType);
+final image =await ImagePicker().pickImage(
+source: imageType);
 
-  if(image == null) return;
+if(image == null) return;
 
-  final imageTemp=File(image.path);
-  setState(() {
-    pickedImage= imageTemp;
-  });
-  Get.back();
-  }catch (err){
-  debugPrint(err.toString());
+final imageTemp=File(image.path);
+setState(() {
+pickedImage= imageTemp;
+});
+Get.back();
+}catch (err){
+debugPrint(err.toString());
 }
 }
 
 getItemAndNavigate(BuildContext context){
-  Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => viewAnimal(
-          nameHolder : nameController.text,
-          dataHolder : dataController.text,
-          specieHolder : specieController.text,
-          razzaHolder: razzaController.text,
-          coloreHolder: coloreController.text,
-          veterinarioHolder :veterinarioController.text,
-          tipoVaccinoHolder: tipoVaccinoController.text,
-          dataSomminisHolder: dataSommController.text,
-          farmacoSommHolder: farmacoSommController.text,
-          nomeveterHolder: nomeVeterController.text,
-          descrizioneHolder: descrizioneController.text,
-          microchipHolder: microchipController.text,
-          dataMicrochipHolder: dataMicrochipController.text,
-          enteHolder: enteController.text,
-      ))
-    );
+Navigator.push(
+context,
+MaterialPageRoute(
+builder: (context) => viewAnimal(
+nameHolder : nameController.text,
+dataHolder : dataController.text,
+specieHolder : specieController.text,
+razzaHolder: razzaController.text,
+coloreHolder: coloreController.text,
+veterinarioHolder :veterinarioController.text,
+tipoVaccinoHolder: tipoVaccinoController.text,
+dataSomminisHolder: dataSommController.text,
+farmacoSommHolder: farmacoSommController.text,
+nomeveterHolder: nomeVeterController.text,
+descrizioneHolder: descrizioneController.text,
+microchipHolder: microchipController.text,
+dataMicrochipHolder: dataMicrochipController.text,
+enteHolder: enteController.text,
+))
+);
 }
 
 
@@ -180,203 +180,204 @@ isOpen: false,
 header: const Text("Aggiungi le info\ndel tuo animale",style: _headerStyle,textAlign:TextAlign.left),
 headerBackgroundColor: Colors.grey.shade300,
 content: Column(children: <Widget>[
-  //aggiunta della foto dell'animale
-  SizedBox(height: 20,),
-  Align(alignment: Alignment.center,
-    child: Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade300,width: 3),
-            borderRadius:const BorderRadius.all(Radius.circular(100)),
-          ),
-          child: ClipOval(
-            child: pickedImage != null 
-            ? Image.file(
-              pickedImage!, 
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,):
-            //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-            SizedBox(
-              width: 100.0,
-              height: 100.0,
-          child: IconButton(
-            icon : Image.asset("assets/icons/dog.png"),
-            color: Color.fromRGBO(10, 10, 10, 1),
-            onPressed: (){
-              //getImage();
-              imagePickerOption();
-            },),
-          ),
-          ),
-          ),
-          Positioned(
-            bottom: 0, right: 2,
-            child: IconButton(
-              onPressed: (){
-                imagePickerOption();
-              },
-              icon: const Icon(
-                Icons.add_a_photo,
-                color: Colors.black,
-                size: 25,
-              ),
-            ),
-            ),
-      ],
-    )
-
-  /*child: CircleAvatar(
-    radius: 50,
-    //backgroundImage: image==null? AssetImage("assets/icons/download.jpeg"): FileImage(File(image.path)),
+//aggiunta della foto dell'animale
+SizedBox(height: 20,),
+Align(alignment: Alignment.center,
+child: Stack(
+children: [
+Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey.shade300,width: 3),
+      borderRadius:const BorderRadius.all(Radius.circular(100)),
+      color: Colors.lightGreen.shade50,
+    ),
     child: ClipOval(
-      child: SizedBox(
-        width: 50.0,
-        height: 50.0,
-      child: IconButton(
-        icon : Image.asset("assets/icons/add-photo.png"),
-        color: Color.fromRGBO(10, 10, 10, 1),
-        iconSize: 30,
-        onPressed: (){
-          getImage();
-        },),
-      ),
-      ),
-  ),*/
-  ),
-  SizedBox(height: 20,),
-  Container(
-    child: TextField(
-    autofocus: false,
-    controller: nameController,
-    keyboardType: TextInputType.name,
-    /*onSaved: (value) {
-      nameController.text = value!;
-    },
-  textInputAction: TextInputAction.next,*/
+      child: pickedImage != null 
+      ? Image.file(
+        pickedImage!, 
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,):
+      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+      SizedBox(
+        width: 100.0,
+        height: 100.0,
+    /*child: IconButton(
+      icon : Image.asset("assets/icons/dog.png"),
+      color: Color.fromRGBO(10, 10, 10, 1),
+      onPressed: (){
+        //getImage();
+        imagePickerOption();
+      },),*/
+    ),
+    ),
+    ),
+Positioned(
+bottom: 0, right: 2,
+child: IconButton(
+onPressed: (){
+  imagePickerOption();
+},
+icon: const Icon(
+  Icons.add_a_photo,
+  color: Colors.black,
+  size: 25,
+),
+),
+),
+],
+)
 
-  //Nome
-  decoration: InputDecoration(
-    prefixIcon: Image.asset("assets/icons/write.png"),
-    filled: true,
-    fillColor: Colors.white,
-    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-    hintText: "Nome",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    )),
-  ),
-  ),
-SizedBox(height: 10,),
+/*child: CircleAvatar(
+radius: 50,
+//backgroundImage: image==null? AssetImage("assets/icons/download.jpeg"): FileImage(File(image.path)),
+child: ClipOval(
+child: SizedBox(
+width: 50.0,
+height: 50.0,
+child: IconButton(
+icon : Image.asset("assets/icons/add-photo.png"),
+color: Color.fromRGBO(10, 10, 10, 1),
+iconSize: 30,
+onPressed: (){
+getImage();
+},),
+),
+),
+),*/
+),
+SizedBox(height: 20,),
 Container(
-  child: TextFormField(
-  autofocus: false,
-  controller: dataController,
-  keyboardType: TextInputType.name,
-  onSaved: (value) {
-    dataController.text = value!;
-  },
-  textInputAction: TextInputAction.next,
+child: TextField(
+autofocus: false,
+controller: nameController,
+keyboardType: TextInputType.name,
+/*onSaved: (value) {
+nameController.text = value!;
+},
+textInputAction: TextInputAction.next,*/
 
-  //DataNascita
-  decoration: InputDecoration(
-    filled: true,
-    fillColor: Colors.white,
-    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-    hintText: "Data di nascita",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    )),
-  ),
+//Nome
+decoration: InputDecoration(
+//prefixIcon: Image.asset("assets/icons/write.png"),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Nome",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
+)),
+),
 ),
 SizedBox(height: 10,),
 Container(
-  child: TextFormField(
-  autofocus: false,
-  controller: specieController,
-  keyboardType: TextInputType.name,
-  onSaved: (value) {
-    specieController.text = value!;
-  },
-  textInputAction: TextInputAction.next,
+child: TextFormField(
+autofocus: false,
+controller: dataController,
+keyboardType: TextInputType.name,
+onSaved: (value) {
+dataController.text = value!;
+},
+textInputAction: TextInputAction.next,
 
-  //Specie
-  decoration: InputDecoration(
-    filled: true,
-    fillColor: Colors.white,
-    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-    hintText: "Specie",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-  )),
-  ),
+//DataNascita
+decoration: InputDecoration(
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Data di nascita",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
+)),
+),
 ),
 SizedBox(height: 10,),
 Container(
-  child: TextFormField(
-  autofocus: false,
-  controller: razzaController,
-  keyboardType: TextInputType.name,
-  onSaved: (value) {
-    razzaController.text = value!;
-  },
-  textInputAction: TextInputAction.next,
+child: TextFormField(
+autofocus: false,
+controller: specieController,
+keyboardType: TextInputType.name,
+onSaved: (value) {
+specieController.text = value!;
+},
+textInputAction: TextInputAction.next,
 
-  //Razza
-  decoration: InputDecoration(
-    filled: true,
-    fillColor: Colors.white,
-    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-    hintText: "Razza",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    )),
-  ),
+//Specie
+decoration: InputDecoration(
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Specie",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
+)),
+),
 ),
 SizedBox(height: 10,),
 Container(
-  child: TextFormField(
-  autofocus: false,
-  controller: coloreController,
-  keyboardType: TextInputType.name,
-  onSaved: (value) {
-    coloreController.text = value!;
-  },
-  textInputAction: TextInputAction.next,
+child: TextFormField(
+autofocus: false,
+controller: razzaController,
+keyboardType: TextInputType.name,
+onSaved: (value) {
+razzaController.text = value!;
+},
+textInputAction: TextInputAction.next,
 
-  //Colore
-  decoration: InputDecoration(
-    filled: true,
-    fillColor: Colors.white,
-    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-    hintText: "Colore",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-  )),
-  ),
+//Razza
+decoration: InputDecoration(
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Razza",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
+)),
+),
 ),
 SizedBox(height: 10,),
 Container(
-  child: TextFormField(
-  autofocus: false,
-  controller: veterinarioController,
-  keyboardType: TextInputType.name,
-  onSaved: (value) {
-    veterinarioController.text = value!;
-  },
-  textInputAction: TextInputAction.next,
+child: TextFormField(
+autofocus: false,
+controller: coloreController,
+keyboardType: TextInputType.name,
+onSaved: (value) {
+coloreController.text = value!;
+},
+textInputAction: TextInputAction.next,
 
-  //NomeVeterinario
-  decoration: InputDecoration(
-    filled: true,
-    fillColor: Colors.white,
-    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-    hintText: "Nome veterinario",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    )),
-  ),
+//Colore
+decoration: InputDecoration(
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Colore",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
+)),
+),
+),
+SizedBox(height: 10,),
+Container(
+child: TextFormField(
+autofocus: false,
+controller: veterinarioController,
+keyboardType: TextInputType.name,
+onSaved: (value) {
+veterinarioController.text = value!;
+},
+textInputAction: TextInputAction.next,
+
+//NomeVeterinario
+decoration: InputDecoration(
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Nome veterinario",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
+)),
+),
 ),
 ],
 ),  
@@ -406,12 +407,12 @@ textInputAction: TextInputAction.next,
 
 //TipoVaccino
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "Tipo vaccino",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Tipo vaccino",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -428,12 +429,12 @@ textInputAction: TextInputAction.next,
 
 //Data somministrazione vaccino
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "Data somministrazione",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Data somministrazione",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -450,12 +451,12 @@ textInputAction: TextInputAction.next,
 
 //Farmaco somministrato
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "Farmaco somministrato",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Farmaco somministrato",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -472,12 +473,12 @@ textInputAction: TextInputAction.next,
 
 //Nome veterinario
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "Nome veterinario",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Nome veterinario",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -490,9 +491,9 @@ child: Column(children: <Widget>[
 Text("Aggiungi un altro vaccino:", style: TextStyle(fontStyle: FontStyle.italic),),
 SizedBox(height: 10,),
 IconButton(
-  onPressed: (){ 
-    //
-  }, 
+onPressed: (){ 
+//
+}, 
 icon: Image.asset("assets/icons/plus.png"),
 iconSize: 40,
 ),
@@ -526,12 +527,12 @@ textInputAction: TextInputAction.next,
 
 //Descrizione animale
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "Descrizione animale",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Descrizione animale",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -548,12 +549,12 @@ textInputAction: TextInputAction.next,
 
 //Numero microchip  
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "N° microchip",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "N° microchip",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -570,12 +571,12 @@ textInputAction: TextInputAction.next,
 
 //Data applicazione microchip 
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "Data applicazione microchip",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Data applicazione microchip",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -592,12 +593,12 @@ textInputAction: TextInputAction.next,
 
 //Ente rilasciante 
 decoration: InputDecoration(
-  filled: true,
-  fillColor: Colors.white,
-  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-  hintText: "Ente rilasciante",
-  border: OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+filled: true,
+fillColor: Colors.white,
+contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+hintText: "Ente rilasciante",
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(20),
 )),
 ),
 ),
@@ -622,52 +623,52 @@ Text("Dispositivi disponibili:", style: _contentStyle,),
 SizedBox(height: 20,),
 Container(
 child: ElevatedButton(
-            child: Text("AirTag1"),
-            style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white70,
-                onSurface: Colors.grey,
-                side: BorderSide(color: Colors.lightGreen, width: 2),
-                elevation: 10,
-                minimumSize: Size(120,40),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-              ),
-            onPressed:() {
-                GFToast.showToast('Dispositivo 1 aggiunto!',context,
-                toastPosition: GFToastPosition.BOTTOM,
-                textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-                backgroundColor: Colors.green.shade300,
-                trailing: Icon(
-                  Icons.notifications,
-                  color: Colors.black,
-                ));
-            },
-          )
-        ),
-        SizedBox(height: 10,),
-        Container(
-        child: ElevatedButton(
-            child: Text("AirTag2"),
-            style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white70,
-                onSurface: Colors.grey,
-                side: BorderSide(color: Colors.lightGreen, width: 2),
-                elevation: 10,
-                minimumSize: Size(120,40),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-              ),
-            onPressed:() {
-                GFToast.showToast('Dispositivo 2 aggiunto!',context,
-                toastPosition: GFToastPosition.BOTTOM,
-                textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-                backgroundColor: Colors.green.shade300,
-                trailing: Icon(
-                  Icons.notifications,
-                  color: Colors.black,
-                ));
-            },
-          )
+child: Text("AirTag1"),
+style: ElevatedButton.styleFrom(
+  onPrimary: Colors.black,
+  primary: Colors.white70,
+  onSurface: Colors.grey,
+  side: BorderSide(color: Colors.lightGreen, width: 2),
+  elevation: 10,
+  minimumSize: Size(120,40),
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+),
+onPressed:() {
+  GFToast.showToast('Dispositivo 1 aggiunto!',context,
+  toastPosition: GFToastPosition.BOTTOM,
+  textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
+  backgroundColor: Colors.green.shade300,
+  trailing: Icon(
+    Icons.notifications,
+    color: Colors.black,
+  ));
+},
+)
+),
+SizedBox(height: 10,),
+Container(
+child: ElevatedButton(
+child: Text("AirTag2"),
+style: ElevatedButton.styleFrom(
+  onPrimary: Colors.black,
+  primary: Colors.white70,
+  onSurface: Colors.grey,
+  side: BorderSide(color: Colors.lightGreen, width: 2),
+  elevation: 10,
+  minimumSize: Size(120,40),
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+),
+onPressed:() {
+  GFToast.showToast('Dispositivo 2 aggiunto!',context,
+  toastPosition: GFToastPosition.BOTTOM,
+  textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
+  backgroundColor: Colors.green.shade300,
+  trailing: Icon(
+    Icons.notifications,
+    color: Colors.black,
+  ));
+},
+)
 ),
 ],
 ),
@@ -682,20 +683,20 @@ rightIcon: Image.asset("assets/icons/down-arrow.png"),
 //bottone 'Salva'
 Container(
 child: ElevatedButton(
-            child: Text("Salva"),
-            style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white70,
-                onSurface: Colors.grey,
-                side: BorderSide(color: Colors.lightGreen, width: 2),
-                elevation: 10,
-                minimumSize: Size(120,40),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-              ),
-            onPressed:() {
-                getItemAndNavigate(context);
-            },
-          )
+child: Text("Salva"),
+style: ElevatedButton.styleFrom(
+  onPrimary: Colors.black,
+  primary: Colors.white70,
+  onSurface: Colors.grey,
+  side: BorderSide(color: Colors.lightGreen, width: 2),
+  elevation: 10,
+  minimumSize: Size(120,40),
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+),
+onPressed:() {
+  getItemAndNavigate(context);
+},
+)
 ),
 ],),
 ),
