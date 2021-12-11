@@ -226,7 +226,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         } else {
           // We can show the loading view until the data comes back.
           //debugPrint('Step 1, build loading widget');
-          return CircularProgressIndicator();//TODO DA CAMBIARE
+          return SizedBox(
+            height: MediaQuery.of(context).size.height / 1,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );//TODO DA CAMBIARE
         }
      },
   );
@@ -256,7 +261,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
-  Future<bool> fetchData() => Future.delayed(Duration(seconds: 2), () {
+  Future<bool> fetchData() => Future.delayed(Duration(seconds: 4), () {
     //debugPrint('Step 2, fetch data');
     return true;
   });

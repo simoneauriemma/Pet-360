@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/addnewanimal_screen.dart';
@@ -17,20 +18,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentTab = 0;
-  final List<Widget> screens = [
-    Dashboard(),
-    ChatScreen(),
-    ProfileScreen(),
-    AddNewAnimalScreen(),
-    LocationScreen(),
-    HomeScreen(),
-  ];
-
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Dashboard();
   final _auth = FirebaseAuth.instance;
-
   var jsonBody;
 
   @override
@@ -39,172 +29,51 @@ class _HomeScreenState extends State<HomeScreen> {
     final uid = _auth.currentUser!.uid;
     if (UserSharedPreferences.getTypeOfUser() == "") {
       getData("Utente", uid.toString(), "");
-      if(jsonBody == null){
+      if (jsonBody == null) {
         getData("Addestratore", uid.toString(), "");
       }
-      if(jsonBody == null){
+      if (jsonBody == null) {
         getData("Veterinario", uid.toString(), "");
       }
     }
   }
 
+  int index = 0;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  final List<Widget> screens = [
+    Dashboard(),
+    LocationScreen(),
+    AddNewAnimalScreen(),
+    ChatScreen(),
+    ProfileScreen(),
+  ];
+
+
   @override
   Widget build(BuildContext context) {
-    //print("Type{" + UserSharedPreferences.getTypeOfUser().toString() + "}");
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
-      body: PageStorage(
-        bucket: bucket,
-        child: currentScreen,
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightGreen.shade300,
-        child: const Icon(Icons.add),
-        onPressed: () {
+      extendBody: true,
+      bottomNavigationBar: CurvedNavigationBar(
+        color: Color.fromRGBO(197 ,225, 165, 5),
+        backgroundColor: Colors.transparent,
+        items: <Widget>[
+          Icon(Icons.home, size: 30, color: Colors.white,),
+          Icon(Icons.map, size: 30, color: Colors.white,),
+          Icon(Icons.add, size: 30, color: Colors.white,),
+          Icon(Icons.chat, size: 30, color: Colors.white,),
+          Icon(Icons.account_box_rounded, size: 30, color: Colors.white,),
+        ],
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 600),
+        onTap: (index) {
           setState(() {
-            currentScreen = AddNewAnimalScreen();
-            currentTab = 0;
+            this.index=index;
           });
         },
+        letIndexChange: (index) => true,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        shape: CircularNotchedRectangle(),
-        notchMargin: 10,
-        child: Container(
-          height: 70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //tabbar a sinistra
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = Dashboard();
-                        currentTab = 0;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.home,
-                          size: 30,
-                          color: currentTab == 0
-                              ? Colors.lightGreen.shade300
-                              : Colors.grey.shade400,
-                        ),
-                        Text(
-                          'Home',
-                          style: TextStyle(
-                              color: currentTab == 0
-                                  ? Colors.lightGreen.shade300
-                                  : Colors.grey),
-                        )
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = LocationScreen();
-                        currentTab = 1;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          size: 30,
-                          color: currentTab == 1
-                              ? Colors.lightGreen.shade300
-                              : Colors.grey.shade400,
-                        ),
-                        Text(
-                          'Traccia',
-                          style: TextStyle(
-                              color: currentTab == 1
-                                  ? Colors.lightGreen.shade300
-                                  : Colors.grey),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = ChatScreen();
-                        currentTab = 2;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.message_outlined,
-                          size: 30,
-                          color: currentTab == 2
-                              ? Colors.lightGreen.shade300
-                              : Colors.grey.shade400,
-                        ),
-                        Text(
-                          'Chat',
-                          style: TextStyle(
-                              color: currentTab == 2
-                                  ? Colors.lightGreen.shade300
-                                  : Colors.grey),
-                        )
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = ProfileScreen();
-                        currentTab = 3;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.account_circle_rounded,
-                          size: 30,
-                          color: currentTab == 3
-                              ? Colors.lightGreen.shade300
-                              : Colors.grey.shade400,
-                        ),
-                        Text(
-                          'Profilo',
-                          style: TextStyle(
-                              color: currentTab == 3
-                                  ? Colors.lightGreen.shade300
-                                  : Colors.grey),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: screens[index],
     );
   }
 
@@ -228,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var response = await http.get(url);
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
-      if(jsonBody != null){
+      if (jsonBody != null) {
         UserSharedPreferences.setTypeOfUser(typeOfUser);
         //print("Settato: " + typeOfUser);
       }
