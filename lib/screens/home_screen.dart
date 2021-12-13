@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/addnewanimal_screen.dart';
 import 'package:pet360/screens/chat_screen.dart';
+import 'package:pet360/screens/find_fiends.dart';
 import 'package:pet360/screens/location_screen.dart';
 import 'package:pet360/screens/profile_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
@@ -42,33 +43,51 @@ class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   final List<Widget> screens = [
     Dashboard(),
-    LocationScreen(),
+    FindFriends(),
     AddNewAnimalScreen(),
     ChatScreen(),
     ProfileScreen(),
   ];
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
-        color: Color.fromRGBO(197 ,225, 165, 5),
+        color: Color.fromRGBO(197, 225, 165, 5),
         backgroundColor: Colors.transparent,
         items: <Widget>[
-          Icon(Icons.home, size: 30, color: Colors.white,),
-          Icon(Icons.map, size: 30, color: Colors.white,),
-          Icon(Icons.add, size: 30, color: Colors.white,),
-          Icon(Icons.chat, size: 30, color: Colors.white,),
-          Icon(Icons.account_box_rounded, size: 30, color: Colors.white,),
+          Icon(
+            Icons.home,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.map,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.add,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.chat,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.account_box_rounded,
+            size: 30,
+            color: Colors.white,
+          ),
         ],
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (index) {
           setState(() {
-            this.index=index;
+            this.index = index;
           });
         },
         letIndexChange: (index) => true,

@@ -49,6 +49,7 @@ dependencies:
   get: ^4.3.8
   path_provider: ^2.0.1
   shared_preferences: ^2.0.9
+  google_maps_flutter: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,21 @@ flutter:
     - assets/icons/write.png
     - assets/icons/dog.png
     - assets/icons/messenger.png
+    - assets/markers/marker-1.png
+    - assets/markers/marker-2.png
+    - assets/markers/marker-3.png
+    - assets/markers/marker-4.png
+    - assets/markers/marker-5.png
+    - assets/markers/marker-6.png
+    - assets/markers/marker-7.png
+    - assets/images/avatar-1.png
+    - assets/images/avatar-2.png
+    - assets/images/avatar-3.png
+    - assets/images/avatar-4.png
+    - assets/images/avatar-5.png
+    - assets/images/avatar-6.png
+    - assets/images/avatar-7.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
