@@ -96,12 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void LogOut() async {
-    await _auth.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
-
   //getData("User","uid","surnameName")
   getData(String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
