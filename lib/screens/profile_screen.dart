@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:getwidget/getwidget.dart';
+import 'home_screen.dart';
 import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -54,11 +55,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             //email decoration
             decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: jsonBody['firstName'].toString(),
-                ),
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+              hintText: jsonBody['firstName'].toString(),
+            ),
           );
 
           final surnameField = TextFormField(
@@ -72,11 +73,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             //email decoration
             decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: jsonBody['surnameName'].toString(),
-                ),
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+              hintText: jsonBody['surnameName'].toString(),
+            ),
           );
 
           final emailField = TextFormField(
@@ -90,29 +91,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             //email decoration
             decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.mail),
-                hintText: _auth.currentUser!.email,
-                ),
-          );
-
-          final passwordField = TextFormField(
-            autofocus: false,
-            controller: passwordController,
-            keyboardType: TextInputType.visiblePassword,
-            onSaved: (value) {
-              passwordController.text = value!;
-            },
-            textInputAction: TextInputAction.next,
-
-            //email decoration
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.password),
-                hintText: "Password",
-                ),
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.mail),
+              hintText: _auth.currentUser!.email,
+            ),
           );
 
           final cityField = TextFormField(
@@ -126,10 +109,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             //email decoration
             decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.location_city),
-                hintText: jsonBody['cityName'].toString(),
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.location_city),
+              hintText: jsonBody['cityName'].toString(),
+            ),
+          );
+
+          final modifyButton = Material(
+            elevation: 5,
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.lightGreen.shade300,
+            child: MaterialButton(
+              padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
+              minWidth: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              onPressed: () {
+                Modify(nameController.text, surnameController.text,
+                    emailController.text, cityController.text);
+              },
+              child: const Text(
+                "Modifica",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           );
 
@@ -139,7 +147,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             color: Colors.lightGreen.shade300,
             child: MaterialButton(
               padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
-              minWidth: MediaQuery.of(context).size.width,
+              minWidth: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               onPressed: () {
                 LogOut();
               },
@@ -147,7 +158,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "Logout",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           );
@@ -199,10 +212,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: 20),
                           emailField,
                           SizedBox(height: 20),
-                          passwordField,
-                          SizedBox(height: 20),
                           cityField,
                           SizedBox(height: 40),
+                          modifyButton,
+                          SizedBox(height: 20),
                           logoutButton,
                         ])),
               ),
@@ -212,13 +225,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // We can show the loading view until the data comes back.
           //debugPrint('Step 1, build loading widget');
           return SizedBox(
-            height: MediaQuery.of(context).size.height / 1,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height / 1,
             child: Center(
               child: CircularProgressIndicator(),
             ),
-          );//TODO DA CAMBIARE
+          );
         }
      },
+
   );
 
   void LogOut() async {
@@ -226,6 +243,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
     UserSharedPreferences.setTypeOfUser("");
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
+
+  void Modify(String nome, String cognome,String email, String citta) async {
+    if(email != ""){
+      GFToast.showToast('Non è possibile modificare la mail', context,
+          toastPosition: GFToastPosition.BOTTOM,
+          textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
+          backgroundColor: Colors.red,
+          trailing: Icon(
+            Icons.notifications,
+            color: Colors.black,
+          ));
+      emailController.text = "";
+      return;
+    }
+    if(nome.isNotEmpty){
+      if(nome != jsonBody['firstName'].toString()){
+        final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
+        DBRef.child(_auth.currentUser!.uid.toString()).update({
+          'firstName': nome,
+        });
+      }
+    }
+    if(cognome.isNotEmpty){
+      if(cognome != jsonBody['surnameName'].toString()){
+        final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
+        DBRef.child(_auth.currentUser!.uid.toString()).update({
+          'surnameName': cognome,
+        });
+      }
+    }
+    if(citta.isNotEmpty){
+      if(citta != jsonBody['cityName'].toString()){
+        final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
+        DBRef.child(_auth.currentUser!.uid.toString()).update({
+          'cityName': citta,
+        });
+      }
+    }
+    //TODO COME REFRESHO?
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => HomeScreen()));
+    return;
   }
 
   getData(String typeOfUser, String uidUser, String path) async {
@@ -246,7 +306,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
-  Future<bool> fetchData() => Future.delayed(Duration(seconds: 4), () {
+
+  Future<bool> fetchData() => Future.delayed(Duration(seconds: 5), () {
     //debugPrint('Step 2, fetch data');
     return true;
   });
