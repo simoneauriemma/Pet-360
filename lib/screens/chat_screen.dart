@@ -17,7 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           bottom: const TabBar(tabs: [
-            Tab(text: 'Veterinari', icon: Icon(Icons.d)),
+            Tab(text: 'Veterinari', icon: Icon(Icons.account_circle)),
             Tab(text: 'Addestratori', icon: Icon(Icons.account_circle)),
           ]),
         ),
