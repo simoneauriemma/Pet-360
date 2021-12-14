@@ -63,13 +63,10 @@ void initializeFlutterFire() async {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
     //password
     final passwordFilds = TextFormField(
@@ -93,13 +90,10 @@ void initializeFlutterFire() async {
       //password decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.password_rounded),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     final loginButton = Material(
