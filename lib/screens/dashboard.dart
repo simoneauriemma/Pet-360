@@ -11,7 +11,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   @override
-
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return AppBackground(
@@ -32,27 +31,35 @@ class _DashboardState extends State<Dashboard> {
                       height: size.height * 0.3 - 27,
                       child: Row(
                         children: <Widget>[
-                          Text("Benvenuto!",
-                            style: Theme.of(context).textTheme.headline5!.copyWith(
-                                color: Colors.black, fontWeight: FontWeight.bold),
+                          Text(
+                            "Benvenuto!",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                           ),
                           Spacer(),
-                          Image.asset("assets/icons/ped-id.png", width: 55, height: 50,),
-
+                          Image.asset(
+                            "assets/icons/ped-id.png",
+                            width: 55,
+                            height: 50,
+                          ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
-        )
+        ),
       ),
     );
   }
 
-  /*Widget build(BuildContext context) {
+/*Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [

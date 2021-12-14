@@ -55,13 +55,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //email decoration
             decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                 hintText: jsonBody['firstName'].toString(),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
+                ),
           );
 
           final surnameField = TextFormField(
@@ -76,13 +73,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //email decoration
             decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                 hintText: jsonBody['surnameName'].toString(),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
+                ),
           );
 
           final emailField = TextFormField(
@@ -97,13 +91,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //email decoration
             decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.mail),
-                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                 hintText: _auth.currentUser!.email,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
+                ),
           );
 
           final passwordField = TextFormField(
@@ -118,13 +109,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //email decoration
             decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.password),
-                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                 hintText: "Password",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
+                ),
           );
 
           final cityField = TextFormField(
@@ -139,13 +127,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //email decoration
             decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.location_city),
-                contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                 hintText: jsonBody['cityName'].toString(),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
+            ),
           );
 
           final logoutButton = Material(

@@ -48,6 +48,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   //TextEditingController controllerUsername = new TextEditingController();
 
   Widget build(BuildContext context) {
+
     final nameField = TextFormField(
       autofocus: false,
       controller: nameController,
@@ -60,13 +61,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Nome",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     final surnameField = TextFormField(
@@ -81,13 +79,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Cognome",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+      ),
     );
 
     final emailField = TextFormField(
@@ -102,13 +97,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     final passwordField = TextFormField(
@@ -124,13 +116,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.password),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     final cityField = TextFormField(
@@ -145,13 +135,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.location_city),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Città",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     final regButton = Material(
@@ -201,13 +188,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.shop),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Nome negozio",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     final phoneNumberField = TextFormField(
@@ -222,13 +206,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.phone),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Numero di telefono",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     final cityShopField = TextFormField(
@@ -243,13 +224,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.apartment_rounded),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Città",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+         ),
     );
 
     final shopAddressField = TextFormField(
@@ -264,13 +242,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       //email decoration
       decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.home),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Indirizzo",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          )),
+          ),
     );
 
     return AppBackground(
