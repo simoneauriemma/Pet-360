@@ -5,6 +5,7 @@ import 'package:pet360/screens/addnewanimal_screen.dart';
 import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/find_fiends.dart';
 import 'package:pet360/screens/location_screen.dart';
+import 'package:pet360/screens/navigator_add.dart';
 import 'package:pet360/screens/profile_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'dart:convert';
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> screens = [
     Dashboard(),
     FindFriends(),
-    AddNewAnimalScreen(),
+    NavigatorAdd(),
     ChatScreen(),
     ProfileScreen(),
   ];
