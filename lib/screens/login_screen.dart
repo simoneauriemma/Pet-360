@@ -63,9 +63,9 @@ void initializeFlutterFire() async {
       //email decoration
       decoration: InputDecoration(
           filled: true,
+          labelText: "Email",
           fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.mail),
-          hintText: "Email",
           ),
     );
     //password
@@ -90,9 +90,9 @@ void initializeFlutterFire() async {
       //password decoration
       decoration: InputDecoration(
           filled: true,
+          labelText: "Password",
           fillColor: Colors.transparent,
           prefixIcon: Icon(Icons.password_rounded),
-          hintText: "Password",
           ),
     );
 
