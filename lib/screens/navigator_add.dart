@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(NavigatorAdd());
 
@@ -17,6 +18,9 @@ class NavigatorAdd extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.grey.shade300,
+        colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: Colors.lightGreen,
+      ).copyWith(),
       ),
       initialRoute: '/',
       routes: {
@@ -134,8 +138,10 @@ class _addInfoState extends State<addInfoAnimals> {
         Step(
           isActive: currentStep >= 0,
           title: Text(''),
+          
           content: Container(
-            //height: 550,
+            //color: Colors.transparent.withOpacity(0.5),
+            padding: EdgeInsets.only(bottom: 100),
             child: Column(
               children: [
                 Text(
@@ -319,7 +325,7 @@ class _addInfoState extends State<addInfoAnimals> {
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.transparent,
-                                labelText: "Colore manto",
+                                labelText: "Colore",
                               )),
                         ),
                         SizedBox(
@@ -350,7 +356,9 @@ class _addInfoState extends State<addInfoAnimals> {
               ],
             ),
           ),
+
         ),
+      
         Step(
           isActive: currentStep >= 1,
           title: Text(''),
@@ -681,6 +689,18 @@ class _addInfoState extends State<addInfoAnimals> {
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                           onPressed: () {
+                            Fluttertoast.showToast(
+                            msg: "Dispositivo aggiunto!",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.lightGreen,
+                            textColor: Colors.black,
+                            fontSize: 15.0
+                           );
+
+
+
                             /* GFToast.showToast('Dispositivo 1 aggiunto!',context,
                   toastPosition: GFToastPosition.BOTTOM,
                   textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
@@ -705,6 +725,15 @@ class _addInfoState extends State<addInfoAnimals> {
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                           onPressed: () {
+                            Fluttertoast.showToast(
+                            msg: "Dispositivo aggiunto!",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.lightGreen,
+                            textColor: Colors.black,
+                            fontSize: 15.0
+                           );
                             /*GFToast.showToast('Dispositivo 2 aggiunto!',context,
                   toastPosition: GFToastPosition.BOTTOM,
                   textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
@@ -717,9 +746,7 @@ class _addInfoState extends State<addInfoAnimals> {
                         )
                       ],
                     )),
-                SizedBox(
-                  height: 50,
-                ),
+                SizedBox(height: 50),
                 /* Align(alignment: Alignment.bottomCenter,
               child: ElevatedButton(
               child: Text("Salva"),
@@ -738,13 +765,14 @@ class _addInfoState extends State<addInfoAnimals> {
             )
             ),*/
 
-                Material(
+               /* Material(
                   elevation: 5,
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.lightGreen.shade300,
-                  child: MaterialButton(
-                    padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                    minWidth: MediaQuery.of(context).size.width,
+                  color: Colors.lightGreen.shade300,*/
+                   ElevatedButton(
+                     
+                   // padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    //minWidth: MediaQuery.of(context).size.width,
                     onPressed: () {
                       //
                     },
@@ -756,8 +784,15 @@ class _addInfoState extends State<addInfoAnimals> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
+                    style: ElevatedButton.styleFrom(
+                primary: Colors.lightGreen,
+                 side: BorderSide(color: Colors.grey.shade300, width: 2),
+                 elevation: 10,
+                 minimumSize: Size(120,40),
+                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+               ),
                   ),
-                )
+              //  )
               ],
             )),
       ];
@@ -766,7 +801,7 @@ class _addInfoState extends State<addInfoAnimals> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pet_360'),
+        title: Text('Aggiungi animale'),
         centerTitle: true,
         backgroundColor: Colors.grey,
       ),
@@ -781,7 +816,7 @@ class _addInfoState extends State<addInfoAnimals> {
         type: StepperType.horizontal,
         steps: getSteps(),
         currentStep: currentStep,
-        /*onStepContinue: (){
+        onStepContinue: null /*(){
             final isLastStep=currentStep==getSteps().length-1;
             if(isLastStep){
               print('Completed!');
@@ -791,30 +826,20 @@ class _addInfoState extends State<addInfoAnimals> {
               currentStep+=1;
             });
             }
-          },
-          onStepCancel:currentStep==0? null: () => setState(() {
+          },*/,
+          onStepCancel: null /*currentStep==0? null: () => setState(() {
               currentStep-=1;
-          }),*/
+          }),*/,
         onStepTapped: (step) => setState(() {
           currentStep = step;
         }),
 
-        /*controlsBuilder: (context, {onStepContinue, onStepCancel}){
+        controlsBuilder: (context, {onStepContinue, onStepCancel}){
           return Container(
              // margin: EdgeInsets.only(top: 10),
-              child: Row(
-                children:[
-                  ElevatedButton(
-                    child: Text("Next"),
-                    onPressed: onStepContinue,
-                  ),
-                  ElevatedButton(
-                    child: Text("Back"),
-                    onPressed: onStepContinue,
-                  ),
-                ]),
+              child: null
           );
-          }*/
+          }
       ),
 /*]),   
 ),*/
