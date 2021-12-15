@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           Icon(
-            Icons.account_box_rounded,
+            Icons.account_circle,
             size: 30,
             color: Colors.white,
           ),
