@@ -56,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
-        color: Color.fromRGBO(197, 225, 165, 5),
+       // color: Color.fromRGBO(197, 225, 165, 5),
+        color: Colors.lightGreen.shade300,
         backgroundColor: Colors.transparent,
         items: <Widget>[
           Icon(

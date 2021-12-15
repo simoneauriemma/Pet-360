@@ -1,3 +1,6 @@
+
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:accordion/accordion.dart';
@@ -19,9 +22,9 @@ Widget build(BuildContext context) {
 	initialRoute: '/',
 	routes: {
 	'/': (context) => addInfoAnimals(),
-	'/second': (context) => addInfoVax(),
+	/*'/second': (context) => addInfoVax(),
 	'/third': (context) => addInfoPass(),
-  '/fourth' : (context) => addInfoDisp(),
+  '/fourth' : (context) => addInfoDisp(),*/
 	},
 );
 }
@@ -56,8 +59,7 @@ File? pickedImage;
 
 void imagePickerOption(){
 Get.bottomSheet(
-  SingleChildScrollView(
-    child: ClipRRect(
+    ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(10.0),
         topRight: Radius.circular(10.0),
@@ -105,7 +107,7 @@ Get.bottomSheet(
       ),
     ),
   ),
-),
+
 );
 }
 
@@ -125,37 +127,18 @@ try{
   debugPrint(err.toString());
 }
 }
+int currentStep=0;
 
-@override
-Widget build(BuildContext context) {
-	return Scaffold(
-	appBar: AppBar(
-		title: Text('Pet_360'),
-		backgroundColor: Colors.green,
-	),
-	body: SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    physics: ScrollPhysics(),
-    padding: const EdgeInsets.only(top:35),
+List<Step> getSteps() => [
+    Step(
+      isActive: currentStep>=0,
+      title: Text(''),
+      content: Container(
+        //height: 550,
+        padding: EdgeInsets.only(bottom: 80),
       child: Column(
-            children:[
-      //SLIDER
-        Slider.adaptive(
-        value: _currentSliderValue,
-        min: 1,
-        max: 4,
-        divisions: 3,
-        activeColor: Colors.lightGreen,
-        inactiveColor: Colors.grey,
-        label: _currentSliderValue.round().toString(),
-        onChanged: (double value) {
-          setState(() {
-            _currentSliderValue = value;
-          });
-        },
-        ),
-        //TITOLO
-      Text("Aggiungi le info\ndel tuo animale",textAlign:TextAlign.center,style: TextStyle(fontSize: 25, color: Colors.black),),
+        children: [
+          Text("Aggiungi le info\ndel tuo animale",textAlign:TextAlign.center,style: TextStyle(fontSize: 25, color: Colors.black),),
         SizedBox(height: 30,),
         Align(alignment: Alignment.center,
       child: Stack(
@@ -198,23 +181,26 @@ Widget build(BuildContext context) {
   ),
   SizedBox(height: 20,),
   Container(
-    width: 320, height: 450,
+    padding: EdgeInsets.only(top:20),
+    width: 320, height: 480,
     decoration: BoxDecoration(
                   borderRadius:BorderRadius.circular(24.0),
                   gradient: new LinearGradient(colors: [
-                    //Colors.grey.shade300,
+                   // Colors.grey,
                     //Colors.grey.shade400,
-                    Color.fromRGBO(236, 236, 236, 0.0),
-                    Color.fromRGBO(236, 236, 236, 1.0)
 
+                    Color.fromRGBO(236, 236, 236, 0.0),
+                   // Color.fromRGBO(236, 236, 236, 1.0)
+                    Color.fromRGBO(216, 205, 205, 1),
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter
                    ),),    
     child: Column(
       children: [
-          SizedBox(width: 280,
-         child: TextFormField(
+        
+        SizedBox(width: 280, 
+        child: TextFormField(
         autofocus: false,
         controller: nameController,
         keyboardType: TextInputType.name,
@@ -410,61 +396,15 @@ SizedBox(height: 10,),
   ],
     )
 ),
-
-Container(
-  alignment: Alignment.bottomRight,
-  padding: const EdgeInsets.only(right: 40, top: 20),
-child: IconButton(
-  //icon: Image.asset("assets/icons/right.png"),
-    icon: Icon(Icons.arrow_forward_ios_rounded),
-
-  onPressed:(){
-      _currentSliderValue= _currentSliderValue+1;
-      Navigator.push(context,MaterialPageRoute(builder: (context) => addInfoVax()),);
-  }
-  ),
-),
-]),
-),
-	);
-}
-}
-
-class addInfoVax extends StatefulWidget {
-@override
-_addInfoVaxState createState() => _addInfoVaxState();
-}
-class _addInfoVaxState extends State<addInfoVax> {
-@override
-Widget build(BuildContext context) {
-	return Scaffold(
-	appBar: AppBar(
-		title: Text("Pet_360"),
-		backgroundColor: Colors.green,
-	),
-	body: SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    physics: ScrollPhysics(),
-    padding: const EdgeInsets.only(top:35),
-      child: Column(
+        ],
+      ),),
+      ),
+      Step(
+      isActive: currentStep>=1,
+      title: Text(''),
+      content: Column(
             children:[
-        //SLIDER
-        Slider.adaptive(
-        value: _currentSliderValue,
-        min: 1,
-        max: 4,
-        divisions: 3,
-        activeColor: Colors.lightGreen,
-        inactiveColor: Colors.grey,
-        label: _currentSliderValue.round().toString(),
-        onChanged: (double value) {
-          setState(() {
-            _currentSliderValue = value;
-          });
-        },
-        ),
-        //TITOLO
-      Text("Aggiungi le info sui\nvaccini del tuo animale",textAlign:TextAlign.center,style: TextStyle(fontSize: 25, color: Colors.black),),
+              Text("Aggiungi le info sui\nvaccini del tuo animale",textAlign:TextAlign.center,style: TextStyle(fontSize: 25, color: Colors.black),),
         SizedBox(height: 30,),
         Container(
     width: 320, height: 400,
@@ -473,9 +413,11 @@ Widget build(BuildContext context) {
                   gradient: new LinearGradient(colors: [
                     //Colors.grey.shade300,
                     //Colors.grey.shade400,
+                   // Color.fromRGBO(236, 236, 236, 0.0),
+                    //Color.fromRGBO(236, 236, 236, 1.0)
                     Color.fromRGBO(236, 236, 236, 0.0),
-                    Color.fromRGBO(236, 236, 236, 1.0)
-
+                   // Color.fromRGBO(236, 236, 236, 1.0)
+                    Color.fromRGBO(216, 205, 205, 1),
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter
@@ -625,71 +567,31 @@ Text("Aggiungi un altro vaccino:", style: TextStyle(fontStyle: FontStyle.italic)
 ]),   
 ),
 
-Container(
-  alignment: Alignment.bottomRight,
-  padding: const EdgeInsets.only(right: 40, top: 50),
-child: IconButton(
-  //icon: Image.asset("assets/icons/right.png"),
-  icon: Icon(Icons.arrow_forward_ios_rounded),
-  onPressed:(){
-      _currentSliderValue=_currentSliderValue+1;
-       Navigator.push(context,MaterialPageRoute(builder: (context) => addInfoPass()));
-  }
-  ),
-),
 
-]),
-  ),
-	);
-}
-}
-
-class addInfoPass extends StatefulWidget {
-@override
-_addInfoPassState createState() => _addInfoPassState();
-}
-class _addInfoPassState extends State<addInfoPass> {
-@override
-Widget build(BuildContext context) {
-	return Scaffold(
-	appBar: AppBar(
-		title: Text("Pet_360"),
-		backgroundColor: Colors.green,
-	),
-  body: SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    physics: ScrollPhysics(),
-    padding: const EdgeInsets.only(top:35),
-      child: Column(
-            children:[
-            //SLIDER
-        Slider.adaptive(
-        value: _currentSliderValue,
-        min: 1,
-        max: 4,
-        divisions: 3,
-        activeColor: Colors.lightGreen,
-        inactiveColor: Colors.grey,
-        label: _currentSliderValue.round().toString(),
-        onChanged: (double value) {
-          setState(() {
-            _currentSliderValue = value;
-          });
-        },
-        ),
-        //TITOLO
+            ]),
+      ),
+      Step(
+      isActive: currentStep>=2,
+      title: Text(''),
+      content: Column(
+        children: [
+           //TITOLO
       Text("Aggiungi le info\nsul passaporto\ndel tuo animale",textAlign:TextAlign.center,style: TextStyle(fontSize: 25, color: Colors.black),),
         SizedBox(height: 30,),
         
         Container(
-    width: 320, height: 350,
+    width: 320, height: 320,
     decoration: BoxDecoration(
                   borderRadius:BorderRadius.circular(24.0),
                   gradient: new LinearGradient(colors: [
                     //Colors.grey.shade300,
                     //Colors.grey.shade400,
+                   // Color.fromRGBO(236, 236, 236, 0.0),
+                    //Color.fromRGBO(236, 236, 236, 1.0)
+
                     Color.fromRGBO(236, 236, 236, 0.0),
-                    Color.fromRGBO(236, 236, 236, 1.0)
+                   // Color.fromRGBO(236, 236, 236, 1.0)
+                    Color.fromRGBO(216, 205, 205, 1),
 
                   ],
                   begin: Alignment.topCenter,
@@ -831,61 +733,15 @@ SizedBox(height: 10,),
 )
 ),
 ), ]),),
-
-Container(
-  alignment: Alignment.bottomRight,
-  padding: const EdgeInsets.only(right: 40, top: 20),
-child: IconButton(
- // icon: Image.asset("assets/icons/right.png"),
-    icon: Icon(Icons.arrow_forward_ios_rounded),
-
-  onPressed:(){
-       _currentSliderValue=_currentSliderValue+1;
-       Navigator.push(context,MaterialPageRoute(builder: (context) => addInfoDisp()));
-  }
-  ),
-),
-
-]),
-  ),
-	);
-}
-}
-
-class addInfoDisp extends StatefulWidget {
-@override
-_addInfoDispState createState() => _addInfoDispState();
-}
-class _addInfoDispState extends State<addInfoDisp> {
-@override
-Widget build(BuildContext context) {
-	return Scaffold(
-	appBar: AppBar(
-		title: Text("Pet_360"),
-		backgroundColor: Colors.green,
-	),
-  body: SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    physics: ScrollPhysics(),
-    padding: const EdgeInsets.only(top:35),
-      child: Column(
-            children:[
-                    //SLIDER
-        Slider.adaptive(
-        value: _currentSliderValue,
-        min: 1,
-        max: 4,
-        divisions: 3,
-        activeColor: Colors.lightGreen,
-        inactiveColor: Colors.grey,
-        label: _currentSliderValue.round().toString(),
-        onChanged: (double value) {
-          setState(() {
-            _currentSliderValue = value;
-          });
-        },
-        ),
-              Container(width: 500,
+//SizedBox(height: 140,)
+        ],)
+      ),
+      Step(
+      isActive: currentStep>=3,
+      title: Text(''),
+      content: Column(
+        children: [
+          Container(width: 500,
               child: Text("Aggiungi\ndispositivi per la\ngeolocalizzazione",textAlign:TextAlign.center,style: TextStyle(fontSize: 25, color: Colors.black),),
               ),
               SizedBox(height: 80,),
@@ -900,8 +756,11 @@ Widget build(BuildContext context) {
                   gradient: new LinearGradient(colors: [
                     //Colors.grey.shade300,
                     //Colors.grey.shade400,
-                    Color.fromRGBO(236, 236, 236, 0.0),
-                    Color.fromRGBO(236, 236, 236, 1.0)
+                    //Color.fromRGBO(236, 236, 236, 0.0),
+                    //Color.fromRGBO(236, 236, 236, 1.0)
+                   Color.fromRGBO(236, 236, 236, 0.0),
+                   // Color.fromRGBO(236, 236, 236, 1.0)
+                    Color.fromRGBO(216, 205, 205, 1),
 
                   ],
                   begin: Alignment.topCenter,
@@ -923,14 +782,14 @@ Widget build(BuildContext context) {
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                ),
               onPressed:() {
-                  GFToast.showToast('Dispositivo 1 aggiunto!',context,
+                 /* GFToast.showToast('Dispositivo 1 aggiunto!',context,
                   toastPosition: GFToastPosition.BOTTOM,
                   textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
                   backgroundColor: Colors.green.shade300,
                   trailing: Icon(
                     Icons.notifications,
                     color: Colors.black,
-                  ));                    
+                  ));      */              
               },
             ),
 
@@ -946,21 +805,21 @@ Widget build(BuildContext context) {
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                ),
               onPressed:() {
-                  GFToast.showToast('Dispositivo 2 aggiunto!',context,
+                  /*GFToast.showToast('Dispositivo 2 aggiunto!',context,
                   toastPosition: GFToastPosition.BOTTOM,
                   textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
                   backgroundColor: Colors.green.shade300,
                   trailing: Icon(
                     Icons.notifications,
                     color: Colors.black,
-                  )); 
+                  )); */
               },
             )
             ],)
             ),
 
-              SizedBox(height: 100,),
-              Align(alignment: Alignment.bottomCenter,
+              SizedBox(height: 50,),
+             /* Align(alignment: Alignment.bottomCenter,
               child: ElevatedButton(
               child: Text("Salva"),
               style: ElevatedButton.styleFrom(
@@ -976,9 +835,88 @@ Widget build(BuildContext context) {
                   //
               },
             )
-            ),
-  ]),  
-  ),
-	);
+            ),*/
+
+      Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(20),
+      color: Colors.lightGreen.shade300,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {
+          //
+        },
+        child: Text(
+          "Salva",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    )
+
+        ],)
+      ),
+  ];
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+	appBar: AppBar(
+		title: Text('Pet_360'),
+    centerTitle: true,
+		backgroundColor: Colors.grey,
+	),
+	body: 
+  /*SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    physics: ScrollPhysics(),
+    padding: const EdgeInsets.only(top:35),
+      child: Column(
+            children:[*/
+        Stepper(
+          type: StepperType.horizontal,
+          steps: getSteps(),
+          currentStep: currentStep,
+          /*onStepContinue: (){
+            final isLastStep=currentStep==getSteps().length-1;
+            if(isLastStep){
+              print('Completed!');
+            }else{
+              //send data to server
+                setState(() {
+              currentStep+=1;
+            });
+            }            
+          },
+          onStepCancel:currentStep==0? null: () => setState(() {
+              currentStep-=1;
+          }),*/
+          onStepTapped: (step) => setState(() {
+            currentStep=step;
+          }), 
+          
+          /*controlsBuilder: (context, {onStepContinue, onStepCancel}){
+          return Container(
+             // margin: EdgeInsets.only(top: 10),
+              child: Row(
+                children:[
+                  ElevatedButton(
+                    child: Text("Next"),
+                    onPressed: onStepContinue,
+                  ),
+                  ElevatedButton(
+                    child: Text("Back"),
+                    onPressed: onStepContinue,
+                  ),
+                ]),
+          );
+          }*/
+          ),  
+/*]),   
+),*/
+);
+  
 }
 }
