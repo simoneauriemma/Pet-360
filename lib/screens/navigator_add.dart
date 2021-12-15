@@ -37,7 +37,6 @@ double _currentSliderValue = 1;
 
 //campi di aggiunta info animale
 final nameController = new TextEditingController();
-final dataController = new TextEditingController();
 final specieController = new TextEditingController();
 final razzaController = new TextEditingController();
 final coloreController = new TextEditingController();
@@ -52,6 +51,7 @@ final descrizioneController = new TextEditingController();
 final microchipController = new TextEditingController();
 final dataMicrochipController = new TextEditingController();
 final enteController = new TextEditingController();
+final dataController = new TextEditingController();
 
 class addInfoAnimals extends StatefulWidget {
   @override
@@ -60,6 +60,13 @@ class addInfoAnimals extends StatefulWidget {
 
 class _addInfoState extends State<addInfoAnimals> {
   File? pickedImage;
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed
+    dataController.dispose();
+    super.dispose();
+  }
 
   void imagePickerOption() {
     Get.bottomSheet(
@@ -240,14 +247,15 @@ class _addInfoState extends State<addInfoAnimals> {
                             height: 10,
                           ),
                           SizedBox(
-                            width: 280,
-                            child: TextFormField(
+                              width: 280,
+                              child: TextFormField(
                                 autofocus: false,
                                 controller: dataController,
                                 keyboardType: TextInputType.name,
                                 onSaved: (value) {
                                   dataController.text = value!;
                                 },
+
                                 textInputAction: TextInputAction.next,
 
                                 //DataNascita
@@ -255,8 +263,17 @@ class _addInfoState extends State<addInfoAnimals> {
                                   filled: true,
                                   fillColor: Colors.transparent,
                                   labelText: "Data di nascita",
-                                )),
-                          ),
+                                ),
+                                onTap: () async {
+                                  var date = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2100));
+                                  dataController.text =
+                                      date.toString().substring(0, 10);
+                                },
+                              )),
                           SizedBox(
                             height: 10,
                           ),

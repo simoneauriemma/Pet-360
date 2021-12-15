@@ -119,7 +119,7 @@ void initializeFlutterFire() async {
       Future.delayed(Duration.zero, () {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => HomeScreen()),
-                (route) => false);
+            (route) => false);
       });
     }
 
@@ -191,9 +191,9 @@ void initializeFlutterFire() async {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomeScreen())),
-      })
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomeScreen())),
+              })
           .catchError((e) {
         GFToast.showToast('Email o password errate, riprova', context,
             toastPosition: GFToastPosition.BOTTOM,
