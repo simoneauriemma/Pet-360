@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:pet360/model/map_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pet360/model/map_style.dart';
 
 class FindFriends extends StatefulWidget {
   const FindFriends({Key? key}) : super(key: key);
@@ -100,7 +100,8 @@ class _FindFriendsState extends State<FindFriends> {
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: ListView.builder(
-                padding: const EdgeInsets.only(right: 0.0, left: 0.0, top: 0.0, bottom: 30.0),
+                padding: const EdgeInsets.only(
+                    right: 0.0, left: 0.0, top: 0.0, bottom: 30.0),
                 scrollDirection: Axis.horizontal,
                 itemCount: _contacts.length,
                 itemBuilder: (context, index) {

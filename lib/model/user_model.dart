@@ -1,6 +1,6 @@
 import 'interface_model.dart';
 
-class UserModel implements InterfaceModel{
+class UserModel implements InterfaceModel {
   String? uid;
   String? email;
   String? firstName;
@@ -87,5 +87,4 @@ class UserModel implements InterfaceModel{
   getNameShop() {
     return null;
   }
-
 }

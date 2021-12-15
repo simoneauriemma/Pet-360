@@ -1,10 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/components/appBackground.dart';
-import 'package:pet360/screens/registration_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pet360/screens/home_screen.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:pet360/components/appBackground.dart';
+import 'package:pet360/screens/home_screen.dart';
+import 'package:pet360/screens/registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -62,11 +62,11 @@ void initializeFlutterFire() async {
       textInputAction: TextInputAction.next,
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          labelText: "Email",
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.mail),
-          ),
+        filled: true,
+        labelText: "Email",
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.mail),
+      ),
     );
     //password
     final passwordFilds = TextFormField(
@@ -89,11 +89,11 @@ void initializeFlutterFire() async {
 
       //password decoration
       decoration: InputDecoration(
-          filled: true,
-          labelText: "Password",
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.password_rounded),
-          ),
+        filled: true,
+        labelText: "Password",
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.password_rounded),
+      ),
     );
 
     final loginButton = Material(
@@ -119,7 +119,7 @@ void initializeFlutterFire() async {
       Future.delayed(Duration.zero, () {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => HomeScreen()),
-            (route) => false);
+                (route) => false);
       });
     }
 
@@ -191,9 +191,9 @@ void initializeFlutterFire() async {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomeScreen())),
-              })
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen())),
+      })
           .catchError((e) {
         GFToast.showToast('Email o password errate, riprova', context,
             toastPosition: GFToastPosition.BOTTOM,

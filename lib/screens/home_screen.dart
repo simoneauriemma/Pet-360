@@ -1,18 +1,16 @@
+import 'dart:convert';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/screens/addnewanimal_screen.dart';
+import 'package:http/http.dart' as http;
 import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/find_fiends.dart';
-import 'package:pet360/screens/location_screen.dart';
 import 'package:pet360/screens/navigator_add.dart';
 import 'package:pet360/screens/profile_screen.dart';
-import 'package:pet360/screens/testFetch.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'dart:convert';
+
 import 'dashboard.dart';
-import 'package:http/http.dart' as http;
-import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -56,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
-       // color: Color.fromRGBO(197, 225, 165, 5),
+        // color: Color.fromRGBO(197, 225, 165, 5),
         color: Colors.lightGreen.shade200,
         backgroundColor: Colors.transparent,
         items: <Widget>[
