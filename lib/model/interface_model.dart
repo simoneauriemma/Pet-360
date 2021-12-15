@@ -1,17 +1,15 @@
 class InterfaceModel {
+  getFirstName() {}
 
-  getFirstName(){}
+  getSurnameName() {}
 
-  getSurnameName(){}
+  getCityName() {}
 
-  getCityName(){}
-
-  getPhoneNumber(){}
+  getPhoneNumber() {}
 
   getNameShop() {}
 
   getCityShop() {}
 
   getAddressShop() {}
-
 }

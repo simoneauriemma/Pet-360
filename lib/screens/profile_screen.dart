@@ -644,7 +644,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
-      switch(typeOfUser) {
+      switch (typeOfUser) {
         case "Utente":
           return UserModel.fromJson(jsonDecode(response.body));
         case "Addestratore":

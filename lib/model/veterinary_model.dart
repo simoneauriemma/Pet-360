@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 import 'interface_model.dart';
 
 class VeterinaryModel implements InterfaceModel {
@@ -57,6 +55,7 @@ class VeterinaryModel implements InterfaceModel {
       address: map['address'],
     );
   }
+
   //sending data to server
 
   Map<String, dynamic> toMap() {

@@ -1,13 +1,9 @@
-import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:accordion/accordion.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
-import 'package:getwidget/getwidget.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(NavigatorAdd());
 
@@ -382,21 +378,20 @@ class _addInfoState extends State<addInfoAnimals> {
                 SizedBox(
                   width: 280,
                   child: TextFormField(
-                    autofocus: false,
-                    controller: tipoVaccinoController,
-                    keyboardType: TextInputType.name,
-                    onSaved: (value) {
-                      tipoVaccinoController.text = value!;
-                    },
-                    textInputAction: TextInputAction.next,
+                      autofocus: false,
+                      controller: tipoVaccinoController,
+                      keyboardType: TextInputType.name,
+                      onSaved: (value) {
+                        tipoVaccinoController.text = value!;
+                      },
+                      textInputAction: TextInputAction.next,
 
-                    //Tipo vaccino
+                      //Tipo vaccino
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.transparent,
                         labelText: "Tipo vaccino",
-                      )
-                  ),
+                      )),
                 ),
                 SizedBox(
                   height: 10,

@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
-
 import 'interface_model.dart';
 
-class TrainerModel implements InterfaceModel{
+class TrainerModel implements InterfaceModel {
   String? uid;
   String? email;
   String? firstName;
