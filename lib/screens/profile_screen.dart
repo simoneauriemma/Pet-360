@@ -26,6 +26,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final emailController = new TextEditingController();
   final passwordController = new TextEditingController();
   final cityController = new TextEditingController();
+  final phoneNumberController = new TextEditingController();
+  final nameShopController = new TextEditingController();
+  final cityShopController = new TextEditingController();
+  final addressShopController = new TextEditingController();
 
   var jsonBody;
   @override
@@ -42,8 +46,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context)  => FutureBuilder(
       future: fetchData(),
       builder: (context, snapshot) {
+        //print("Snap: " + snapshot.toString() + jsonBody.toString());
         if (snapshot.hasData) {
-          //debugPrint('Step 3, build widget: ${snapshot.data}');
           final nameField = TextFormField(
             autofocus: false,
             controller: nameController,
@@ -128,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   .width,
               onPressed: () {
                 Modify(nameController.text, surnameController.text,
-                    emailController.text, cityController.text);
+                    emailController.text, cityController.text,phoneNumberController.text,nameShopController.text,cityShopController.text,addressShopController.text);
               },
               child: const Text(
                 "Modifica",
@@ -165,6 +169,269 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           );
 
+          if(UserSharedPreferences.getTypeOfUser().toString() == "Utente"){
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(36.0),
+                  child: Form(
+                      key: _formkey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Profilo",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.lightGreen.shade100,
+                                        offset: Offset(5.0, 5.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            nameField,
+                            SizedBox(height: 20),
+                            surnameField,
+                            SizedBox(height: 20),
+                            emailField,
+                            SizedBox(height: 20),
+                            cityField,
+                            SizedBox(height: 40),
+                            modifyButton,
+                            SizedBox(height: 20),
+                            logoutButton,
+                          ])),
+                ),
+              ),
+            );
+          }
+
+          final phoneNumber = TextFormField(
+            autofocus: false,
+            controller: phoneNumberController,
+            keyboardType: TextInputType.name,
+            onSaved: (value) {
+              phoneNumberController.text = value!;
+            },
+            textInputAction: TextInputAction.done,
+
+            //email decoration
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.phone),
+              hintText: jsonBody['numberPhone'].toString(),
+            ),
+          );
+
+          final nameShop = TextFormField(
+            autofocus: false,
+            controller: nameShopController,
+            keyboardType: TextInputType.name,
+            onSaved: (value) {
+              nameShopController.text = value!;
+            },
+            textInputAction: TextInputAction.done,
+
+            //email decoration
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.shop),
+              hintText: jsonBody['nameShop'].toString(),
+            ),
+          );
+
+          final cityShop = TextFormField(
+            autofocus: false,
+            controller: cityShopController,
+            keyboardType: TextInputType.name,
+            onSaved: (value) {
+              cityShopController.text = value!;
+            },
+            textInputAction: TextInputAction.done,
+
+            //email decoration
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.apartment_rounded),
+              hintText: jsonBody['cityShop'].toString(),
+            ),
+          );
+
+          final addressShop = TextFormField(
+            autofocus: false,
+            controller: addressShopController,
+            keyboardType: TextInputType.name,
+            onSaved: (value) {
+              addressShopController.text = value!;
+            },
+            textInputAction: TextInputAction.done,
+
+            //email decoration
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.transparent,
+              prefixIcon: Icon(Icons.home),
+              hintText: jsonBody['addressShop'].toString(),
+            ),
+          );
+
+          if(UserSharedPreferences.getTypeOfUser().toString() == "Veterinario"){
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(36.0),
+                  child: Form(
+                      key: _formkey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Profilo",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.lightGreen.shade100,
+                                        offset: Offset(5.0, 5.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            nameField,
+                            SizedBox(height: 20),
+                            surnameField,
+                            SizedBox(height: 20),
+                            emailField,
+                            SizedBox(height: 20),
+                            cityField,
+                            SizedBox(height: 20),
+                            phoneNumber,
+                            SizedBox(height: 20),
+                            nameShop,
+                            SizedBox(height: 20),
+                            cityShop,
+                            SizedBox(height: 20),
+                            addressShop,
+                            SizedBox(height: 40),
+                            modifyButton,
+                            SizedBox(height: 20),
+                            logoutButton,
+                          ])),
+                ),
+              ),
+            );
+          }
+          if (UserSharedPreferences.getTypeOfUser().toString() == "Addestratore"){
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(36.0),
+                  child: Form(
+                      key: _formkey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Profilo",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.lightGreen.shade100,
+                                        offset: Offset(5.0, 5.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            nameField,
+                            SizedBox(height: 20),
+                            surnameField,
+                            SizedBox(height: 20),
+                            emailField,
+                            SizedBox(height: 20),
+                            cityField,
+                            SizedBox(height: 20),
+                            phoneNumber,
+                            SizedBox(height: 20),
+                            nameShop,
+                            SizedBox(height: 20),
+                            cityShop,
+                            SizedBox(height: 20),
+                            addressShop,
+                            SizedBox(height: 40),
+                            modifyButton,
+                            SizedBox(height: 20),
+                            logoutButton,
+                          ])),
+                ),
+              ),
+            );
+          }
           return Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
@@ -245,7 +512,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
-  void Modify(String nome, String cognome,String email, String citta) async {
+  void Modify(String nome, String cognome,String email, String citta, String numberPhone, String nameShop, String cityShop, String addressShop) async {
     if(email != ""){
       GFToast.showToast('Non è possibile modificare la mail', context,
           toastPosition: GFToastPosition.BOTTOM,
@@ -279,6 +546,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
         final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
         DBRef.child(_auth.currentUser!.uid.toString()).update({
           'cityName': citta,
+        });
+      }
+    }
+    if(numberPhone.isNotEmpty){
+      if(numberPhone != jsonBody['numberPhone'].toString()){
+        final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
+        DBRef.child(_auth.currentUser!.uid.toString()).update({
+          'numberPhone': numberPhone,
+        });
+      }
+    }
+    if(nameShop.isNotEmpty){
+      if(nameShop != jsonBody['nameShop'].toString()){
+        final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
+        DBRef.child(_auth.currentUser!.uid.toString()).update({
+          'nameShop': nameShop,
+        });
+      }
+    }
+    if(cityShop.isNotEmpty){
+      if(cityShop != jsonBody['cityShop'].toString()){
+        final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
+        DBRef.child(_auth.currentUser!.uid.toString()).update({
+          'cityShop': cityShop,
+        });
+      }
+    }
+    if(addressShop.isNotEmpty){
+      if(addressShop != jsonBody['addressShop'].toString()){
+        final DBRef = FirebaseDatabase.instance.reference().child(UserSharedPreferences.getTypeOfUser().toString());
+        DBRef.child(_auth.currentUser!.uid.toString()).update({
+          'addressShop': addressShop,
         });
       }
     }
