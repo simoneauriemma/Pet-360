@@ -141,6 +141,7 @@ class _addInfoState extends State<addInfoAnimals> {
           
           content: Container(
             //color: Colors.transparent.withOpacity(0.5),
+            child: SingleChildScrollView(
             padding: EdgeInsets.only(bottom: 100),
             child: Column(
               children: [
@@ -239,8 +240,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         SizedBox(
                           height: 10,
                         ),
-//Container(
-                        //width: 300,
                         SizedBox(
                           width: 280,
                           child: TextFormField(
@@ -262,8 +261,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         SizedBox(
                           height: 10,
                         ),
-//Container(
-                        //width: 300,
                         SizedBox(
                           width: 280,
                           child: TextFormField(
@@ -285,8 +282,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         SizedBox(
                           height: 10,
                         ),
-//Container(
-                        // width: 300,
                         SizedBox(
                           width: 280,
                           child: TextFormField(
@@ -308,8 +303,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         SizedBox(
                           height: 10,
                         ),
-//Container(
-                        //width: 300,
                         SizedBox(
                           width: 280,
                           child: TextFormField(
@@ -331,8 +324,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         SizedBox(
                           height: 10,
                         ),
-//Container(
-                        //width: 300,
                         SizedBox(
                           width: 280,
                           child: TextFormField(
@@ -356,7 +347,7 @@ class _addInfoState extends State<addInfoAnimals> {
               ],
             ),
           ),
-
+          ),
         ),
       
         Step(
@@ -376,13 +367,8 @@ class _addInfoState extends State<addInfoAnimals> {
               height: 400,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
-                gradient: new LinearGradient(colors: [
-                  //Colors.grey.shade300,
-                  //Colors.grey.shade400,
-                  // Color.fromRGBO(236, 236, 236, 0.0),
-                  //Color.fromRGBO(236, 236, 236, 1.0)
-                  Color.fromRGBO(236, 236, 236, 0.0),
-                  // Color.fromRGBO(236, 236, 236, 1.0)
+                gradient: new LinearGradient(colors: [                
+                  Color.fromRGBO(236, 236, 236, 0.0),                  
                   Color.fromRGBO(216, 205, 205, 1),
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
               ),
@@ -409,8 +395,6 @@ class _addInfoState extends State<addInfoAnimals> {
                 SizedBox(
                   height: 10,
                 ),
-//Container(
-                //width: 300,
                 SizedBox(
                   width: 280,
                   child: TextFormField(
@@ -433,8 +417,6 @@ class _addInfoState extends State<addInfoAnimals> {
                 SizedBox(
                   height: 10,
                 ),
-//Container(
-                //width: 300,
                 SizedBox(
                   width: 280,
                   child: TextFormField(
@@ -457,8 +439,6 @@ class _addInfoState extends State<addInfoAnimals> {
                 SizedBox(
                   height: 10,
                 ),
-//Container(
-                //width: 300,
                 SizedBox(
                   width: 280,
                   child: TextFormField(
@@ -552,8 +532,6 @@ class _addInfoState extends State<addInfoAnimals> {
                     SizedBox(
                       height: 10,
                     ),
-//Container(
-                    //width: 300,
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -572,12 +550,10 @@ class _addInfoState extends State<addInfoAnimals> {
                             labelText: "N° microchip",
                           )),
                     ),
-//),
                     SizedBox(
                       height: 10,
                     ),
-//Container(
-                    //width: 300,
+
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -596,13 +572,11 @@ class _addInfoState extends State<addInfoAnimals> {
                             labelText: "Data applicazione microchip",
                           )),
                     ),
-//),
 
                     SizedBox(
                       height: 10,
                     ),
-//Container(
-                    //width: 300,
+
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -623,7 +597,6 @@ class _addInfoState extends State<addInfoAnimals> {
                     ),
                   ]),
                 ),
-//SizedBox(height: 140,)
               ],
             )),
         Step(
@@ -660,13 +633,8 @@ class _addInfoState extends State<addInfoAnimals> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24.0),
                       gradient: new LinearGradient(
-                          colors: [
-                            //Colors.grey.shade300,
-                            //Colors.grey.shade400,
-                            //Color.fromRGBO(236, 236, 236, 0.0),
-                            //Color.fromRGBO(236, 236, 236, 1.0)
-                            Color.fromRGBO(236, 236, 236, 0.0),
-                            // Color.fromRGBO(236, 236, 236, 1.0)
+                          colors: [                           
+                            Color.fromRGBO(236, 236, 236, 0.0),                          
                             Color.fromRGBO(216, 205, 205, 1),
                           ],
                           begin: Alignment.topCenter,
@@ -699,16 +667,6 @@ class _addInfoState extends State<addInfoAnimals> {
                             fontSize: 15.0
                            );
 
-
-
-                            /* GFToast.showToast('Dispositivo 1 aggiunto!',context,
-                  toastPosition: GFToastPosition.BOTTOM,
-                  textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-                  backgroundColor: Colors.green.shade300,
-                  trailing: Icon(
-                    Icons.notifications,
-                    color: Colors.black,
-                  ));      */
                           },
                         ),
                         ElevatedButton(
@@ -734,45 +692,12 @@ class _addInfoState extends State<addInfoAnimals> {
                             textColor: Colors.black,
                             fontSize: 15.0
                            );
-                            /*GFToast.showToast('Dispositivo 2 aggiunto!',context,
-                  toastPosition: GFToastPosition.BOTTOM,
-                  textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-                  backgroundColor: Colors.green.shade300,
-                  trailing: Icon(
-                    Icons.notifications,
-                    color: Colors.black,
-                  )); */
                           },
                         )
                       ],
                     )),
                 SizedBox(height: 50),
-                /* Align(alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-              child: Text("Salva"),
-              style: ElevatedButton.styleFrom(
-                 onPrimary: Colors.black,
-                 primary: Colors.white70,
-                 onSurface: Colors.grey,
-                 side: BorderSide(color: Colors.lightGreen, width: 2),
-                 elevation: 10,
-                 minimumSize: Size(120,40),
-                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-               ),
-              onPressed:() {
-                  //
-              },
-            )
-            ),*/
-
-               /* Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.lightGreen.shade300,*/
-                   ElevatedButton(
-                     
-                   // padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                    //minWidth: MediaQuery.of(context).size.width,
+                   ElevatedButton(                    
                     onPressed: () {
                       //
                     },
@@ -800,49 +725,29 @@ class _addInfoState extends State<addInfoAnimals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       resizeToAvoidBottomInset : false,
       appBar: AppBar(
         title: Text('Aggiungi animale'),
         centerTitle: true,
         backgroundColor: Colors.grey,
       ),
       body:
-          /*SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    physics: ScrollPhysics(),
-    padding: const EdgeInsets.only(top:35),
-      child: Column(
-            children:[*/
           Stepper(
         type: StepperType.horizontal,
         steps: getSteps(),
         currentStep: currentStep,
-        onStepContinue: null /*(){
-            final isLastStep=currentStep==getSteps().length-1;
-            if(isLastStep){
-              print('Completed!');
-            }else{
-              //send data to server
-                setState(() {
-              currentStep+=1;
-            });
-            }
-          },*/,
-          onStepCancel: null /*currentStep==0? null: () => setState(() {
-              currentStep-=1;
-          }),*/,
+        onStepContinue: null,
+          onStepCancel: null,
         onStepTapped: (step) => setState(() {
           currentStep = step;
         }),
 
         controlsBuilder: (context, {onStepContinue, onStepCancel}){
           return Container(
-             // margin: EdgeInsets.only(top: 10),
               child: null
           );
           }
       ),
-/*]),   
-),*/
     );
   }
 }
