@@ -15,6 +15,13 @@ class _ChatScreenState extends State<ChatScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          title: Text("Chat"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
           backgroundColor: Colors.white,
           bottom: const TabBar(tabs: [
             Tab(text: 'Veterinari', icon: Icon(Icons.account_circle)),

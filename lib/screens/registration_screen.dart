@@ -252,6 +252,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          title: Text("Registrazione"),
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
@@ -277,7 +278,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             fit: BoxFit.contain,
                           )),
                       SizedBox(height: 20),
-                      Row(
+                      /*Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
@@ -295,7 +296,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                           ),
                         ],
-                      ),
+                      ), */
                       SizedBox(height: 20),
                       nameField,
                       SizedBox(height: 20),

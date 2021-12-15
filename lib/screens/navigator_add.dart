@@ -19,8 +19,8 @@ class NavigatorAdd extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.grey.shade300,
         colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: Colors.lightGreen,
-      ).copyWith(),
+          primarySwatch: Colors.lightGreen,
+        ).copyWith(),
       ),
       initialRoute: '/',
       routes: {
@@ -138,224 +138,222 @@ class _addInfoState extends State<addInfoAnimals> {
         Step(
           isActive: currentStep >= 0,
           title: Text(''),
-          
           content: Container(
             //color: Colors.transparent.withOpacity(0.5),
             child: SingleChildScrollView(
-            padding: EdgeInsets.only(bottom: 100),
-            child: Column(
-              children: [
-                Text(
-                  "Aggiungi le info\ndel tuo animale",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, color: Colors.black),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Align(
-                    alignment: Alignment.center,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.grey.shade300, width: 3),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(100)),
-                            color: Colors.lightGreen.shade50,
-                          ),
-                          child: ClipOval(
-                            child: pickedImage != null
-                                ? Image.file(
-                                    pickedImage!,
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                  )
-                                :
-                                //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                SizedBox(
-                                    width: 100.0,
-                                    height: 100.0,
-                                  ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 2,
-                          child: IconButton(
-                            onPressed: () {
-                              imagePickerOption();
-                            },
-                            icon: const Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black,
-                              size: 25,
+              padding: EdgeInsets.only(bottom: 100),
+              child: Column(
+                children: [
+                  Text(
+                    "Libretto",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 25, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 3),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(100)),
+                              color: Colors.lightGreen.shade50,
+                            ),
+                            child: ClipOval(
+                              child: pickedImage != null
+                                  ? Image.file(
+                                      pickedImage!,
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    )
+                                  :
+                                  //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                  SizedBox(
+                                      width: 100.0,
+                                      height: 100.0,
+                                    ),
                             ),
                           ),
-                        ),
-                      ],
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    padding: EdgeInsets.only(top: 20),
-                    width: 320,
-                    height: 480,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24.0),
-                      gradient: new LinearGradient(
-                          colors: [
-                            // Colors.grey,
-                            //Colors.grey.shade400,
-
-                            Color.fromRGBO(236, 236, 236, 0.0),
-                            // Color.fromRGBO(236, 236, 236, 1.0)
-                            Color.fromRGBO(216, 205, 205, 1),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter),
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: nameController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                nameController.text = value!;
+                          Positioned(
+                            bottom: 0,
+                            right: 2,
+                            child: IconButton(
+                              onPressed: () {
+                                imagePickerOption();
                               },
-                              textInputAction: TextInputAction.next,
-                              //Nome
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.transparent,
-                                labelText: "Nome",
-                              )),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: dataController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                dataController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                              icon: const Icon(
+                                Icons.add_a_photo,
+                                color: Colors.black,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      padding: EdgeInsets.only(top: 20),
+                      width: 320,
+                      height: 480,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24.0),
+                        gradient: new LinearGradient(
+                            colors: [
+                              // Colors.grey,
+                              //Colors.grey.shade400,
 
-                              //DataNascita
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.transparent,
-                                labelText: "Data di nascita",
-                              )),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: specieController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                specieController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                              Color.fromRGBO(236, 236, 236, 0.0),
+                              // Color.fromRGBO(236, 236, 236, 1.0)
+                              Color.fromRGBO(216, 205, 205, 1),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter),
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: nameController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  nameController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
+                                //Nome
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Nome",
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: dataController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  dataController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
 
-                              //Specie
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.transparent,
-                                labelText: "Specie",
-                              )),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: razzaController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                razzaController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                                //DataNascita
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Data di nascita",
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: specieController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  specieController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
 
-                              //Razza
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.transparent,
-                                labelText: "Razza",
-                              )),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: coloreController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                coloreController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                                //Specie
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Specie",
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: razzaController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  razzaController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
 
-                              //Colore
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.transparent,
-                                labelText: "Colore",
-                              )),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: veterinarioController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                veterinarioController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                                //Razza
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Razza",
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: coloreController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  coloreController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
 
-                              //NomeVeterinario
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.transparent,
-                                labelText: "Nome veterinario",
-                              )),
-                        ),
-                      ],
-                    )),
-              ],
+                                //Colore
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Colore",
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: veterinarioController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  veterinarioController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
+
+                                //NomeVeterinario
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Nome veterinario",
+                                )),
+                          ),
+                        ],
+                      )),
+                ],
+              ),
             ),
           ),
-          ),
         ),
-      
         Step(
           isActive: currentStep >= 1,
           title: Text(''),
           content: Column(children: [
             Text(
-              "Aggiungi le info sui\nvaccini del tuo animale",
+              "Lista vaccini",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 25, color: Colors.black),
             ),
@@ -367,8 +365,8 @@ class _addInfoState extends State<addInfoAnimals> {
               height: 400,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
-                gradient: new LinearGradient(colors: [                
-                  Color.fromRGBO(236, 236, 236, 0.0),                  
+                gradient: new LinearGradient(colors: [
+                  Color.fromRGBO(236, 236, 236, 0.0),
                   Color.fromRGBO(216, 205, 205, 1),
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
               ),
@@ -376,21 +374,20 @@ class _addInfoState extends State<addInfoAnimals> {
                 SizedBox(
                   width: 280,
                   child: TextFormField(
-                    autofocus: false,
-                    controller: tipoVaccinoController,
-                    keyboardType: TextInputType.name,
-                    onSaved: (value) {
-                      tipoVaccinoController.text = value!;
-                    },
-                    textInputAction: TextInputAction.next,
+                      autofocus: false,
+                      controller: tipoVaccinoController,
+                      keyboardType: TextInputType.name,
+                      onSaved: (value) {
+                        tipoVaccinoController.text = value!;
+                      },
+                      textInputAction: TextInputAction.next,
 
-                    //Tipo vaccino
+                      //Tipo vaccino
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.transparent,
                         labelText: "Tipo vaccino",
-                      )
-                  ),
+                      )),
                 ),
                 SizedBox(
                   height: 10,
@@ -413,7 +410,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         labelText: "Data somministrazione",
                       )),
                 ),
-
                 SizedBox(
                   height: 10,
                 ),
@@ -435,7 +431,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         labelText: "Farmaco somministrato",
                       )),
                 ),
-
                 SizedBox(
                   height: 10,
                 ),
@@ -462,7 +457,7 @@ class _addInfoState extends State<addInfoAnimals> {
                 ),
                 Text(
                   "Aggiungi un altro vaccino:",
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                  //style: TextStyle(fontStyle: FontStyle.italic),
                 ),
                 SizedBox(
                   height: 10,
@@ -485,9 +480,9 @@ class _addInfoState extends State<addInfoAnimals> {
               children: [
                 //TITOLO
                 Text(
-                  "Aggiungi le info\nsul passaporto\ndel tuo animale",
+                  "Passaporto",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, color: Colors.black),
+                  style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
                 SizedBox(
                   height: 30,
@@ -633,8 +628,8 @@ class _addInfoState extends State<addInfoAnimals> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24.0),
                       gradient: new LinearGradient(
-                          colors: [                           
-                            Color.fromRGBO(236, 236, 236, 0.0),                          
+                          colors: [
+                            Color.fromRGBO(236, 236, 236, 0.0),
                             Color.fromRGBO(216, 205, 205, 1),
                           ],
                           begin: Alignment.topCenter,
@@ -658,15 +653,13 @@ class _addInfoState extends State<addInfoAnimals> {
                           ),
                           onPressed: () {
                             Fluttertoast.showToast(
-                            msg: "Dispositivo aggiunto!",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.lightGreen,
-                            textColor: Colors.black,
-                            fontSize: 15.0
-                           );
-
+                                msg: "Dispositivo aggiunto!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.lightGreen,
+                                textColor: Colors.black,
+                                fontSize: 15.0);
                           },
                         ),
                         ElevatedButton(
@@ -684,40 +677,40 @@ class _addInfoState extends State<addInfoAnimals> {
                           ),
                           onPressed: () {
                             Fluttertoast.showToast(
-                            msg: "Dispositivo aggiunto!",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.lightGreen,
-                            textColor: Colors.black,
-                            fontSize: 15.0
-                           );
+                                msg: "Dispositivo aggiunto!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.lightGreen,
+                                textColor: Colors.black,
+                                fontSize: 15.0);
                           },
                         )
                       ],
                     )),
                 SizedBox(height: 50),
-                   ElevatedButton(                    
-                    onPressed: () {
-                      //
-                    },
-                    child: Text(
-                      "Salva",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                primary: Colors.lightGreen,
-                 side: BorderSide(color: Colors.grey.shade300, width: 2),
-                 elevation: 10,
-                 minimumSize: Size(120,40),
-                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-               ),
+                ElevatedButton(
+                  onPressed: () {
+                    //
+                  },
+                  child: Text(
+                    "Salva",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
-              //  )
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.lightGreen,
+                    side: BorderSide(color: Colors.grey.shade300, width: 2),
+                    elevation: 10,
+                    minimumSize: Size(120, 40),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                ),
+                //  )
               ],
             )),
       ];
@@ -725,29 +718,31 @@ class _addInfoState extends State<addInfoAnimals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Aggiungi animale'),
+        backgroundColor: Colors.transparent,
+        title: Text("Aggiungi animale"),
         centerTitle: true,
-        backgroundColor: Colors.grey,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
-      body:
-          Stepper(
-        type: StepperType.horizontal,
-        steps: getSteps(),
-        currentStep: currentStep,
-        onStepContinue: null,
+      body: Stepper(
+          type: StepperType.horizontal,
+          steps: getSteps(),
+          currentStep: currentStep,
+          onStepContinue: null,
           onStepCancel: null,
-        onStepTapped: (step) => setState(() {
-          currentStep = step;
-        }),
-
-        controlsBuilder: (context, {onStepContinue, onStepCancel}){
-          return Container(
-              child: null
-          );
-          }
-      ),
+          onStepTapped: (step) => setState(() {
+                currentStep = step;
+              }),
+          controlsBuilder: (context, {onStepContinue, onStepCancel}) {
+            return Container(child: null);
+          }),
     );
   }
 }
