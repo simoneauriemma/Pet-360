@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-class TrainerModel {
+import 'interface_model.dart';
+
+class TrainerModel implements InterfaceModel{
   String? uid;
   String? email;
   String? firstName;
@@ -43,6 +45,19 @@ class TrainerModel {
       address: map['address'],
     );
   }
+
+  factory TrainerModel.fromJson(Map<String, dynamic> json) {
+    return TrainerModel(
+      addressShop: json['addressShop'],
+      cityName: json['cityName'],
+      cityShop: json['cityShop'],
+      firstName: json['firstName'],
+      nameShop: json['nameShop'],
+      numberPhone: json['numberPhone'],
+      surnameName: json['surnameName'],
+    );
+  }
+
   //sending data to server
 
   Map<String, dynamic> toMap() {
@@ -59,5 +74,40 @@ class TrainerModel {
       'nameShop': nameShop,
       'address': address,
     };
+  }
+
+  @override
+  getFirstName() {
+    return firstName;
+  }
+
+  @override
+  getCityName() {
+    return cityName;
+  }
+
+  @override
+  getSurnameName() {
+    return surnameName;
+  }
+
+  @override
+  getPhoneNumber() {
+    return numberPhone;
+  }
+
+  @override
+  getAddressShop() {
+    return addressShop;
+  }
+
+  @override
+  getCityShop() {
+    return cityShop;
+  }
+
+  @override
+  getNameShop() {
+    return nameShop;
   }
 }
