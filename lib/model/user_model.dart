@@ -1,4 +1,6 @@
-class UserModel {
+import 'interface_model.dart';
+
+class UserModel implements InterfaceModel{
   String? uid;
   String? email;
   String? firstName;
@@ -50,4 +52,40 @@ class UserModel {
       'address': address
     };
   }
+
+  @override
+  getFirstName() {
+    return firstName;
+  }
+
+  @override
+  getSurnameName() {
+    return surnameName;
+  }
+
+  @override
+  getCityName() {
+    return cityName;
+  }
+
+  @override
+  getPhoneNumber() {
+    return null;
+  }
+
+  @override
+  getAddressShop() {
+    return null;
+  }
+
+  @override
+  getCityShop() {
+    return null;
+  }
+
+  @override
+  getNameShop() {
+    return null;
+  }
+
 }

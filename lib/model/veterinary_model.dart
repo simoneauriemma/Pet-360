@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-class VeterinaryModel {
+import 'interface_model.dart';
+
+class VeterinaryModel implements InterfaceModel {
   String? uid;
   String? email;
   String? firstName;
@@ -26,6 +28,18 @@ class VeterinaryModel {
     this.nameShop,
     this.address,
   });
+
+  factory VeterinaryModel.fromJson(Map<String, dynamic> json) {
+    return VeterinaryModel(
+      addressShop: json['addressShop'],
+      cityName: json['cityName'],
+      cityShop: json['cityShop'],
+      firstName: json['firstName'],
+      nameShop: json['nameShop'],
+      numberPhone: json['numberPhone'],
+      surnameName: json['surnameName'],
+    );
+  }
 
   //receive data from server
   factory VeterinaryModel.fromMap(map) {
@@ -59,5 +73,40 @@ class VeterinaryModel {
       'nameShop': nameShop,
       'address': address,
     };
+  }
+
+  @override
+  getFirstName() {
+    return firstName;
+  }
+
+  @override
+  getSurnameName() {
+    return surnameName;
+  }
+
+  @override
+  getCityName() {
+    return cityName;
+  }
+
+  @override
+  getPhoneNumber() {
+    return numberPhone;
+  }
+
+  @override
+  getAddressShop() {
+    return addressShop;
+  }
+
+  @override
+  getCityShop() {
+    return cityShop;
+  }
+
+  @override
+  getNameShop() {
+    return nameShop;
   }
 }
