@@ -5,7 +5,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet360/model/interface_model.dart';
+import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
+import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:getwidget/getwidget.dart';
 import 'home_screen.dart';
@@ -20,7 +23,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final _auth = FirebaseAuth.instance;
-  Future<UserModel>? futureUser;
+  Future<InterfaceModel>? futureUser;
 
   final _formkey = GlobalKey<FormState>();
   final nameController = new TextEditingController();
@@ -39,17 +42,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     final uid = _auth.currentUser!.uid;
-    //per il click continuo
-    /*if (jsonBody == null) {
-      getData(UserSharedPreferences.getTypeOfUser().toString(), uid, "");
-    }*/
 
     futureUser =
         fetchUser(UserSharedPreferences.getTypeOfUser().toString(), uid, "");
   }
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<UserModel>(
+  Widget build(BuildContext context) => FutureBuilder<InterfaceModel>(
         future: futureUser,
         builder: (context, snapshot) {
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
@@ -68,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: snapshot.data!.firstName,
+                hintText: snapshot.data!.getFirstName(),
               ),
             );
 
@@ -86,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: snapshot.data!.surnameName,
+                hintText: snapshot.data!.getSurnameName(),
               ),
             );
 
@@ -122,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.location_city),
-                hintText: snapshot.data!.cityName,
+                hintText: snapshot.data!.getCityName(),
               ),
             );
 
@@ -249,7 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.phone),
-                hintText: jsonBody['numberPhone'].toString(),
+                hintText: snapshot.data!.getPhoneNumber(),
               ),
             );
 
@@ -267,7 +266,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.shop),
-                hintText: jsonBody['nameShop'].toString(),
+                hintText: snapshot.data!.getNameShop(),
               ),
             );
 
@@ -285,7 +284,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.apartment_rounded),
-                hintText: jsonBody['cityShop'].toString(),
+                hintText: snapshot.data!.getCityShop(),
               ),
             );
 
@@ -303,7 +302,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.home),
-                hintText: jsonBody['addressShop'].toString(),
+                hintText: snapshot.data!.getAddressShop(),
               ),
             );
 
@@ -613,7 +612,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return;
   }
 
-  getData(String typeOfUser, String uidUser, String path) async {
+  /*getData(String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
             typeOfUser +
@@ -630,9 +629,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
-  }
+  }*/
 
-  Future<UserModel> fetchUser(
+  Future<InterfaceModel> fetchUser(
       String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
@@ -644,7 +643,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ".json?");
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      return UserModel.fromJson(jsonDecode(response.body));
+      jsonBody = json.decode(response.body);
+      switch(typeOfUser) {
+        case "Utente":
+          return UserModel.fromJson(jsonDecode(response.body));
+        case "Addestratore":
+          return TrainerModel.fromJson(jsonDecode(response.body));
+        case "Veterinario":
+          return VeterinaryModel.fromJson(jsonDecode(response.body));
+        default:
+          return UserModel.fromJson(jsonDecode(response.body));
+      }
     } else {
       throw Exception('Failed to load album');
     }
