@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
        // color: Color.fromRGBO(197, 225, 165, 5),
-        color: Colors.lightGreen.shade300,
+        color: Colors.lightGreen.shade200,
         backgroundColor: Colors.transparent,
         items: <Widget>[
           Icon(
