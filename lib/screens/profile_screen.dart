@@ -180,6 +180,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
+                  title: Text("Profilo"),
+                  centerTitle: true,
                   elevation: 0,
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
@@ -197,25 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    "Profilo",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 10.0,
-                                          color: Colors.lightGreen.shade100,
-                                          offset: Offset(5.0, 5.0),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+
                               SizedBox(height: 20),
                               nameField,
                               SizedBox(height: 20),
@@ -313,6 +297,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
                   elevation: 0,
+                  title: const Text("Profilo"),
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
