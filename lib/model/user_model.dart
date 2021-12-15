@@ -27,6 +27,16 @@ class UserModel {
         address: map['address'],
         typeOfUser: map['typeOfUser']);
   }
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      firstName: json['firstName'],
+      surnameName: json['surnameName'],
+      cityName: json['cityName'],
+      address: json['address'],
+    );
+  }
+
   //sending data to server
 
   Map<String, dynamic> toMap() {
