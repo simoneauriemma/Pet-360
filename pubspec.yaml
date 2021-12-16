@@ -82,7 +82,6 @@ flutter:
     - assets/icons/plus.png
     - assets/icons/write.png
     - assets/icons/dog.png
-    - assets/icons/edit1.png
     - assets/icons/messenger.png
     - assets/markers/marker-1.png
     - assets/markers/marker-2.png
@@ -98,6 +97,18 @@ flutter:
     - assets/images/avatar-5.png
     - assets/images/avatar-6.png
     - assets/images/avatar-7.png
+    - assets/images/dog.png
+    - assets/markers/dog.png
+    - assets/markers/cane1.png
+    - assets/markers/cane2.png
+    - assets/markers/cane3.png
+    - assets/markers/cane4.png
+    - assets/markers/cane5.png
+    - assets/images/cane1.png
+    - assets/images/cane2.png
+    - assets/images/cane3.png
+    - assets/images/cane4.png
+    - assets/images/cane5.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
