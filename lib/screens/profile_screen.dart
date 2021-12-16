@@ -126,11 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
 
             final modifyButton = Material(
-              elevation: 5,
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.lightGreen.shade300,
               child: MaterialButton(
-                padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
                 minWidth: MediaQuery.of(context).size.width,
                 onPressed: () {
                   Modify(
@@ -143,13 +139,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       cityShopController.text,
                       addressShopController.text);
                 },
-                child: const Text(
-                  "Modifica",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    icon: Icon(Icons.border_color_rounded, color: Colors.black54),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
                 ),
               ),
             );
@@ -199,7 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-
+                              modifyButton,
                               SizedBox(height: 20),
                               nameField,
                               SizedBox(height: 20),
@@ -208,9 +205,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               emailField,
                               SizedBox(height: 20),
                               cityField,
-                              SizedBox(height: 40),
-                              modifyButton,
-                              SizedBox(height: 20),
+                              SizedBox(height: 60),
                               logoutButton,
                             ])),
                   ),
@@ -314,25 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    "Profilo",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 10.0,
-                                          color: Colors.lightGreen.shade100,
-                                          offset: Offset(5.0, 5.0),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              modifyButton,
                               SizedBox(height: 20),
                               nameField,
                               SizedBox(height: 20),
@@ -350,8 +327,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(height: 20),
                               addressShop,
                               SizedBox(height: 40),
-                              modifyButton,
-                              SizedBox(height: 20),
                               logoutButton,
                             ])),
                   ),
@@ -381,25 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    "Profilo",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 10.0,
-                                          color: Colors.lightGreen.shade100,
-                                          offset: Offset(5.0, 5.0),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              modifyButton,
                               SizedBox(height: 20),
                               nameField,
                               SizedBox(height: 20),
@@ -416,9 +373,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               cityShop,
                               SizedBox(height: 20),
                               addressShop,
-                              SizedBox(height: 40),
-                              modifyButton,
-                              SizedBox(height: 20),
+                              SizedBox(height: 60),
                               logoutButton,
                             ])),
                   ),
@@ -446,25 +401,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  "Profilo",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    shadows: [
-                                      Shadow(
-                                        blurRadius: 10.0,
-                                        color: Colors.lightGreen.shade100,
-                                        offset: Offset(5.0, 5.0),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                            modifyButton,
                             SizedBox(height: 20),
                             nameField,
                             SizedBox(height: 20),
@@ -473,9 +410,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             emailField,
                             SizedBox(height: 20),
                             cityField,
-                            SizedBox(height: 40),
-                            modifyButton,
-                            SizedBox(height: 20),
+                            SizedBox(height: 60),
                             logoutButton,
                           ])),
                 ),

@@ -95,7 +95,7 @@ class _addInfoState extends State<addInfoAnimals> {
                   onPressed: () {
                     getImage(ImageSource.camera);
                   },
-                  icon: const Icon(Icons.camera_alt_rounded),
+                  icon: const Icon(Icons.camera_alt),
                   label: const Text("CAMERA"),
                 ),
                 ElevatedButton.icon(
@@ -670,11 +670,11 @@ class _addInfoState extends State<addInfoAnimals> {
                           ),
                           onPressed: () {
                             Fluttertoast.showToast(
-                                msg: "Dispositivo aggiunto!",
+                                msg: "Dispositivo aggiunto correttamente!",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.lightGreen,
+                                backgroundColor: Colors.grey.shade200,
                                 textColor: Colors.black,
                                 fontSize: 15.0);
                           },
