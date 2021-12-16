@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:pet360/model/map_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:pet360/model/map_style.dart';
 
 class FindFriends extends StatefulWidget {
   const FindFriends({Key? key}) : super(key: key);
@@ -26,36 +26,36 @@ class _FindFriendsState extends State<FindFriends> {
 
   final List<dynamic> _contacts = [
     {
-      "name": "Me",
+      "name": "Lilly",
       "position": LatLng(37.42796133580664, -122.085749655962),
-      "marker": 'assets/markers/marker-1.png',
-      "image": 'assets/images/avatar-1.png',
+      "marker": 'assets/markers/cane1.png',
+      "image": 'assets/images/cane1.png',
     },
     {
-      "name": "Samantha",
+      "name": "Billie",
       "position": LatLng(37.42484642575639, -122.08309359848501),
-      "marker": 'assets/markers/marker-2.png',
-      "image": 'assets/images/avatar-2.png',
+      "marker": 'assets/markers/cane2.png',
+      "image": 'assets/images/cane2.png',
     },
     {
-      "name": "Malte",
+      "name": "Airon",
       "position": LatLng(37.42381625902441, -122.0928531512618),
-      "marker": 'assets/markers/marker-3.png',
-      "image": 'assets/images/avatar-3.png',
+      "marker": 'assets/markers/cane3.png',
+      "image": 'assets/images/cane3.png',
     },
     {
-      "name": "Julia",
+      "name": "Lucky",
       "position": LatLng(37.41994095849639, -122.08159055560827),
-      "marker": 'assets/markers/marker-4.png',
-      "image": 'assets/images/avatar-4.png',
+      "marker": 'assets/markers/cane4.png',
+      "image": 'assets/images/cane4.png',
     },
     {
-      "name": "Tim",
+      "name": "Laila",
       "position": LatLng(37.413175077529935, -122.10101041942836),
-      "marker": 'assets/markers/marker-5.png',
-      "image": 'assets/images/avatar-5.png',
+      "marker": 'assets/markers/cane5.png',
+      "image": 'assets/images/cane5.png',
     },
-    {
+    /*{
       "name": "Sara",
       "position": LatLng(37.419013242401576, -122.11134664714336),
       "marker": 'assets/markers/marker-6.png',
@@ -66,7 +66,7 @@ class _FindFriendsState extends State<FindFriends> {
       "position": LatLng(37.40260962243491, -122.0976958796382),
       "marker": 'assets/markers/marker-7.png',
       "image": 'assets/images/avatar-7.png',
-    },
+    },*/
   ];
 
   @override
@@ -96,12 +96,11 @@ class _FindFriendsState extends State<FindFriends> {
           right: 20,
           child: Container(
               width: MediaQuery.of(context).size.width,
-              height: 120,
+              height: 140,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: ListView.builder(
-                padding: const EdgeInsets.only(
-                    right: 0.0, left: 0.0, top: 0.0, bottom: 30.0),
+                padding: const EdgeInsets.only(right: 0.0, left: 0.0, top: 0.0, bottom: 30.0),
                 scrollDirection: Axis.horizontal,
                 itemCount: _contacts.length,
                 itemBuilder: (context, index) {
