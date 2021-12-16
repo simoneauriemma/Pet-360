@@ -464,8 +464,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       emailController.text = "";
       return;
     }
+    bool changes = false;
     if (nome.isNotEmpty) {
       if (nome != jsonBody['firstName'].toString()) {
+        changes = true;
         final DBRef = FirebaseDatabase.instance
             .reference()
             .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -476,6 +478,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     if (cognome.isNotEmpty) {
       if (cognome != jsonBody['surnameName'].toString()) {
+        changes = true;
         final DBRef = FirebaseDatabase.instance
             .reference()
             .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -486,6 +489,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     if (citta.isNotEmpty) {
       if (citta != jsonBody['cityName'].toString()) {
+        changes = true;
         final DBRef = FirebaseDatabase.instance
             .reference()
             .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -496,6 +500,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     if (numberPhone.isNotEmpty) {
       if (numberPhone != jsonBody['numberPhone'].toString()) {
+        changes = true;
         final DBRef = FirebaseDatabase.instance
             .reference()
             .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -506,6 +511,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     if (nameShop.isNotEmpty) {
       if (nameShop != jsonBody['nameShop'].toString()) {
+        changes = true;
         final DBRef = FirebaseDatabase.instance
             .reference()
             .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -516,6 +522,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     if (cityShop.isNotEmpty) {
       if (cityShop != jsonBody['cityShop'].toString()) {
+        changes = true;
         final DBRef = FirebaseDatabase.instance
             .reference()
             .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -526,6 +533,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     if (addressShop.isNotEmpty) {
       if (addressShop != jsonBody['addressShop'].toString()) {
+        changes = true;
         final DBRef = FirebaseDatabase.instance
             .reference()
             .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -534,9 +542,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     }
-    //TODO COME REFRESHO?
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+    if(changes){
+      //TODO COME REFRESHO?
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
     return;
   }
 
