@@ -61,12 +61,12 @@ class addInfoAnimals extends StatefulWidget {
 class _addInfoState extends State<addInfoAnimals> {
   File? pickedImage;
 
-  @override
+  /*@override
   void dispose() {
     // Clean up the controller when the widget is removed
     dataController.dispose();
     super.dispose();
-  }
+  }*/
 
   void imagePickerOption() {
     Get.bottomSheet(
