@@ -195,7 +195,7 @@ class _addInfoState extends State<addInfoAnimals> {
                                 imagePickerOption();
                               },
                               icon: const Icon(
-                                Icons.add_a_photo,
+                                Icons.camera_alt,
                                 color: Colors.black,
                                 size: 25,
                               ),
@@ -208,7 +208,7 @@ class _addInfoState extends State<addInfoAnimals> {
                   ),
                   Container(
                       padding: EdgeInsets.only(top: 20),
-                      width: 320,
+                      width: 400,
                       height: 480,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24.0),
@@ -218,8 +218,7 @@ class _addInfoState extends State<addInfoAnimals> {
                               //Colors.grey.shade400,
 
                               Color.fromRGBO(236, 236, 236, 0.0),
-                              // Color.fromRGBO(236, 236, 236, 1.0)
-                              Color.fromRGBO(216, 205, 205, 1),
+                              Color.fromRGBO(220, 220, 220, 1),
                             ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter),
@@ -378,115 +377,114 @@ class _addInfoState extends State<addInfoAnimals> {
               height: 30,
             ),
             Container(
-              width: 320,
+              width: 400,
               height: 400,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
                 gradient: new LinearGradient(colors: [
                   Color.fromRGBO(236, 236, 236, 0.0),
-                  Color.fromRGBO(216, 205, 205, 1),
+                  Color.fromRGBO(220, 220, 220, 1),
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
               ),
-              child: Column(children: [
-                SizedBox(
-                  width: 280,
-                  child: TextFormField(
-                      autofocus: false,
-                      controller: tipoVaccinoController,
-                      keyboardType: TextInputType.name,
-                      onSaved: (value) {
-                        tipoVaccinoController.text = value!;
-                      },
-                      textInputAction: TextInputAction.next,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 280,
+                    child: TextFormField(
+                        autofocus: false,
+                        controller: tipoVaccinoController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          tipoVaccinoController.text = value!;
+                        },
+                        textInputAction: TextInputAction.next,
 
-                      //Tipo vaccino
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.transparent,
-                        labelText: "Tipo vaccino",
-                      )),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 280,
-                  child: TextFormField(
-                      autofocus: false,
-                      controller: dataSommController,
-                      keyboardType: TextInputType.name,
-                      onSaved: (value) {
-                        dataSommController.text = value!;
-                      },
-                      textInputAction: TextInputAction.next,
+                        //Tipo vaccino
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          labelText: "Tipo vaccino",
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: 280,
+                    child: TextFormField(
+                        autofocus: false,
+                        controller: dataSommController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          dataSommController.text = value!;
+                        },
+                        textInputAction: TextInputAction.next,
 
-                      //Data somministrazione vaccino
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.transparent,
-                        labelText: "Data somministrazione",
-                      )),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 280,
-                  child: TextFormField(
-                      autofocus: false,
-                      controller: farmacoSommController,
-                      keyboardType: TextInputType.name,
-                      onSaved: (value) {
-                        farmacoSommController.text = value!;
-                      },
-                      textInputAction: TextInputAction.next,
+                        //Data somministrazione vaccino
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          labelText: "Data somministrazione",
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: 280,
+                    child: TextFormField(
+                        autofocus: false,
+                        controller: farmacoSommController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          farmacoSommController.text = value!;
+                        },
+                        textInputAction: TextInputAction.next,
 
-                      //Farmaco somministrato
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.transparent,
-                        labelText: "Farmaco somministrato",
-                      )),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 280,
-                  child: TextFormField(
-                      autofocus: false,
-                      controller: nomeVeterController,
-                      keyboardType: TextInputType.name,
-                      onSaved: (value) {
-                        nomeVeterController.text = value!;
-                      },
-                      textInputAction: TextInputAction.next,
+                        //Farmaco somministrato
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          labelText: "Farmaco somministrato",
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: 280,
+                    child: TextFormField(
+                        autofocus: false,
+                        controller: nomeVeterController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          nomeVeterController.text = value!;
+                        },
+                        textInputAction: TextInputAction.next,
 
-                      //Nome veterinario
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.transparent,
-                        labelText: "Nome veterinario",
-                      )),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  "Aggiungi un altro vaccino:",
-                  //style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                IconButton(
-                  onPressed: () {
-                    //
-                  },
-                  icon: Image.asset("assets/icons/plus.png"),
-                  iconSize: 40,
-                ),
-              ]),
+                        //Nome veterinario
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          labelText: "Nome veterinario",
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Aggiungi un altro vaccino",
+                    //style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      //
+                    },
+                    icon: Icon(Icons.add_circle_outline, color: Colors.black),
+                    iconSize: 40,
+                  ),
+                ],
+              ),
             ),
           ]),
         ),
@@ -499,14 +497,14 @@ class _addInfoState extends State<addInfoAnimals> {
                 Text(
                   "Passaporto",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
                 SizedBox(
                   height: 30,
                 ),
 
                 Container(
-                  width: 320,
+                  width: 400,
                   height: 320,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24.0),
@@ -517,8 +515,7 @@ class _addInfoState extends State<addInfoAnimals> {
                       //Color.fromRGBO(236, 236, 236, 1.0)
 
                       Color.fromRGBO(236, 236, 236, 0.0),
-                      // Color.fromRGBO(236, 236, 236, 1.0)
-                      Color.fromRGBO(216, 205, 205, 1),
+                      Color.fromRGBO(220, 220, 220, 1),
                     ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
                   ),
                   child: Column(children: [
@@ -619,7 +616,7 @@ class _addInfoState extends State<addInfoAnimals> {
                 Container(
                   width: 500,
                   child: Text(
-                    "Aggiungi\ndispositivi per la\ngeolocalizzazione",
+                    "Localizzazione",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 25, color: Colors.black),
                   ),
@@ -635,11 +632,8 @@ class _addInfoState extends State<addInfoAnimals> {
                     style: TextStyle(fontSize: 15, color: Colors.black),
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
                 Container(
-                    width: 300,
+                    width: 400,
                     height: 200,
                     padding: EdgeInsets.only(top: 40),
                     decoration: BoxDecoration(
@@ -647,7 +641,7 @@ class _addInfoState extends State<addInfoAnimals> {
                       gradient: new LinearGradient(
                           colors: [
                             Color.fromRGBO(236, 236, 236, 0.0),
-                            Color.fromRGBO(216, 205, 205, 1),
+                            Color.fromRGBO(220, 220, 220, 1),
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter),
@@ -694,18 +688,18 @@ class _addInfoState extends State<addInfoAnimals> {
                           ),
                           onPressed: () {
                             Fluttertoast.showToast(
-                                msg: "Dispositivo aggiunto!",
+                                msg: "Dispositivo aggiunto correttamente!",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.lightGreen,
+                                backgroundColor: Colors.grey.shade200,
                                 textColor: Colors.black,
                                 fontSize: 15.0);
                           },
                         )
                       ],
                     )),
-                SizedBox(height: 50),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     //
@@ -719,12 +713,12 @@ class _addInfoState extends State<addInfoAnimals> {
                         fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.lightGreen,
-                    side: BorderSide(color: Colors.grey.shade300, width: 2),
-                    elevation: 10,
-                    minimumSize: Size(120, 40),
+                    primary: Colors.lightGreen.shade300,
+                    //side: BorderSide(color: Colors.grey.shade300, width: 2),
+                    elevation: 5,
+                    minimumSize: Size(400, 50),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(20)),
                   ),
                 ),
                 //  )
