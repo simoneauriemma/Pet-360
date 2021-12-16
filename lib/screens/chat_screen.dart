@@ -30,8 +30,8 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         body: const TabBarView(
           children: [
-            Center(child: Text('ciao')),
-            Center(child: Text('ciao1')),
+            Center(child: Text('lista veterinari disponibili')),
+            Center(child: Text('lista addestratori disponibili')),
           ],
         ),
       ),
