@@ -144,7 +144,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: IconButton(
                     icon: Icon(Icons.border_color_rounded, color: Colors.black54),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Modify(
+                          nameController.text,
+                          surnameController.text,
+                          emailController.text,
+                          cityController.text,
+                          phoneNumberController.text,
+                          nameShopController.text,
+                          cityShopController.text,
+                          addressShopController.text);
                     },
                   ),
                 ),
