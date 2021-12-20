@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     final uid = _auth.currentUser!.uid;
-
+    print("Type" + UserSharedPreferences.getTypeOfUser().toString());
     futureUser =
         fetchUser(UserSharedPreferences.getTypeOfUser().toString(), uid, "");
   }
@@ -142,7 +142,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                    icon: Icon(Icons.border_color_rounded, color: Colors.black54),
+                    icon:
+                        Icon(Icons.border_color_rounded, color: Colors.black54),
                     onPressed: () {
                       Modify(
                           nameController.text,
@@ -356,7 +357,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   ),
                 ),
-
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(36.0),
@@ -545,10 +545,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     }
-    if(changes){
+    if (changes) {
       //TODO COME REFRESHO?
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+      /*Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()));*/
+      GFToast.showToast('Modifica completata con successo! :)', context,
+          toastPosition: GFToastPosition.TOP,
+          toastDuration: 5,
+          textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
+          backgroundColor: Colors.green,
+          trailing: Icon(
+            Icons.notifications,
+            color: Colors.black,
+          ));
     }
     return;
   }
@@ -600,8 +609,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  Future<bool> fetchData() => Future.delayed(Duration(seconds: 5), () {
+/*Future<bool> fetchData() => Future.delayed(Duration(seconds: 5), () {
         //debugPrint('Step 2, fetch data');
         return true;
-      });
+      });*/
 }
