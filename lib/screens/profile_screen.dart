@@ -348,6 +348,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
                   elevation: 0,
+                  title: Text("Profilo"),
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
@@ -355,6 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   ),
                 ),
+
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(36.0),
@@ -393,6 +395,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
+                title: Text("Profilo"),
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
@@ -456,7 +459,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       GFToast.showToast('Non è possibile modificare la mail', context,
           toastPosition: GFToastPosition.BOTTOM,
           textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.white24,
           trailing: Icon(
             Icons.notifications,
             color: Colors.black,
