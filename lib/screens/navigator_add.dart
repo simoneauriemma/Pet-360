@@ -151,80 +151,82 @@ class _addInfoState extends State<addInfoAnimals> {
               padding: EdgeInsets.only(bottom: 100),
               child: Column(
                 children: [
-                  Text(
-                    "Libretto",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 25, color: Colors.black),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.grey.shade300, width: 3),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(100)),
-                              color: Colors.lightGreen.shade50,
-                            ),
-                            child: ClipOval(
-                              child: pickedImage != null
-                                  ? Image.file(
-                                      pickedImage!,
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    )
-                                  :
-                                  //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                  SizedBox(
-                                      width: 100.0,
-                                      height: 100.0,
-                                    ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 2,
-                            child: IconButton(
-                              onPressed: () {
-                                imagePickerOption();
-                              },
-                              icon: const Icon(
-                                Icons.camera_alt,
-                                color: Colors.black,
-                                size: 25,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                  SizedBox(
-                    height: 20,
-                  ),
                   Container(
                       padding: EdgeInsets.only(top: 20),
                       width: 400,
-                      height: 480,
+                      height: 620,
+                      //sfondo con sfocatura
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24.0),
-                        gradient: new LinearGradient(
-                            colors: [
-                              // Colors.grey,
-                              //Colors.grey.shade400,
-
-                              Color.fromRGBO(236, 236, 236, 0.0),
-                              Color.fromRGBO(220, 220, 220, 1),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
                       ),
                       child: Column(
                         children: [
+                          Text(
+                            "DATI LIBRETTO ANIMALE",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Align(
+                              alignment: Alignment.center,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300, width: 3),
+                                      borderRadius:
+                                      const BorderRadius.all(Radius.circular(100)),
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: ClipOval(
+                                      child: pickedImage != null
+                                          ? Image.file(
+                                        pickedImage!,
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      )
+                                          :
+                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                      SizedBox(
+                                        width: 100.0,
+                                        height: 100.0,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 2,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        imagePickerOption();
+                                      },
+                                      icon: const Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.black,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
                           SizedBox(
                             width: 280,
                             child: TextFormField(
@@ -364,30 +366,44 @@ class _addInfoState extends State<addInfoAnimals> {
             ),
           ),
         ),
+
         Step(
           isActive: currentStep >= 1,
           title: Text(''),
           content: Column(children: [
-            Text(
-              "Lista vaccini",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25, color: Colors.black),
-            ),
-            SizedBox(
-              height: 30,
-            ),
             Container(
               width: 400,
-              height: 400,
+              height: 350,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0),
-                gradient: new LinearGradient(colors: [
-                  Color.fromRGBO(236, 236, 236, 0.0),
-                  Color.fromRGBO(220, 220, 220, 1),
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
               ),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "LISTA VACCINI",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   SizedBox(
                     width: 280,
                     child: TextFormField(
@@ -472,6 +488,33 @@ class _addInfoState extends State<addInfoAnimals> {
                   SizedBox(
                     height: 10,
                   ),
+                ],
+              ),
+            ),
+
+            Container(
+              padding: EdgeInsets.only(top:20.0),
+              width: 400,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
                   Text(
                     "Aggiungi un altro vaccino",
                     //style: TextStyle(fontStyle: FontStyle.italic),
@@ -485,40 +528,48 @@ class _addInfoState extends State<addInfoAnimals> {
                   ),
                 ],
               ),
-            ),
+            )
           ]),
         ),
+
         Step(
             isActive: currentStep >= 2,
             title: Text(''),
             content: Column(
               children: [
                 //TITOLO
-                Text(
-                  "Passaporto",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, color: Colors.black),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-
                 Container(
                   width: 400,
-                  height: 320,
+                  height: 350,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24.0),
-                    gradient: new LinearGradient(colors: [
-                      //Colors.grey.shade300,
-                      //Colors.grey.shade400,
-                      // Color.fromRGBO(236, 236, 236, 0.0),
-                      //Color.fromRGBO(236, 236, 236, 1.0)
-
-                      Color.fromRGBO(236, 236, 236, 0.0),
-                      Color.fromRGBO(220, 220, 220, 1),
-                    ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: Column(children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "PASSAPORTO ANIMALE",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -604,60 +655,66 @@ class _addInfoState extends State<addInfoAnimals> {
                             labelText: "Ente rilasciante",
                           )),
                     ),
+
                   ]),
                 ),
               ],
-            )),
+            )
+        ),
+
         Step(
             isActive: currentStep >= 3,
             title: Text(''),
             content: Column(
               children: [
                 Container(
-                  width: 500,
-                  child: Text(
-                    "Localizzazione",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 25, color: Colors.black),
-                  ),
-                ),
-                SizedBox(
-                  height: 80,
-                ),
-                Container(
-                  width: 500,
-                  child: Text(
-                    "Dispositivi disponibili:",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
-                ),
-                Container(
                     width: 400,
-                    height: 200,
-                    padding: EdgeInsets.only(top: 40),
+                    height: 300,
+                    padding: EdgeInsets.only(top: 30),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24.0),
-                      gradient: new LinearGradient(
-                          colors: [
-                            Color.fromRGBO(236, 236, 236, 0.0),
-                            Color.fromRGBO(220, 220, 220, 1),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter),
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Text(
+                          "LOCALIZZAZIONE",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Text(
+                          "Dispositivi disponibili:",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         ElevatedButton(
                           child: Text("AirTag1"),
                           style: ElevatedButton.styleFrom(
                             onPrimary: Colors.black,
-                            primary: Colors.white70,
-                            onSurface: Colors.grey,
+                            primary: Colors.white,
                             side:
-                                BorderSide(color: Colors.lightGreen, width: 2),
-                            elevation: 10,
+                                BorderSide(color: Colors.lightGreen, width: 1),
+                            elevation: 5,
                             minimumSize: Size(140, 40),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
@@ -677,11 +734,11 @@ class _addInfoState extends State<addInfoAnimals> {
                           child: Text("AirTag2"),
                           style: ElevatedButton.styleFrom(
                             onPrimary: Colors.black,
-                            primary: Colors.white70,
+                            primary: Colors.white,
                             onSurface: Colors.grey,
                             side:
-                                BorderSide(color: Colors.lightGreen, width: 2),
-                            elevation: 10,
+                                BorderSide(color: Colors.lightGreen, width: 1),
+                            elevation: 5,
                             minimumSize: Size(140, 40),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
@@ -699,13 +756,13 @@ class _addInfoState extends State<addInfoAnimals> {
                         )
                       ],
                     )),
-                SizedBox(height: 20),
+                SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
                     //
                   },
                   child: Text(
-                    "Salva",
+                    "Salva tutto",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
@@ -723,7 +780,8 @@ class _addInfoState extends State<addInfoAnimals> {
                 ),
                 //  )
               ],
-            )),
+            )
+        ),
       ];
 
   @override

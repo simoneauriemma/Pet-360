@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/components/appBackground.dart';
+import 'package:pet360/components/appbackground.dart';
+import 'package:pet360/screens/ia_screen.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -13,8 +14,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return AppBackground(
-      child: Scaffold(
+    return  Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
           child: Column(
@@ -23,6 +23,7 @@ class _DashboardState extends State<Dashboard> {
                 height: size.height * 0.3,
                 child: Stack(
                   children: [
+                    
                     Container(
                       padding: const EdgeInsets.only(
                         left: 40,
@@ -41,11 +42,20 @@ class _DashboardState extends State<Dashboard> {
                                     fontWeight: FontWeight.bold),
                           ),
                           Spacer(),
-                          Image.asset(
-                            "assets/icons/ped-id.png",
-                            width: 55,
-                            height: 50,
-                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                  builder: (context) => IAscreen())
+                              );
+                            }, // Image tapped
+                            child: Image.asset(
+                              "assets/icons/ped-id.png",
+                              width: 55,
+                              height: 50,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -55,7 +65,6 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
-      ),
     );
   }
 
