@@ -51,6 +51,7 @@ dependencies:
   shared_preferences: ^2.0.9
   google_maps_flutter: ^2.1.1
   fluttertoast: ^8.0.8
+  tflite: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +84,7 @@ flutter:
     - assets/icons/write.png
     - assets/icons/dog.png
     - assets/icons/messenger.png
+    - assets/icons/razza_cane.jpg
     - assets/markers/marker-1.png
     - assets/markers/marker-2.png
     - assets/markers/marker-3.png
@@ -109,6 +111,8 @@ flutter:
     - assets/images/cane3.png
     - assets/images/cane4.png
     - assets/images/cane5.png
+    - assets/labels_mobilenet_quant_v1_224.txt
+    - assets/mobilenet_v1_1.0_224_quant.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

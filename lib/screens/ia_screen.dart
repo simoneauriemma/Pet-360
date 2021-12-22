@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:tflite/tflite.dart';
+
+
 
 class IAscreen extends StatefulWidget {
   const IAscreen({Key? key}) : super(key: key);
@@ -9,6 +14,61 @@ class IAscreen extends StatefulWidget {
 }
 
 class _IAscreenState extends State<IAscreen> {
+  File? _imageFile;
+  List _classifiedResult = []; //per memorizzare il risultato della classificazione
+
+  
+  @override
+  void initState() {
+    super.initState();
+    loadImageModel();
+  }
+
+  Future selectImage() async {
+    final picker = ImagePicker();
+    var image = await picker.pickImage(source: ImageSource.gallery, maxHeight: 300);
+    setState(() {
+      if (image != null) {
+        _imageFile = File(image.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+    classifyImage(image);
+  }
+
+  Future loadImageModel() async {
+  var result = await Tflite.loadModel(
+    model: "assets/mobilenet_v1_1.0_224_quant.tflite",
+    labels: "assets/labels_mobilenet_quant_v1_224.txt",
+  );
+  print("result: $result");
+}
+
+
+Future classifyImage(image) async {
+   // _classifiedResult = null;
+    // Run tensorflowlite image classification model on the image
+    print("classification start $image");
+     final List result = [await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 6,
+      threshold: 0.05,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    )];
+    print("classification done");
+    setState(() {
+      if (image != null) {
+        _imageFile = File(image.path);
+        _classifiedResult = result;
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,17 +107,68 @@ class _IAscreenState extends State<IAscreen> {
                 ],
               ),
               child: Column(
-                children: const [
-                  SizedBox(
-                    height: 20,
-                  ),
+                children: [
+                  SizedBox(height: 20),
                   Text(
                     "RICONOSCI LA RAZZA DEL TUO CANE",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
-
+               Container(
+              margin: EdgeInsets.all(15),
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+                border: Border.all(color: Colors.white),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(2, 2),
+                    spreadRadius: 2,
+                    blurRadius: 1,
+                  ),
                 ],
+              ),
+              child: (_imageFile != null)?
+              Image.file(_imageFile!) :
+              //Image.network('<https://i.imgur.com/sUFH1Aq.png>')
+              Image.asset("assets/icons/razza_cane.jpg")
+            ),
+            ElevatedButton(
+              onPressed: (){
+                 selectImage();
+              },
+              child: Text('Seleziona immagine')
+            ),
+                SizedBox(height: 20),
+                SingleChildScrollView(
+                  child: Column(
+                    children: 
+                    _classifiedResult!=null ? _classifiedResult.map((result) {
+                        return Card(
+                          elevation: 0.0,
+                          color: Colors.lightGreen,
+                          child: Container(
+                            width: 300,
+                            margin: EdgeInsets.all(10),
+                            child: Center(
+                              child: Text("${result["label"]} :  ${(result["confidence"] * 100).toStringAsFixed(1)}%",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        );
+                    } ).toList()
+                   :[]
+                  ),
+                )
+                ]
               ),
             ),
           ]),
