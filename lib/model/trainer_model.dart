@@ -1,3 +1,4 @@
+import 'package:pet360/model/new_vaccine.dart';
 import 'interface_model.dart';
 
 class TrainerModel implements InterfaceModel {
@@ -12,6 +13,14 @@ class TrainerModel implements InterfaceModel {
   String? addressShop;
   String? address;
   String? typeOfUser;
+  String? nameAnimal;
+  String? birthdayAnimal;
+  String? specieAnimal;
+  String? kindAnimal;
+  String? colorAnimal;
+  String? veterinaryNameAnimal;
+
+  //var lstVaccines = List.empty();
 
   TrainerModel({
     this.uid,
@@ -25,6 +34,12 @@ class TrainerModel implements InterfaceModel {
     this.cityShop,
     this.nameShop,
     this.address,
+    this.nameAnimal,
+    this.birthdayAnimal,
+    this.specieAnimal,
+    this.colorAnimal,
+    this.veterinaryNameAnimal,
+    this.kindAnimal,
   });
 
   //receive data from server
@@ -41,6 +56,12 @@ class TrainerModel implements InterfaceModel {
       cityShop: map['cityShop'],
       nameShop: map['nameShop'],
       address: map['address'],
+      nameAnimal: map['nameAnimal'],
+      birthdayAnimal: map['birthdayAnimal'],
+      specieAnimal: map['specieAnimal'],
+      colorAnimal: map['colorAnimal'],
+      veterinaryNameAnimal: map['veterinaryNameAnimal'],
+      kindAnimal: map['kindAnimal'],
     );
   }
 
@@ -53,6 +74,12 @@ class TrainerModel implements InterfaceModel {
       nameShop: json['nameShop'],
       numberPhone: json['numberPhone'],
       surnameName: json['surnameName'],
+      nameAnimal: json['nameAnimal'],
+      birthdayAnimal: json['birthdayAnimal'],
+      specieAnimal: json['specieAnimal'],
+      colorAnimal: json['colorAnimal'],
+      veterinaryNameAnimal: json['veterinaryNameAnimal'],
+      kindAnimal: json['kindAnimal'],
     );
   }
 
@@ -71,6 +98,12 @@ class TrainerModel implements InterfaceModel {
       'cityShop': cityShop,
       'nameShop': nameShop,
       'address': address,
+      'nameAnimal': nameAnimal,
+      'birthdayAnimal': birthdayAnimal,
+      'specieAnimal': specieAnimal,
+      'colorAnimal': colorAnimal,
+      'veterinaryNameAnimal': veterinaryNameAnimal,
+      'kindAnimal': kindAnimal,
     };
   }
 
@@ -108,4 +141,47 @@ class TrainerModel implements InterfaceModel {
   getNameShop() {
     return nameShop;
   }
+
+  @override
+  getAnimalBirthday() {
+    return birthdayAnimal;
+  }
+
+  @override
+  getAnimalName() {
+    return nameAnimal;
+  }
+
+  @override
+  getAnimalSpecie() {
+    return specieAnimal;
+  }
+
+  @override
+  getAnimalColor() {
+    return colorAnimal;
+  }
+
+  @override
+  getAnimalVeterinaryName() {
+    return veterinaryNameAnimal;
+  }
+
+  @override
+  getAnimalKind() {
+    return kindAnimal;
+  }
+
+/*addVaccine(NewVaccine vaccine){
+    lstVaccines.add(vaccine);
+  }
+
+  removeVaccine(NewVaccine vaccine){
+    lstVaccines.remove(vaccine);
+  }
+
+  getVaccines(){
+    return lstVaccines;
+  }*/
+
 }

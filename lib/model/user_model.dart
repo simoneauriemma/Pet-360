@@ -8,26 +8,46 @@ class UserModel implements InterfaceModel {
   String? cityName;
   String? address;
   String? typeOfUser;
+  String? nameAnimal;
+  String? birthdayAnimal;
+  String? specieAnimal;
+  String? colorAnimal;
+  String? veterinaryNameAnimal;
+  String? kindAnimal;
 
-  UserModel(
-      {this.uid,
-      this.email,
-      this.firstName,
-      this.surnameName,
-      this.cityName,
-      this.address,
-      this.typeOfUser});
+  UserModel({
+    this.uid,
+    this.email,
+    this.firstName,
+    this.surnameName,
+    this.cityName,
+    this.address,
+    this.typeOfUser,
+    this.nameAnimal,
+    this.birthdayAnimal,
+    this.specieAnimal,
+    this.colorAnimal,
+    this.veterinaryNameAnimal,
+    this.kindAnimal,
+  });
 
   //receive data from server
   factory UserModel.fromMap(map) {
     return UserModel(
-        uid: map['uid'],
-        email: map['email'],
-        firstName: map['name'],
-        surnameName: map['surname'],
-        cityName: map['city'],
-        address: map['address'],
-        typeOfUser: map['typeOfUser']);
+      uid: map['uid'],
+      email: map['email'],
+      firstName: map['name'],
+      surnameName: map['surname'],
+      cityName: map['city'],
+      address: map['address'],
+      typeOfUser: map['typeOfUser'],
+      nameAnimal: map['nameAnimal'],
+      birthdayAnimal: map['birthdayAnimal'],
+      specieAnimal: map['specieAnimal'],
+      colorAnimal: map['colorAnimal'],
+      veterinaryNameAnimal: map['veterinaryNameAnimal'],
+      kindAnimal: map['kindAnimal'],
+    );
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +56,12 @@ class UserModel implements InterfaceModel {
       surnameName: json['surnameName'],
       cityName: json['cityName'],
       address: json['address'],
+      nameAnimal: json['nameAnimal'],
+      birthdayAnimal: json['birthdayAnimal'],
+      specieAnimal: json['specieAnimal'],
+      colorAnimal: json['colorAnimal'],
+      veterinaryNameAnimal: json['veterinaryNameAnimal'],
+      kindAnimal: json['kindAnimal'],
     );
   }
 
@@ -49,7 +75,13 @@ class UserModel implements InterfaceModel {
       'surname': surnameName,
       'city': cityName,
       'typeOfUser': typeOfUser,
-      'address': address
+      'address': address,
+      'nameAnimal': nameAnimal,
+      'birthdayAnimal': birthdayAnimal,
+      'specieAnimal': specieAnimal,
+      'colorAnimal': colorAnimal,
+      'veterinaryNameAnimal': veterinaryNameAnimal,
+      'kindAnimal': kindAnimal,
     };
   }
 
@@ -86,5 +118,35 @@ class UserModel implements InterfaceModel {
   @override
   getNameShop() {
     return null;
+  }
+
+  @override
+  getAnimalBirthday() {
+    return birthdayAnimal;
+  }
+
+  @override
+  getAnimalName() {
+    return nameAnimal;
+  }
+
+  @override
+  getAnimalSpecie() {
+    return specieAnimal;
+  }
+
+  @override
+  getAnimalColor() {
+    return colorAnimal;
+  }
+
+  @override
+  getAnimalVeterinaryName() {
+    return veterinaryNameAnimal;
+  }
+
+  @override
+  getAnimalKind() {
+    return kindAnimal;
   }
 }

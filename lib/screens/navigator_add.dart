@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:ffi';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:accordion/accordion.dart';
@@ -9,6 +12,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pet360/model/new_vaccine.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(NavigatorAdd());
 
@@ -52,6 +58,7 @@ final microchipController = new TextEditingController();
 final dataMicrochipController = new TextEditingController();
 final enteController = new TextEditingController();
 final dataController = new TextEditingController();
+final _auth = FirebaseAuth.instance;
 
 class addInfoAnimals extends StatefulWidget {
   @override
@@ -60,6 +67,9 @@ class addInfoAnimals extends StatefulWidget {
 
 class _addInfoState extends State<addInfoAnimals> {
   File? pickedImage;
+  var lstVaccines = List.empty();
+  NewVaccine firstVaccine = NewVaccine();
+  var jsonBody;
 
   /*@override
   void dispose() {
@@ -162,8 +172,7 @@ class _addInfoState extends State<addInfoAnimals> {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10),
                             bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)
-                        ),
+                            bottomRight: Radius.circular(10)),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.1),
@@ -178,7 +187,8 @@ class _addInfoState extends State<addInfoAnimals> {
                           Text(
                             "DATI LIBRETTO ANIMALE",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 30,
@@ -190,25 +200,26 @@ class _addInfoState extends State<addInfoAnimals> {
                                   Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: Colors.grey.shade300, width: 3),
-                                      borderRadius:
-                                      const BorderRadius.all(Radius.circular(100)),
+                                          color: Colors.grey.shade300,
+                                          width: 3),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(100)),
                                       color: Colors.grey.shade200,
                                     ),
                                     child: ClipOval(
                                       child: pickedImage != null
                                           ? Image.file(
-                                        pickedImage!,
-                                        width: 100,
-                                        height: 100,
-                                        fit: BoxFit.cover,
-                                      )
+                                              pickedImage!,
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
+                                            )
                                           :
-                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                      SizedBox(
-                                        width: 100.0,
-                                        height: 100.0,
-                                      ),
+                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                          SizedBox(
+                                              width: 100.0,
+                                              height: 100.0,
+                                            ),
                                     ),
                                   ),
                                   Positioned(
@@ -366,7 +377,6 @@ class _addInfoState extends State<addInfoAnimals> {
             ),
           ),
         ),
-
         Step(
           isActive: currentStep >= 1,
           title: Text(''),
@@ -380,8 +390,7 @@ class _addInfoState extends State<addInfoAnimals> {
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)
-                ),
+                    bottomRight: Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
@@ -412,6 +421,7 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           tipoVaccinoController.text = value!;
+                          firstVaccine.vaccineType = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -433,6 +443,7 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           dataSommController.text = value!;
+                          firstVaccine.date = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -454,6 +465,7 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           farmacoSommController.text = value!;
+                          firstVaccine.medicine = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -475,6 +487,7 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           nomeVeterController.text = value!;
+                          firstVaccine.veterinaryName = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -491,9 +504,8 @@ class _addInfoState extends State<addInfoAnimals> {
                 ],
               ),
             ),
-
             Container(
-              padding: EdgeInsets.only(top:20.0),
+              padding: EdgeInsets.only(top: 20.0),
               width: 400,
               height: 100,
               decoration: BoxDecoration(
@@ -502,8 +514,7 @@ class _addInfoState extends State<addInfoAnimals> {
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)
-                ),
+                    bottomRight: Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
@@ -521,7 +532,13 @@ class _addInfoState extends State<addInfoAnimals> {
                   ),
                   IconButton(
                     onPressed: () {
-                      //
+                      NewVaccine tmp = NewVaccine();
+                      tmp.veterinaryName = firstVaccine.veterinaryName;
+                      tmp.date = firstVaccine.date;
+                      tmp.vaccineType = firstVaccine.vaccineType;
+                      tmp.medicine = firstVaccine.medicine;
+                      lstVaccines = List.filled(1, 0);
+                      lstVaccines[0]=firstVaccine;
                     },
                     icon: Icon(Icons.add_circle_outline, color: Colors.black),
                     iconSize: 40,
@@ -531,7 +548,6 @@ class _addInfoState extends State<addInfoAnimals> {
             )
           ]),
         ),
-
         Step(
             isActive: currentStep >= 2,
             title: Text(''),
@@ -547,8 +563,7 @@ class _addInfoState extends State<addInfoAnimals> {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                    ),
+                        bottomRight: Radius.circular(10)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.1),
@@ -565,7 +580,8 @@ class _addInfoState extends State<addInfoAnimals> {
                     Text(
                       "PASSAPORTO ANIMALE",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 10,
@@ -655,13 +671,10 @@ class _addInfoState extends State<addInfoAnimals> {
                             labelText: "Ente rilasciante",
                           )),
                     ),
-
                   ]),
                 ),
               ],
-            )
-        ),
-
+            )),
         Step(
             isActive: currentStep >= 3,
             title: Text(''),
@@ -677,8 +690,7 @@ class _addInfoState extends State<addInfoAnimals> {
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
                           bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10)
-                      ),
+                          bottomRight: Radius.circular(10)),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.1),
@@ -694,7 +706,8 @@ class _addInfoState extends State<addInfoAnimals> {
                         Text(
                           "LOCALIZZAZIONE",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: 40,
@@ -702,7 +715,8 @@ class _addInfoState extends State<addInfoAnimals> {
                         Text(
                           "Dispositivi disponibili:",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
+                          style: TextStyle(
+                              fontSize: 15, fontStyle: FontStyle.italic),
                         ),
                         SizedBox(
                           height: 10,
@@ -759,7 +773,13 @@ class _addInfoState extends State<addInfoAnimals> {
                 SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
-                    //
+                    saveData(
+                        nameController.text,
+                        dataController.text,
+                        specieController.text,
+                        razzaController.text,
+                        coloreController.text,
+                        veterinarioController.text);
                   },
                   child: Text(
                     "Salva tutto",
@@ -780,8 +800,7 @@ class _addInfoState extends State<addInfoAnimals> {
                 ),
                 //  )
               ],
-            )
-        ),
+            )),
       ];
 
   @override
@@ -813,5 +832,43 @@ class _addInfoState extends State<addInfoAnimals> {
             return Container(child: null);
           }),
     );
+  }
+
+  saveData(String animalName, String animalBirthday, String animalSpecie,
+      String animalKind, String animalColor, String animalVeterinaryName) {
+    final DBRef = FirebaseDatabase.instance
+        .reference()
+        .child(UserSharedPreferences.getTypeOfUser().toString());
+    DBRef.child(_auth.currentUser!.uid.toString() + "/Animali/"+animalName).set({
+      'animalName': animalName,
+      'animalBirthday': animalBirthday,
+      'animalSpecie': animalSpecie,
+      'animalKind': animalKind,
+      'animalColor': animalColor,
+      'animalVeterinaryName': animalVeterinaryName,
+    });
+    if (lstVaccines.isNotEmpty) {
+      for (int i=0;i<lstVaccines.length;i++) {
+        DBRef.child(_auth.currentUser!.uid.toString() +
+                "/Animali/" + animalName + "/Vaccini/"+i.toString())
+            .set({
+          'vaccineType': lstVaccines[i].vaccineType,
+          'medicine': lstVaccines[i].medicine,
+          'date': lstVaccines[i].date,
+          'veterinaryName': lstVaccines[i].veterinaryName,
+        });
+      }
+    } else {
+      print(_auth.currentUser!.uid.toString() +
+          "/Animali/" + animalName + "/Vaccini/"+0.toString());
+      DBRef.child(_auth.currentUser!.uid.toString() +
+          "/Animali/" + animalName + "/Vaccini/"+0.toString())
+          .set({
+        'vaccineType': firstVaccine.vaccineType,
+        'medicine': firstVaccine.medicine,
+        'date': firstVaccine.date,
+        'veterinaryName': firstVaccine.veterinaryName,
+      });
+    }
   }
 }

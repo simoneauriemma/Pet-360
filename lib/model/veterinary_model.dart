@@ -12,6 +12,12 @@ class VeterinaryModel implements InterfaceModel {
   String? addressShop;
   String? address;
   String? typeOfUser;
+  String? nameAnimal;
+  String? birthdayAnimal;
+  String? specieAnimal;
+  String? colorAnimal;
+  String? veterinaryNameAnimal;
+  String? kindAnimal;
 
   VeterinaryModel({
     this.uid,
@@ -25,6 +31,12 @@ class VeterinaryModel implements InterfaceModel {
     this.cityShop,
     this.nameShop,
     this.address,
+    this.nameAnimal,
+    this.birthdayAnimal,
+    this.specieAnimal,
+    this.colorAnimal,
+    this.veterinaryNameAnimal,
+    this.kindAnimal,
   });
 
   factory VeterinaryModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +48,12 @@ class VeterinaryModel implements InterfaceModel {
       nameShop: json['nameShop'],
       numberPhone: json['numberPhone'],
       surnameName: json['surnameName'],
+      nameAnimal: json['nameAnimal'],
+      birthdayAnimal: json['birthdayAnimal'],
+      specieAnimal: json['specieAnimal'],
+      colorAnimal: json['colorAnimal'],
+      veterinaryNameAnimal: json['veterinaryNameAnimal'],
+      kindAnimal: json['kindAnimal'],
     );
   }
 
@@ -53,6 +71,12 @@ class VeterinaryModel implements InterfaceModel {
       cityShop: map['cityShop'],
       nameShop: map['nameShop'],
       address: map['address'],
+      nameAnimal: map['nameAnimal'],
+      birthdayAnimal: map['birthdayAnimal'],
+      specieAnimal: map['specieAnimal'],
+      colorAnimal: map['colorAnimal'],
+      veterinaryNameAnimal: map['veterinaryNameAnimal'],
+      kindAnimal: map['kindAnimal'],
     );
   }
 
@@ -71,6 +95,12 @@ class VeterinaryModel implements InterfaceModel {
       'cityShop': cityShop,
       'nameShop': nameShop,
       'address': address,
+      'nameAnimal': nameAnimal,
+      'birthdayAnimal': birthdayAnimal,
+      'specieAnimal': specieAnimal,
+      'colorAnimal': colorAnimal,
+      'veterinaryNameAnimal': veterinaryNameAnimal,
+      'kindAnimal': kindAnimal,
     };
   }
 
@@ -107,5 +137,35 @@ class VeterinaryModel implements InterfaceModel {
   @override
   getNameShop() {
     return nameShop;
+  }
+
+  @override
+  getAnimalBirthday() {
+    return birthdayAnimal;
+  }
+
+  @override
+  getAnimalName() {
+    return nameAnimal;
+  }
+
+  @override
+  getAnimalSpecie() {
+    return specieAnimal;
+  }
+
+  @override
+  getAnimalColor() {
+    return colorAnimal;
+  }
+
+  @override
+  getAnimalVeterinaryName() {
+    return veterinaryNameAnimal;
+  }
+
+  @override
+  getAnimalKind() {
+    return kindAnimal;
   }
 }
