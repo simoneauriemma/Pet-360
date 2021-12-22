@@ -18,6 +18,12 @@ class VeterinaryModel implements InterfaceModel {
   String? colorAnimal;
   String? veterinaryNameAnimal;
   String? kindAnimal;
+  String? descriptionAnimal;
+  String? microchipAnimal;
+  String? dateMicrochipAnimal;
+  String? entityIssuingAnimal;
+  String? airTag1;
+  String? airTag2;
 
   VeterinaryModel({
     this.uid,
@@ -37,6 +43,12 @@ class VeterinaryModel implements InterfaceModel {
     this.colorAnimal,
     this.veterinaryNameAnimal,
     this.kindAnimal,
+    this.airTag1,
+    this.airTag2,
+    this.dateMicrochipAnimal,
+    this.descriptionAnimal,
+    this.entityIssuingAnimal,
+    this.microchipAnimal,
   });
 
   factory VeterinaryModel.fromJson(Map<String, dynamic> json) {
@@ -54,6 +66,12 @@ class VeterinaryModel implements InterfaceModel {
       colorAnimal: json['colorAnimal'],
       veterinaryNameAnimal: json['veterinaryNameAnimal'],
       kindAnimal: json['kindAnimal'],
+      airTag1: json['airTag1'],
+      airTag2: json['airTag2'],
+      descriptionAnimal: json['descriptionAnimal'],
+      dateMicrochipAnimal: json['dateMicrochipAnimal'],
+      entityIssuingAnimal: json['entityIssuingAnimal'],
+      microchipAnimal: json['microchipAnimal'],
     );
   }
 
@@ -77,6 +95,12 @@ class VeterinaryModel implements InterfaceModel {
       colorAnimal: map['colorAnimal'],
       veterinaryNameAnimal: map['veterinaryNameAnimal'],
       kindAnimal: map['kindAnimal'],
+      airTag1: map['airTag1'],
+      airTag2: map['airTag2'],
+      descriptionAnimal: map['descriptionAnimal'],
+      dateMicrochipAnimal: map['dateMicrochipAnimal'],
+      entityIssuingAnimal: map['entityIssuingAnimal'],
+      microchipAnimal: map['microchipAnimal'],
     );
   }
 
@@ -101,6 +125,12 @@ class VeterinaryModel implements InterfaceModel {
       'colorAnimal': colorAnimal,
       'veterinaryNameAnimal': veterinaryNameAnimal,
       'kindAnimal': kindAnimal,
+      'airTag1': airTag1,
+      'airTag2': airTag2,
+      'descriptionAnimal': descriptionAnimal,
+      'dateMicrochipAnimal': dateMicrochipAnimal,
+      'entityIssuingAnimal': entityIssuingAnimal,
+      'microchipAnimal': microchipAnimal,
     };
   }
 
@@ -167,5 +197,35 @@ class VeterinaryModel implements InterfaceModel {
   @override
   getAnimalKind() {
     return kindAnimal;
+  }
+
+  @override
+  getAirTag1() {
+    return airTag1;
+  }
+
+  @override
+  getAirTag2() {
+    return airTag2;
+  }
+
+  @override
+  getAnimalDescription() {
+    return descriptionAnimal;
+  }
+
+  @override
+  getAnimalMicrochip() {
+    return microchipAnimal;
+  }
+
+  @override
+  getDateMicrochip() {
+    return dateMicrochipAnimal;
+  }
+
+  @override
+  getEntityIssuingAnimal() {
+    return entityIssuingAnimal;
   }
 }

@@ -24,4 +24,16 @@ class InterfaceModel {
   getAnimalColor() {}
 
   getAnimalVeterinaryName() {}
+
+  getAnimalDescription() {}
+
+  getAnimalMicrochip() {}
+
+  getDateMicrochip() {}
+
+  getEntityIssuingAnimal() {}
+
+  getAirTag1() {}
+
+  getAirTag2() {}
 }
