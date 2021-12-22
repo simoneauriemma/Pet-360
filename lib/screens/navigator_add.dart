@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pet360/model/new_vaccine.dart';
+import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -57,7 +58,7 @@ final descrizioneController = new TextEditingController();
 final microchipController = new TextEditingController();
 final dataMicrochipController = new TextEditingController();
 final enteController = new TextEditingController();
-final dataController = new TextEditingController();
+final dataController = TextEditingController();
 final _auth = FirebaseAuth.instance;
 
 class addInfoAnimals extends StatefulWidget {
@@ -67,9 +68,9 @@ class addInfoAnimals extends StatefulWidget {
 
 class _addInfoState extends State<addInfoAnimals> {
   File? pickedImage;
-  var lstVaccines = List.empty();
+  List<NewVaccine> lstVaccines = List.empty(growable: true);
   NewVaccine firstVaccine = NewVaccine();
-  var jsonBody;
+  var jsonBody, airTag1, airTag2;
 
   /*@override
   void dispose() {
@@ -421,7 +422,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           tipoVaccinoController.text = value!;
-                          firstVaccine.vaccineType = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -443,7 +443,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           dataSommController.text = value!;
-                          firstVaccine.date = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -465,7 +464,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           farmacoSommController.text = value!;
-                          firstVaccine.medicine = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -487,7 +485,6 @@ class _addInfoState extends State<addInfoAnimals> {
                         keyboardType: TextInputType.name,
                         onSaved: (value) {
                           nomeVeterController.text = value!;
-                          firstVaccine.veterinaryName = value;
                         },
                         textInputAction: TextInputAction.next,
 
@@ -533,12 +530,15 @@ class _addInfoState extends State<addInfoAnimals> {
                   IconButton(
                     onPressed: () {
                       NewVaccine tmp = NewVaccine();
-                      tmp.veterinaryName = firstVaccine.veterinaryName;
-                      tmp.date = firstVaccine.date;
-                      tmp.vaccineType = firstVaccine.vaccineType;
-                      tmp.medicine = firstVaccine.medicine;
-                      lstVaccines = List.filled(1, 0);
-                      lstVaccines[0]=firstVaccine;
+                      tmp.veterinaryName = nomeVeterController.text;
+                      tmp.date = dataSommController.text;
+                      tmp.vaccineType = tipoVaccinoController.text;
+                      tmp.medicine = farmacoSommController.text;
+                      lstVaccines.add(tmp);
+                      nomeVeterController.text = "";
+                      dataSommController.text = "";
+                      tipoVaccinoController.text = "";
+                      farmacoSommController.text = "";
                     },
                     icon: Icon(Icons.add_circle_outline, color: Colors.black),
                     iconSize: 40,
@@ -742,6 +742,7 @@ class _addInfoState extends State<addInfoAnimals> {
                                 backgroundColor: Colors.grey.shade200,
                                 textColor: Colors.black,
                                 fontSize: 15.0);
+                            airTag1 = "1 dispositivo"; //TODO DA CAMBIARE
                           },
                         ),
                         ElevatedButton(
@@ -766,6 +767,7 @@ class _addInfoState extends State<addInfoAnimals> {
                                 backgroundColor: Colors.grey.shade200,
                                 textColor: Colors.black,
                                 fontSize: 15.0);
+                            airTag2 = "2 dispositivo"; //TODO DA CAMBIARE
                           },
                         )
                       ],
@@ -779,7 +781,11 @@ class _addInfoState extends State<addInfoAnimals> {
                         specieController.text,
                         razzaController.text,
                         coloreController.text,
-                        veterinarioController.text);
+                        veterinarioController.text,
+                        descrizioneController.text,
+                        microchipController.text,
+                        dataMicrochipController.text,
+                        enteController.text);
                   },
                   child: Text(
                     "Salva tutto",
@@ -834,12 +840,25 @@ class _addInfoState extends State<addInfoAnimals> {
     );
   }
 
-  saveData(String animalName, String animalBirthday, String animalSpecie,
-      String animalKind, String animalColor, String animalVeterinaryName) {
+  saveData(
+      String animalName,
+      String animalBirthday,
+      String animalSpecie,
+      String animalKind,
+      String animalColor,
+      String animalVeterinaryName,
+      String animalDescription,
+      String animalMicrochip,
+      String animalDateMicrochip,
+      String entityIssuingAnimal) {
     final DBRef = FirebaseDatabase.instance
         .reference()
         .child(UserSharedPreferences.getTypeOfUser().toString());
-    DBRef.child(_auth.currentUser!.uid.toString() + "/Animali/"+animalName).set({
+    DBRef.child(_auth.currentUser!.uid.toString() +
+            "/Animali/" +
+            animalName +
+            "/Libretto")
+        .set({
       'animalName': animalName,
       'animalBirthday': animalBirthday,
       'animalSpecie': animalSpecie,
@@ -848,9 +867,12 @@ class _addInfoState extends State<addInfoAnimals> {
       'animalVeterinaryName': animalVeterinaryName,
     });
     if (lstVaccines.isNotEmpty) {
-      for (int i=0;i<lstVaccines.length;i++) {
+      for (int i = 0; i < lstVaccines.length; i++) {
         DBRef.child(_auth.currentUser!.uid.toString() +
-                "/Animali/" + animalName + "/Vaccini/"+i.toString())
+                "/Animali/" +
+                animalName +
+                "/Vaccini/" +
+                i.toString())
             .set({
           'vaccineType': lstVaccines[i].vaccineType,
           'medicine': lstVaccines[i].medicine,
@@ -858,17 +880,60 @@ class _addInfoState extends State<addInfoAnimals> {
           'veterinaryName': lstVaccines[i].veterinaryName,
         });
       }
+      if (nomeVeterController.text != "" ||
+          dataSommController.text != "" ||
+          tipoVaccinoController.text != "" ||
+          farmacoSommController.text != "") {
+        DBRef.child(_auth.currentUser!.uid.toString() +
+                "/Animali/" +
+                animalName +
+                "/Vaccini/" +
+                lstVaccines.length.toString())
+            .set({
+          'vaccineType': tipoVaccinoController.text,
+          'medicine': farmacoSommController.text,
+          'date': dataSommController.text,
+          'veterinaryName': nomeVeterController.text,
+        });
+      }
+      lstVaccines.clear();
     } else {
-      print(_auth.currentUser!.uid.toString() +
-          "/Animali/" + animalName + "/Vaccini/"+0.toString());
-      DBRef.child(_auth.currentUser!.uid.toString() +
-          "/Animali/" + animalName + "/Vaccini/"+0.toString())
-          .set({
-        'vaccineType': firstVaccine.vaccineType,
-        'medicine': firstVaccine.medicine,
-        'date': firstVaccine.date,
-        'veterinaryName': firstVaccine.veterinaryName,
-      });
+      if (nomeVeterController.text != "" ||
+          dataSommController.text != "" ||
+          tipoVaccinoController.text != "" ||
+          farmacoSommController.text != "") {
+        DBRef.child(_auth.currentUser!.uid.toString() +
+                "/Animali/" +
+                animalName +
+                "/Vaccini/" +
+                lstVaccines.length.toString())
+            .set({
+          'vaccineType': tipoVaccinoController.text,
+          'medicine': farmacoSommController.text,
+          'date': dataSommController.text,
+          'veterinaryName': nomeVeterController.text,
+        });
+      }
     }
+    DBRef.child(_auth.currentUser!.uid.toString() +
+            "/Animali/" +
+            animalName +
+            "/Passaporto")
+        .set({
+      'animalDescription': animalDescription,
+      'animalMicrochip': animalMicrochip,
+      'animalDateMicrochip': animalDateMicrochip,
+      'entityIssuingAnimal': entityIssuingAnimal,
+    });
+    DBRef.child(_auth.currentUser!.uid.toString() +
+            "/Animali/" +
+            animalName +
+            "/Dispositivi")
+        .set({
+      'airTag1': airTag1,
+      'airTag2': airTag2,
+    });
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 }
