@@ -12,4 +12,16 @@ class InterfaceModel {
   getCityShop() {}
 
   getAddressShop() {}
+
+  getAnimalName() {}
+
+  getAnimalBirthday() {}
+
+  getAnimalSpecie() {}
+
+  getAnimalKind() {}
+
+  getAnimalColor() {}
+
+  getAnimalVeterinaryName() {}
 }

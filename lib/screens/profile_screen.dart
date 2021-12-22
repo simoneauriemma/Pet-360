@@ -546,9 +546,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
     }
     if (changes) {
-      //TODO COME REFRESHO?
-      /*Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));*/
       GFToast.showToast('Modifica completata con successo! :)', context,
           toastPosition: GFToastPosition.TOP,
           toastDuration: 5,
@@ -561,25 +558,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     return;
   }
-
-  /*getData(String typeOfUser, String uidUser, String path) async {
-    var url = Uri.parse(
-        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
-            typeOfUser +
-            "//" +
-            uidUser +
-            "//" +
-            path +
-            ".json?");
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      //print(url);
-      jsonBody = json.decode(response.body);
-      //print(jsonBody);
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
-  }*/
 
   Future<InterfaceModel> fetchUser(
       String typeOfUser, String uidUser, String path) async {
@@ -608,9 +586,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       throw Exception('Failed to load album');
     }
   }
-
-/*Future<bool> fetchData() => Future.delayed(Duration(seconds: 5), () {
-        //debugPrint('Step 2, fetch data');
-        return true;
-      });*/
 }
