@@ -80,7 +80,7 @@ class _addInfoState extends State<addInfoAnimals> {
   }*/
 
   void imagePickerOption() {
-    Get.bottomSheet(
+    /*Get.bottomSheet(
       ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(10.0),
@@ -131,8 +131,40 @@ class _addInfoState extends State<addInfoAnimals> {
           ),
         ),
       ),
-    );
-  }
+    );*/
+
+ showDialog(
+    context: context,
+    builder: (BuildContext context) {
+        return AlertDialog(
+            title: Text("Scegli immagine da: "),
+            content: SingleChildScrollView(
+                child: ListBody(
+                    children: [
+                        GestureDetector(
+                            child: Text("Camera"),
+                            onTap: () {
+                             getImage(ImageSource.camera);
+                              Navigator.of(context, rootNavigator: true).pop();
+                            },
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        GestureDetector(
+                            child: Text("Galleria"),
+                            onTap: () {
+                               getImage(ImageSource.gallery);
+                                Navigator.of(context, rootNavigator: true).pop();
+                            },
+                        ),
+                    ],
+                ),
+            ),
+        );
+    }
+);
+}
+  
+  
 
   getImage(ImageSource imageType) async {
     try {
@@ -148,8 +180,10 @@ class _addInfoState extends State<addInfoAnimals> {
     } catch (err) {
       debugPrint(err.toString());
     }
+    
   }
 
+  
   int currentStep = 0;
 
   List<Step> getSteps() => [

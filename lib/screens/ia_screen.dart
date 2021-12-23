@@ -15,7 +15,7 @@ class IAscreen extends StatefulWidget {
 
 class _IAscreenState extends State<IAscreen> {
   File? _imageFile;
-  List _classifiedResult = []; //per memorizzare il risultato della classificazione
+  List? _classifiedResult; //per memorizzare il risultato della classificazione
 
   
   @override
@@ -47,16 +47,16 @@ class _IAscreenState extends State<IAscreen> {
 
 
 Future classifyImage(image) async {
-   // _classifiedResult = null;
+    _classifiedResult = null;
     // Run tensorflowlite image classification model on the image
     print("classification start $image");
-     final List result = [await Tflite.runModelOnImage(
+     final List? result = await Tflite.runModelOnImage(
       path: image.path,
       numResults: 6,
       threshold: 0.05,
       imageMean: 127.5,
       imageStd: 127.5,
-    )];
+    );
     print("classification done");
     setState(() {
       if (image != null) {
@@ -134,7 +134,6 @@ Future classifyImage(image) async {
               ),
               child: (_imageFile != null)?
               Image.file(_imageFile!) :
-              //Image.network('<https://i.imgur.com/sUFH1Aq.png>')
               Image.asset("assets/icons/razza_cane.jpg")
             ),
             ElevatedButton(
@@ -147,7 +146,7 @@ Future classifyImage(image) async {
                 SingleChildScrollView(
                   child: Column(
                     children: 
-                    _classifiedResult!=null ? _classifiedResult.map((result) {
+                    _classifiedResult!=null ? _classifiedResult!.map((result) {
                         return Card(
                           elevation: 0.0,
                           color: Colors.lightGreen,
@@ -165,7 +164,7 @@ Future classifyImage(image) async {
                           ),
                         );
                     } ).toList()
-                   :[]
+                   :[],
                   ),
                 )
                 ]
