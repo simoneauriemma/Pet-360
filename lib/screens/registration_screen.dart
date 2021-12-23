@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/components/appBackground.dart';
+import 'package:pet360/components/appbackground.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
