@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:pet360/components/appbackground.dart';
+import 'package:pet360/components/appBackground.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/screens/registration_screen.dart';
 

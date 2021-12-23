@@ -113,6 +113,7 @@ flutter:
     - assets/images/cane5.png
     - assets/labels_mobilenet_quant_v1_224.txt
     - assets/mobilenet_v1_1.0_224_quant.tflite
+    - assets/storyset/homeimg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

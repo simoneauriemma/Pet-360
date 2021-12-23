@@ -91,7 +91,7 @@ class _FindFriendsState extends State<FindFriends> {
           },
         ),
         Positioned(
-          bottom: 50,
+          bottom: 100,
           left: 20,
           right: 20,
           child: Container(
@@ -100,7 +100,6 @@ class _FindFriendsState extends State<FindFriends> {
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: ListView.builder(
-                padding: const EdgeInsets.only(right: 0.0, left: 0.0, top: 0.0, bottom: 30.0),
                 scrollDirection: Axis.horizontal,
                 itemCount: _contacts.length,
                 itemBuilder: (context, index) {
