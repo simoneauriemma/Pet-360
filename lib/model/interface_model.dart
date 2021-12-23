@@ -15,6 +15,8 @@ class InterfaceModel {
 
   getAnimalName() {}
 
+  getPathImg() {}
+
   getAnimalBirthday() {}
 
   getAnimalSpecie() {}

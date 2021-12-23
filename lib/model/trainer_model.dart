@@ -1,4 +1,3 @@
-import 'package:pet360/model/new_vaccine.dart';
 import 'interface_model.dart';
 
 class TrainerModel implements InterfaceModel {
@@ -230,6 +229,12 @@ class TrainerModel implements InterfaceModel {
   @override
   getEntityIssuingAnimal() {
     return entityIssuingAnimal;
+  }
+
+  @override
+  getPathImg() {
+    // TODO: implement getPathImg
+    throw UnimplementedError();
   }
 
 /*addVaccine(NewVaccine vaccine){

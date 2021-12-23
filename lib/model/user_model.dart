@@ -209,4 +209,10 @@ class UserModel implements InterfaceModel {
   getEntityIssuingAnimal() {
     return entityIssuingAnimal;
   }
+
+  @override
+  getPathImg() {
+    // TODO: implement getPathImg
+    throw UnimplementedError();
+  }
 }

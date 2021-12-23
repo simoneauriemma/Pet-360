@@ -76,44 +76,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/icons/logoPet360.png
-    - assets/icons/down-arrow.png
-    - assets/icons/add-photo.png
-    - assets/icons/ped-id.png
-    - assets/icons/plus.png
-    - assets/icons/write.png
-    - assets/icons/dog.png
-    - assets/icons/messenger.png
-    - assets/icons/razza_cane.jpg
-    - assets/markers/marker-1.png
-    - assets/markers/marker-2.png
-    - assets/markers/marker-3.png
-    - assets/markers/marker-4.png
-    - assets/markers/marker-5.png
-    - assets/markers/marker-6.png
-    - assets/markers/marker-7.png
-    - assets/images/avatar-1.png
-    - assets/images/avatar-2.png
-    - assets/images/avatar-3.png
-    - assets/images/avatar-4.png
-    - assets/images/avatar-5.png
-    - assets/images/avatar-6.png
-    - assets/images/avatar-7.png
-    - assets/images/dog.png
-    - assets/markers/dog.png
-    - assets/markers/cane1.png
-    - assets/markers/cane2.png
-    - assets/markers/cane3.png
-    - assets/markers/cane4.png
-    - assets/markers/cane5.png
-    - assets/images/cane1.png
-    - assets/images/cane2.png
-    - assets/images/cane3.png
-    - assets/images/cane4.png
-    - assets/images/cane5.png
+    - assets/images/
+    - assets/markers/
+    - assets/icons/
+    - assets/storyset/
     - assets/labels_mobilenet_quant_v1_224.txt
     - assets/mobilenet_v1_1.0_224_quant.tflite
-    - assets/storyset/homeimg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
