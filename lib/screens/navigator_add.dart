@@ -142,7 +142,13 @@ class _addInfoState extends State<addInfoAnimals> {
                 child: ListBody(
                     children: [
                         GestureDetector(
-                            child: Text("Camera"),
+                            child: Row(
+                              children : [
+                                 Icon(Icons.camera_alt_rounded),
+                                 Padding(padding: EdgeInsets.only(right: 10),),
+                                 Text("Camera"),
+                              ]
+                            ),                                                       
                             onTap: () {
                              getImage(ImageSource.camera);
                               Navigator.of(context, rootNavigator: true).pop();
@@ -150,7 +156,13 @@ class _addInfoState extends State<addInfoAnimals> {
                         ),
                         Padding(padding: EdgeInsets.all(10)),
                         GestureDetector(
-                            child: Text("Galleria"),
+                            child: Row(
+                              children : [
+                                 Icon(Icons.photo),
+                                 Padding(padding: EdgeInsets.only(right: 10),),
+                                 Text("Galleria"),
+                              ]
+                            ),   
                             onTap: () {
                                getImage(ImageSource.gallery);
                                 Navigator.of(context, rootNavigator: true).pop();
@@ -747,13 +759,13 @@ class _addInfoState extends State<addInfoAnimals> {
                           height: 40,
                         ),
                         Text(
-                          "Dispositivi disponibili:",
+                          "Dispositivi disponibili:\n(CLICCA PER AGGIUNGERE)",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15, fontStyle: FontStyle.italic),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 30,
                         ),
                         ElevatedButton(
                           child: Text("AirTag1"),
