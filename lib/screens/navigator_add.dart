@@ -198,7 +198,7 @@ class _addInfoState extends State<addInfoAnimals> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(top: 20),
-                      width: 400,
+                      width: MediaQuery.of(context).size.width / 1.1,
                       height: 620,
                       //sfondo con sfocatura
                       decoration: BoxDecoration(
@@ -417,7 +417,7 @@ class _addInfoState extends State<addInfoAnimals> {
           title: Text(''),
           content: Column(children: [
             Container(
-              width: 400,
+              width: MediaQuery.of(context).size.width / 1.1,
               height: 350,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -537,7 +537,7 @@ class _addInfoState extends State<addInfoAnimals> {
             ),
             Container(
               padding: EdgeInsets.only(top: 20.0),
-              width: 400,
+              width: MediaQuery.of(context).size.width / 1.1,
               height: 100,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -589,7 +589,7 @@ class _addInfoState extends State<addInfoAnimals> {
               children: [
                 //TITOLO
                 Container(
-                  width: 400,
+                  width: MediaQuery.of(context).size.width / 1.1,
                   height: 350,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -715,7 +715,7 @@ class _addInfoState extends State<addInfoAnimals> {
             content: Column(
               children: [
                 Container(
-                    width: 400,
+                    width: MediaQuery.of(context).size.width / 1.1,
                     height: 300,
                     padding: EdgeInsets.only(top: 30),
                     decoration: BoxDecoration(
