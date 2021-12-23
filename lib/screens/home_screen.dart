@@ -134,20 +134,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     size: 30,
                     color: Colors.white,
                   ),
+                  ImageIcon(
+                  AssetImage("assets/icons/location.png"),
+                  color: Colors.white,
+                  size: 25,
+                  ),
                   Icon(
-                    Icons.map,
+                    Icons.add_circle_rounded,
                     size: 30,
                     color: Colors.white,
                   ),
-                  Icon(
-                    Icons.add,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    Icons.chat,
-                    size: 30,
-                    color: Colors.white,
+                  ImageIcon(
+                  AssetImage("assets/icons/bubble-chat.png"),
+                  color: Colors.white,
+                  size: 25,
                   ),
                   Icon(
                     Icons.account_circle,

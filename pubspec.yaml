@@ -85,6 +85,8 @@ flutter:
     - assets/icons/dog.png
     - assets/icons/messenger.png
     - assets/icons/razza_cane.jpg
+    - assets/icons/bubble-chat.png
+    - assets/icons/location.png
     - assets/markers/marker-1.png
     - assets/markers/marker-2.png
     - assets/markers/marker-3.png
