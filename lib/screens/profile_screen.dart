@@ -49,395 +49,401 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) => FutureBuilder<InterfaceModel>(
-        future: futureUser,
-        builder: (context, snapshot) {
-          //print("Snap: " + snapshot.toString() + jsonBody.toString());
-          if (snapshot.hasData) {
-            final nameField = TextFormField(
-              autofocus: false,
-              controller: nameController,
-              keyboardType: TextInputType.name,
-              onSaved: (value) {
-                nameController.text = value!;
-              },
-              textInputAction: TextInputAction.next,
+    future: futureUser,
+    builder: (context, snapshot) {
+      //print("Snap: " + snapshot.toString() + jsonBody.toString());
+      if (snapshot.hasData) {
+        final nameField = TextFormField(
+          autofocus: false,
+          controller: nameController,
+          keyboardType: TextInputType.name,
+          onSaved: (value) {
+            nameController.text = value!;
+          },
+          textInputAction: TextInputAction.next,
 
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: snapshot.data!.getFirstName(),
-              ),
-            );
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+            hintText: snapshot.data!.getFirstName(),
+          ),
+        );
 
-            final surnameField = TextFormField(
-              autofocus: false,
-              controller: surnameController,
-              keyboardType: TextInputType.name,
-              onSaved: (value) {
-                surnameController.text = value!;
-              },
-              textInputAction: TextInputAction.next,
+        final surnameField = TextFormField(
+          autofocus: false,
+          controller: surnameController,
+          keyboardType: TextInputType.name,
+          onSaved: (value) {
+            surnameController.text = value!;
+          },
+          textInputAction: TextInputAction.next,
 
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: snapshot.data!.getSurnameName(),
-              ),
-            );
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+            hintText: snapshot.data!.getSurnameName(),
+          ),
+        );
 
-            final emailField = TextFormField(
-              autofocus: false,
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              onSaved: (value) {
-                emailController.text = value!;
-              },
-              textInputAction: TextInputAction.next,
+        final emailField = TextFormField(
+          autofocus: false,
+          controller: emailController,
+          keyboardType: TextInputType.emailAddress,
+          onSaved: (value) {
+            emailController.text = value!;
+          },
+          textInputAction: TextInputAction.next,
 
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.mail),
-                hintText: _auth.currentUser!.email,
-              ),
-            );
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.mail),
+            hintText: _auth.currentUser!.email,
+          ),
+        );
 
-            final cityField = TextFormField(
-              autofocus: false,
-              controller: cityController,
-              keyboardType: TextInputType.name,
-              onSaved: (value) {
-                cityController.text = value!;
-              },
-              textInputAction: TextInputAction.done,
+        final cityField = TextFormField(
+          autofocus: false,
+          controller: cityController,
+          keyboardType: TextInputType.name,
+          onSaved: (value) {
+            cityController.text = value!;
+          },
+          textInputAction: TextInputAction.done,
 
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.location_city),
-                hintText: snapshot.data!.getCityName(),
-              ),
-            );
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.location_city),
+            hintText: snapshot.data!.getCityName(),
+          ),
+        );
 
-            final modifyButton = Material(
-              child: MaterialButton(
-                minWidth: MediaQuery.of(context).size.width,
-                onPressed: () {
-                  Modify(
-                      nameController.text,
-                      surnameController.text,
-                      emailController.text,
-                      cityController.text,
-                      phoneNumberController.text,
-                      nameShopController.text,
-                      cityShopController.text,
-                      addressShopController.text);
-                },
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon:
-                        Icon(Icons.border_color_rounded, color: Colors.black54),
-                    onPressed: () {
-                      Modify(
-                          nameController.text,
-                          surnameController.text,
-                          emailController.text,
-                          cityController.text,
-                          phoneNumberController.text,
-                          nameShopController.text,
-                          cityShopController.text,
-                          addressShopController.text);
-                    },
-                  ),
-                ),
-              ),
-            );
+        final logoutButton = Material(
+          color: Colors.transparent,
+          //elevation: 4,
+          child: MaterialButton(
 
-            final logoutButton = Material(
-              elevation: 5,
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.lightGreen.shade300,
-              child: MaterialButton(
-                padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
-                minWidth: MediaQuery.of(context).size.width,
-                onPressed: () {
-                  LogOut();
-                },
-                child: const Text(
-                  "Logout",
-                  textAlign: TextAlign.center,
+            onPressed: () {
+              LogOut();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: const <Widget>[
+                Text(
+                  "LOGOUT  ",
                   style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
+                      fontSize: 15,
+                      color: Colors.black54,
                       fontWeight: FontWeight.bold),
                 ),
-              ),
-            );
-
-            if (UserSharedPreferences.getTypeOfUser().toString() == "Utente") {
-              return Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  title: Text("Profilo"),
-                  centerTitle: true,
-                  elevation: 0,
-                  leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+                ImageIcon(
+                  AssetImage("assets/icons/logout.png"),
+                  size: 20.0,
                 ),
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(36.0),
-                    child: Form(
-                        key: _formkey,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              modifyButton,
-                              SizedBox(height: 20),
-                              nameField,
-                              SizedBox(height: 20),
-                              surnameField,
-                              SizedBox(height: 20),
-                              emailField,
-                              SizedBox(height: 20),
-                              cityField,
-                              SizedBox(height: 60),
-                              logoutButton,
-                            ])),
-                  ),
-                ),
-              );
-            }
+              ],
+            ),
+          ),
+        );
 
-            final phoneNumber = TextFormField(
-              autofocus: false,
-              controller: phoneNumberController,
-              keyboardType: TextInputType.name,
-              onSaved: (value) {
-                phoneNumberController.text = value!;
-              },
-              textInputAction: TextInputAction.done,
+        final modifyButton = Material(
+          elevation: 5,
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.lightGreen.shade300,
+          child: MaterialButton(
+            padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
+            minWidth: MediaQuery.of(context).size.width,
+            onPressed: () {
+              Modify(
+                  nameController.text,
+                  surnameController.text,
+                  emailController.text,
+                  cityController.text,
+                  phoneNumberController.text,
+                  nameShopController.text,
+                  cityShopController.text,
+                  addressShopController.text);
+            },
+            child: const Text(
+              "Salva",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
 
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.phone),
-                hintText: snapshot.data!.getPhoneNumber(),
-              ),
-            );
-
-            final nameShop = TextFormField(
-              autofocus: false,
-              controller: nameShopController,
-              keyboardType: TextInputType.name,
-              onSaved: (value) {
-                nameShopController.text = value!;
-              },
-              textInputAction: TextInputAction.done,
-
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.shop),
-                hintText: snapshot.data!.getNameShop(),
-              ),
-            );
-
-            final cityShop = TextFormField(
-              autofocus: false,
-              controller: cityShopController,
-              keyboardType: TextInputType.name,
-              onSaved: (value) {
-                cityShopController.text = value!;
-              },
-              textInputAction: TextInputAction.done,
-
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.apartment_rounded),
-                hintText: snapshot.data!.getCityShop(),
-              ),
-            );
-
-            final addressShop = TextFormField(
-              autofocus: false,
-              controller: addressShopController,
-              keyboardType: TextInputType.name,
-              onSaved: (value) {
-                addressShopController.text = value!;
-              },
-              textInputAction: TextInputAction.done,
-
-              //email decoration
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.transparent,
-                prefixIcon: Icon(Icons.home),
-                hintText: snapshot.data!.getAddressShop(),
-              ),
-            );
-
-            if (UserSharedPreferences.getTypeOfUser().toString() ==
-                "Veterinario") {
-              return Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  title: const Text("Profilo"),
-                  leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(36.0),
-                    child: Form(
-                        key: _formkey,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              modifyButton,
-                              SizedBox(height: 20),
-                              nameField,
-                              SizedBox(height: 20),
-                              surnameField,
-                              SizedBox(height: 20),
-                              emailField,
-                              SizedBox(height: 20),
-                              cityField,
-                              SizedBox(height: 20),
-                              phoneNumber,
-                              SizedBox(height: 20),
-                              nameShop,
-                              SizedBox(height: 20),
-                              cityShop,
-                              SizedBox(height: 20),
-                              addressShop,
-                              SizedBox(height: 40),
-                              logoutButton,
-                            ])),
-                  ),
-                ),
-              );
-            }
-            if (UserSharedPreferences.getTypeOfUser().toString() ==
-                "Addestratore") {
-              return Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  title: Text("Profilo"),
-                  leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(36.0),
-                    child: Form(
-                        key: _formkey,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              modifyButton,
-                              SizedBox(height: 20),
-                              nameField,
-                              SizedBox(height: 20),
-                              surnameField,
-                              SizedBox(height: 20),
-                              emailField,
-                              SizedBox(height: 20),
-                              cityField,
-                              SizedBox(height: 20),
-                              phoneNumber,
-                              SizedBox(height: 20),
-                              nameShop,
-                              SizedBox(height: 20),
-                              cityShop,
-                              SizedBox(height: 20),
-                              addressShop,
-                              SizedBox(height: 60),
-                              logoutButton,
-                            ])),
-                  ),
-                ),
-              );
-            }
-            return Scaffold(
+        if (UserSharedPreferences.getTypeOfUser().toString() == "Utente") {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
               backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                title: Text("Profilo"),
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
+              title: Text("Profilo"),
+              centerTitle: true,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(36.0),
-                  child: Form(
-                      key: _formkey,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            modifyButton,
-                            SizedBox(height: 20),
-                            nameField,
-                            SizedBox(height: 20),
-                            surnameField,
-                            SizedBox(height: 20),
-                            emailField,
-                            SizedBox(height: 20),
-                            cityField,
-                            SizedBox(height: 60),
-                            logoutButton,
-                          ])),
-                ),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Form(
+                    key: _formkey,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          logoutButton,
+                          SizedBox(height: 20),
+                          nameField,
+                          SizedBox(height: 20),
+                          surnameField,
+                          SizedBox(height: 20),
+                          emailField,
+                          SizedBox(height: 20),
+                          cityField,
+                          SizedBox(height: 60),
+                          modifyButton,
+                        ])),
               ),
-            );
-          }
-          // We can show the loading view until the data comes back.
-          //debugPrint('Step 1, build loading widget');
-          return SizedBox(
-            height: MediaQuery.of(context).size.height / 1,
-            child: Center(
-              child: CircularProgressIndicator(),
             ),
           );
-        },
+        }
+
+        final phoneNumber = TextFormField(
+          autofocus: false,
+          controller: phoneNumberController,
+          keyboardType: TextInputType.name,
+          onSaved: (value) {
+            phoneNumberController.text = value!;
+          },
+          textInputAction: TextInputAction.done,
+
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.phone),
+            hintText: snapshot.data!.getPhoneNumber(),
+          ),
+        );
+
+        final nameShop = TextFormField(
+          autofocus: false,
+          controller: nameShopController,
+          keyboardType: TextInputType.name,
+          onSaved: (value) {
+            nameShopController.text = value!;
+          },
+          textInputAction: TextInputAction.done,
+
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.shop),
+            hintText: snapshot.data!.getNameShop(),
+          ),
+        );
+
+        final cityShop = TextFormField(
+          autofocus: false,
+          controller: cityShopController,
+          keyboardType: TextInputType.name,
+          onSaved: (value) {
+            cityShopController.text = value!;
+          },
+          textInputAction: TextInputAction.done,
+
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.apartment_rounded),
+            hintText: snapshot.data!.getCityShop(),
+          ),
+        );
+
+        final addressShop = TextFormField(
+          autofocus: false,
+          controller: addressShopController,
+          keyboardType: TextInputType.name,
+          onSaved: (value) {
+            addressShopController.text = value!;
+          },
+          textInputAction: TextInputAction.done,
+
+          //email decoration
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixIcon: Icon(Icons.home),
+            hintText: snapshot.data!.getAddressShop(),
+          ),
+        );
+
+        if (UserSharedPreferences.getTypeOfUser().toString() ==
+            "Veterinario") {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: const Text("Profilo"),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      logoutButton,
+                      SizedBox(height: 20),
+                      nameField,
+                      SizedBox(height: 20),
+                      surnameField,
+                      SizedBox(height: 20),
+                      emailField,
+                      SizedBox(height: 20),
+                      cityField,
+                      SizedBox(height: 20),
+                      phoneNumber,
+                      SizedBox(height: 20),
+                      nameShop,
+                      SizedBox(height: 20),
+                      cityShop,
+                      SizedBox(height: 20),
+                      addressShop,
+                      SizedBox(height: 20),
+                      modifyButton,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+        if (UserSharedPreferences.getTypeOfUser().toString() ==
+            "Addestratore") {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Text("Profilo"),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      logoutButton,
+                      SizedBox(height: 20),
+                      nameField,
+                      SizedBox(height: 20),
+                      surnameField,
+                      SizedBox(height: 20),
+                      emailField,
+                      SizedBox(height: 20),
+                      cityField,
+                      SizedBox(height: 20),
+                      phoneNumber,
+                      SizedBox(height: 20),
+                      nameShop,
+                      SizedBox(height: 20),
+                      cityShop,
+                      SizedBox(height: 20),
+                      addressShop,
+                      SizedBox(height: 20),
+                      modifyButton,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text("Profilo"),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    logoutButton,
+                    SizedBox(height: 20),
+                    nameField,
+                    SizedBox(height: 20),
+                    surnameField,
+                    SizedBox(height: 20),
+                    emailField,
+                    SizedBox(height: 20),
+                    cityField,
+                    SizedBox(height: 20),
+                    modifyButton,
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+      // We can show the loading view until the data comes back.
+      //debugPrint('Step 1, build loading widget');
+      return SizedBox(
+        height: MediaQuery.of(context).size.height / 1,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
+    },
+  );
 
   void LogOut() async {
     await _auth.signOut();
@@ -457,9 +463,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       String addressShop) async {
     if (email != "") {
       GFToast.showToast('Non è possibile modificare la mail', context,
-          toastPosition: GFToastPosition.BOTTOM,
+          toastPosition: GFToastPosition.TOP,
           textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-          backgroundColor: Colors.white24,
+          backgroundColor: Colors.grey.shade200,
           trailing: Icon(
             Icons.notifications,
             color: Colors.black,
@@ -546,11 +552,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
     }
     if (changes) {
-      GFToast.showToast('Modifica completata con successo! :)', context,
+      GFToast.showToast('Modifica completata con successo!', context,
           toastPosition: GFToastPosition.TOP,
           toastDuration: 5,
           textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.grey.shade200,
           trailing: Icon(
             Icons.notifications,
             color: Colors.black,
