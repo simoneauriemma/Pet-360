@@ -114,6 +114,7 @@ Future classifyImage(image) async {
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(height: 30,),
                Container(
               margin: EdgeInsets.all(15),
               padding: EdgeInsets.all(15),
@@ -136,6 +137,7 @@ Future classifyImage(image) async {
               Image.file(_imageFile!) :
               Image.asset("assets/icons/razza_cane.jpg")
             ),
+            SizedBox(height: 20,),
             ElevatedButton(
               onPressed: (){
                  selectImage();
