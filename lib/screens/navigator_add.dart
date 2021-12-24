@@ -168,6 +168,30 @@ class _addInfoState extends State<addInfoAnimals> {
                                 Navigator.of(context, rootNavigator: true).pop();
                             },
                         ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        Divider(
+                         color: Colors.black,
+                         //height: 20,
+                         thickness: 2,
+                         indent: 3,
+                         endIndent: 3,
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        GestureDetector(
+                            child: Row(
+                              children : [
+                                 Icon(Icons.remove_circle, color: Colors.red),
+                                 Padding(padding: EdgeInsets.only(right: 10),),
+                                 Text("Rimuovi immagine", style: TextStyle(color: Colors.red)),
+                              ]
+                            ),   
+                            onTap: () {
+                               setState(() {
+                               pickedImage = null;
+                              });
+                                Navigator.of(context, rootNavigator: true).pop();
+                            },
+                        ),
                     ],
                 ),
             ),
@@ -197,6 +221,8 @@ class _addInfoState extends State<addInfoAnimals> {
 
   
   int currentStep = 0;
+  bool isLoading=false;
+
 
   List<Step> getSteps() => [
         Step(
@@ -248,7 +274,7 @@ class _addInfoState extends State<addInfoAnimals> {
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                           color: Colors.grey.shade300,
-                                          width: 3),
+                                          width: 5),
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(100)),
                                       color: Colors.grey.shade200,
@@ -278,7 +304,7 @@ class _addInfoState extends State<addInfoAnimals> {
                                       },
                                       icon: const Icon(
                                         Icons.camera_alt,
-                                        color: Colors.black,
+                                        color: Colors.black45,
                                         size: 25,
                                       ),
                                     ),
@@ -430,14 +456,14 @@ class _addInfoState extends State<addInfoAnimals> {
           content: Column(children: [
             Container(
               width: MediaQuery.of(context).size.width / 1.1,
-              height: 350,
+              height: 380,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
@@ -450,7 +476,7 @@ class _addInfoState extends State<addInfoAnimals> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   Text(
                     "LISTA VACCINI",
@@ -458,7 +484,7 @@ class _addInfoState extends State<addInfoAnimals> {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   SizedBox(
                     width: 280,
@@ -554,8 +580,8 @@ class _addInfoState extends State<addInfoAnimals> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(0),
+                    topRight: Radius.circular(0),
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10)),
                 boxShadow: [
@@ -602,7 +628,7 @@ class _addInfoState extends State<addInfoAnimals> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: 350,
+                  height: 380,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -621,7 +647,7 @@ class _addInfoState extends State<addInfoAnimals> {
                   ),
                   child: Column(children: [
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Text(
                       "PASSAPORTO ANIMALE",
@@ -630,7 +656,7 @@ class _addInfoState extends State<addInfoAnimals> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     SizedBox(
                       width: 280,
@@ -819,7 +845,7 @@ class _addInfoState extends State<addInfoAnimals> {
                       ],
                     )),
                 SizedBox(height: 40),
-                ElevatedButton(
+               ElevatedButton(
                   onPressed: () {
                     saveData(
                         nameController.text,
@@ -849,8 +875,55 @@ class _addInfoState extends State<addInfoAnimals> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                   ),
-                ),
+                ), 
                 //  )
+
+
+                /*ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.lightGreen.shade300,
+                    //side: BorderSide(color: Colors.grey.shade300, width: 2),
+                    elevation: 5,
+                    minimumSize: Size(400, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                ),
+                onPressed: () {
+                setState(() {
+                  isLoading = true;
+                });
+
+                
+                // we had used future delayed to stop loading after
+                // 3 seconds and show text "submit" on the screen.
+                Future.delayed(const Duration(seconds: 3), (){
+                    setState(() {
+                  isLoading = false;
+                });
+                }
+                );
+              }, child:  isLoading? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                  
+                // as elevated button gets clicked we will see text"Loading..."
+                // on the screen with circular progress indicator white in color.
+                //as loading gets stopped "Submit" will be displayed
+                children: const [
+                  Text('Loading.. ', style: TextStyle(color: Colors.white, fontSize: 20),),
+                  SizedBox(width: 10,),
+                   CircularProgressIndicator(color: Colors.white,),
+                ],
+              ) : const Text(
+                    "Salva tutto",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                
+              )*/
+              
               ],
             )),
       ];
