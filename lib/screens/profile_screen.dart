@@ -125,11 +125,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         );
 
-        final logoutButton = Material(
-          color: Colors.transparent,
+        /*final logoutButton = Material(
+          elevation: 5,
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.lightGreen.shade300,
           //elevation: 4,
           child: MaterialButton(
-
+            //padding: EdgeInsets.fromLTRB(100, 15, 15, 20),
+            minWidth: 10,
             onPressed: () {
               LogOut();
             },
@@ -137,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: const <Widget>[
                 Text(
-                  "LOGOUT  ",
+                  "Logout  ",
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black54,
@@ -150,12 +153,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
-        );
+        ); */
 
+        final logoutButton = ElevatedButton(
+          onPressed: () {
+            LogOut();
+          },
+          child: Text("Logout"),
+          style: ElevatedButton.styleFrom(
+            onPrimary: Colors.black,
+            primary: Colors.white,
+            //onSurface: Colors.grey,
+            //side: BorderSide(color: Colors.lightGreen, width: 2),
+            //elevation: 5,
+            minimumSize: Size(120,40),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          ),
+
+        );
         final modifyButton = Material(
           elevation: 5,
           borderRadius: BorderRadius.circular(20),
           color: Colors.lightGreen.shade300,
+
           child: MaterialButton(
             padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
             minWidth: MediaQuery.of(context).size.width,
@@ -180,6 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         );
+
 
         if (UserSharedPreferences.getTypeOfUser().toString() == "Utente") {
           return Scaffold(
