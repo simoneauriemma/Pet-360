@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet360/screens/list_addestratore_chat.dart';
+import 'package:pet360/screens/list_veterinari_chat.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -23,15 +25,15 @@ class _ChatScreenState extends State<ChatScreen> {
             },
           ),
           backgroundColor: Colors.white,
-          bottom: const TabBar(tabs: [
-            Tab(text: 'Veterinari', icon: Icon(Icons.account_circle)),
-            Tab(text: 'Addestratori', icon: Icon(Icons.account_circle)),
+          bottom: TabBar(tabs: [
+            Tab(text: 'Veterinari', icon: Image.asset("assets/icons/veterinario.png", height: 25, width: 25,)),
+            Tab(text: 'Addestratori', icon: Image.asset("assets/icons/addestratore.png", height: 25, width: 25,)),
           ]),
         ),
         body: const TabBarView(
           children: [
-            Center(child: Text('lista veterinari disponibili')),
-            Center(child: Text('lista addestratori disponibili')),
+            ListVeterinariChat(),
+            ListAddestratoriChat(),
           ],
         ),
       ),

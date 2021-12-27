@@ -153,7 +153,6 @@ class _addInfoState extends State<addInfoAnimals> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(top: 20),
-                      width: 400,
                       height: 620,
                       //sfondo con sfocatura
                       decoration: BoxDecoration(
