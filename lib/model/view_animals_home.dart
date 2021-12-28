@@ -8,7 +8,7 @@ class ViewAnimalsHome implements InterfaceModel {
   ViewAnimalsHome({this.animalName, this.pathImg});
 
   factory ViewAnimalsHome.fromJson(Map<String, dynamic> json) {
-    return ViewAnimalsHome(animalName: json['name'], pathImg: json['pathImg']);
+    return ViewAnimalsHome(animalName: json.keys.first, pathImg: "");
   }
 
   factory ViewAnimalsHome.fromMap(map) {

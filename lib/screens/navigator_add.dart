@@ -3,6 +3,7 @@ import 'dart:ffi';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:accordion/accordion.dart';
@@ -12,10 +13,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pet360/model/new_vaccine.dart';
+import 'package:pet360/screens/dashboard.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:image/image.dart' as Img;
+import 'package:path/path.dart' as Bho;
 
 void main() => runApp(NavigatorAdd());
 
@@ -209,6 +214,7 @@ class _addInfoState extends State<addInfoAnimals> {
       if (image == null) return;
 
       final imageTemp = File(image.path);
+
       setState(() {
         pickedImage = imageTemp;
       });
@@ -858,6 +864,16 @@ class _addInfoState extends State<addInfoAnimals> {
                         microchipController.text,
                         dataMicrochipController.text,
                         enteController.text);
+                    nameController.text = "";
+                    dataController.text = "";
+                    specieController.text = "";
+                    razzaController.text = "";
+                    coloreController.text = "";
+                    veterinarioController.text = "";
+                    descrizioneController.text = "";
+                    microchipController.text = "";
+                    dataMicrochipController.text = "";
+                    enteController.text = "";
                   },
                   child: Text(
                     "Salva tutto",
@@ -970,6 +986,11 @@ class _addInfoState extends State<addInfoAnimals> {
       String animalMicrochip,
       String animalDateMicrochip,
       String entityIssuingAnimal) {
+
+
+    String path = pickedImage!.path;
+    final File localImage = pickedImage!.copySync('$path');
+
     final DBRef = FirebaseDatabase.instance
         .reference()
         .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -978,6 +999,7 @@ class _addInfoState extends State<addInfoAnimals> {
             animalName +
             "/Libretto")
         .set({
+      'animalFoto': path,
       'animalName': animalName,
       'animalBirthday': animalBirthday,
       'animalSpecie': animalSpecie,
@@ -1053,6 +1075,6 @@ class _addInfoState extends State<addInfoAnimals> {
       'airTag2': airTag2,
     });
     Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+        .pushReplacement(MaterialPageRoute(builder: (context) => Dashboard()));
   }
 }
