@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class WidgetList extends StatelessWidget {
   final String name;
   final String shopname;
@@ -16,19 +15,30 @@ class WidgetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      child: InkWell(
-        onTap: () => print("tapped"),
-        child: Container(
+    return Container(
           //margin: EdgeInsets.only(left: 20, right: 20),
           padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20),
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(30.0)),
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 8,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Icon(
                   Icons.account_circle,
@@ -46,7 +56,7 @@ class WidgetList extends StatelessWidget {
                           child: Text(
                             name,
                             textAlign: TextAlign.left,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15.0,
                               fontWeight: FontWeight.bold,
                               color: Colors.lightGreen,
@@ -214,8 +224,6 @@ class WidgetList extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
     );
   }
 }

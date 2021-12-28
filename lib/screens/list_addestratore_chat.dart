@@ -26,7 +26,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                   width: MediaQuery.of(context).size.width,
                   child: ListView(
                     padding: EdgeInsets.only(
-                        left: 10.0, right: 10.0, bottom: 10.0, top: 10.0),
+                        left: 20.0, right: 20.0, bottom: 10.0, top: 10.0),
                     primary: false,
                     children: <Widget>[
                       Padding(padding: EdgeInsets.only(bottom: 10)),
@@ -41,7 +41,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
                           ),
-                          Padding(padding: EdgeInsets.only(bottom: 20)),
+                          Padding(padding: EdgeInsets.only(bottom: 40)),
                           ImageIcon(
                             AssetImage("assets/icons/online.png"),
                             color: Colors.green,
