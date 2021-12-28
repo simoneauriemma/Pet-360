@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/components/widget_list.dart';
+import 'package:pet360/model/interface_model.dart';
 
 class ListAddestratoriChat extends StatefulWidget {
   const ListAddestratoriChat({Key? key}) : super(key: key);
@@ -10,77 +11,56 @@ class ListAddestratoriChat extends StatefulWidget {
 }
 
 class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
-
-  /*_listAddestratori() {
-    return Positioned(
-      top: 310,
-      child: Container(
-        height: 100,
-        width: MediaQuery.of(context).size.width - 20,
-        decoration: BoxDecoration(
-          color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30),
-              bottomLeft: Radius.circular(30),
-              topLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(0,1),
-                blurRadius: 20.0,
-                spreadRadius: 5,
-              ),
-            ]),
-
-        child: Container(
-          margin: const EdgeInsets.only(top: 10, bottom: 10),
-          child: Row(
-            children: [
-              Row(
-                children: [
-                  Text("Nome"),
-                  Text("..."),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }*/
+  Future<InterfaceModel>? futureListVet;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: ListView(
-            padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 10.0),
-            primary: false,
-            children: <Widget>[
-              WidgetList(
-                name: "Addestratore 1",
-                shopname: "...",
-                phonenum: "...",
-                indirizzo: "...",
-                voto: "...",
+  Widget build(BuildContext context) => FutureBuilder<InterfaceModel>(
+        future: futureListVet,
+        builder: (context, snapshot) {
+          //print("Snap: " + snapshot.toString() + jsonBody.toString());
+          if (true) {
+            return Scaffold(
+              body: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView(
+                    padding: EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 10.0, top: 10.0),
+                    primary: false,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.only(bottom: 10)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            "Online ora ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: 40)),
+                          ImageIcon(
+                            AssetImage("assets/icons/online.png"),
+                            color: Colors.green,
+                            size: 15,
+                          ),
+                        ],
+                      ),
+                      WidgetList(
+                        name: "Addestratore 1",
+                        shopname: "...",
+                        voto: "...",
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              WidgetList(
-                name: "Addestratore 2",
-                shopname: "...",
-                phonenum: "...",
-                indirizzo: "...",
-                voto: "...",
-              ),
+            );
+          }
 
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+        },
+      );
 }
