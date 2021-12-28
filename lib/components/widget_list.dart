@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
+
 class WidgetList extends StatelessWidget {
   final String name;
   final String shopname;
-  final String phonenum;
-  final String indirizzo;
   final String voto;
 
   WidgetList({
     required this.name,
     required this.shopname,
-    required this.phonenum,
-    required this.indirizzo,
+    /*required this.phonenum,
+    required this.indirizzo, */
     required this.voto,
   });
 
@@ -23,15 +22,14 @@ class WidgetList extends StatelessWidget {
         onTap: () => print("tapped"),
         child: Container(
           //margin: EdgeInsets.only(left: 20, right: 20),
-          padding:
-              EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20.0),
+          padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20),
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(30.0)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 20.0),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Icon(
                   Icons.account_circle,
                   size: 40.0,
@@ -77,42 +75,6 @@ class WidgetList extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Row(
                             children: [
-                              Text("Cellulare: ",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey[800],
-                                  )),
-                              Text("$phonenum",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Colors.grey[800],
-                                  )),
-                            ],
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
-                              Text("Indirizzo: ",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey[800],
-                                  )),
-                              Text("$indirizzo",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Colors.grey[800],
-                                  )),
-                            ],
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
                               Text("Voto: ",
                                   style: TextStyle(
                                     fontSize: 15.0,
@@ -132,15 +94,122 @@ class WidgetList extends StatelessWidget {
                   ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Chatta ora"),
-                style: ElevatedButton.styleFrom(
-                  onPrimary: Colors.black,
-                  primary: Colors.white,
-                  minimumSize: Size(100, 40),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(width: 60, height: 40),
+                child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            //title: Text("Informazioni"),
+                            content: Container(
+                              height: 190.0,
+                              child: Column(
+                                //mainAxisAlignment: MainAxisAlignment.center,
+                                //crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "nome cognome",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Padding(padding: EdgeInsets.only(bottom: 30)),
+                                  Row(
+                                    children: [
+                                      Text("Nome negozio: ",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[800],
+                                          )),
+                                      Text("...",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.grey[800],
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("Cellulare: ",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[800],
+                                          )),
+                                      Text("...",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.grey[800],
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("Indirizzo: ",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[800],
+                                          )),
+                                      Text("...",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.grey[800],
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("Voto: ",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[800],
+                                          )),
+                                      Text("...",
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.grey[800],
+                                          )),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 10),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text("Chatta ora"),
+                                    style: ElevatedButton.styleFrom(
+                                      onPrimary: Colors.black,
+                                      primary: Colors.white,
+                                      minimumSize: Size(40, 40),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                  child: const ImageIcon(
+                    AssetImage("assets/icons/information.png"),
+                    color: Colors.black,
+                    size: 30,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.black,
+                    primary: Colors.white,
+                    minimumSize: Size(20, 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
                 ),
               ),
             ],
