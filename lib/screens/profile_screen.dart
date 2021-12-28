@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,8 +11,11 @@ import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:image_picker/image_picker.dart';
 import 'home_screen.dart';
 import 'login_screen.dart';
+import 'package:get/get.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -24,6 +27,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final _auth = FirebaseAuth.instance;
   Future<InterfaceModel>? futureUser;
+  File? pickedImage;
+
 
   final _formkey = GlobalKey<FormState>();
   final nameController = new TextEditingController();
@@ -37,6 +42,93 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final addressShopController = new TextEditingController();
 
   var jsonBody;
+  
+   void imagePickerOption() {
+ showDialog(
+    context: context,
+    builder: (BuildContext context) {
+        return AlertDialog(
+            title: Text("Scegli immagine da: "),
+            content: SingleChildScrollView(
+                child: ListBody(
+                    children: [
+                        GestureDetector(
+                            child: Row(
+                              children : [
+                                 Icon(Icons.camera_alt_rounded),
+                                 Padding(padding: EdgeInsets.only(right: 10),),
+                                 Text("Camera"),
+                              ]
+                            ),                                                       
+                            onTap: () {
+                             getImage(ImageSource.camera);
+                              Navigator.of(context, rootNavigator: true).pop();
+                            },
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        GestureDetector(
+                            child: Row(
+                              children : [
+                                 Icon(Icons.photo),
+                                 Padding(padding: EdgeInsets.only(right: 10),),
+                                 Text("Galleria"),
+                              ]
+                            ),   
+                            onTap: () {
+                               getImage(ImageSource.gallery);
+                                Navigator.of(context, rootNavigator: true).pop();
+                            },
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        Divider(
+                         color: Colors.black,
+                         //height: 20,
+                         thickness: 2,
+                         indent: 3,
+                         endIndent: 3,
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        GestureDetector(
+                            child: Row(
+                              children : [
+                                 Icon(Icons.remove_circle, color: Colors.red),
+                                 Padding(padding: EdgeInsets.only(right: 10),),
+                                 Text("Rimuovi immagine", style: TextStyle(color: Colors.red)),
+                              ]
+                            ),   
+                            onTap: () {
+                               setState(() {
+                               pickedImage = null;
+                              });
+                                Navigator.of(context, rootNavigator: true).pop();
+                            },
+                        ),
+                    ],
+                ),
+            ),
+        );
+    }
+);
+}
+  
+  
+
+  getImage(ImageSource imageType) async {
+    try {
+      final image = await ImagePicker().pickImage(source: imageType);
+
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+      setState(() {
+        pickedImage = imageTemp;
+      });
+      Get.back();
+    } catch (err) {
+      debugPrint(err.toString());
+    }
+    
+  }
 
   @override
   void initState() {
@@ -125,12 +217,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         );
 
-        /*final logoutButton = Material(
-          elevation: 5,
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.lightGreen.shade300,
-          //elevation: 4,
-          child: MaterialButton(
+        final logoutButton =  MaterialButton(
             //padding: EdgeInsets.fromLTRB(100, 15, 15, 20),
             minWidth: 10,
             onPressed: () {
@@ -148,14 +235,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 ImageIcon(
                   AssetImage("assets/icons/logout.png"),
-                  size: 20.0,
+                  size: 20,
                 ),
               ],
-            ),
-          ),
-        ); */
+            ),          
+        ); 
 
-        final logoutButton = ElevatedButton(
+       /* final logoutButton = ElevatedButton(
           onPressed: () {
             LogOut();
           },
@@ -170,7 +256,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
 
-        );
+        );*/
+
         final modifyButton = Material(
           elevation: 5,
           borderRadius: BorderRadius.circular(20),
@@ -228,6 +315,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: <Widget>[
                           logoutButton,
                           SizedBox(height: 20),
+                          Align(
+                              alignment: Alignment.center,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 5),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(100)),
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: ClipOval(
+                                      child: pickedImage != null
+                                          ? Image.file(
+                                              pickedImage!,
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
+                                            )
+                                          :
+                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                          SizedBox(
+                                              width: 100.0,
+                                              height: 100.0,
+                                            ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 2,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        imagePickerOption();
+                                      },
+                                      icon: const Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.black45,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          SizedBox(height: 30),
                           nameField,
                           SizedBox(height: 20),
                           surnameField,
@@ -237,6 +370,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           cityField,
                           SizedBox(height: 60),
                           modifyButton,
+                          SizedBox(height: 100),
                         ])),
               ),
             ),

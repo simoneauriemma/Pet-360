@@ -140,7 +140,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           hintText: "Città",
           ),
     );
-
     final regButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(20),
@@ -351,7 +350,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
-                                      SizedBox(height: 20),
+                                      SizedBox(height: 30),
                                       Text(
                                         "Informazioni aggiuntive",
                                         style: TextStyle(
@@ -366,7 +365,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 10),
+                                      SizedBox(height: 30),
                                       shopNameField,
                                       SizedBox(height: 20),
                                       phoneNumberField,
