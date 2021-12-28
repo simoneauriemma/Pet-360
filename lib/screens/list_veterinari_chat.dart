@@ -14,51 +14,53 @@ class ListVeterinariChat extends StatefulWidget {
 class _ListVeterinariChatState extends State<ListVeterinariChat> {
   Future<InterfaceModel>? futureListVet;
 
-
   @override
   Widget build(BuildContext context) => FutureBuilder<InterfaceModel>(
-    future: futureListVet,
-    builder: (context, snapshot) {
-      //print("Snap: " + snapshot.toString() + jsonBody.toString());
-      if (true){
-        return Scaffold(
-          body: SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: ListView(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 10.0),
-                primary: false,
-                children: <Widget>[
-                  WidgetList(
-                    name: "Veterinario 1",
-                    shopname: "...",
-                    phonenum: "...",
-                    indirizzo: "...",
-                    voto: "....",
+        future: futureListVet,
+        builder: (context, snapshot) {
+          //print("Snap: " + snapshot.toString() + jsonBody.toString());
+          if (true) {
+            return Scaffold(
+              body: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView(
+                    padding: EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 10.0, top: 10.0),
+                    primary: false,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.only(bottom: 10)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            "Online ora ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: 40)),
+                          ImageIcon(
+                            AssetImage("assets/icons/online.png"),
+                            color: Colors.green,
+                            size: 15,
+                          ),
+                        ],
+                      ),
+                      WidgetList(
+                        name: "Veterinario 1",
+                        shopname: "...",
+                        voto: "...",
+                      ),
+                    ],
                   ),
-                  WidgetList(
-                    name: "Veterinatio 2",
-                    shopname: "...",
-                    phonenum: "...",
-                    indirizzo: "...",
-                    voto: "...",
-                  ),
-
-                ],
+                ),
               ),
-            ),
-          ),
-        );
-      }
-      // We can show the loading view until the data comes back.
-      //debugPrint('Step 1, build loading widget');
-      return SizedBox(
-        height: MediaQuery.of(context).size.height / 1,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
+            );
+          }
+        },
       );
-    },
-  );
 }
