@@ -35,7 +35,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                     shopname: "...",
                     phonenum: "...",
                     indirizzo: "...",
-                    voto: "...",
+                    voto: "....",
                   ),
                   WidgetList(
                     name: "Veterinatio 2",
