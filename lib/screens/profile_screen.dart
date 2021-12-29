@@ -329,6 +329,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               SizedBox(
                                                   width: 100.0,
                                                   height: 100.0,
+                                                  child: Image.asset("assets/icons/user_default.png"),
                                                 ),
                                         ),
                                       ),
@@ -497,6 +498,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               SizedBox(
                                                   width: 100.0,
                                                   height: 100.0,
+                                                  child: Image.asset("assets/icons/user_default.png"),
                                                 ),
                                         ),
                                       ),
@@ -601,6 +603,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               SizedBox(
                                                   width: 100.0,
                                                   height: 100.0,
+                                                  child: Image.asset("assets/icons/user_default.png"),
                                                 ),
                                         ),
                                       ),
