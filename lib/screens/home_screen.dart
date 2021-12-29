@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) => FutureBuilder<InterfaceModel>(
         future: futureUser,
         builder: (context, snapshot) {
-          if(UserSharedPreferences.getIndex() == null){
+          if (UserSharedPreferences.getIndex() != null) {
             index = UserSharedPreferences.getIndex()!;
           }
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
