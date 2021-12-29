@@ -4,8 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
 
-
-
 class IAscreen extends StatefulWidget {
   const IAscreen({Key? key}) : super(key: key);
 
@@ -34,7 +32,7 @@ class _IAscreenState extends State<IAscreen> {
         print('No image selected.');
       }
     });
-    classifyImage(image);
+    classifyImage(image!.path);
   }
 
   Future loadImageModel() async {
@@ -51,7 +49,7 @@ Future classifyImage(image) async {
     // Run tensorflowlite image classification model on the image
     print("classification start $image");
      final List? result = await Tflite.runModelOnImage(
-      path: image.path,
+      path: image,
       numResults: 6,
       threshold: 0.05,
       imageMean: 127.5,
