@@ -28,37 +28,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget currentScreen = Dashboard();
   final _auth = FirebaseAuth.instance;
   Future<InterfaceModel>? futureUser;
+  int index = 0;
 
   var jsonBody;
-
-  /*@override
-  void initState() {
-    super.initState();
-    final uid = _auth.currentUser!.uid;
-    if (UserSharedPreferences.getTypeOfUser() == "" ||
-        UserSharedPreferences.getTypeOfUser() == null) {
-      getData("Utente", uid.toString(), "");
-      /*if (jsonBody == null) {
-        getData("Addestratore", uid.toString(), "");
-      }
-      if (jsonBody == null) {
-        getData("Veterinario", uid.toString(), "");
-      }*/
-    }
-  }*/
 
   @override
   void initState() {
     super.initState();
     final uid = _auth.currentUser!.uid;
     //print("test INIT");
-    print("typeOfUser..." + UserSharedPreferences.getTypeOfUser().toString());
+    //print("typeOfUser..." + UserSharedPreferences.getTypeOfUser().toString());
     //print(uid);
     futureUser =
         fetchUser(UserSharedPreferences.getTypeOfUser().toString(), uid, "");
   }
 
-  int index = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   final List<Widget> screens = [
     Dashboard(),
@@ -68,58 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
     ProfileScreen(),
   ];
 
-  /* @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      bottomNavigationBar: CurvedNavigationBar(
-        // color: Color.fromRGBO(197, 225, 165, 5),
-        color: Colors.lightGreen.shade200,
-        backgroundColor: Colors.transparent,
-        items: <Widget>[
-          Icon(
-            Icons.home,
-            size: 30,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.map,
-            size: 30,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.add,
-            size: 30,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.chat,
-            size: 30,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.account_circle,
-            size: 30,
-            color: Colors.white,
-          ),
-        ],
-        animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 600),
-        onTap: (index) {
-          setState(() {
-            this.index = index;
-          });
-        },
-        letIndexChange: (index) => true,
-      ),
-      body: screens[index],
-    );
-  }*/
-
   @override
   Widget build(BuildContext context) => FutureBuilder<InterfaceModel>(
         future: futureUser,
         builder: (context, snapshot) {
+          if(UserSharedPreferences.getIndex() == null){
+            index = UserSharedPreferences.getIndex()!;
+          }
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
           if (snapshot.hasData) {
             return Scaffold(
@@ -160,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: (index) {
                   setState(() {
                     this.index = index;
+                    UserSharedPreferences.setIndex(index);
                   });
                 },
                 letIndexChange: (index) => true,

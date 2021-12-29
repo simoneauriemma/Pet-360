@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/list_addestratore_chat.dart';
 import 'package:pet360/screens/list_veterinari_chat.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
+
+import 'home_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -21,7 +24,9 @@ class _ChatScreenState extends State<ChatScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {
-              Navigator.of(context).pop();
+              UserSharedPreferences.setIndex(0);
+              Navigator.of(context)
+                  .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
             },
           ),
           backgroundColor: Colors.white,
