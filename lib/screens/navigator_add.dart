@@ -19,7 +19,7 @@ import 'package:pet360/screens/dashboard.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:image/image.dart' as Img;
+//import 'package:image/image.dart' as Img;
 import 'package:path/path.dart' as Bho;
 
 void main() => runApp(NavigatorAdd());
@@ -74,6 +74,7 @@ class addInfoAnimals extends StatefulWidget {
 class _addInfoState extends State<addInfoAnimals> {
   File? pickedImage;
   List<NewVaccine> lstVaccines = List.empty(growable: true);
+  List<String> generateNumber=List.generate(10, (index) => "${index + 1}");
   NewVaccine firstVaccine = NewVaccine();
   var jsonBody, airTag1, airTag2;
 
@@ -85,60 +86,7 @@ class _addInfoState extends State<addInfoAnimals> {
   }*/
 
   void imagePickerOption() {
-    /*Get.bottomSheet(
-      ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(10.0),
-        ),
-        child: Container(
-          color: Colors.white,
-          height: 250,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  "Scegli immagine da",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    getImage(ImageSource.camera);
-                  },
-                  icon: const Icon(Icons.camera_alt),
-                  label: const Text("CAMERA"),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    getImage(ImageSource.gallery);
-                  },
-                  icon: const Icon(Icons.image),
-                  label: const Text("GALLERIA"),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(Icons.close),
-                  label: const Text("CANCEL"),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );*/
-
- showDialog(
+    showDialog(
     context: context,
     builder: (BuildContext context) {
         return AlertDialog(
@@ -492,7 +440,51 @@ class _addInfoState extends State<addInfoAnimals> {
                   SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
+                   Scrollbar(
+                  child: ListView.builder(
+                    itemCount: this.lstVaccines.length,
+                    shrinkWrap: true,
+                    itemBuilder: (_,int index)=> Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                        child: Card(
+                          elevation: 8.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0)),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
+                            child: Row(
+                              children: [
+                                Padding(padding: EdgeInsets.only(left: 7)),
+                                Image.asset("assets/icons/vaccine.png", width:30, height: 30),
+                                //Text(" "+ generateNumber[index]+".", style: TextStyle(color: Colors.black, fontSize: 18.0)),
+                                //Text("Vaccino x"),
+                                Padding(padding: EdgeInsets.only(left: 13)),
+                                Text(" "+ lstVaccines[index].vaccineType.toString(), style: TextStyle(color: Colors.black,
+                                fontSize: 18.0),)
+                              ],),
+                          ),
+                          ),
+                    ),
+                    
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+                  Text(
+                    "Aggiungi un vaccino",
+                    //style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SingleChildScrollView(
+                child: ListBody(
+                    children: [
+                        SizedBox(
                     width: 280,
                     child: TextFormField(
                         autofocus: false,
@@ -529,7 +521,17 @@ class _addInfoState extends State<addInfoAnimals> {
                           filled: true,
                           fillColor: Colors.transparent,
                           labelText: "Data somministrazione",
-                        )),
+                        ),
+                        onTap: () async {
+                                  var date = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2100));
+                                      dataController.text =
+                                      date.toString().substring(0, 10);
+                                },
+                                ),                        
                   ),
                   SizedBox(
                     height: 10,
@@ -573,40 +575,10 @@ class _addInfoState extends State<addInfoAnimals> {
                           labelText: "Nome veterinario",
                         )),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 20.0),
-              width: MediaQuery.of(context).size.width / 1.1,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(0),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    "Aggiungi un altro vaccino",
-                    //style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
+                  SizedBox(height: 20,),
                   IconButton(
-                    onPressed: () {
+                    onPressed: (){
+                      debugPrint("Add new vax");
                       NewVaccine tmp = NewVaccine();
                       tmp.veterinaryName = nomeVeterController.text;
                       tmp.date = dataSommController.text;
@@ -617,13 +589,25 @@ class _addInfoState extends State<addInfoAnimals> {
                       dataSommController.text = "";
                       tipoVaccinoController.text = "";
                       farmacoSommController.text = "";
+                   Navigator.of(context, rootNavigator: true).pop();
+
+                    }, 
+                    alignment: Alignment.centerRight,
+                    icon: Icon(Icons.save, color:Colors.black54),
+                    )
+
+                  ])
+                  )
+                  );
+                 }
+                );
                     },
                     icon: Icon(Icons.add_circle_outline, color: Colors.black),
                     iconSize: 40,
                   ),
                 ],
               ),
-            )
+            ),
           ]),
         ),
         Step(
@@ -724,7 +708,16 @@ class _addInfoState extends State<addInfoAnimals> {
                             filled: true,
                             fillColor: Colors.transparent,
                             labelText: "Data applicazione microchip",
-                          )),
+                          ),
+                          onTap: () async {
+                                  var date = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2100));
+                                  dataController.text =
+                                      date.toString().substring(0, 10);
+                                },),
                     ),
 
                     SizedBox(
