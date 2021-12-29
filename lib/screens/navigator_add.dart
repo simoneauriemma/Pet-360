@@ -21,6 +21,7 @@ import 'package:pet360/screens/dashboard.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 //import 'package:image/image.dart' as Img;
 import 'package:path/path.dart' as Bho;
@@ -57,6 +58,7 @@ class _addInfoState extends State<NavigatorAdd> {
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
   NewVaccine firstVaccine = NewVaccine();
   var jsonBody, airTag1, airTag2;
+  firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
 
   void imagePickerOption() {
     showDialog(
@@ -964,6 +966,18 @@ class _addInfoState extends State<NavigatorAdd> {
     );
   }
 
+  Future<void> uploadFile(String filePath) async {
+    File file = File(filePath);
+
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads/'+filePath.split("/").last)
+          .putFile(file);
+    } on firebase_storage.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+    }
+  }
+
   saveData(
       String animalName,
       String animalBirthday,
@@ -978,9 +992,7 @@ class _addInfoState extends State<NavigatorAdd> {
     String path = "";
     if (pickedImage != null) {
       path = pickedImage!.path;
-      final File localImage = pickedImage!.copySync('$path');
-      Uint8List list = pickedImage!.readAsBytesSync();
-      print(list);
+      uploadFile(path);
     }
 
     final DBRef = FirebaseDatabase.instance
