@@ -34,7 +34,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                           Text(
-                            "Attualmente online ",
+                            "Addestratori attualmente online ",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 15,

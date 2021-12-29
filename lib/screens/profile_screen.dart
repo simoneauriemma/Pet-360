@@ -443,9 +443,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  title: const Text("Profilo"),
+                  backgroundColor: Colors.white,
+                  shadowColor: Colors.grey.shade200,
+                  /*shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0)
+                      )
+                  ), */
+                  title: Text("Profilo"),
+                  centerTitle: true,
+                  elevation: 4,
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
@@ -548,9 +556,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
+                  backgroundColor: Colors.white,
+                  shadowColor: Colors.grey.shade200,
+                  /*shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0)
+                      )
+                  ), */
                   title: Text("Profilo"),
+                  centerTitle: true,
+                  elevation: 4,
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
@@ -651,13 +667,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return Scaffold(
               backgroundColor: Colors.transparent,
               appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
+                backgroundColor: Colors.white,
+                shadowColor: Colors.grey.shade200,
+                /*shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0)
+                      )
+                  ), */
                 title: Text("Profilo"),
+                centerTitle: true,
+                elevation: 4,
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    UserSharedPreferences.setIndex(0);
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
                 ),
               ),

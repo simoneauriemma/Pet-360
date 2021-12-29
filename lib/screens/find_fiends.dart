@@ -83,10 +83,10 @@ class _FindFriendsState extends State<FindFriends> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: Text("Localizzazione"),
+          backgroundColor: Colors.white,
+          title: Text("Geolocalizza i tuoi animali"),
           centerTitle: true,
-          elevation: 0,
+          elevation: 4,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {

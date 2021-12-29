@@ -29,6 +29,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
             },
           ),
+          elevation: 4,
           backgroundColor: Colors.white,
           bottom: TabBar(tabs: [
             Tab(text: 'Veterinari', icon: Image.asset("assets/icons/veterinario.png", height: 25, width: 25,)),

@@ -16,50 +16,93 @@ class _Chatting_screenState extends State<Chatting_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text("Chat"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
-          },
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Expanded(
-          child: Align(
-            alignment: Alignment.bottomCenter,
+        appBar: AppBar(
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          flexibleSpace: SafeArea(
             child: Container(
-              //margin: EdgeInsets.only(left: 20, right: 20),
-              padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 8,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
+              padding: EdgeInsets.only(right: 16),
               child: Row(
                 children: <Widget>[
-                  Text("Scrivi qui..."),
+                  IconButton(
+                    onPressed: (){
+                      UserSharedPreferences.setIndex(0);
+                      Navigator.of(context)
+                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                    },
+                    icon: Icon(Icons.arrow_back,color: Colors.black,),
+                  ),
+                  SizedBox(width: 2,),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage("<https://randomuser.me/api/portraits/men/5.jpg>"),
+                    maxRadius: 20,
+                  ),
+                  SizedBox(width: 12,),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Kriss Benwat",style: TextStyle( fontSize: 16 ,fontWeight: FontWeight.w600),),
+                        SizedBox(height: 6,),
+                        Text("Online",style: TextStyle(color: Colors.grey.shade600, fontSize: 13),),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.settings,color: Colors.black54,),
                 ],
               ),
             ),
           ),
         ),
+      body: Stack(
+        children: <Widget>[
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              padding: EdgeInsets.only(left: 10,bottom: 10,top: 10),
+              height: 60,
+              width: double.infinity,
+              color: Colors.white,
+              child: Row(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: (){
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.lightGreen.shade200,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Icon(Icons.add, color: Colors.white, size: 20, ),
+                    ),
+                  ),
+                  SizedBox(width: 15,),
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintText: "Write message...",
+                          hintStyle: TextStyle(color: Colors.black54),
+                          border: InputBorder.none
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15,),
+                  FloatingActionButton(
+                    onPressed: (){},
+                    child: Icon(Icons.send,color: Colors.white,size: 18,),
+                    backgroundColor: Colors.lightGreen.shade200,
+                    elevation: 0,
+                  ),
+                ],
+
+              ),
+            ),
+          ),
+        ],
       ),
-    );
-  }
+    );  }
 }
