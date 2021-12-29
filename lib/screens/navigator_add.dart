@@ -376,10 +376,11 @@ class _addInfoState extends State<NavigatorAdd> {
     Step(
       isActive: currentStep >= 1,
       title: Text(''),
-      content: Column(children: [
+      content: Column(
+        children: [
         Container(
           width: MediaQuery.of(context).size.width / 1.1,
-          height: 380,
+          height: 500,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(
@@ -409,41 +410,13 @@ class _addInfoState extends State<NavigatorAdd> {
               SizedBox(
                 height: 20,
               ),
-              Scrollbar(
-                child: ListView.builder(
-                  itemCount: this.lstVaccines.length,
-                  shrinkWrap: true,
-                  itemBuilder: (_,int index)=> Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-                    child: Card(
-                      elevation: 8.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.0)),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
-                        child: Row(
-                          children: [
-                            Padding(padding: EdgeInsets.only(left: 7)),
-                            Image.asset("assets/icons/vaccine.png", width:30, height: 30),
-                            //Text(" "+ generateNumber[index]+".", style: TextStyle(color: Colors.black, fontSize: 18.0)),
-                            //Text("Vaccino x"),
-                            Padding(padding: EdgeInsets.only(left: 13)),
-                            Text(" "+ lstVaccines[index].vaccineType.toString(), style: TextStyle(color: Colors.black,
-                                fontSize: 18.0),)
-                          ],),
-                      ),
-                    ),
-                  ),
-
-                ),
-              ),
-              SizedBox(height: 30,),
-              Text(
-                "Aggiungi un vaccino",
-                //style: TextStyle(fontStyle: FontStyle.italic),
-              ),
+             
+        //SizedBox(height: 30,),
+       Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 15)),
+          Text("AGGIUNGI UN VACCINO", style: TextStyle(fontSize: 15,color: Colors.black54),),
               IconButton(
                 onPressed: () {
                   showDialog(
@@ -571,9 +544,49 @@ class _addInfoState extends State<NavigatorAdd> {
                       }
                   );
                 },
-                icon: Icon(Icons.add_circle_outline, color: Colors.black),
-                iconSize: 40,
+                icon: Icon(Icons.add_circle_outline, color: Colors.lightGreen),
+                iconSize: 30,
               ),
+            ]),
+            //),
+             Expanded(
+                child: ListView.builder(
+                  itemCount: this.lstVaccines.length,
+                  shrinkWrap: true,
+                  itemBuilder: (_,int index)=> Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                    child: Card(
+                      elevation: 8.0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0)),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
+                        child: Row(
+                          children: [
+                            Padding(padding: EdgeInsets.only(left: 7)),
+                            Image.asset("assets/icons/vaccine.png", width:30, height: 30),
+                            //Text(" "+ generateNumber[index]+".", style: TextStyle(color: Colors.black, fontSize: 18.0)),
+                            Padding(padding: EdgeInsets.only(left: 13)),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(" "+ lstVaccines[index].vaccineType.toString(), style: TextStyle(color: Colors.black,
+                                fontSize: 18.0, fontWeight: FontWeight.bold,)),
+                                SizedBox(height: 3,),
+                                Text(" "+ lstVaccines[index].date.toString(), style: TextStyle(color: Colors.grey,
+                                fontSize: 13.0)),
+                              ],
+                            )
+                            
+                          ],),
+                      ),
+                    ),
+                  ),
+
+                ),
+              ),             
             ],
           ),
         ),
