@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
+
+import 'home_screen.dart';
 
 class FindFriends extends StatefulWidget {
   const FindFriends({Key? key}) : super(key: key);
@@ -79,6 +82,20 @@ class _FindFriendsState extends State<FindFriends> {
     createMarkers(context);
 
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text("Localizzazione"),
+          centerTitle: true,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              UserSharedPreferences.setIndex(0);
+              Navigator.of(context)
+                  .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+            },
+          ),
+        ),
         body: Stack(
       children: [
         GoogleMap(

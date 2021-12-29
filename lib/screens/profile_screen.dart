@@ -130,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     final uid = _auth.currentUser!.uid;
-    print("Type" + UserSharedPreferences.getTypeOfUser().toString());
+    //print("Type" + UserSharedPreferences.getTypeOfUser().toString());
     futureUser =
         fetchUser(UserSharedPreferences.getTypeOfUser().toString(), uid, "");
   }
@@ -279,7 +279,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      UserSharedPreferences.setIndex(0);
+                      Navigator.of(context)
+                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
                     },
                   ),
                 ),
@@ -446,7 +448,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      UserSharedPreferences.setIndex(0);
+                      Navigator.of(context)
+                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
                     },
                   ),
                 ),
@@ -548,7 +552,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      UserSharedPreferences.setIndex(0);
+                      Navigator.of(context)
+                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
                     },
                   ),
                 ),

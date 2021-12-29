@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet360/screens/chat_screen.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
+
+import 'home_screen.dart';
 
 class Chatting_screen extends StatefulWidget {
   const Chatting_screen({Key? key}) : super(key: key);
@@ -18,7 +22,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
           },
         ),
       ),
