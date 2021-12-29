@@ -309,7 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                               color: Colors.grey.shade300,
-                                              width: 2),
+                                              width: 3),
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(100)),
                                           color: Colors.grey.shade200,
@@ -467,6 +467,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: logoutButton,
                             ),
                           ),
+                          Align(
+                                  alignment: Alignment.center,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade300,
+                                              width: 3),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(100)),
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        child: ClipOval(
+                                          child: pickedImage != null
+                                              ? Image.file(
+                                                  pickedImage!,
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              :
+                                              //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                              SizedBox(
+                                                  width: 100.0,
+                                                  height: 100.0,
+                                                ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        right: 2,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            imagePickerOption();
+                                          },
+                                          icon: const Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.black45,
+                                            size: 25,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
                           SizedBox(height: 20),
                           nameField,
                           SizedBox(height: 20),
@@ -524,6 +569,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: logoutButton,
                             ),
                           ),
+                          Align(
+                                  alignment: Alignment.center,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade300,
+                                              width: 3),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(100)),
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        child: ClipOval(
+                                          child: pickedImage != null
+                                              ? Image.file(
+                                                  pickedImage!,
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              :
+                                              //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                              SizedBox(
+                                                  width: 100.0,
+                                                  height: 100.0,
+                                                ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        right: 2,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            imagePickerOption();
+                                          },
+                                          icon: const Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.black45,
+                                            size: 25,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
                           SizedBox(height: 20),
                           nameField,
                           SizedBox(height: 20),
