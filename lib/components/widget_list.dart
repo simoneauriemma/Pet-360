@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet360/screens/chatting_screen.dart';
 
 class WidgetList extends StatelessWidget {
   final String name;
@@ -191,7 +192,11 @@ class WidgetList extends StatelessWidget {
                                     padding: EdgeInsets.only(bottom: 10),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(builder: (context) => Chatting_screen()),
+                                              (route) => false);
+                                    },
                                     child: Text("Chatta ora"),
                                     style: ElevatedButton.styleFrom(
                                       onPrimary: Colors.black,

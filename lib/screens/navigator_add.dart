@@ -280,7 +280,7 @@ class _addInfoState extends State<addInfoAnimals> {
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                           color: Colors.grey.shade300,
-                                          width: 5),
+                                          width: 2),
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(100)),
                                       color: Colors.grey.shade200,

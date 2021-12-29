@@ -35,7 +35,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                           Text(
-                            "Online ora ",
+                            "Attualmente online ",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 15,

@@ -135,9 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   ImageIcon(
-                  AssetImage("assets/icons/location.png"),
-                  color: Colors.white,
-                  size: 25,
+                    AssetImage("assets/icons/location.png"),
+                    color: Colors.white,
+                    size: 25,
                   ),
                   Icon(
                     Icons.add_circle_rounded,
@@ -145,9 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   ImageIcon(
-                  AssetImage("assets/icons/bubble-chat.png"),
-                  color: Colors.white,
-                  size: 25,
+                    AssetImage("assets/icons/bubble-chat.png"),
+                    color: Colors.white,
+                    size: 25,
                   ),
                   Icon(
                     Icons.account_circle,
