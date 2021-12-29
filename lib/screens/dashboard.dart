@@ -197,10 +197,126 @@ class _DashboardState extends State<Dashboard> {
               ),
             );
           }
-          return SizedBox(
-            height: MediaQuery.of(context).size.height / 1,
-            child: Center(
-              child: CircularProgressIndicator(),
+          Size size = MediaQuery
+              .of(context)
+              .size;
+          return AppBackground(
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Center(
+                child: Column(
+                  children: [
+                    Container(
+                      height: size.height * 0.3,
+                      child: Stack(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: 40,
+                              right: 40,
+                            ),
+                            height: size.height * 0.3 - 27,
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "Benvenuto!",
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline5!
+                                      .copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Spacer(),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(30),
+                                          topRight: Radius.circular(30),
+                                          bottomLeft: Radius.circular(30),
+                                          bottomRight: Radius.circular(30),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.3),
+                                            spreadRadius: 5,
+                                            blurRadius: 7,
+                                            offset: Offset(
+                                                0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      IAscreen()));
+                                        },
+                                        // Image tapped
+                                        child: Image.asset(
+                                          "assets/icons/ped-id.png",
+                                          width: 55,
+                                          height: 50,
+                                          colorBlendMode: BlendMode.multiply,
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Container(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 1.1,
+                      height: 140,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/storyset/homeimg.png",
+                        height: size.width / 2,
+                        width: size.width / 2,
+                      ),
+                    ),
+                    const Padding(
+                        padding:
+                        EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 80)),
+                  ],
+                ),
+              ),
             ),
           );
         });
