@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -907,6 +908,8 @@ class _addInfoState extends State<NavigatorAdd> {
     if(pickedImage != null){
       path = pickedImage!.path;
       final File localImage = pickedImage!.copySync('$path');
+      Uint8List list = pickedImage!.readAsBytesSync();
+      print(list);
     }
 
     final DBRef = FirebaseDatabase.instance

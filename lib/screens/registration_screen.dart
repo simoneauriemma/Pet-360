@@ -393,6 +393,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   void SignUp(String email, String password, String firstName,
       String surnameName, String cityName, String typeOfUser) async {
+    UserSharedPreferences.setIndex(0);
     switch (typeOfUser) {
       case "Utente":
         {

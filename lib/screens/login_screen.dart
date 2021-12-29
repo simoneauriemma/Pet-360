@@ -5,6 +5,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:pet360/components/appbackground.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/screens/registration_screen.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -104,6 +105,7 @@ void initializeFlutterFire() async {
         padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
+          UserSharedPreferences.setIndex(0);
           SignIn(emailController.text, passwordController.text);
         },
         child: Text(
