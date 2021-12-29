@@ -136,4 +136,10 @@ class ViewAnimalsHome implements InterfaceModel {
     // TODO: implement getSurnameName
     throw UnimplementedError();
   }
+
+  @override
+  getPhoto() {
+    // TODO: implement getPhoto
+    throw UnimplementedError();
+  }
 }

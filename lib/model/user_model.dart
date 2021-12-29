@@ -20,6 +20,7 @@ class UserModel implements InterfaceModel {
   String? entityIssuingAnimal;
   String? airTag1;
   String? airTag2;
+  String? photo;
 
   UserModel({
     this.uid,
@@ -41,6 +42,7 @@ class UserModel implements InterfaceModel {
     this.descriptionAnimal,
     this.entityIssuingAnimal,
     this.microchipAnimal,
+    this.photo,
   });
 
   //receive data from server
@@ -65,6 +67,7 @@ class UserModel implements InterfaceModel {
       dateMicrochipAnimal: map['dateMicrochipAnimal'],
       entityIssuingAnimal: map['entityIssuingAnimal'],
       microchipAnimal: map['microchipAnimal'],
+      photo: map['photo'],
     );
   }
 
@@ -86,6 +89,7 @@ class UserModel implements InterfaceModel {
       dateMicrochipAnimal: json['dateMicrochipAnimal'],
       entityIssuingAnimal: json['entityIssuingAnimal'],
       microchipAnimal: json['microchipAnimal'],
+      photo: json['photo'],
     );
   }
 
@@ -112,6 +116,7 @@ class UserModel implements InterfaceModel {
       'dateMicrochipAnimal': dateMicrochipAnimal,
       'entityIssuingAnimal': entityIssuingAnimal,
       'microchipAnimal': microchipAnimal,
+      'photo': photo,
     };
   }
 
@@ -214,5 +219,10 @@ class UserModel implements InterfaceModel {
   getPathImg() {
     // TODO: implement getPathImg
     throw UnimplementedError();
+  }
+
+  @override
+  getPhoto() {
+    return photo;
   }
 }

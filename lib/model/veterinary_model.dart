@@ -24,6 +24,7 @@ class VeterinaryModel implements InterfaceModel {
   String? entityIssuingAnimal;
   String? airTag1;
   String? airTag2;
+  String? photo;
 
   VeterinaryModel({
     this.uid,
@@ -49,6 +50,7 @@ class VeterinaryModel implements InterfaceModel {
     this.descriptionAnimal,
     this.entityIssuingAnimal,
     this.microchipAnimal,
+    this.photo,
   });
 
   factory VeterinaryModel.fromJson(Map<String, dynamic> json) {
@@ -72,6 +74,7 @@ class VeterinaryModel implements InterfaceModel {
       dateMicrochipAnimal: json['dateMicrochipAnimal'],
       entityIssuingAnimal: json['entityIssuingAnimal'],
       microchipAnimal: json['microchipAnimal'],
+      photo: json['photo'],
     );
   }
 
@@ -101,6 +104,7 @@ class VeterinaryModel implements InterfaceModel {
       dateMicrochipAnimal: map['dateMicrochipAnimal'],
       entityIssuingAnimal: map['entityIssuingAnimal'],
       microchipAnimal: map['microchipAnimal'],
+      photo: map['photo'],
     );
   }
 
@@ -131,6 +135,7 @@ class VeterinaryModel implements InterfaceModel {
       'dateMicrochipAnimal': dateMicrochipAnimal,
       'entityIssuingAnimal': entityIssuingAnimal,
       'microchipAnimal': microchipAnimal,
+      'photo': photo,
     };
   }
 
@@ -233,5 +238,10 @@ class VeterinaryModel implements InterfaceModel {
   getPathImg() {
     // TODO: implement getPathImg
     throw UnimplementedError();
+  }
+
+  @override
+  getPhoto() {
+    return photo;
   }
 }

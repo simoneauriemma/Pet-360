@@ -16,6 +16,7 @@ import 'package:image_picker/image_picker.dart';
 import 'home_screen.dart';
 import 'login_screen.dart';
 import 'package:get/get.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -141,6 +142,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, snapshot) {
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
           if (snapshot.hasData) {
+            print(snapshot.data!.getPhoto());
+            if(snapshot.data!.getPhoto() == ""){
+              print("Strunz");
+              downloadFileExample(snapshot.data!.getPhoto());
+            }
             final nameField = TextFormField(
               autofocus: false,
               controller: nameController,
@@ -329,7 +335,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               SizedBox(
                                                   width: 100.0,
                                                   height: 100.0,
-                                                  child: Image.asset("assets/icons/user_default.png"),
+                                                  child: Image.file(File(snapshot.data!.getPhoto())),
                                                 ),
                                         ),
                                       ),
@@ -739,6 +745,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
         MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
+  Future<void> uploadFile(String filePath) async {
+    File file = File(filePath);
+
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads/'+filePath.split("/").last)
+          .putFile(file);
+    } on firebase_storage.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+    }
+  }
+
+  Future<void> downloadFileExample(String path) async {
+    File downloadToFile = File(path);
+    if (downloadToFile.existsSync()) {
+      return;
+    }
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads/' + path.split("/").last)
+          .writeToFile(downloadToFile);
+    } on firebase_storage.FirebaseException catch (e) {}
+  }
+
   void Modify(
       String nome,
       String cognome,
@@ -748,6 +778,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       String nameShop,
       String cityShop,
       String addressShop) async {
+    String path = "";
+    if (pickedImage != null) {
+      path = pickedImage!.path;
+      uploadFile(path);
+      final DBRef = FirebaseDatabase.instance
+          .reference()
+          .child(UserSharedPreferences.getTypeOfUser().toString());
+      DBRef.child(_auth.currentUser!.uid.toString()).update({
+        'photo': path,
+      });
+    }
     if (email != "") {
       GFToast.showToast('Non è possibile modificare la mail', context,
           toastPosition: GFToastPosition.TOP,

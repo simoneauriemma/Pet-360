@@ -127,4 +127,10 @@ class ViewAllInfoAnimal implements InterfaceModel {
     // TODO: implement getPathImg
     throw UnimplementedError();
   }
+
+  @override
+  getPhoto() {
+    // TODO: implement getPhoto
+    throw UnimplementedError();
+  }
 }

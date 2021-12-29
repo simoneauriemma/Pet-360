@@ -38,4 +38,6 @@ class InterfaceModel {
   getAirTag1() {}
 
   getAirTag2() {}
+
+  getPhoto() {}
 }

@@ -24,6 +24,7 @@ class TrainerModel implements InterfaceModel {
   String? entityIssuingAnimal;
   String? airTag1;
   String? airTag2;
+  String? photo;
 
   //var lstVaccines = List.empty();
 
@@ -51,6 +52,7 @@ class TrainerModel implements InterfaceModel {
     this.descriptionAnimal,
     this.entityIssuingAnimal,
     this.microchipAnimal,
+    this.photo,
   });
 
   //receive data from server
@@ -79,6 +81,7 @@ class TrainerModel implements InterfaceModel {
       dateMicrochipAnimal: map['dateMicrochipAnimal'],
       entityIssuingAnimal: map['entityIssuingAnimal'],
       microchipAnimal: map['microchipAnimal'],
+      photo: map['photo'],
     );
   }
 
@@ -103,6 +106,7 @@ class TrainerModel implements InterfaceModel {
       dateMicrochipAnimal: json['dateMicrochipAnimal'],
       entityIssuingAnimal: json['entityIssuingAnimal'],
       microchipAnimal: json['microchipAnimal'],
+      photo:json['photo'],
     );
   }
 
@@ -133,6 +137,7 @@ class TrainerModel implements InterfaceModel {
       'dateMicrochipAnimal': dateMicrochipAnimal,
       'entityIssuingAnimal': entityIssuingAnimal,
       'microchipAnimal': microchipAnimal,
+      'photo': photo,
     };
   }
 
@@ -235,6 +240,11 @@ class TrainerModel implements InterfaceModel {
   getPathImg() {
     // TODO: implement getPathImg
     throw UnimplementedError();
+  }
+
+  @override
+  getPhoto() {
+    return photo;
   }
 
 /*addVaccine(NewVaccine vaccine){
