@@ -945,7 +945,6 @@ class _addInfoState extends State<NavigatorAdd> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            UserSharedPreferences.setIndex(0);
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => HomeScreen()));
           },
@@ -1078,7 +1077,6 @@ class _addInfoState extends State<NavigatorAdd> {
       'airTag1': airTag1,
       'airTag2': airTag2,
     });
-    UserSharedPreferences.setIndex(0);
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
   }

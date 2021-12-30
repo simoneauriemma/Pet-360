@@ -62,55 +62,17 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                           ),
                         ],
                       ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    shrinkWrap: true,
-                    itemBuilder: (_, int index) => Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 5.0),
-                      child: Card(
-                        elevation: 2.0,
-                        color: Colors.grey.shade100,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0)),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 15.0),
-                          child: Row(
-                            children: [
-                              Padding(padding: EdgeInsets.only(left: 7)),
-                              Image.asset("assets/icons/injection.png",
-                                  width: 20, height: 20),
-                              //Text(" "+ generateNumber[index]+".", style: TextStyle(color: Colors.black, fontSize: 18.0)),
-                              Padding(padding: EdgeInsets.only(left: 13)),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(snapshot.data![index].firstName.toString(),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                  SizedBox(
-                                    height: 3,
-                                  ),
-                                  Text(snapshot.data![index].surnameName.toString(),
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 13.0)),
-                                ],
-                              )
-                            ],
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          shrinkWrap: true,
+                          itemBuilder: (_, int index) => WidgetList(
+                            name: snapshot.data![index].firstName!,
+                            shopname: snapshot.data![index].nameShop!,
+                            voto: "5",
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
                     ],
                   ),
                 ),
@@ -137,8 +99,10 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<VeterinaryModel> list = List.empty(growable: true);
-      jsonDecode(response.body).forEach((key, value) async {
-        VeterinaryModel user = VeterinaryModel.fromJson(jsonDecode(response.body));
+      jsonDecode(response.body).forEach((key, value) {
+        VeterinaryModel user = VeterinaryModel();
+        user.nameShop = value['nameShop'];
+        user.firstName = value['firstName'];
         list.add(user);
       });
       return list;

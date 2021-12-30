@@ -28,7 +28,6 @@ class _Chatting_screenState extends State<Chatting_screen> {
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                    UserSharedPreferences.setIndex(0);
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen()));
                   },

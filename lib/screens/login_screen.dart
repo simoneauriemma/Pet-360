@@ -104,7 +104,6 @@ void initializeFlutterFire() async {
         padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          UserSharedPreferences.setIndex(0);
           SignIn(emailController.text, passwordController.text);
         },
         child: Text(

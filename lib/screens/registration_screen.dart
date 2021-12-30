@@ -503,8 +503,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'surnameName': user.surnameName,
                         'cityName': user.cityName,
                         'address': user.address,
+                        'photo': "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
-                      UserSharedPreferences.setIndex(0),
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen())),
                     })
@@ -544,8 +544,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'numberPhone': veterinaryModel.numberPhone,
                         'cityShop': veterinaryModel.cityShop,
                         'addressShop': veterinaryModel.addressShop,
+                        'photo': "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
-                      UserSharedPreferences.setIndex(0),
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen())),
                     })
@@ -585,9 +585,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'numberPhone': trainerModel.numberPhone,
                         'cityShop': trainerModel.cityShop,
                         'addressShop': trainerModel.addressShop,
+                        'photo': "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
                       print(UserSharedPreferences.getTypeOfUser()),
-                      UserSharedPreferences.setIndex(0),
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen())),
                     })

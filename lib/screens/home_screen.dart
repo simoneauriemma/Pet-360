@@ -35,9 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     final uid = _auth.currentUser!.uid;
-    //print("test INIT");
-    //print("typeOfUser..." + UserSharedPreferences.getTypeOfUser().toString());
-    //print(uid);
     futureUser =
         fetchUser(UserSharedPreferences.getTypeOfUser().toString(), uid, "");
   }
@@ -55,9 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) => FutureBuilder<InterfaceModel>(
         future: futureUser,
         builder: (context, snapshot) {
-          if (UserSharedPreferences.getIndex() != null) {
-            index = UserSharedPreferences.getIndex()!;
-          }
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
           if (snapshot.hasData) {
             return Scaffold(
@@ -98,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: (index) {
                   setState(() {
                     this.index = index;
-                    UserSharedPreferences.setIndex(index);
                   });
                 },
                 letIndexChange: (index) => true,

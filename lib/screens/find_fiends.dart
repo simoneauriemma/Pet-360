@@ -90,7 +90,6 @@ class _FindFriendsState extends State<FindFriends> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {
-              UserSharedPreferences.setIndex(0);
               Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
             },
