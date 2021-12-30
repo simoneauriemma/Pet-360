@@ -53,7 +53,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Nome Cognome",
+                        UserSharedPreferences.getNameChat().toString(),
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),

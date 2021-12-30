@@ -70,6 +70,8 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                             name: snapshot.data![index].firstName!,
                             shopname: snapshot.data![index].nameShop!,
                             voto: "5",
+                            phonenum: snapshot.data![index].numberPhone!,
+                            indirizzo: snapshot.data![index].addressShop!,
                             ),
                           ),
                         ),
@@ -79,10 +81,56 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
               ),
             );
           }
-          return SizedBox(
-            height: MediaQuery.of(context).size.height / 1,
-            child: Center(
-              child: CircularProgressIndicator(),
+          return Scaffold(
+            body: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: ListView(
+                  padding: EdgeInsets.only(
+                      left: 20.0, right: 20.0, bottom: 10.0, top: 10.0),
+                  primary: false,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(bottom: 10)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Veterinari attualmente online ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 40)),
+                        ImageIcon(
+                          AssetImage("assets/icons/online.png"),
+                          color: Colors.green,
+                          size: 15,
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "Non ci sono veterinari disponibili",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height / 1,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         },
@@ -103,6 +151,8 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
         VeterinaryModel user = VeterinaryModel();
         user.nameShop = value['nameShop'];
         user.firstName = value['firstName'];
+        user.numberPhone = value['numberPhone'];
+        user.addressShop = value['addressShop'];
         list.add(user);
       });
       return list;

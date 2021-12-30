@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/chatting_screen.dart';
+import 'package:pet360/utils/usersharedpreferences.dart';
 
 class WidgetList extends StatelessWidget {
   final String name;
   final String shopname;
   final String voto;
+  final String phonenum;
+  final String indirizzo;
 
   WidgetList({
     required this.name,
     required this.shopname,
-    /*required this.phonenum,
-    required this.indirizzo, */
+    required this.phonenum,
+    required this.indirizzo,
     required this.voto,
   });
 
@@ -149,8 +152,8 @@ class WidgetList extends StatelessWidget {
                               //mainAxisAlignment: MainAxisAlignment.center,
                               //crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  "Nome Cognome",
+                                Text(
+                                  name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -160,13 +163,13 @@ class WidgetList extends StatelessWidget {
                                 Padding(padding: EdgeInsets.only(bottom: 30)),
                                 Row(
                                   children: [
-                                    Text("Nome negozio: ",
+                                    Text("Nome negozio:",
                                         style: TextStyle(
                                           fontSize: 15.0,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.grey[800],
                                         )),
-                                    Text("...",
+                                    Text(shopname,
                                         style: TextStyle(
                                           fontSize: 15.0,
                                           color: Colors.grey[800],
@@ -181,7 +184,7 @@ class WidgetList extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                           color: Colors.grey[800],
                                         )),
-                                    Text("...",
+                                    Text(phonenum,
                                         style: TextStyle(
                                           fontSize: 15.0,
                                           color: Colors.grey[800],
@@ -196,7 +199,7 @@ class WidgetList extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                           color: Colors.grey[800],
                                         )),
-                                    Text("...",
+                                    Text(indirizzo,
                                         style: TextStyle(
                                           fontSize: 15.0,
                                           color: Colors.grey[800],
@@ -211,7 +214,7 @@ class WidgetList extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                           color: Colors.grey[800],
                                         )),
-                                    Text("...",
+                                    Text(voto,
                                         style: TextStyle(
                                           fontSize: 15.0,
                                           color: Colors.grey[800],
@@ -283,6 +286,7 @@ class WidgetList extends StatelessWidget {
         ),
       ),
       onTap: () {
+        UserSharedPreferences.setNameChat(name.toString());
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => Chatting_screen()),
             (route) => false);
