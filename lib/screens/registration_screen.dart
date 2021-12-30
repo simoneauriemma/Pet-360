@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/components/appbackground.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
@@ -22,8 +22,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   void initState() {
     super.initState();
-
-    UserSharedPreferences.init();
+    //UserSharedPreferences.init();
   }
 
   final _formkey = GlobalKey<FormState>();
@@ -48,7 +47,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   //TextEditingController controllerUsername = new TextEditingController();
 
   Widget build(BuildContext context) {
-
     final nameField = TextFormField(
       autofocus: false,
       controller: nameController,
@@ -56,15 +54,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         nameController.text = value!;
       },
+      validator: (value) {
+        RegExp regE = RegExp(r'^.{3,}$');
+        if (value!.isEmpty) {
+          return ("Inserisci il nome!");
+        }
+        if (!regE.hasMatch(value)) {
+          return ("Inserisci un nome valido!");
+        }
+      },
       textInputAction: TextInputAction.next,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-          hintText: "Nome",
-          ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+        hintText: "Nome",
+      ),
     );
 
     final surnameField = TextFormField(
@@ -74,14 +81,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         surnameController.text = value!;
       },
+      validator: (value) {
+        RegExp regE = RegExp(r'^.{3,}$');
+        if (value!.isEmpty) {
+          return ("Inserisci la password!");
+        }
+        if (!regE.hasMatch(value)) {
+          return ("Inserisci una passoword valida (Almeno 6 caratteri)");
+        }
+      },
       textInputAction: TextInputAction.next,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-          hintText: "Cognome",
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+        hintText: "Cognome",
       ),
     );
 
@@ -92,15 +108,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         emailController.text = value!;
       },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Inserisci una e-mail!");
+        }
+        //reg expr
+        if (!RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-z]+").hasMatch(value)) {
+          return ("Inserisci una e-mail valida!");
+        }
+      },
       textInputAction: TextInputAction.next,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.mail),
-          hintText: "Email",
-          ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.mail),
+        hintText: "Email",
+      ),
     );
 
     final passwordField = TextFormField(
@@ -111,16 +136,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         passwordController.text = value!;
       },
+      validator: (value) {
+        RegExp regE = new RegExp(r'^.{6,}$');
+        if (value!.isEmpty) {
+          return ("Inserisci la password!");
+        }
+        if (!regE.hasMatch(value)) {
+          return ("Inserisci una passoword valida (Almeno 6 caratteri)");
+        }
+      },
+
       textInputAction: TextInputAction.next,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.password),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Password",
-          ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.password),
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Password",
+      ),
     );
 
     final cityField = TextFormField(
@@ -130,15 +165,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         cityController.text = value!;
       },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Inserisci una Città");
+        }
+        //reg expr
+        if (!RegExp("[0-9a-zA-Z]{3,}").hasMatch(value)) {
+          return ("Inserisci una città valida!");
+        }
+      },
       textInputAction: TextInputAction.done,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.location_city),
-          hintText: "Città",
-          ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.location_city),
+        hintText: "Città",
+      ),
     );
     final regButton = Material(
       elevation: 5,
@@ -182,15 +226,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         shopNameController.text = value!;
       },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Inserisci una Città");
+        }
+        //reg expr
+        if (!RegExp("[a-zA-Z]{3,}").hasMatch(value)) {
+          return ("Inserisci una città valida!");
+        }
+      },
       textInputAction: TextInputAction.next,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.shop),
-          hintText: "Nome negozio",
-          ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.shop),
+        hintText: "Nome negozio",
+      ),
     );
 
     final phoneNumberField = TextFormField(
@@ -200,15 +253,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         phoneNumberController.text = value!;
       },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Inserisci un numero di telefono valido");
+        }
+        //reg expr
+        if (!RegExp("[0-9]{9,}").hasMatch(value)) {
+          return ("Inserisci un numero di telefono valido!");
+        }
+      },
       textInputAction: TextInputAction.next,
-
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.phone),
-          hintText: "Numero di telefono",
-          ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.phone),
+        hintText: "Numero di telefono",
+      ),
     );
 
     final cityShopField = TextFormField(
@@ -218,15 +279,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         cityShopController.text = value!;
       },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Inserisci una Città per il tuo shop valida");
+        }
+        //reg expr
+        if (!RegExp("[a-zA-Z]{3,}").hasMatch(value)) {
+          return ("Inserisci una città del tuo shop valida!");
+        }
+      },
       textInputAction: TextInputAction.next,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.apartment_rounded),
-          hintText: "Città",
-         ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.apartment_rounded),
+        hintText: "Città",
+      ),
     );
 
     final shopAddressField = TextFormField(
@@ -236,15 +306,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       onSaved: (value) {
         shopAddressController.text = value!;
       },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Inserisci un indirizzo per il tuo shop valido");
+        }
+        //reg expr
+        if (!RegExp("[a-z A-Z]{5,}").hasMatch(value)) {
+          return ("Inserisci un indirizzo del tuo shop valido!");
+        }
+      },
       textInputAction: TextInputAction.done,
 
       //email decoration
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          prefixIcon: Icon(Icons.home),
-          hintText: "Indirizzo",
-          ),
+        filled: true,
+        fillColor: Colors.transparent,
+        prefixIcon: Icon(Icons.home),
+        hintText: "Indirizzo",
+      ),
     );
 
     return AppBackground(
@@ -345,38 +424,38 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                           (checkBoxChecked || checkBoxChecked2)
                               ? Flexible(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      SizedBox(height: 30),
-                                      Text(
-                                        "Informazioni aggiuntive",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                              blurRadius: 10.0,
-                                              color: Colors.lightGreen.shade100,
-                                              offset: Offset(5.0, 5.0),
-                                            ),
-                                          ],
-                                        ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(height: 30),
+                                Text(
+                                  "Informazioni aggiuntive",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.lightGreen.shade100,
+                                        offset: Offset(5.0, 5.0),
                                       ),
-                                      SizedBox(height: 30),
-                                      shopNameField,
-                                      SizedBox(height: 20),
-                                      phoneNumberField,
-                                      SizedBox(height: 20),
-                                      cityShopField,
-                                      SizedBox(height: 20),
-                                      shopAddressField,
-                                      SizedBox(height: 40)
                                     ],
                                   ),
-                                )
+                                ),
+                                SizedBox(height: 30),
+                                shopNameField,
+                                SizedBox(height: 20),
+                                phoneNumberField,
+                                SizedBox(height: 20),
+                                cityShopField,
+                                SizedBox(height: 20),
+                                shopAddressField,
+                                SizedBox(height: 40)
+                              ],
+                            ),
+                          )
                               : Column(),
 
                           //bottone "registrazione"
@@ -393,126 +472,134 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   void SignUp(String email, String password, String firstName,
       String surnameName, String cityName, String typeOfUser) async {
-    UserSharedPreferences.setIndex(0);
-    switch (typeOfUser) {
-      case "Utente":
-        {
-          UserModel user = UserModel(
-              email: email,
-              firstName: firstName,
-              surnameName: surnameName,
-              cityName: cityName,
-              address: "prova",
-              //TODO DA CAMBIARE
-              typeOfUser: typeOfUser);
-          final DBRef = FirebaseDatabase.instance.reference().child(typeOfUser);
-          //var document = getData();
-          // document.getEmail();
-          await _auth
-              .createUserWithEmailAndPassword(email: email, password: password)
-              .then((uid) =>
+    if (_formkey.currentState!.validate()) {
+      UserSharedPreferences.setIndex(0);
+
+      switch (typeOfUser) {
+        case "Utente":
           {
-                    UserSharedPreferences.setTypeOfUser(typeOfUser),
-                    user.uid = _auth.currentUser!.uid,
-                    //ONLY FOR TESTING!!!!!
-                    //print("\n TESTING UID  " + user.uid.toString() + "\n"),
-                    DBRef.child(user.uid.toString()).set({
-                      'firstName': user.firstName,
-                      'surnameName': user.surnameName,
-                      'cityName': user.cityName,
-                      'address': user.address,
-                    }),
-                    UserSharedPreferences.setIndex(0),
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomeScreen())),
-                  })
-              .catchError((e) {});
-        }
-        break;
-      case "Veterinario":
-        {
-          VeterinaryModel veterinaryModel = VeterinaryModel(
-              email: email,
-              firstName: firstName,
-              surnameName: surnameName,
-              cityName: cityName,
-              typeOfUser: typeOfUser,
-              nameShop: shopNameController.text,
-              numberPhone: phoneNumberController.text,
-              cityShop: cityShopController.text,
-              addressShop: shopAddressController.text);
-          final DBRef = FirebaseDatabase.instance.reference().child(typeOfUser);
-          await _auth
-              .createUserWithEmailAndPassword(email: email, password: password)
-              .then((uid) => {
-                    UserSharedPreferences.setTypeOfUser(typeOfUser),
-                    veterinaryModel.uid = _auth.currentUser!.uid,
-                    //ONLY FOR TESTING!!!!!
-                    print("\n TESTING UID  " +
-                        veterinaryModel.uid.toString() +
-                        "\n"),
-                    DBRef.child(veterinaryModel.uid.toString()).set({
-                      'firstName': veterinaryModel.firstName,
-                      'surnameName': veterinaryModel.surnameName,
-                      'cityName': veterinaryModel.cityName,
-                      'address': veterinaryModel.address,
-                      'nameShop': veterinaryModel.nameShop,
-                      'numberPhone': veterinaryModel.numberPhone,
-                      'cityShop': veterinaryModel.cityShop,
-                      'addressShop': veterinaryModel.addressShop,
-                    }),
-                    UserSharedPreferences.setIndex(0),
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomeScreen())),
-                  })
-              .catchError((e) {});
-        }
-        break;
-      case "Addestratore":
-        {
-          TrainerModel trainerModel = TrainerModel(
-              email: email,
-              firstName: firstName,
-              surnameName: surnameName,
-              cityName: cityName,
-              typeOfUser: typeOfUser,
-              nameShop: shopNameController.text,
-              numberPhone: phoneNumberController.text,
-              cityShop: cityShopController.text,
-              addressShop: shopAddressController.text);
-          final DBRef = FirebaseDatabase.instance.reference().child(typeOfUser);
-          await _auth
-              .createUserWithEmailAndPassword(email: email, password: password)
-              .then((uid) => {
-                    UserSharedPreferences.setTypeOfUser(typeOfUser),
-                    trainerModel.uid = _auth.currentUser!.uid,
-                    //ONLY FOR TESTING!!!!!
-                    /*print("\n TESTING UID  " +
+            UserModel user = UserModel(
+                email: email,
+                firstName: firstName,
+                surnameName: surnameName,
+                cityName: cityName,
+                address: "prova",
+                //TODO DA CAMBIARE
+                typeOfUser: typeOfUser);
+            final DBRef =
+                FirebaseDatabase.instance.reference().child(typeOfUser);
+            //var document = getData();
+            // document.getEmail();
+            await _auth
+                .createUserWithEmailAndPassword(
+                    email: email, password: password)
+                .then((uid) => {
+                      UserSharedPreferences.setTypeOfUser(typeOfUser),
+                      user.uid = _auth.currentUser!.uid,
+                      //ONLY FOR TESTING!!!!!
+                      //print("\n TESTING UID  " + user.uid.toString() + "\n"),
+                      DBRef.child(user.uid.toString()).set({
+                        'firstName': user.firstName,
+                        'surnameName': user.surnameName,
+                        'cityName': user.cityName,
+                        'address': user.address,
+                      }),
+                      UserSharedPreferences.setIndex(0),
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeScreen())),
+                    })
+                .catchError((e) {});
+          }
+          break;
+        case "Veterinario":
+          {
+            VeterinaryModel veterinaryModel = VeterinaryModel(
+                email: email,
+                firstName: firstName,
+                surnameName: surnameName,
+                cityName: cityName,
+                typeOfUser: typeOfUser,
+                nameShop: shopNameController.text,
+                numberPhone: phoneNumberController.text,
+                cityShop: cityShopController.text,
+                addressShop: shopAddressController.text);
+            final DBRef =
+                FirebaseDatabase.instance.reference().child(typeOfUser);
+            await _auth
+                .createUserWithEmailAndPassword(
+                    email: email, password: password)
+                .then((uid) => {
+                      UserSharedPreferences.setTypeOfUser(typeOfUser),
+                      veterinaryModel.uid = _auth.currentUser!.uid,
+                      //ONLY FOR TESTING!!!!!
+                      print("\n TESTING UID  " +
+                          veterinaryModel.uid.toString() +
+                          "\n"),
+                      DBRef.child(veterinaryModel.uid.toString()).set({
+                        'firstName': veterinaryModel.firstName,
+                        'surnameName': veterinaryModel.surnameName,
+                        'cityName': veterinaryModel.cityName,
+                        'address': veterinaryModel.address,
+                        'nameShop': veterinaryModel.nameShop,
+                        'numberPhone': veterinaryModel.numberPhone,
+                        'cityShop': veterinaryModel.cityShop,
+                        'addressShop': veterinaryModel.addressShop,
+                      }),
+                      UserSharedPreferences.setIndex(0),
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeScreen())),
+                    })
+                .catchError((e) {});
+          }
+          break;
+        case "Addestratore":
+          {
+            TrainerModel trainerModel = TrainerModel(
+                email: email,
+                firstName: firstName,
+                surnameName: surnameName,
+                cityName: cityName,
+                typeOfUser: typeOfUser,
+                nameShop: shopNameController.text,
+                numberPhone: phoneNumberController.text,
+                cityShop: cityShopController.text,
+                addressShop: shopAddressController.text);
+            final DBRef =
+                FirebaseDatabase.instance.reference().child(typeOfUser);
+            await _auth
+                .createUserWithEmailAndPassword(
+                    email: email, password: password)
+                .then((uid) => {
+                      UserSharedPreferences.setTypeOfUser(typeOfUser),
+                      trainerModel.uid = _auth.currentUser!.uid,
+                      //ONLY FOR TESTING!!!!!
+                      /*print("\n TESTING UID  " +
                         trainerModel.uid.toString() +
                         "\n"),*/
-                    DBRef.child(trainerModel.uid.toString()).set({
-                      'firstName': trainerModel.firstName,
-                      'surnameName': trainerModel.surnameName,
-                      'cityName': trainerModel.cityName,
-                      'address': trainerModel.address,
-                      'nameShop': trainerModel.nameShop,
-                      'numberPhone': trainerModel.numberPhone,
-                      'cityShop': trainerModel.cityShop,
-                      'addressShop': trainerModel.addressShop,
-                    }),
-                    print(UserSharedPreferences.getTypeOfUser()),
-                    UserSharedPreferences.setIndex(0),
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomeScreen())),
-                  })
-              .catchError((e) {});
-        }
-        break;
-      default:
-        {
-          print("This is default case");
-        }
-        break;
+                      DBRef.child(trainerModel.uid.toString()).set({
+                        'firstName': trainerModel.firstName,
+                        'surnameName': trainerModel.surnameName,
+                        'cityName': trainerModel.cityName,
+                        'address': trainerModel.address,
+                        'nameShop': trainerModel.nameShop,
+                        'numberPhone': trainerModel.numberPhone,
+                        'cityShop': trainerModel.cityShop,
+                        'addressShop': trainerModel.addressShop,
+                      }),
+                      print(UserSharedPreferences.getTypeOfUser()),
+                      UserSharedPreferences.setIndex(0),
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeScreen())),
+                    })
+                .catchError((e) {});
+          }
+          break;
+        default:
+          {
+            print("This is default case");
+          }
+          break;
+      }
     }
   }
 }
