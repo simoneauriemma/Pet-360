@@ -720,7 +720,7 @@ class _viewInfoState extends State<NavigatorView> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: 380,
+                  height: 440,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -750,6 +750,17 @@ class _viewInfoState extends State<NavigatorView> {
                     SizedBox(
                       height: 20,
                     ),
+                      
+                                Align(alignment: Alignment.centerRight,                                        
+                                child: IconButton(
+                                padding: EdgeInsets.only(right: 30),
+                                icon: Image.asset("assets/icons/edit.png"),                                
+                                onPressed: (){
+                                    //
+                                },
+                                ),  
+                              ),
+                              SizedBox(height: 20,),
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -887,7 +898,7 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 40,
                         ),
                         Text(
-                          "Dispositivi aggiunti",
+                          "Dispositivi collegati:",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15, fontStyle: FontStyle.italic),
@@ -895,57 +906,31 @@ class _viewInfoState extends State<NavigatorView> {
                         SizedBox(
                           height: 30,
                         ),
-                        ElevatedButton(
-                          child: Text("AirTag1"),
-                          style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.black,
-                            primary: Colors.white,
-                            side:
-                                BorderSide(color: Colors.lightGreen, width: 1),
-                            elevation: 5,
-                            minimumSize: Size(140, 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          onPressed: () {
-                            Fluttertoast.showToast(
-                                msg: "Dispositivo aggiunto correttamente!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.grey.shade200,
-                                textColor: Colors.black,
-                                fontSize: 15.0);
-                            airTag1 = "1 dispositivo"; //TODO DA CAMBIARE
-                          },
-                        ),
-                        ElevatedButton(
-                          child: Text("AirTag2"),
-                          style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.black,
-                            primary: Colors.white,
-                            onSurface: Colors.grey,
-                            side:
-                                BorderSide(color: Colors.lightGreen, width: 1),
-                            elevation: 5,
-                            minimumSize: Size(140, 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          onPressed: () {
-                            Fluttertoast.showToast(
-                                msg: "Dispositivo aggiunto correttamente!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.grey.shade200,
-                                textColor: Colors.black,
-                                fontSize: 15.0);
-                            airTag2 = "2 dispositivo"; //TODO DA CAMBIARE
-                          },
-                        )
-                      ],
-                    )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          Text("AirTag1"),                         
+                          IconButton(
+                            icon: Image.asset("assets/icons/delete.png", width: 23,height: 23,color: Colors.red),
+                            onPressed: (){
+                                //
+                          }),
+                        ],),
+                        
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          Text("AirTag2"),                         
+                          IconButton(
+                            icon: Image.asset("assets/icons/delete.png", width: 23,height: 23,color: Colors.red),
+                            onPressed: (){
+                                //
+                          }),
+                        ],),
+                        
+                       
+                      ])
+                    ),
                 SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
