@@ -422,7 +422,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       'cityName': user.cityName,
                       'address': user.address,
                     }),
-                    //print(UserSharedPreferences.getTypeOfUser()),
+                    UserSharedPreferences.setIndex(0),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
@@ -461,7 +461,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       'cityShop': veterinaryModel.cityShop,
                       'addressShop': veterinaryModel.addressShop,
                     }),
-
+                    UserSharedPreferences.setIndex(0),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
@@ -501,6 +501,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       'addressShop': trainerModel.addressShop,
                     }),
                     print(UserSharedPreferences.getTypeOfUser()),
+                    UserSharedPreferences.setIndex(0),
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                   })
