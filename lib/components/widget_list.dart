@@ -257,7 +257,7 @@ class WidgetList extends StatelessWidget {
                             ),
                           ),
                         );
-                      });
+                      },);
                 },
                 child: Row(
                   children: [
