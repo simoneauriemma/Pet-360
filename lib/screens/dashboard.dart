@@ -16,6 +16,8 @@ import 'package:pet360/utils/usersharedpreferences.dart';
 import 'ia_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import 'navigator_view.dart';
+
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
@@ -141,7 +143,11 @@ class _DashboardState extends State<Dashboard> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              //
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          NavigatorView()));
                             },
                             child: Container(
                               width: 100,
@@ -284,6 +290,14 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ],
                     ),
+                  child: Text(
+                    "Clicca su + per inserire il tuo primo animale",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
                   ),
                   Spacer(),
                   Align(
