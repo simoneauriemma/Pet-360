@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -424,38 +426,38 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                           (checkBoxChecked || checkBoxChecked2)
                               ? Flexible(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      SizedBox(height: 30),
-                                      Text(
-                                        "Informazioni aggiuntive",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                              blurRadius: 10.0,
-                                              color: Colors.lightGreen.shade100,
-                                              offset: Offset(5.0, 5.0),
-                                            ),
-                                          ],
-                                        ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(height: 30),
+                                Text(
+                                  "Informazioni aggiuntive",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.lightGreen.shade100,
+                                        offset: Offset(5.0, 5.0),
                                       ),
-                                      SizedBox(height: 30),
-                                      shopNameField,
-                                      SizedBox(height: 20),
-                                      phoneNumberField,
-                                      SizedBox(height: 20),
-                                      cityShopField,
-                                      SizedBox(height: 20),
-                                      shopAddressField,
-                                      SizedBox(height: 40)
                                     ],
                                   ),
-                                )
+                                ),
+                                SizedBox(height: 30),
+                                shopNameField,
+                                SizedBox(height: 20),
+                                phoneNumberField,
+                                SizedBox(height: 20),
+                                cityShopField,
+                                SizedBox(height: 20),
+                                shopAddressField,
+                                SizedBox(height: 40)
+                              ],
+                            ),
+                          )
                               : Column(),
 
                           //bottone "registrazione"
@@ -487,13 +489,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 //TODO DA CAMBIARE
                 typeOfUser: typeOfUser);
             final DBRef =
-                FirebaseDatabase.instance.reference().child(typeOfUser);
+            FirebaseDatabase.instance.reference().child(typeOfUser);
             //var document = getData();
             // document.getEmail();
             await _auth
                 .createUserWithEmailAndPassword(
                     email: email, password: password)
-                .then((uid) => {
+                .then((uid) async => {
                       UserSharedPreferences.setTypeOfUser(typeOfUser),
                       user.uid = _auth.currentUser!.uid,
                       //ONLY FOR TESTING!!!!!
@@ -503,10 +505,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'surnameName': user.surnameName,
                         'cityName': user.cityName,
                         'address': user.address,
-                        'photo': "/data/user/0/com.example.pet360/cache/user_default.png",
+                        'photo':
+                            "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen())),
+                      //print("aspetto il future...."),
+                      //print(UserSharedPreferences.getTypeOfUser()),
+                      await Future.delayed(Duration(seconds: 3), () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      }),
                     })
                 .catchError((e) {});
           }
@@ -524,11 +531,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 cityShop: cityShopController.text,
                 addressShop: shopAddressController.text);
             final DBRef =
-                FirebaseDatabase.instance.reference().child(typeOfUser);
+            FirebaseDatabase.instance.reference().child(typeOfUser);
             await _auth
                 .createUserWithEmailAndPassword(
                     email: email, password: password)
-                .then((uid) => {
+                .then((uid) async => {
                       UserSharedPreferences.setTypeOfUser(typeOfUser),
                       veterinaryModel.uid = _auth.currentUser!.uid,
                       //ONLY FOR TESTING!!!!!
@@ -544,10 +551,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'numberPhone': veterinaryModel.numberPhone,
                         'cityShop': veterinaryModel.cityShop,
                         'addressShop': veterinaryModel.addressShop,
-                        'photo': "/data/user/0/com.example.pet360/cache/user_default.png",
+                        'photo':
+                            "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen())),
+                      //print("aspetto il future...."),
+                      //print(UserSharedPreferences.getTypeOfUser()),
+                      await Future.delayed(Duration(seconds: 5), () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      }),
                     })
                 .catchError((e) {});
           }
@@ -565,11 +577,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 cityShop: cityShopController.text,
                 addressShop: shopAddressController.text);
             final DBRef =
-                FirebaseDatabase.instance.reference().child(typeOfUser);
+            FirebaseDatabase.instance.reference().child(typeOfUser);
             await _auth
                 .createUserWithEmailAndPassword(
                     email: email, password: password)
-                .then((uid) => {
+                .then((uid) async => {
                       UserSharedPreferences.setTypeOfUser(typeOfUser),
                       trainerModel.uid = _auth.currentUser!.uid,
                       //ONLY FOR TESTING!!!!!
@@ -585,11 +597,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'numberPhone': trainerModel.numberPhone,
                         'cityShop': trainerModel.cityShop,
                         'addressShop': trainerModel.addressShop,
-                        'photo': "/data/user/0/com.example.pet360/cache/user_default.png",
+                        'photo':
+                            "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
-                      print(UserSharedPreferences.getTypeOfUser()),
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen())),
+                      //print("aspetto il future...."),
+                      //print(UserSharedPreferences.getTypeOfUser()),
+                      await Future.delayed(Duration(seconds: 3), () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      }),
                     })
                 .catchError((e) {});
           }
