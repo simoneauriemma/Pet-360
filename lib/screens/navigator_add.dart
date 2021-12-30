@@ -531,7 +531,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                               )),
                                         ),
                                         SizedBox(
-                                          height: 20,
+                                          height: 40,
                                         ),
                                     ConstrainedBox(
                                       constraints: BoxConstraints.tightFor(
@@ -566,7 +566,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                 AssetImage(
                                                     "assets/icons/save.png"),
                                                 color: Colors.black,
-                                                size: 15,
+                                                size: 17,
                                               ),
                                             ],
                                           ),
@@ -613,8 +613,8 @@ class _addInfoState extends State<NavigatorAdd> {
                             child: Row(
                               children: [
                                 Padding(padding: EdgeInsets.only(left: 7)),
-                                Image.asset("assets/icons/injection.png",
-                                    width: 20, height: 20),
+                                Image.asset("assets/icons/vaccine.png",
+                                    width: 25, height: 25),
                                 //Text(" "+ generateNumber[index]+".", style: TextStyle(color: Colors.black, fontSize: 18.0)),
                                 Padding(padding: EdgeInsets.only(left: 13)),
                                 Column(
