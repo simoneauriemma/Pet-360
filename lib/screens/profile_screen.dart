@@ -142,11 +142,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, snapshot) {
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
           if (snapshot.hasData) {
-            print(snapshot.data!.getPhoto());
-            if(snapshot.data!.getPhoto() == ""){
-              print("Strunz");
-              downloadFileExample(snapshot.data!.getPhoto());
-            }
             final nameField = TextFormField(
               autofocus: false,
               controller: nameController,
@@ -335,7 +330,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               SizedBox(
                                                   width: 100.0,
                                                   height: 100.0,
-                                                  child: Image.file(File(snapshot.data!.getPhoto())),
+                                                child: Image.asset("assets/icons/user_default.png"),
                                                 ),
                                         ),
                                       ),
@@ -759,6 +754,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> downloadFileExample(String path) async {
     File downloadToFile = File(path);
+    pickedImage = downloadToFile;
     if (downloadToFile.existsSync()) {
       return;
     }
@@ -907,14 +903,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
       switch (typeOfUser) {
-        case "Utente":
-          return UserModel.fromJson(jsonDecode(response.body));
-        case "Addestratore":
-          return TrainerModel.fromJson(jsonDecode(response.body));
-        case "Veterinario":
-          return VeterinaryModel.fromJson(jsonDecode(response.body));
-        default:
-          return UserModel.fromJson(jsonDecode(response.body));
+        case "Utente": {
+          UserModel user = UserModel.fromJson(jsonDecode(response.body));
+          await downloadFileExample(user.getPhoto());
+          return user;
+        }
+        case "Addestratore":{
+          TrainerModel user = TrainerModel.fromJson(jsonDecode(response.body));
+          await downloadFileExample(user.getPhoto());
+          return user;
+        }
+        case "Veterinario": {
+          VeterinaryModel user = VeterinaryModel.fromJson(jsonDecode(response.body));
+          await downloadFileExample(user.getPhoto());
+          return user;
+        }
+        default: {
+          UserModel user = UserModel.fromJson(jsonDecode(response.body));
+          await downloadFileExample(user.getPhoto());
+          return user;
+        }
       }
     } else {
       throw Exception('Failed to load album');
