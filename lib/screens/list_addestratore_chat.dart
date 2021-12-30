@@ -27,7 +27,6 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
   Widget build(BuildContext context) => FutureBuilder<List<TrainerModel>>(
         future: futureListVet,
         builder: (context, snapshot) {
-          //print("Snap: " + snapshot.toString() + jsonBody.toString());
           if (snapshot.hasData) {
             return Scaffold(
               body: SingleChildScrollView(

@@ -993,6 +993,9 @@ class _addInfoState extends State<NavigatorAdd> {
       path = pickedImage!.path;
       uploadFile(path);
     }
+    if(path == ""){
+      path = "/data/user/0/com.example.pet360/cache/dog.png";
+    }
 
     final DBRef = FirebaseDatabase.instance
         .reference()
