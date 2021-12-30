@@ -424,38 +424,38 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                           (checkBoxChecked || checkBoxChecked2)
                               ? Flexible(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(height: 30),
-                                Text(
-                                  "Informazioni aggiuntive",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    shadows: [
-                                      Shadow(
-                                        blurRadius: 10.0,
-                                        color: Colors.lightGreen.shade100,
-                                        offset: Offset(5.0, 5.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(height: 30),
+                                      Text(
+                                        "Informazioni aggiuntive",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 10.0,
+                                              color: Colors.lightGreen.shade100,
+                                              offset: Offset(5.0, 5.0),
+                                            ),
+                                          ],
+                                        ),
                                       ),
+                                      SizedBox(height: 30),
+                                      shopNameField,
+                                      SizedBox(height: 20),
+                                      phoneNumberField,
+                                      SizedBox(height: 20),
+                                      cityShopField,
+                                      SizedBox(height: 20),
+                                      shopAddressField,
+                                      SizedBox(height: 40)
                                     ],
                                   ),
-                                ),
-                                SizedBox(height: 30),
-                                shopNameField,
-                                SizedBox(height: 20),
-                                phoneNumberField,
-                                SizedBox(height: 20),
-                                cityShopField,
-                                SizedBox(height: 20),
-                                shopAddressField,
-                                SizedBox(height: 40)
-                              ],
-                            ),
-                          )
+                                )
                               : Column(),
 
                           //bottone "registrazione"
@@ -473,7 +473,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   void SignUp(String email, String password, String firstName,
       String surnameName, String cityName, String typeOfUser) async {
     if (_formkey.currentState!.validate()) {
-      UserSharedPreferences.setIndex(0);
+      //UserSharedPreferences.setIndex(0);
 
       switch (typeOfUser) {
         case "Utente":

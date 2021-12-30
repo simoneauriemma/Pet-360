@@ -55,7 +55,6 @@ void initializeFlutterFire() async {
         if (!RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-z]+").hasMatch(value)) {
           return ("Inserisci una e-mail valida!");
         }
-        return null;
       },
       onSaved: (value) {
         emailController.text = value!;
