@@ -86,10 +86,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       validator: (value) {
         RegExp regE = RegExp(r'^.{3,}$');
         if (value!.isEmpty) {
-          return ("Inserisci la password!");
+          return ("Inserisci il tuo cognome");
         }
         if (!regE.hasMatch(value)) {
-          return ("Inserisci una passoword valida (Almeno 6 caratteri)");
+          return ("Inserisci un cognome valido (Almeno 3 caratteri)");
         }
       },
       textInputAction: TextInputAction.next,
@@ -196,19 +196,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         onPressed: () {
           //String email, String password, String firstName,
           //       String surnameName, String cityName, typeOfUser
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                );
-              });
+
           var typeOfUser;
           if (checkBoxChecked) {
             typeOfUser = "Veterinario";
@@ -487,6 +475,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   void SignUp(String email, String password, String firstName,
       String surnameName, String cityName, String typeOfUser) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: SizedBox(
+              height: 100,
+              width: 100,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        });
     if (_formkey.currentState!.validate()) {
       //UserSharedPreferences.setIndex(0);
 

@@ -31,6 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _auth = FirebaseAuth.instance;
   Future<InterfaceModel>? futureUser;
   File? pickedImage;
+  var stringPathImage;
 
   final _formkey = GlobalKey<FormState>();
   final nameController = new TextEditingController();
@@ -355,7 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               :
                                               //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
                                               SizedBox(
-                                                width: 100.0,
+                                                  width: 100.0,
                                                   height: 100.0,
                                                   child: Image.asset(
                                                       "assets/icons/user_default.png"),
@@ -803,8 +804,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  Future<void> removePhoto(String filePath) async {
+    try {
+      if (filePath.split("/").last != "user_default.png") {
+        await firebase_storage.FirebaseStorage.instance
+            .ref('uploads/' + filePath.split("/").last)
+            .delete();
+      }
+    } on firebase_storage.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+    }
+  }
+
   Future<void> downloadFileExample(String path) async {
     File downloadToFile = File(path);
+    stringPathImage = path.split("/").last;
     pickedImage = downloadToFile;
     if (downloadToFile.existsSync()) {
       return;
@@ -942,7 +956,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void eliminateAccount() async {
     final DBRef = FirebaseDatabase.instance.reference();
-
+    removePhoto(stringPathImage);
     await DBRef.child(UserSharedPreferences.getTypeOfUser().toString() +
             "/" +
             _auth.currentUser!.uid)
