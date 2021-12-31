@@ -101,10 +101,16 @@ class _FindFriendsState extends State<FindFriends> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.file(
-                                      File(snapshot.data![index].pathImg!),
-                                      width: 60,
-                                    ),
+                                    ClipOval(
+                                  
+                                   child: Image.file(
+                                    File(snapshot.data![index].pathImg
+                                        .toString()),
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  ),
                                     SizedBox(
                                       height: 10,
                                     ),
