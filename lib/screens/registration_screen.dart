@@ -503,32 +503,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 //TODO DA CAMBIARE
                 typeOfUser: typeOfUser);
             final DBRef =
-            FirebaseDatabase.instance.reference().child(typeOfUser);
+                FirebaseDatabase.instance.reference().child(typeOfUser);
             //var document = getData();
             // document.getEmail();
             await _auth
                 .createUserWithEmailAndPassword(
-                email: email, password: password)
+                    email: email, password: password)
                 .then((uid) async => {
-              UserSharedPreferences.setTypeOfUser(typeOfUser),
-              user.uid = _auth.currentUser!.uid,
-              //ONLY FOR TESTING!!!!!
-              //print("\n TESTING UID  " + user.uid.toString() + "\n"),
-              DBRef.child(user.uid.toString()).set({
-                'firstName': user.firstName,
-                'surnameName': user.surnameName,
-                'cityName': user.cityName,
-                'address': user.address,
-                'photo':
-                "/data/user/0/com.example.pet360/cache/user_default.png",
-              }),
-              //print("aspetto il future...."),
-              //print(UserSharedPreferences.getTypeOfUser()),
-              await Future.delayed(Duration(seconds: 3), () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => HomeScreen()));
-              }),
-            })
+                      UserSharedPreferences.setTypeOfUser(typeOfUser),
+                      user.uid = _auth.currentUser!.uid,
+                      //ONLY FOR TESTING!!!!!
+                      //print("\n TESTING UID  " + user.uid.toString() + "\n"),
+                      DBRef.child(user.uid.toString()).set({
+                        'firstName': user.firstName,
+                        'surnameName': user.surnameName,
+                        'cityName': user.cityName,
+                        'address': user.address,
+                        'photo':
+                            "/data/user/0/com.example.pet360/cache/user_default.png",
+                      }),
+                      //print("aspetto il future...."),
+                      //print(UserSharedPreferences.getTypeOfUser()),
+                      await Future.delayed(Duration(seconds: 3), () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      }),
+                    })
                 .catchError((e) {});
           }
           break;
@@ -545,36 +545,36 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 cityShop: cityShopController.text,
                 addressShop: shopAddressController.text);
             final DBRef =
-            FirebaseDatabase.instance.reference().child(typeOfUser);
+                FirebaseDatabase.instance.reference().child(typeOfUser);
             await _auth
                 .createUserWithEmailAndPassword(
-                email: email, password: password)
+                    email: email, password: password)
                 .then((uid) async => {
-              UserSharedPreferences.setTypeOfUser(typeOfUser),
-              veterinaryModel.uid = _auth.currentUser!.uid,
-              //ONLY FOR TESTING!!!!!
-              print("\n TESTING UID  " +
-                  veterinaryModel.uid.toString() +
-                  "\n"),
-              DBRef.child(veterinaryModel.uid.toString()).set({
-                'firstName': veterinaryModel.firstName,
-                'surnameName': veterinaryModel.surnameName,
-                'cityName': veterinaryModel.cityName,
-                'address': veterinaryModel.address,
-                'nameShop': veterinaryModel.nameShop,
-                'numberPhone': veterinaryModel.numberPhone,
-                'cityShop': veterinaryModel.cityShop,
-                'addressShop': veterinaryModel.addressShop,
-                'photo':
-                "/data/user/0/com.example.pet360/cache/user_default.png",
-              }),
-              //print("aspetto il future...."),
-              //print(UserSharedPreferences.getTypeOfUser()),
-              await Future.delayed(Duration(seconds: 5), () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => HomeScreen()));
-              }),
-            })
+                      UserSharedPreferences.setTypeOfUser(typeOfUser),
+                      veterinaryModel.uid = _auth.currentUser!.uid,
+                      //ONLY FOR TESTING!!!!!
+                      print("\n TESTING UID  " +
+                          veterinaryModel.uid.toString() +
+                          "\n"),
+                      DBRef.child(veterinaryModel.uid.toString()).set({
+                        'firstName': veterinaryModel.firstName,
+                        'surnameName': veterinaryModel.surnameName,
+                        'cityName': veterinaryModel.cityName,
+                        'address': veterinaryModel.address,
+                        'nameShop': veterinaryModel.nameShop,
+                        'numberPhone': veterinaryModel.numberPhone,
+                        'cityShop': veterinaryModel.cityShop,
+                        'addressShop': veterinaryModel.addressShop,
+                        'photo':
+                            "/data/user/0/com.example.pet360/cache/user_default.png",
+                      }),
+                      //print("aspetto il future...."),
+                      //print(UserSharedPreferences.getTypeOfUser()),
+                      await Future.delayed(Duration(seconds: 5), () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      }),
+                    })
                 .catchError((e) {});
           }
           break;
@@ -591,37 +591,37 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 cityShop: cityShopController.text,
                 addressShop: shopAddressController.text);
             final DBRef =
-            FirebaseDatabase.instance.reference().child(typeOfUser);
+                FirebaseDatabase.instance.reference().child(typeOfUser);
             await _auth
                 .createUserWithEmailAndPassword(
-                email: email, password: password)
+                    email: email, password: password)
                 .then((uid) async => {
-              UserSharedPreferences.setTypeOfUser(typeOfUser),
-              trainerModel.uid = _auth.currentUser!.uid,
-              //ONLY FOR TESTING!!!!!
-              /*print("\n TESTING UID  " +
+                      UserSharedPreferences.setTypeOfUser(typeOfUser),
+                      trainerModel.uid = _auth.currentUser!.uid,
+                      //ONLY FOR TESTING!!!!!
+                      /*print("\n TESTING UID  " +
                         trainerModel.uid.toString() +
                         "\n"),*/
-              DBRef.child(trainerModel.uid.toString()).set({
-                'firstName': trainerModel.firstName,
-                'surnameName': trainerModel.surnameName,
-                'cityName': trainerModel.cityName,
-                'address': trainerModel.address,
-                'nameShop': trainerModel.nameShop,
-                'numberPhone': trainerModel.numberPhone,
-                'cityShop': trainerModel.cityShop,
-                'addressShop': trainerModel.addressShop,
-                'photo':
-                "/data/user/0/com.example.pet360/cache/user_default.png",
-              }),
+                      DBRef.child(trainerModel.uid.toString()).set({
+                        'firstName': trainerModel.firstName,
+                        'surnameName': trainerModel.surnameName,
+                        'cityName': trainerModel.cityName,
+                        'address': trainerModel.address,
+                        'nameShop': trainerModel.nameShop,
+                        'numberPhone': trainerModel.numberPhone,
+                        'cityShop': trainerModel.cityShop,
+                        'addressShop': trainerModel.addressShop,
+                        'photo':
+                            "/data/user/0/com.example.pet360/cache/user_default.png",
+                      }),
 
-              //print("aspetto il future...."),
-              //print(UserSharedPreferences.getTypeOfUser()),
-              await Future.delayed(Duration(seconds: 3), () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => HomeScreen()));
-              }),
-            })
+                      //print("aspetto il future...."),
+                      //print(UserSharedPreferences.getTypeOfUser()),
+                      await Future.delayed(Duration(seconds: 3), () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      }),
+                    })
                 .catchError((e) {});
           }
           break;

@@ -356,7 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               :
                                               //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
                                               SizedBox(
-                                                width: 100.0,
+                                                  width: 100.0,
                                                   height: 100.0,
                                                   child: Image.asset(
                                                       "assets/icons/user_default.png"),
