@@ -152,15 +152,27 @@ class _DashboardState extends State<Dashboard> {
                             child: Container(
                               width: 100,
                               height: 100,
-                              margin: EdgeInsets.only(right: 10),
+                              margin: EdgeInsets.only(left: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.file(
+                                  
+                                  ClipOval(
+                                  
+                                   child: Image.file(
                                     File(snapshot.data![index].pathImg
                                         .toString()),
-                                    width: 60,
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
                                   ),
+                                  ),
+                                      
+                                  //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                 
+
+
+                                  
                                   SizedBox(
                                     height: 10,
                                   ),
