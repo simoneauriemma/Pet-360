@@ -30,6 +30,7 @@ class _DashboardState extends State<Dashboard> {
     final uid = _auth.currentUser!.uid;
     futureAnimal = fetchAnimals(
         UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
+    downloadFileExample("/data/user/0/com.example.pet360/cache/dog.png");
   }
 
   @override

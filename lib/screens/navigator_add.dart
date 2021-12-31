@@ -48,6 +48,12 @@ class _addInfoState extends State<NavigatorAdd> {
   var jsonBody, airTag1, airTag2;
   firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
 
+  @override
+  void initState() {
+    super.initState();
+    pickedImage = File("/data/user/0/com.example.pet360/cache/dog.png");
+  }
+
   void imagePickerOption() {
     showDialog(
         context: context,
@@ -121,8 +127,7 @@ class _addInfoState extends State<NavigatorAdd> {
       final image = await ImagePicker().pickImage(source: imageType);
 
       if (image == null) return;
-
-      final imageTemp = File(image.path);
+      final imageTemp = File("/data/user/0/com.example.pet360/cache/dog.png");
 
       setState(() {
         pickedImage = imageTemp;
