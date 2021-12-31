@@ -140,8 +140,22 @@ Future classifyImage(image) async {
               onPressed: (){
                  selectImage();
               },
-              child: Text('Seleziona immagine')
-            ),
+              child: Text('Seleziona immagine',
+              textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.lightGreen.shade300,
+                    //side: BorderSide(color: Colors.grey.shade300, width: 2),
+                    elevation: 5,
+                    minimumSize: Size(320, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
+                ),
                 SizedBox(height: 20),
                 SingleChildScrollView(
                   child: Column(
