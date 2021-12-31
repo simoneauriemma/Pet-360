@@ -126,12 +126,52 @@ class _FindFriendsState extends State<FindFriends> {
         }
         else
         {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height / 1,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                title: Text("Geolocalizza i tuoi animali"),
+                centerTitle: true,
+                elevation: 4,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
+                ),
+              ),
+              body: Stack(
+                children: [
+                  GoogleMap(
+                    initialCameraPosition: _kGooglePlex,
+                    markers: _markers,
+                    myLocationButtonEnabled: false,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller = controller;
+                      controller.setMapStyle(MapStyle().sliver);
+                    },
+                  ),
+                  Positioned(
+                    bottom: 100,
+                    left: 20,
+                    right: 20,
+                    child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 140,
+                        decoration: BoxDecoration(
+                            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                      child: Text(
+                        "Non hai animali da poter tracciare",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                  )
+                ],
+              ));
         }
       });
 
