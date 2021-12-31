@@ -196,6 +196,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         onPressed: () {
           //String email, String password, String firstName,
           //       String surnameName, String cityName, typeOfUser
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              });
           var typeOfUser;
           if (checkBoxChecked) {
             typeOfUser = "Veterinario";
@@ -426,38 +439,38 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                           (checkBoxChecked || checkBoxChecked2)
                               ? Flexible(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(height: 30),
-                                Text(
-                                  "Informazioni aggiuntive",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    shadows: [
-                                      Shadow(
-                                        blurRadius: 10.0,
-                                        color: Colors.lightGreen.shade100,
-                                        offset: Offset(5.0, 5.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(height: 30),
+                                      Text(
+                                        "Informazioni aggiuntive",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 10.0,
+                                              color: Colors.lightGreen.shade100,
+                                              offset: Offset(5.0, 5.0),
+                                            ),
+                                          ],
+                                        ),
                                       ),
+                                      SizedBox(height: 30),
+                                      shopNameField,
+                                      SizedBox(height: 20),
+                                      phoneNumberField,
+                                      SizedBox(height: 20),
+                                      cityShopField,
+                                      SizedBox(height: 20),
+                                      shopAddressField,
+                                      SizedBox(height: 40)
                                     ],
                                   ),
-                                ),
-                                SizedBox(height: 30),
-                                shopNameField,
-                                SizedBox(height: 20),
-                                phoneNumberField,
-                                SizedBox(height: 20),
-                                cityShopField,
-                                SizedBox(height: 20),
-                                shopAddressField,
-                                SizedBox(height: 40)
-                              ],
-                            ),
-                          )
+                                )
                               : Column(),
 
                           //bottone "registrazione"
@@ -489,7 +502,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 //TODO DA CAMBIARE
                 typeOfUser: typeOfUser);
             final DBRef =
-            FirebaseDatabase.instance.reference().child(typeOfUser);
+                FirebaseDatabase.instance.reference().child(typeOfUser);
             //var document = getData();
             // document.getEmail();
             await _auth
@@ -531,7 +544,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 cityShop: cityShopController.text,
                 addressShop: shopAddressController.text);
             final DBRef =
-            FirebaseDatabase.instance.reference().child(typeOfUser);
+                FirebaseDatabase.instance.reference().child(typeOfUser);
             await _auth
                 .createUserWithEmailAndPassword(
                     email: email, password: password)
@@ -577,7 +590,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 cityShop: cityShopController.text,
                 addressShop: shopAddressController.text);
             final DBRef =
-            FirebaseDatabase.instance.reference().child(typeOfUser);
+                FirebaseDatabase.instance.reference().child(typeOfUser);
             await _auth
                 .createUserWithEmailAndPassword(
                     email: email, password: password)
@@ -600,6 +613,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'photo':
                             "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
+
                       //print("aspetto il future...."),
                       //print(UserSharedPreferences.getTypeOfUser()),
                       await Future.delayed(Duration(seconds: 3), () {
