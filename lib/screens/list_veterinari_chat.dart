@@ -1,12 +1,10 @@
 import 'dart:convert';
 
-import 'package:accordion/accordion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/components/widget_list.dart';
-import 'package:pet360/model/interface_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet360/components/widget_list.dart';
 import 'package:pet360/model/veterinary_model.dart';
 
 class ListVeterinariChat extends StatefulWidget {
@@ -68,11 +66,12 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                           shrinkWrap: true,
                           itemBuilder: (_, int index) => WidgetList(
                             name: snapshot.data![index].firstName!,
+                            surname: snapshot.data![index].surnameName!,
                             shopname: snapshot.data![index].nameShop!,
                             voto: "5",
                             phonenum: snapshot.data![index].numberPhone!,
                             indirizzo: snapshot.data![index].addressShop!,
-                            ),
+                          ),
                           ),
                         ),
                     ],
@@ -87,7 +86,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: ListView(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       left: 20.0, right: 20.0, bottom: 10.0, top: 10.0),
                   primary: false,
                   children: <Widget>[
@@ -111,22 +110,29 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                         ),
                       ],
                     ),
-                    Text(
-                      "Non ci sono veterinari disponibili",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height / 1,
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                    Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            "Non ci sono veterinari disponibili!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.black),
+                          ),
                         ),
-                      ),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height / 1,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -151,6 +157,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
         VeterinaryModel user = VeterinaryModel();
         user.nameShop = value['nameShop'];
         user.firstName = value['firstName'];
+        user.surnameName = value['surnameName'];
         user.numberPhone = value['numberPhone'];
         user.addressShop = value['addressShop'];
         list.add(user);

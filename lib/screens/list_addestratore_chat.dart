@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/components/widget_list.dart';
-import 'package:pet360/model/interface_model.dart';
-import 'package:pet360/model/trainer_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet360/components/widget_list.dart';
+import 'package:pet360/model/trainer_model.dart';
 
 class ListAddestratoriChat extends StatefulWidget {
   const ListAddestratoriChat({Key? key}) : super(key: key);
@@ -64,6 +63,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                           shrinkWrap: true,
                           itemBuilder: (_, int index) => WidgetList(
                             name: snapshot.data![index].firstName!,
+                            surname: snapshot.data![index].surnameName!,
                             shopname: snapshot.data![index].nameShop!,
                             voto: "5",
                             phonenum: snapshot.data![index].numberPhone!,
@@ -107,22 +107,29 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                         ),
                       ],
                     ),
-                    Text(
-                      "Non ci sono addestratori disponibili",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height / 1,
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                    Column(
+                      children: [
+                        const Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            "Non ci sono addestratori disponibili!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.black),
+                          ),
                         ),
-                      ),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height / 1,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -147,6 +154,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
       jsonDecode(response.body).forEach((key, value) {
         TrainerModel user = TrainerModel();
         user.nameShop = value['nameShop'];
+        user.surnameName = value['surnameName'];
         user.firstName = value['firstName'];
         user.numberPhone = value['numberPhone'];
         user.addressShop = value['addressShop'];

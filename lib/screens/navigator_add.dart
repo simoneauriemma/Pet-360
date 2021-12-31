@@ -1,30 +1,18 @@
-import 'dart:convert';
-import 'dart:ffi';
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:accordion/accordion.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:get/get.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pet360/model/new_vaccine.dart';
-import 'package:pet360/screens/dashboard.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:http/http.dart' as http;
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-
-//import 'package:image/image.dart' as Img;
-import 'package:path/path.dart' as Bho;
 
 double _currentSliderValue = 1;
 
@@ -951,17 +939,18 @@ class _addInfoState extends State<NavigatorAdd> {
         ),
       ),
       body: Stepper(
-          type: StepperType.horizontal,
-          steps: getSteps(),
-          currentStep: currentStep,
-          onStepContinue: null,
-          onStepCancel: null,
-          onStepTapped: (step) => setState(() {
-                currentStep = step;
-              }),
-          controlsBuilder: (context, {onStepContinue, onStepCancel}) {
+        type: StepperType.horizontal,
+        steps: getSteps(),
+        currentStep: currentStep,
+        onStepContinue: null,
+        onStepCancel: null,
+        onStepTapped: (step) => setState(() {
+          currentStep = step;
+        }),
+        /*controlsBuilder: (context, {onStepContinue, onStepCancel}) {
             return Container(child: null);
-          }),
+          }*/
+      ),
     );
   }
 

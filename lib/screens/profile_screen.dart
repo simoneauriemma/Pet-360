@@ -1,22 +1,24 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:pet360/model/interface_model.dart';
 import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:getwidget/getwidget.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'home_screen.dart';
 import 'login_screen.dart';
-import 'package:get/get.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -269,6 +271,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
 
+            final cancellaAccount = ElevatedButton(
+              onPressed: () {
+                eliminateAccount();
+              },
+              child: Row(
+                children: const [
+                  Text("Cancella account  "),
+                  ImageIcon(
+                    AssetImage("assets/icons/logout.png"),
+                    color: Colors.black,
+                    size: 15,
+                  ),
+                ],
+              ),
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.black,
+                primary: Colors.white,
+                //onSurface: Colors.grey,
+                //side: BorderSide(color: Colors.lightGreen, width: 2),
+                //elevation: 5,
+                minimumSize: Size(120, 40),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+              ),
+            );
+
             if (UserSharedPreferences.getTypeOfUser().toString() == "Utente") {
               return Scaffold(
                 backgroundColor: Colors.transparent,
@@ -280,8 +308,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
                     },
                   ),
                 ),
@@ -327,9 +355,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               :
                                               //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
                                               SizedBox(
-                                                  width: 100.0,
+                                                width: 100.0,
                                                   height: 100.0,
-                                                child: Image.asset("assets/icons/user_default.png"),
+                                                  child: Image.asset(
+                                                      "assets/icons/user_default.png"),
                                                 ),
                                         ),
                                       ),
@@ -359,6 +388,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               cityField,
                               SizedBox(height: 60),
                               modifyButton,
+                              SizedBox(height: 20),
+                              cancellaAccount,
                               SizedBox(height: 100),
                             ])),
                   ),
@@ -457,8 +488,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
                     },
                   ),
                 ),
@@ -480,51 +511,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Align(
-                                  alignment: Alignment.center,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey.shade300,
-                                              width: 3),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(100)),
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        child: ClipOval(
-                                          child: pickedImage != null
-                                              ? Image.file(
-                                                  pickedImage!,
-                                                  width: 100,
-                                                  height: 100,
-                                                  fit: BoxFit.cover,
-                                                )
-                                              :
-                                              //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                              SizedBox(
-                                                  width: 100.0,
-                                                  height: 100.0,
-                                                  child: Image.asset("assets/icons/user_default.png"),
-                                                ),
-                                        ),
+                              alignment: Alignment.center,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 3),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(100)),
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: ClipOval(
+                                      child: pickedImage != null
+                                          ? Image.file(
+                                              pickedImage!,
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
+                                            )
+                                          :
+                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                          SizedBox(
+                                              width: 100.0,
+                                              height: 100.0,
+                                              child: Image.asset(
+                                                  "assets/icons/user_default.png"),
+                                            ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 2,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        imagePickerOption();
+                                      },
+                                      icon: const Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.black45,
+                                        size: 25,
                                       ),
-                                      Positioned(
-                                        bottom: 0,
-                                        right: 2,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            imagePickerOption();
-                                          },
-                                          icon: const Icon(
-                                            Icons.camera_alt,
-                                            color: Colors.black45,
-                                            size: 25,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+                                    ),
+                                  ),
+                                ],
+                              )),
                           SizedBox(height: 20),
                           nameField,
                           SizedBox(height: 20),
@@ -533,6 +565,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           emailField,
                           SizedBox(height: 20),
                           cityField,
+                          SizedBox(height: 30),
+                          Text(
+                            "Informazioni aggiuntive",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
                           SizedBox(height: 20),
                           phoneNumber,
                           SizedBox(height: 20),
@@ -543,6 +583,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           addressShop,
                           SizedBox(height: 20),
                           modifyButton,
+                          SizedBox(height: 20),
+                          cancellaAccount,
+                          SizedBox(height: 100),
                         ],
                       ),
                     ),
@@ -569,8 +612,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
                     },
                   ),
                 ),
@@ -592,51 +635,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Align(
-                                  alignment: Alignment.center,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey.shade300,
-                                              width: 3),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(100)),
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        child: ClipOval(
-                                          child: pickedImage != null
-                                              ? Image.file(
-                                                  pickedImage!,
-                                                  width: 100,
-                                                  height: 100,
-                                                  fit: BoxFit.cover,
-                                                )
-                                              :
-                                              //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                              SizedBox(
-                                                  width: 100.0,
-                                                  height: 100.0,
-                                                  child: Image.asset("assets/icons/user_default.png"),
-                                                ),
-                                        ),
+                              alignment: Alignment.center,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 3),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(100)),
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: ClipOval(
+                                      child: pickedImage != null
+                                          ? Image.file(
+                                              pickedImage!,
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
+                                            )
+                                          :
+                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                          SizedBox(
+                                              width: 100.0,
+                                              height: 100.0,
+                                              child: Image.asset(
+                                                  "assets/icons/user_default.png"),
+                                            ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 2,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        imagePickerOption();
+                                      },
+                                      icon: const Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.black45,
+                                        size: 25,
                                       ),
-                                      Positioned(
-                                        bottom: 0,
-                                        right: 2,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            imagePickerOption();
-                                          },
-                                          icon: const Icon(
-                                            Icons.camera_alt,
-                                            color: Colors.black45,
-                                            size: 25,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+                                    ),
+                                  ),
+                                ],
+                              )),
                           SizedBox(height: 20),
                           nameField,
                           SizedBox(height: 20),
@@ -645,6 +689,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           emailField,
                           SizedBox(height: 20),
                           cityField,
+                          SizedBox(height: 30),
+                          Text(
+                            "Informazioni aggiuntive",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
                           SizedBox(height: 20),
                           phoneNumber,
                           SizedBox(height: 20),
@@ -655,6 +707,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           addressShop,
                           SizedBox(height: 20),
                           modifyButton,
+                          SizedBox(height: 20),
+                          cancellaAccount,
+                          SizedBox(height: 60),
                         ],
                       ),
                     ),
@@ -679,8 +734,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
                 ),
               ),
@@ -696,8 +751,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Align(
                           alignment: Alignment.topRight,
                           child: ConstrainedBox(
-                            constraints: BoxConstraints.tightFor(
-                                width: 100, height: 40),
+                            constraints:
+                                BoxConstraints.tightFor(width: 100, height: 40),
                             child: logoutButton,
                           ),
                         ),
@@ -741,7 +796,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     try {
       await firebase_storage.FirebaseStorage.instance
-          .ref('uploads/'+filePath.split("/").last)
+          .ref('uploads/' + filePath.split("/").last)
           .putFile(file);
     } on firebase_storage.FirebaseException catch (e) {
       // e.g, e.code == 'canceled'
@@ -885,6 +940,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return;
   }
 
+  void eliminateAccount() async {
+    final DBRef = FirebaseDatabase.instance.reference();
+
+    await DBRef.child(UserSharedPreferences.getTypeOfUser().toString() +
+            "/" +
+            _auth.currentUser!.uid)
+        .remove()
+        .then((value) => {
+              FirebaseAuth.instance.currentUser!.delete().then((value) => {
+                    UserSharedPreferences.setTypeOfUser(""),
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => LoginScreen())),
+                  })
+            });
+  }
+
   Future<InterfaceModel> fetchUser(
       String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
@@ -899,26 +970,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
       switch (typeOfUser) {
-        case "Utente": {
-          UserModel user = UserModel.fromJson(jsonDecode(response.body));
-          await downloadFileExample(user.getPhoto());
-          return user;
-        }
-        case "Addestratore":{
-          TrainerModel user = TrainerModel.fromJson(jsonDecode(response.body));
-          await downloadFileExample(user.getPhoto());
-          return user;
-        }
-        case "Veterinario": {
-          VeterinaryModel user = VeterinaryModel.fromJson(jsonDecode(response.body));
-          await downloadFileExample(user.getPhoto());
-          return user;
-        }
-        default: {
-          UserModel user = UserModel.fromJson(jsonDecode(response.body));
-          await downloadFileExample(user.getPhoto());
-          return user;
-        }
+        case "Utente":
+          {
+            UserModel user = UserModel.fromJson(jsonDecode(response.body));
+            await downloadFileExample(user.getPhoto());
+            return user;
+          }
+        case "Addestratore":
+          {
+            TrainerModel user =
+                TrainerModel.fromJson(jsonDecode(response.body));
+            await downloadFileExample(user.getPhoto());
+            return user;
+          }
+        case "Veterinario":
+          {
+            VeterinaryModel user =
+                VeterinaryModel.fromJson(jsonDecode(response.body));
+            await downloadFileExample(user.getPhoto());
+            return user;
+          }
+        default:
+          {
+            UserModel user = UserModel.fromJson(jsonDecode(response.body));
+            await downloadFileExample(user.getPhoto());
+            return user;
+          }
       }
     } else {
       throw Exception('Failed to load album');
