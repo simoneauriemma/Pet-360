@@ -5,15 +5,16 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pet360/model/map_style.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:pet360/model/map_style.dart';
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:http/http.dart' as http;
+
 import 'home_screen.dart';
 //import 'package:geolocator/geolocator.dart';
 
@@ -162,17 +163,34 @@ class _FindFriendsState extends State<FindFriends> {
                     left: 20,
                     right: 20,
                     child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 140,
-                        decoration: BoxDecoration(
-                            color: Colors.white, borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        "Non hai animali da poter tracciare",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                      width: MediaQuery.of(context).size.width,
+                      height: 140,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Non hai ancora animali da poter tracciare!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.black),
+                        ),
                       ),
                     ),
                   )

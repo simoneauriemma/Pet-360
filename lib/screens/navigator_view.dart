@@ -991,8 +991,6 @@ class _viewInfoState extends State<NavigatorView> {
         onStepTapped: (step) => setState(() {
           currentStep = step;
         }),
-        /* controlsBuilder: (context, {onStepContinue, onStepCancel}) {
-            return Container(child: null); */
       ),
     );
   }

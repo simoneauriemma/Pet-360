@@ -2,20 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:pet360/components/appbackground.dart';
-import 'package:pet360/model/interface_model.dart';
-import 'package:pet360/model/trainer_model.dart';
-import 'package:pet360/model/user_model.dart';
-import 'package:pet360/model/veterinary_model.dart';
-import 'package:pet360/model/view_animals_home.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet360/components/appbackground.dart';
+import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'ia_screen.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import 'ia_screen.dart';
 import 'navigator_view.dart';
 
 class Dashboard extends StatefulWidget {
@@ -146,8 +141,7 @@ class _DashboardState extends State<Dashboard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavigatorView()));
+                                      builder: (context) => NavigatorView()));
                             },
                             child: Container(
                               width: 100,
@@ -156,23 +150,18 @@ class _DashboardState extends State<Dashboard> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  
                                   ClipOval(
-                                  
-                                   child: Image.file(
-                                    File(snapshot.data![index].pathImg
-                                        .toString()),
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
+                                    child: Image.file(
+                                      File(snapshot.data![index].pathImg
+                                          .toString()),
+                                      width: 80,
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  ),
-                                      
+
                                   //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                 
 
-
-                                  
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -302,14 +291,16 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ],
                     ),
-                  child: Text(
-                    "Clicca su + per inserire il tuo primo animale",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
+                    child: Center(
+                      child: Text(
+                        "Clicca su '+' per aggiungere un animale da gestire!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.black),
+                      ),
+                    ),
                   ),
                   Spacer(),
                   Align(

@@ -947,9 +947,6 @@ class _addInfoState extends State<NavigatorAdd> {
         onStepTapped: (step) => setState(() {
           currentStep = step;
         }),
-        /*controlsBuilder: (context, {onStepContinue, onStepCancel}) {
-            return Container(child: null);
-          }*/
       ),
     );
   }

@@ -141,7 +141,7 @@ class WidgetList extends StatelessWidget {
             ),
           ), */
                 ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 60, height: 40),
+                  constraints: BoxConstraints.tightFor(width: 50, height: 40),
                   child: ElevatedButton(
                     onPressed: () {
                       showDialog(
@@ -272,7 +272,7 @@ class WidgetList extends StatelessWidget {
                         ImageIcon(
                           AssetImage("assets/icons/information.png"),
                           color: Colors.black,
-                          size: 25,
+                          size: 18,
                         ),
                       ],
                     ),
