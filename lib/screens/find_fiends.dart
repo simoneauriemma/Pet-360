@@ -1,22 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/model/map_style.dart';
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
+import 'package:geocoding/geocoding.dart';
 import 'home_screen.dart';
-//import 'package:geolocator/geolocator.dart';
 
 class FindFriends extends StatefulWidget {
   const FindFriends({Key? key}) : super(key: key);
@@ -26,16 +26,13 @@ class FindFriends extends StatefulWidget {
 }
 
 class _FindFriendsState extends State<FindFriends> {
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
   Set<Marker> _markers = {};
   late GoogleMapController _controller;
   Future<List<ViewAnimalsHome>>? animalList;
   final _auth = FirebaseAuth.instance;
-  //static LatLng _initialPosition = LatLng(37.42796133580664, -122.085749655962);
-  double x = 37.42796133580664,y = -122.085749655962;
+  LatLng _initialPosition = LatLng(37.42796133580664, -122.085749655962);
+  late CameraPosition _kGooglePlex;
+  int count = 0;
 
   @override
   void initState() {
@@ -43,13 +40,17 @@ class _FindFriendsState extends State<FindFriends> {
     final uid = _auth.currentUser!.uid;
     animalList = fetchAnimals(
         UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
-    //_getUserLocation();
+    _getUserLocation();
   }
 
   @override
   Widget build(BuildContext context) => FutureBuilder<List<ViewAnimalsHome>>(
       future: animalList,
       builder: (context, snapshot) {
+        _kGooglePlex = CameraPosition(
+          target: _initialPosition,
+          zoom: 14.4746,
+        );
         if (snapshot.hasData) {
           return Scaffold(
               appBar: AppBar(
@@ -89,11 +90,11 @@ class _FindFriendsState extends State<FindFriends> {
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
-                            setMarker(context,snapshot.data![index],x,y);
+                            setMarker(context,snapshot.data![index],_initialPosition.latitude,_initialPosition.longitude);
                             return GestureDetector(
                               onTap: () {
                                 _controller.moveCamera(
-                                    CameraUpdate.newLatLng(LatLng(37.413175077529935, -122.10101041942836)));
+                                    CameraUpdate.newLatLng(_initialPosition));
                               },
                               child: Container(
                                 width: 100,
@@ -199,23 +200,52 @@ class _FindFriendsState extends State<FindFriends> {
         }
       });
 
-  /*void _getUserLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  void _getUserLocation() async {
+    Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    _initialPosition = LatLng(position.latitude, position.longitude);
+    _controller.moveCamera(
+        CameraUpdate.newLatLng(_initialPosition));
     setState(() {
       _initialPosition = LatLng(position.latitude, position.longitude);
     });
-  }*/
+  }
+
+  Future<String> _getAddressFromLatLng(dynamic x, dynamic y) async {
+    try {
+      List<Placemark> p = await placemarkFromCoordinates(
+          x, y);
+      Placemark place = p[0];
+      return  "${place.locality}, ${place.country}";
+    } catch (e) {
+      return 'No address found';
+    }
+  }
 
   setMarker(context,data,x,y) async{
+    count++;
+    double convertedX = 0;
+    double convertedY = 0;
+    if(count == 100){
+      Random random = Random();
+      String doubleNumberX = "0.000"+random.nextInt(10).toString();
+      String doubleNumberY = "0.000"+random.nextInt(10).toString();
+      convertedX = double.parse(doubleNumberX);
+      convertedY = double.parse(doubleNumberY);
+      _initialPosition = LatLng(x+convertedX, y+convertedY);
+      count = 0;
+    }
+    String street = await _getAddressFromLatLng(x+convertedX,y+convertedY);
+
     Marker marker;
     marker = Marker(
       markerId: MarkerId(data.animalName.toString()),
-      position: LatLng(x, y),
+      position: LatLng(x+convertedX, y+convertedY),
       icon: await _getAssetIcon(context, data.pathImg.toString())
           .then((value) => value),
       infoWindow: InfoWindow(
         title: data.animalName.toString(),
-        snippet: 'Street 6 . 2min ago',
+        snippet: street,
       ),
     );
     setState(() {
