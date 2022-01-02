@@ -840,15 +840,17 @@ class _addInfoState extends State<NavigatorAdd> {
                           height: 40,
                         ),
                         Text(
-                          "Dispositivi disponibili:\n(CLICCA PER AGGIUNGERE)",
+                          "Dispositivi disponibili:",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 15, fontStyle: FontStyle.italic),
+                              fontSize: 16, fontStyle: FontStyle.italic),
                         ),
                         SizedBox(
                           height: 30,
                         ),
-                        ElevatedButton(
+                        Stack(alignment: AlignmentDirectional.topCenter,
+                        children:[                        
+                          ElevatedButton(
                           child: Text("AirTag1"),
                           style: ElevatedButton.styleFrom(
                             onPrimary: Colors.black,
@@ -870,12 +872,33 @@ class _addInfoState extends State<NavigatorAdd> {
                             airTag1 = "1 dispositivo"; //TODO DA CAMBIARE
                           },
                         ),
-                        ElevatedButton(
+                        Positioned(
+                        bottom: 5,
+                        left: 105,
+                        //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
+                        child: IconButton(onPressed: (){
+                          Fluttertoast.showToast(
+                                msg: "Dispositivo aggiunto correttamente!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.grey.shade200,
+                                textColor: Colors.black,
+                                fontSize: 15.0);
+                            airTag1 = "1 dispositivo";
+                        }, 
+                        icon: Icon(Icons.add_circle_rounded, size: 27, color: Colors.grey))
+                        ),
+                        ]
+                      ),
+
+                      Stack(alignment: AlignmentDirectional.topCenter,
+                        children:[                        
+                          ElevatedButton(
                           child: Text("AirTag2"),
                           style: ElevatedButton.styleFrom(
                             onPrimary: Colors.black,
                             primary: Colors.white,
-                            onSurface: Colors.grey,
                             elevation: 5,
                             minimumSize: Size(140, 40),
                             shape: RoundedRectangleBorder(
@@ -892,7 +915,29 @@ class _addInfoState extends State<NavigatorAdd> {
                                 fontSize: 15.0);
                             airTag2 = "2 dispositivo"; //TODO DA CAMBIARE
                           },
-                        )
+                        ),
+                        Positioned(
+                        bottom: 5,
+                        left: 105,
+                        //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
+                        child: IconButton(onPressed: (){
+                          Fluttertoast.showToast(
+                                msg: "Dispositivo aggiunto correttamente!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.grey.shade200,
+                                textColor: Colors.black,
+                                fontSize: 15.0);
+                            airTag2 = "2 dispositivo";
+                        }, 
+                        icon: Icon(Icons.add_circle_rounded, size: 27, color: Colors.grey))
+                        ),
+                        
+                        ]
+                      ),
+                      
+                        
                       ],
                     )),
                 SizedBox(height: 40),
