@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/appbackground.dart';
 import 'package:pet360/model/view_animals_home.dart';
@@ -59,14 +60,24 @@ class _DashboardState extends State<Dashboard> {
                             height: size.height * 0.3 - 27,
                             child: Row(
                               children: <Widget>[
-                                Text(
-                                  "Benvenuto!",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
+                                Column(
+                                  children: [
+                                    Padding(padding: EdgeInsets.only(top: 60)),
+                                    Text(
+                                      "Benvenuto!",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5!
+                                          .copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      _firstName,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ],
                                 ),
                                 Spacer(),
                                 Stack(
@@ -219,14 +230,21 @@ class _DashboardState extends State<Dashboard> {
                           height: size.height * 0.3 - 27,
                           child: Row(
                             children: <Widget>[
-                              Text(
-                                "Benvenuto!",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .copyWith(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                              Column(
+                                children: [
+                                  Padding(padding: EdgeInsets.only(top: 60)),
+                                  Text(
+                                    "Benvenuto",
+                                    style: GoogleFonts.questrial(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    _firstName,
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
                               ),
                               Spacer(),
                               Stack(

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:pet360/model/interface_model.dart';
@@ -259,7 +260,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: const Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Salva",
+                    "Salva le modifiche",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18),
                   ),
@@ -403,72 +404,110 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 backgroundColor: Colors.transparent,
                 body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(36.0),
-                    child: Form(
-                        key: _formkey,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              SizedBox(height: 20),
-                              Align(
-                                  alignment: Alignment.center,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey.shade300,
-                                              width: 3),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(100)),
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        child: ClipOval(
-                                          child: pickedImage != null
-                                              ? Image.file(
-                                                  pickedImage!,
-                                                  width: 100,
-                                                  height: 100,
-                                                  fit: BoxFit.cover,
-                                                )
-                                              :
-                                              //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                              SizedBox(
-                                                  child: Image.asset(
-                                                      "assets/icons/user_default.png"),
-                                                ),
-                                        ),
+                  //child: Padding
+                  //padding: const EdgeInsets.all(36.0),
+                  child: Form(
+                      key: _formkey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(height: 20),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 3),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(100)),
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: ClipOval(
+                                      child: pickedImage != null
+                                          ? Image.file(
+                                              pickedImage!,
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
+                                            )
+                                          :
+                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                          SizedBox(
+                                              child: Image.asset(
+                                                  "assets/icons/user_default.png"),
+                                            ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 2,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        imagePickerOption();
+                                      },
+                                      icon: const Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.black,
+                                        size: 35,
                                       ),
-                                      Positioned(
-                                        bottom: 0,
-                                        right: 2,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            imagePickerOption();
-                                          },
-                                          icon: const Icon(
-                                            Icons.camera_alt,
-                                            color: Colors.black45,
-                                            size: 25,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              SizedBox(height: 50),
-                              nameField,
-                              SizedBox(height: 20),
-                              surnameField,
-                              SizedBox(height: 20),
-                              emailField,
-                              SizedBox(height: 20),
-                              cityField,
-                              SizedBox(height: 30),
-                              modifyButton,
-                            ])),
-                  ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(padding: EdgeInsets.only(bottom: 10)),
+                            Text(
+                              snapshot.data!.getFirstName() +
+                                  " " +
+                                  snapshot.data!.getSurnameName(),
+                              style: GoogleFonts.questrial(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Padding(padding: EdgeInsets.only(bottom: 30)),
+                            Container(
+                                padding: EdgeInsets.only(top: 20),
+                                width: MediaQuery.of(context).size.width * 1.2,
+                                height: 500,
+                                //sfondo con sfocatura
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 50),
+                                    SizedBox(width: 320, child: nameField),
+                                    SizedBox(height: 20),
+                                    SizedBox(width: 320, child: surnameField),
+                                    SizedBox(height: 20),
+                                    SizedBox(width: 320, child: emailField),
+                                    SizedBox(height: 20),
+                                    SizedBox(width: 320, child: cityField),
+                                    SizedBox(height: 30),
+                                    SizedBox(width: 320, child: modifyButton),
+                                    SizedBox(height: 20),
+                                  ],
+                                )),
+                          ])),
                 ),
               );
             }
@@ -566,90 +605,122 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(36.0),
                     child: Form(
-                      key: _formkey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Align(
-                              alignment: Alignment.center,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300,
-                                          width: 3),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(100)),
-                                      color: Colors.grey.shade200,
-                                    ),
-                                    child: ClipOval(
-                                      child: pickedImage != null
-                                          ? Image.file(
-                                              pickedImage!,
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.cover,
-                                            )
-                                          :
-                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                          SizedBox(
-                                              width: 100.0,
-                                              height: 100.0,
-                                              child: Image.asset(
-                                                  "assets/icons/user_default.png"),
-                                            ),
-                                    ),
+                    key: _formkey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: 20),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade300, width: 3),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
+                                  color: Colors.grey.shade200,
+                                ),
+                                child: ClipOval(
+                                  child: pickedImage != null
+                                      ? Image.file(
+                                          pickedImage!,
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        )
+                                      :
+                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                      SizedBox(
+                                          child: Image.asset(
+                                              "assets/icons/user_default.png"),
+                                        ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                right: 2,
+                                child: IconButton(
+                                  onPressed: () {
+                                    imagePickerOption();
+                                  },
+                                  icon: const Icon(
+                                    Icons.camera_alt,
+                                    color: Colors.black,
+                                    size: 35,
                                   ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 2,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        imagePickerOption();
-                                      },
-                                      icon: const Icon(
-                                        Icons.camera_alt,
-                                        color: Colors.black45,
-                                        size: 25,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                          SizedBox(height: 50),
-                          nameField,
-                          SizedBox(height: 20),
-                          surnameField,
-                          SizedBox(height: 20),
-                          emailField,
-                          SizedBox(height: 20),
-                          cityField,
-                          SizedBox(height: 30),
-                          Text(
-                            "Informazioni aggiuntive",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 20),
-                          phoneNumber,
-                          SizedBox(height: 20),
-                          nameShop,
-                          SizedBox(height: 20),
-                          cityShop,
-                          SizedBox(height: 20),
-                          addressShop,
-                          SizedBox(height: 30),
-                          modifyButton,
-                          SizedBox(height: 60),
-                        ],
-                      ),
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 10)),
+                        Text(
+                          snapshot.data!.getFirstName() +
+                              " " +
+                              snapshot.data!.getSurnameName(),
+                          style: GoogleFonts.questrial(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 30)),
+                        Container(
+                            padding: EdgeInsets.only(top: 20),
+                            width: MediaQuery.of(context).size.width * 1.2,
+                            height: 850,
+                            //sfondo con sfocatura
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 50),
+                                SizedBox(width: 320, child: nameField),
+                                SizedBox(height: 20),
+                                SizedBox(width: 320, child: surnameField),
+                                SizedBox(height: 20),
+                                SizedBox(width: 320, child: emailField),
+                                SizedBox(height: 20),
+                                SizedBox(width: 320, child: cityField),
+                                SizedBox(height: 20),
+                                Padding(padding: EdgeInsets.only(top: 20)),
+                                Text(
+                                  "Informazioni aggiuntive",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                SizedBox(width: 320, child: nameShop),
+                                SizedBox(height: 30),
+                                SizedBox(width: 320, child: cityShop),
+                                SizedBox(height: 30),
+                                SizedBox(width: 320, child: phoneNumber),
+                                SizedBox(height: 30),
+                                SizedBox(width: 320, child: addressShop),
+                                SizedBox(height: 30),
+                                SizedBox(width: 320, child: modifyButton),
+                                SizedBox(height: 30),
+                              ],
+                            )),
+                      ],
                     ),
                   ),
                 ),
@@ -676,95 +747,120 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(36.0),
                     child: Form(
-                      key: _formkey,
-                      child: Column(
+                    key: _formkey,
+                    child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
+                          SizedBox(height: 20),
                           Align(
-                              alignment: Alignment.center,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300,
-                                          width: 3),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(100)),
-                                      color: Colors.grey.shade200,
-                                    ),
-                                    child: ClipOval(
-                                      child: pickedImage != null
-                                          ? Image.file(
-                                              pickedImage!,
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.cover,
-                                            )
-                                          :
-                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                          SizedBox(
-                                              width: 100.0,
-                                              height: 100.0,
-                                              child: Image.asset(
-                                                  "assets/icons/user_default.png"),
-                                            ),
+                            alignment: Alignment.center,
+                            child: Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey.shade300, width: 3),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(100)),
+                                    color: Colors.grey.shade200,
+                                  ),
+                                  child: ClipOval(
+                                    child: pickedImage != null
+                                        ? Image.file(
+                                            pickedImage!,
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.cover,
+                                          )
+                                        :
+                                        //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                        SizedBox(
+                                            child: Image.asset(
+                                                "assets/icons/user_default.png"),
+                                          ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 2,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      imagePickerOption();
+                                    },
+                                    icon: const Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.black,
+                                      size: 35,
                                     ),
                                   ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 2,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        imagePickerOption();
-                                      },
-                                      icon: const Icon(
-                                        Icons.camera_alt,
-                                        color: Colors.black45,
-                                        size: 25,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                          SizedBox(height: 50),
-                          nameField,
-                          SizedBox(height: 20),
-                          surnameField,
-                          SizedBox(height: 20),
-                          emailField,
-                          SizedBox(height: 20),
-                          cityField,
-                          SizedBox(height: 30),
-                          Text(
-                            "Informazioni aggiuntive",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(height: 20),
-                          phoneNumber,
-                          SizedBox(height: 20),
-                          nameShop,
-                          SizedBox(height: 20),
-                          cityShop,
-                          SizedBox(height: 20),
-                          addressShop,
-                          SizedBox(height: 30),
-                          modifyButton,
-                          SizedBox(height: 60),
-                        ],
-                      ),
-                    ),
+                          Padding(padding: EdgeInsets.only(bottom: 10)),
+                          Text(
+                            snapshot.data!.getFirstName() +
+                                " " +
+                                snapshot.data!.getSurnameName(),
+                            style: GoogleFonts.questrial(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: 30)),
+                          Container(
+                              padding: EdgeInsets.only(top: 20),
+                              width: MediaQuery.of(context).size.width,
+                              height: 800,
+                              //sfondo con sfocatura
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 50),
+                                  SizedBox(width: 320, child: nameField),
+                                  SizedBox(height: 20),
+                                  SizedBox(width: 320, child: surnameField),
+                                  SizedBox(height: 20),
+                                  SizedBox(width: 320, child: emailField),
+                                  SizedBox(height: 20),
+                                  SizedBox(width: 320, child: cityField),
+                                  SizedBox(height: 20),
+                                  Text("Informazioni aggiuntive"),
+                                  SizedBox(width: 320, child: nameShop),
+                                  SizedBox(height: 30),
+                                  SizedBox(width: 320, child: cityShop),
+                                  SizedBox(height: 30),
+                                  SizedBox(width: 320, child: phoneNumber),
+                                  SizedBox(height: 30),
+                                  SizedBox(width: 320, child: addressShop),
+                                  SizedBox(height: 30),
+                                  SizedBox(width: 320, child: modifyButton),
+                                ],
+                              )),
+                        ]),
                   ),
                 ),
               );
             }
+
             return Scaffold(
               backgroundColor: Colors.transparent,
               appBar: AppBar(
@@ -784,26 +880,116 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(36.0),
-                  child: Form(
-                    key: _formkey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: 50),
-                        nameField,
-                        SizedBox(height: 20),
-                        surnameField,
-                        SizedBox(height: 20),
-                        emailField,
-                        SizedBox(height: 30),
-                        cityField,
-                        SizedBox(height: 20),
-                        modifyButton,
-                      ],
-                    ),
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: 20),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.grey.shade300, width: 3),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(100)),
+                                color: Colors.grey.shade200,
+                              ),
+                              child: ClipOval(
+                                child: pickedImage != null
+                                    ? Image.file(
+                                        pickedImage!,
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      )
+                                    :
+                                    //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                    SizedBox(
+                                        child: Image.asset(
+                                            "assets/icons/user_default.png"),
+                                      ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 2,
+                              child: IconButton(
+                                onPressed: () {
+                                  imagePickerOption();
+                                },
+                                icon: const Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.black,
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 10)),
+                      Text(
+                        snapshot.data!.getFirstName() +
+                            " " +
+                            snapshot.data!.getSurnameName(),
+                        style: GoogleFonts.questrial(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 30)),
+                      Container(
+                          padding: EdgeInsets.only(top: 20),
+                          width: MediaQuery.of(context).size.width * 1.2,
+                          height: 850,
+                          //sfondo con sfocatura
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 50),
+                              SizedBox(width: 320, child: nameField),
+                              SizedBox(height: 20),
+                              SizedBox(width: 320, child: surnameField),
+                              SizedBox(height: 20),
+                              SizedBox(width: 320, child: emailField),
+                              SizedBox(height: 20),
+                              SizedBox(width: 320, child: cityField),
+                              SizedBox(height: 20),
+                              Text("Informazioni aggiuntive"),
+                              SizedBox(width: 320, child: nameShop),
+                              SizedBox(height: 30),
+                              SizedBox(width: 320, child: cityShop),
+                              SizedBox(height: 30),
+                              SizedBox(width: 320, child: phoneNumber),
+                              SizedBox(height: 30),
+                              SizedBox(width: 320, child: addressShop),
+                              SizedBox(height: 30),
+                              SizedBox(width: 320, child: modifyButton),
+                              SizedBox(height: 30),
+                            ],
+                          )),
+                    ],
                   ),
                 ),
               ),

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet360/model/new_vaccine.dart';
 import 'package:pet360/screens/home_screen.dart';
@@ -49,10 +50,12 @@ class _addInfoState extends State<NavigatorAdd> {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
+  final style = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+
   @override
   void initState() {
     super.initState();
-    if(pickedImage == null){
+    if (pickedImage == null) {
       pickedImage = File("/data/user/0/com.example.pet360/cache/dog.png");
     }
   }
@@ -183,8 +186,10 @@ class _addInfoState extends State<NavigatorAdd> {
                           Text(
                             "DATI LIBRETTO ANIMALE",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                            style: GoogleFonts.questrial(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           SizedBox(
                             height: 30,
@@ -227,8 +232,8 @@ class _addInfoState extends State<NavigatorAdd> {
                                       },
                                       icon: const Icon(
                                         Icons.camera_alt,
-                                        color: Colors.black45,
-                                        size: 25,
+                                        color: Colors.black,
+                                        size: 35,
                                       ),
                                     ),
                                   ),
@@ -404,7 +409,10 @@ class _addInfoState extends State<NavigatorAdd> {
                   Text(
                     "LISTA VACCINI",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.questrial(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -415,7 +423,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(padding: EdgeInsets.only(top: 15)),
-                        Text(
+                        const Text(
                           "Aggiungi un vaccino",
                           style: TextStyle(
                               fontSize: 15,
@@ -431,6 +439,10 @@ class _addInfoState extends State<NavigatorAdd> {
                                   title: Text(
                                     "Aggiungi informazioni sul vaccino",
                                     textAlign: TextAlign.center,
+                                    style: GoogleFonts.questrial(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
@@ -516,7 +528,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                 "Farmaco somministrato",
                                               )),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         SizedBox(
@@ -539,7 +551,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                 labelText: "Nome veterinario",
                                               )),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 40,
                                         ),
                                         ConstrainedBox(
@@ -571,13 +583,17 @@ class _addInfoState extends State<NavigatorAdd> {
                                                   MainAxisAlignment.center,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
-                                              children: const [
-                                                Text("Aggiungi  "),
-                                                ImageIcon(
-                                                  AssetImage(
-                                                      "assets/icons/save.png"),
-                                                  color: Colors.black,
-                                                  size: 17,
+                                              children: [
+                                                Text("Aggiungi  ",
+                                                    style:
+                                                        GoogleFonts.questrial(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    )),
+                                                Icon(
+                                                  Icons.save_rounded,
+                                                  size: 20,
                                                 ),
                                               ],
                                             ),
@@ -697,8 +713,10 @@ class _addInfoState extends State<NavigatorAdd> {
                     Text(
                       "PASSAPORTO ANIMALE",
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.questrial(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     SizedBox(
                       height: 20,
@@ -743,7 +761,7 @@ class _addInfoState extends State<NavigatorAdd> {
                             labelText: "N° microchip",
                           )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
 
@@ -776,7 +794,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       ),
                     ),
 
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
 
@@ -831,10 +849,12 @@ class _addInfoState extends State<NavigatorAdd> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "LOCALIZZAZIONE",
+                          "DISPOSITIVI PER LA GEOLOCALIZZAZIONE",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.questrial(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         SizedBox(
                           height: 40,
@@ -877,18 +897,20 @@ class _addInfoState extends State<NavigatorAdd> {
                         left: 105,
                         //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
                         child: IconButton(onPressed: (){
-                          Fluttertoast.showToast(
-                                msg: "Dispositivo aggiunto correttamente!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.grey.shade200,
-                                textColor: Colors.black,
-                                fontSize: 15.0);
-                            airTag1 = "1 dispositivo";
-                        }, 
-                        icon: Icon(Icons.add_circle_rounded, size: 27, color: Colors.grey))
-                        ),
+                                        Fluttertoast.showToast(
+                                            msg:
+                                                "Dispositivo aggiunto correttamente!",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.BOTTOM,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor:
+                                                Colors.grey.shade200,
+                                            textColor: Colors.black,
+                                            fontSize: 15.0);
+                                        airTag1 = "1 dispositivo";
+                                      },
+                                      icon: Icon(Icons.add_circle_rounded,
+                                          size: 25, color: Colors.black))),
                         ]
                       ),
 
@@ -921,18 +943,20 @@ class _addInfoState extends State<NavigatorAdd> {
                         left: 105,
                         //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
                         child: IconButton(onPressed: (){
-                          Fluttertoast.showToast(
-                                msg: "Dispositivo aggiunto correttamente!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.grey.shade200,
-                                textColor: Colors.black,
-                                fontSize: 15.0);
-                            airTag2 = "2 dispositivo";
-                        }, 
-                        icon: Icon(Icons.add_circle_rounded, size: 27, color: Colors.grey))
-                        ),
+                                        Fluttertoast.showToast(
+                                            msg:
+                                                "Dispositivo aggiunto correttamente!",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.BOTTOM,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor:
+                                                Colors.grey.shade200,
+                                            textColor: Colors.black,
+                                            fontSize: 15.0);
+                                        airTag2 = "2 dispositivo";
+                                      },
+                                      icon: Icon(Icons.add_circle_rounded,
+                                          size: 25, color: Colors.black))),
                         
                         ]
                       ),
