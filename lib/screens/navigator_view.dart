@@ -944,22 +944,28 @@ class _viewInfoState extends State<NavigatorView> {
                     dataMicrochipController.text = "";
                     enteController.text = "";
                   },
+                 child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(
+                    width: MediaQuery.of(context).size.width, height: 50),
+                child: const Align(
+                  alignment: Alignment.center,
                   child: Text(
                     "Salva tutto",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18),
                   ),
+                ),
+              ),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.lightGreen.shade300,
-                    //side: BorderSide(color: Colors.grey.shade300, width: 2),
-                    elevation: 5,
-                    minimumSize: Size(400, 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
+                onPrimary: Colors.black,
+                primary: Colors.white,
+                onSurface: Colors.grey,
+                side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
+                elevation: 5,
+                //minimumSize: Size(100, 40),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+              ),
                 ),
               ],
             )),

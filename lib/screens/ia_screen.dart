@@ -140,21 +140,28 @@ Future classifyImage(image) async {
               onPressed: (){
                  selectImage();
               },
-              child: Text('Seleziona immagine',
-              textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(
+                    width: MediaQuery.of(context).size.width, height: 50),
+                child: const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Seleziona immagine",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.lightGreen.shade300,
-                    //side: BorderSide(color: Colors.grey.shade300, width: 2),
-                    elevation: 5,
-                    minimumSize: Size(320, 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.black,
+                primary: Colors.white,
+                onSurface: Colors.grey,
+                side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
+                elevation: 5,
+                //minimumSize: Size(100, 40),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+              ),
                 ),
                 SizedBox(height: 20),
                 SingleChildScrollView(
