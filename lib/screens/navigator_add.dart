@@ -46,7 +46,8 @@ class _addInfoState extends State<NavigatorAdd> {
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
   NewVaccine firstVaccine = NewVaccine();
   var jsonBody, airTag1, airTag2;
-  firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
 
   @override
   void initState() {
@@ -59,6 +60,8 @@ class _addInfoState extends State<NavigatorAdd> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text("Scegli immagine da: "),
             content: SingleChildScrollView(
               child: ListBody(
@@ -411,7 +414,10 @@ class _addInfoState extends State<NavigatorAdd> {
                         Padding(padding: EdgeInsets.only(top: 15)),
                         Text(
                           "Aggiungi un vaccino",
-                          style: TextStyle(fontSize: 15, color: Colors.black54, fontStyle: FontStyle.italic),
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.black54,
+                              fontStyle: FontStyle.italic),
                         ),
                         IconButton(
                           onPressed: () {
@@ -419,6 +425,13 @@ class _addInfoState extends State<NavigatorAdd> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
+                                  title: Text(
+                                    "Aggiungi informazioni sul vaccino",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: [
@@ -430,10 +443,10 @@ class _addInfoState extends State<NavigatorAdd> {
                                               keyboardType: TextInputType.name,
                                               onSaved: (value) {
                                                 tipoVaccinoController.text =
-                                                    value!;
+                                                value!;
                                               },
                                               textInputAction:
-                                                  TextInputAction.next,
+                                              TextInputAction.next,
 
                                               //Tipo vaccino
                                               decoration: InputDecoration(
@@ -455,14 +468,14 @@ class _addInfoState extends State<NavigatorAdd> {
                                               dataSommController.text = value!;
                                             },
                                             textInputAction:
-                                                TextInputAction.next,
+                                            TextInputAction.next,
 
                                             //Data somministrazione vaccino
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.transparent,
                                               labelText:
-                                                  "Data somministrazione",
+                                              "Data somministrazione",
                                             ),
                                             onTap: () async {
                                               var date = await showDatePicker(
@@ -487,17 +500,17 @@ class _addInfoState extends State<NavigatorAdd> {
                                               keyboardType: TextInputType.name,
                                               onSaved: (value) {
                                                 farmacoSommController.text =
-                                                    value!;
+                                                value!;
                                               },
                                               textInputAction:
-                                                  TextInputAction.next,
+                                              TextInputAction.next,
 
                                               //Farmaco somministrato
                                               decoration: InputDecoration(
                                                 filled: true,
                                                 fillColor: Colors.transparent,
                                                 labelText:
-                                                    "Farmaco somministrato",
+                                                "Farmaco somministrato",
                                               )),
                                         ),
                                         SizedBox(
@@ -511,10 +524,10 @@ class _addInfoState extends State<NavigatorAdd> {
                                               keyboardType: TextInputType.name,
                                               onSaved: (value) {
                                                 nomeVeterController.text =
-                                                    value!;
+                                                value!;
                                               },
                                               textInputAction:
-                                                  TextInputAction.next,
+                                              TextInputAction.next,
 
                                               //Nome veterinario
                                               decoration: InputDecoration(
@@ -526,53 +539,56 @@ class _addInfoState extends State<NavigatorAdd> {
                                         SizedBox(
                                           height: 40,
                                         ),
-                                    ConstrainedBox(
-                                      constraints: BoxConstraints.tightFor(
-                                          width: 120, height: 40),
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            debugPrint("Add new vax");
-                                            NewVaccine tmp = NewVaccine();
-                                            tmp.veterinaryName =
-                                                nomeVeterController.text;
-                                            tmp.date = dataSommController.text;
-                                            tmp.vaccineType =
-                                                tipoVaccinoController.text;
-                                            tmp.medicine =
-                                                farmacoSommController.text;
-                                            lstVaccines.add(tmp);
-                                            nomeVeterController.text = "";
-                                            dataSommController.text = "";
-                                            tipoVaccinoController.text = "";
-                                            farmacoSommController.text = "";
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pop();
-                                          },
-
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: const [
-                                              Text("Aggiungi  "),
-                                              ImageIcon(
-                                                AssetImage(
-                                                    "assets/icons/save.png"),
-                                                color: Colors.black,
-                                                size: 17,
-                                              ),
-                                            ],
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            onPrimary: Colors.black,
-                                            primary: Colors.white,
-                                            alignment: Alignment.center,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15)),
+                                        ConstrainedBox(
+                                          constraints: BoxConstraints.tightFor(
+                                              width: 120, height: 40),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              debugPrint("Add new vax");
+                                              NewVaccine tmp = NewVaccine();
+                                              tmp.veterinaryName =
+                                                  nomeVeterController.text;
+                                              tmp.date =
+                                                  dataSommController.text;
+                                              tmp.vaccineType =
+                                                  tipoVaccinoController.text;
+                                              tmp.medicine =
+                                                  farmacoSommController.text;
+                                              lstVaccines.add(tmp);
+                                              nomeVeterController.text = "";
+                                              dataSommController.text = "";
+                                              tipoVaccinoController.text = "";
+                                              farmacoSommController.text = "";
+                                              Navigator.of(context,
+                                                      rootNavigator: true)
+                                                  .pop();
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: const [
+                                                Text("Aggiungi  "),
+                                                ImageIcon(
+                                                  AssetImage(
+                                                      "assets/icons/save.png"),
+                                                  color: Colors.black,
+                                                  size: 17,
+                                                ),
+                                              ],
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                              onPrimary: Colors.black,
+                                              primary: Colors.white,
+                                              alignment: Alignment.center,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                            ),
                                           ),
                                         ),
-                                    ),
                                       ],
                                     ),
                                   ),
@@ -834,8 +850,6 @@ class _addInfoState extends State<NavigatorAdd> {
                           style: ElevatedButton.styleFrom(
                             onPrimary: Colors.black,
                             primary: Colors.white,
-                            side:
-                                BorderSide(color: Colors.lightGreen, width: 1),
                             elevation: 5,
                             minimumSize: Size(140, 40),
                             shape: RoundedRectangleBorder(
@@ -859,8 +873,6 @@ class _addInfoState extends State<NavigatorAdd> {
                             onPrimary: Colors.black,
                             primary: Colors.white,
                             onSurface: Colors.grey,
-                            side:
-                                BorderSide(color: Colors.lightGreen, width: 1),
                             elevation: 5,
                             minimumSize: Size(140, 40),
                             shape: RoundedRectangleBorder(
@@ -905,6 +917,55 @@ class _addInfoState extends State<NavigatorAdd> {
                     dataMicrochipController.text = "";
                     enteController.text = "";
                   },
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(
+                        width: MediaQuery.of(context).size.width, height: 50),
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Salva tutto",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.black,
+                    primary: Colors.white,
+                    onSurface: Colors.grey,
+                    side:
+                        BorderSide(color: Colors.lightGreen.shade200, width: 2),
+                    elevation: 5,
+//minimumSize: Size(100, 40),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
+                ),
+
+                /*ElevatedButton(
+                  onPressed: () {
+                    saveData(
+                        nameController.text,
+                        dataController.text,
+                        specieController.text,
+                        razzaController.text,
+                        coloreController.text,
+                        veterinarioController.text,
+                        descrizioneController.text,
+                        microchipController.text,
+                        dataMicrochipController.text,
+                        enteController.text);
+                    nameController.text = "";
+                    dataController.text = "";
+                    specieController.text = "";
+                    razzaController.text = "";
+                    coloreController.text = "";
+                    veterinarioController.text = "";
+                    descrizioneController.text = "";
+                    microchipController.text = "";
+                    dataMicrochipController.text = "";
+                    enteController.text = "";
+                  },
                   child: Text(
                     "Salva tutto",
                     textAlign: TextAlign.center,
@@ -921,7 +982,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                   ),
-                ),
+                ), */
               ],
             )),
       ];
@@ -961,7 +1022,7 @@ class _addInfoState extends State<NavigatorAdd> {
 
     try {
       await firebase_storage.FirebaseStorage.instance
-          .ref('uploads/'+filePath.split("/").last)
+          .ref('uploads/' + filePath.split("/").last)
           .putFile(file);
     } on firebase_storage.FirebaseException catch (e) {
       // e.g, e.code == 'canceled'
@@ -984,7 +1045,7 @@ class _addInfoState extends State<NavigatorAdd> {
       path = pickedImage!.path;
       uploadFile(path);
     }
-    if(path == ""){
+    if (path == "") {
       path = "/data/user/0/com.example.pet360/cache/dog.png";
     }
 

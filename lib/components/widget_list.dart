@@ -148,7 +148,9 @@ class WidgetList extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            //title: Text("Informazioni"),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(32.0))),
                             content: Container(
                               height: 190.0,
                               child: Column(

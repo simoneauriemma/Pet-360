@@ -5,7 +5,6 @@ import 'package:getwidget/getwidget.dart';
 import 'package:pet360/components/appbackground.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/screens/registration_screen.dart';
-import 'package:pet360/utils/usersharedpreferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -96,7 +95,7 @@ void initializeFlutterFire() async {
       ),
     );
 
-    final loginButton = Material(
+    /* final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(20),
       color: Colors.lightGreen.shade300,
@@ -112,6 +111,33 @@ void initializeFlutterFire() async {
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
+      ),
+    ); */
+
+    final loginButton = ElevatedButton(
+      onPressed: () {
+        SignIn(emailController.text, passwordController.text);
+      },
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(
+            width: MediaQuery.of(context).size.width, height: 50),
+        child: const Align(
+          alignment: Alignment.center,
+          child: Text(
+            "Login",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        onPrimary: Colors.black,
+        primary: Colors.white,
+        onSurface: Colors.grey,
+        side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
+        elevation: 5,
+        //minimumSize: Size(100, 40),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
     );
 

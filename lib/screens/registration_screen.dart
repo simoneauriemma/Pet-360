@@ -186,7 +186,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         hintText: "Città",
       ),
     );
-    final regButton = Material(
+
+    /*final regButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(20),
       color: Colors.lightGreen.shade300,
@@ -219,6 +220,47 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
+      ),
+    ); */
+
+    final regButton = ElevatedButton(
+      onPressed: () {
+        var typeOfUser;
+        if (checkBoxChecked) {
+          typeOfUser = "Veterinario";
+        } else if (checkBoxChecked2) {
+          typeOfUser = "Addestratore";
+        } else {
+          typeOfUser = "Utente";
+        }
+        SignUp(
+            emailController.text,
+            passwordController.text,
+            nameController.text,
+            surnameController.text,
+            cityController.text,
+            typeOfUser);
+      },
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(
+            width: MediaQuery.of(context).size.width, height: 50),
+        child: const Align(
+          alignment: Alignment.center,
+          child: Text(
+            "Registrazione",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        onPrimary: Colors.black,
+        primary: Colors.white,
+        onSurface: Colors.grey,
+        side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
+        elevation: 5,
+        //minimumSize: Size(100, 40),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
     );
 

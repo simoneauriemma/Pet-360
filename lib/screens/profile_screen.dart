@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -16,7 +15,6 @@ import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
 import 'home_screen.dart';
 import 'login_screen.dart';
 
@@ -217,7 +215,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
 
-            final logoutButton = ElevatedButton(
+            final logout1Button = ElevatedButton(
               onPressed: () {
                 LogOut();
               },
@@ -243,7 +241,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
 
-            final modifyButton = Material(
+            final modifyButton = ElevatedButton(
+              onPressed: () {
+                Modify(
+                    nameController.text,
+                    surnameController.text,
+                    emailController.text,
+                    cityController.text,
+                    phoneNumberController.text,
+                    nameShopController.text,
+                    cityShopController.text,
+                    addressShopController.text);
+              },
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(
+                    width: MediaQuery.of(context).size.width, height: 50),
+                child: const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Salva",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.black,
+                primary: Colors.white,
+                onSurface: Colors.grey,
+                side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
+                elevation: 5,
+                //minimumSize: Size(100, 40),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+              ),
+            );
+            /*final modifyButton = Material(
               elevation: 5,
               borderRadius: BorderRadius.circular(20),
               color: Colors.lightGreen.shade300,
@@ -270,42 +303,95 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-            );
-
-            final cancellaAccount = ElevatedButton(
-              onPressed: () {
+            ); */
+            final cancellaAccount = GestureDetector(
+              onTap: () {
                 eliminateAccount();
               },
               child: Row(
                 children: const [
-                  Text("Cancella account  "),
+                  Text(
+                    "Cancella account  ",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18),
+                  ),
                   ImageIcon(
-                    AssetImage("assets/icons/logout.png"),
+                    AssetImage("assets/icons/delete.png"),
                     color: Colors.black,
-                    size: 15,
+                    size: 22,
                   ),
                 ],
               ),
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white,
-                //onSurface: Colors.grey,
-                //side: BorderSide(color: Colors.lightGreen, width: 2),
-                //elevation: 5,
-                minimumSize: Size(120, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+            );
+
+            final logoutButton = GestureDetector(
+              onTap: () {
+                LogOut();
+              },
+              child: Row(
+                children: const [
+                  Text(
+                    "Logout  ",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  ImageIcon(
+                    AssetImage("assets/icons/logout.png"),
+                    color: Colors.black,
+                    size: 18,
+                  ),
+                ],
               ),
+            );
+
+            final btnImpostazioni = IconButton(
+              //key: btnKey,
+              icon: Icon(Icons.build_circle_sharp),
+              iconSize: 30,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(32.0))),
+                      title: Text(
+                        "Impostazioni",
+                        textAlign: TextAlign.center,
+                      ),
+                      content: Container(
+                        height: 100.0,
+                        child: Column(
+                          children: [
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            logoutButton,
+                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                            const Divider(
+                              color: Colors.black,
+                              height: 3,
+                            ),
+                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                            cancellaAccount,
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
             );
 
             if (UserSharedPreferences.getTypeOfUser().toString() == "Utente") {
               return Scaffold(
-                backgroundColor: Colors.transparent,
                 appBar: AppBar(
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Colors.white,
+                  elevation: 4,
                   title: Text("Profilo"),
                   centerTitle: true,
-                  elevation: 0,
+                  actions: <Widget>[
+                    btnImpostazioni,
+                  ],
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
@@ -314,6 +400,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   ),
                 ),
+                backgroundColor: Colors.transparent,
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(36.0),
@@ -323,14 +410,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: ConstrainedBox(
-                                  constraints: BoxConstraints.tightFor(
-                                      width: 100, height: 40),
-                                  child: logoutButton,
-                                ),
-                              ),
                               SizedBox(height: 20),
                               Align(
                                   alignment: Alignment.center,
@@ -356,8 +435,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               :
                                               //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
                                               SizedBox(
-                                                  width: 100.0,
-                                                  height: 100.0,
                                                   child: Image.asset(
                                                       "assets/icons/user_default.png"),
                                                 ),
@@ -379,7 +456,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ],
                                   )),
-                              SizedBox(height: 30),
+                              SizedBox(height: 50),
                               nameField,
                               SizedBox(height: 20),
                               surnameField,
@@ -387,11 +464,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               emailField,
                               SizedBox(height: 20),
                               cityField,
-                              SizedBox(height: 60),
+                              SizedBox(height: 30),
                               modifyButton,
-                              SizedBox(height: 20),
-                              cancellaAccount,
-                              SizedBox(height: 100),
                             ])),
                   ),
                 ),
@@ -476,16 +550,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  shadowColor: Colors.grey.shade200,
-                  /*shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20.0),
-                          bottomRight: Radius.circular(20.0)
-                      )
-                  ), */
+                  elevation: 4,
                   title: Text("Profilo"),
                   centerTitle: true,
-                  elevation: 4,
+                  actions: <Widget>[
+                    btnImpostazioni,
+                  ],
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
@@ -503,14 +573,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints.tightFor(
-                                  width: 100, height: 40),
-                              child: logoutButton,
-                            ),
-                          ),
                           Align(
                               alignment: Alignment.center,
                               child: Stack(
@@ -558,7 +620,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ],
                               )),
-                          SizedBox(height: 20),
+                          SizedBox(height: 50),
                           nameField,
                           SizedBox(height: 20),
                           surnameField,
@@ -582,11 +644,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           cityShop,
                           SizedBox(height: 20),
                           addressShop,
-                          SizedBox(height: 20),
+                          SizedBox(height: 30),
                           modifyButton,
-                          SizedBox(height: 20),
-                          cancellaAccount,
-                          SizedBox(height: 100),
+                          SizedBox(height: 60),
                         ],
                       ),
                     ),
@@ -600,16 +660,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  shadowColor: Colors.grey.shade200,
-                  /*shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20.0),
-                          bottomRight: Radius.circular(20.0)
-                      )
-                  ), */
+                  elevation: 4,
                   title: Text("Profilo"),
                   centerTitle: true,
-                  elevation: 4,
+                  actions: <Widget>[
+                    btnImpostazioni,
+                  ],
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
@@ -627,14 +683,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints.tightFor(
-                                  width: 100, height: 40),
-                              child: logoutButton,
-                            ),
-                          ),
                           Align(
                               alignment: Alignment.center,
                               child: Stack(
@@ -682,7 +730,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ],
                               )),
-                          SizedBox(height: 20),
+                          SizedBox(height: 50),
                           nameField,
                           SizedBox(height: 20),
                           surnameField,
@@ -706,10 +754,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           cityShop,
                           SizedBox(height: 20),
                           addressShop,
-                          SizedBox(height: 20),
+                          SizedBox(height: 30),
                           modifyButton,
-                          SizedBox(height: 20),
-                          cancellaAccount,
                           SizedBox(height: 60),
                         ],
                       ),
@@ -722,16 +768,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               backgroundColor: Colors.transparent,
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                shadowColor: Colors.grey.shade200,
-                /*shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20.0),
-                          bottomRight: Radius.circular(20.0)
-                      )
-                  ), */
+                elevation: 4,
                 title: Text("Profilo"),
                 centerTitle: true,
-                elevation: 4,
+                actions: <Widget>[
+                  btnImpostazioni,
+                ],
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
@@ -749,21 +791,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: ConstrainedBox(
-                            constraints:
-                                BoxConstraints.tightFor(width: 100, height: 40),
-                            child: logoutButton,
-                          ),
-                        ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 50),
                         nameField,
                         SizedBox(height: 20),
                         surnameField,
                         SizedBox(height: 20),
                         emailField,
-                        SizedBox(height: 20),
+                        SizedBox(height: 30),
                         cityField,
                         SizedBox(height: 20),
                         modifyButton,
