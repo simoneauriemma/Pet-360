@@ -52,7 +52,9 @@ class _addInfoState extends State<NavigatorAdd> {
   @override
   void initState() {
     super.initState();
-    pickedImage = File("/data/user/0/com.example.pet360/cache/dog.png");
+    if(pickedImage == null){
+      pickedImage = File("/data/user/0/com.example.pet360/cache/dog.png");
+    }
   }
 
   void imagePickerOption() {
@@ -113,7 +115,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     ]),
                     onTap: () {
                       setState(() {
-                        pickedImage = null;
+                        pickedImage = File("/data/user/0/com.example.pet360/cache/dog.png");
                       });
                       Navigator.of(context, rootNavigator: true).pop();
                     },
@@ -128,9 +130,10 @@ class _addInfoState extends State<NavigatorAdd> {
   getImage(ImageSource imageType) async {
     try {
       final image = await ImagePicker().pickImage(source: imageType);
-
-      if (image == null) return;
-      final imageTemp = File("/data/user/0/com.example.pet360/cache/dog.png");
+      var imageTemp = File(image!.path);
+      if (image == null){
+        imageTemp = File("/data/user/0/com.example.pet360/cache/dog.png");
+      }
 
       setState(() {
         pickedImage = imageTemp;
