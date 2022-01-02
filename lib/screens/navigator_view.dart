@@ -152,7 +152,7 @@ class _viewInfoState extends State<NavigatorView> {
   int currentStep = 0;
   bool isLoading = false;
 
-  List<Step> getSteps(data) => [
+  List<Step> getSteps(ViewAllInfoAnimal data) => [
         Step(
           isActive: currentStep >= 0,
           title: Text(''),
@@ -324,8 +324,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  labelText: "Nome",
-                                  hintText: data.surnameName,
+                                  //labelText: "Nome",
+                                  hintText: data.booklet.animalName,
                                 )),
                           ),
                           SizedBox(
@@ -347,7 +347,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  labelText: "Data di nascita",
+                                  //labelText: "Data di nascita",
+                                  hintText: data.booklet.animalBirthday,
                                 ),
                                 onTap: () async {
                                   var date = await showDatePicker(
@@ -377,7 +378,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  labelText: "Specie",
+                                  //labelText: "Specie",
+                                  hintText: data.booklet.animalSpecie,
                                 )),
                           ),
                           SizedBox(
@@ -398,7 +400,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  labelText: "Razza",
+                                  //labelText: "Razza",
+                                  hintText: data.booklet.animalKind,
                                 )),
                           ),
                           SizedBox(
@@ -419,7 +422,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  labelText: "Colore",
+                                  //labelText: "Colore",
+                                  hintText: data.booklet.animalColor,
                                 )),
                           ),
                           SizedBox(
@@ -440,7 +444,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  labelText: "Nome veterinario",
+                                  //labelText: "Nome veterinario",
+                                  hintText: data.booklet.animalVeterinaryName,
                                 )),
                           ),                          
                         ],
@@ -781,7 +786,8 @@ class _viewInfoState extends State<NavigatorView> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
-                            labelText: "Descrizione animale",
+                            //labelText: "Descrizione animale",
+                            hintText: data.passport.animalDescription,
                           )),
                     ),
                     // ),
@@ -803,7 +809,8 @@ class _viewInfoState extends State<NavigatorView> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
-                            labelText: "N° microchip",
+                            //labelText: "N° microchip",
+                            hintText: data.passport.animalMicrochip,
                           )),
                     ),
                     SizedBox(
@@ -825,7 +832,8 @@ class _viewInfoState extends State<NavigatorView> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.transparent,
-                          labelText: "Data applicazione microchip",
+                          //labelText: "Data applicazione microchip",
+                          hintText: data.passport.animalDateMicrochip,
                         ),
                         onTap: () async {
                           var date = await showDatePicker(
@@ -858,7 +866,8 @@ class _viewInfoState extends State<NavigatorView> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
-                            labelText: "Ente rilasciante",
+                            //labelText: "Ente rilasciante",
+                            hintText: data.passport.animalIssuingAnimal,
                           )),
                     ),
                   ]),
@@ -1010,7 +1019,7 @@ class _viewInfoState extends State<NavigatorView> {
             ),
             body: Stepper(
               type: StepperType.horizontal,
-              steps: getSteps(snapshot.hasData),
+              steps: getSteps(snapshot.data!),
               currentStep: currentStep,
               onStepContinue: null,
               onStepCancel: null,
@@ -1159,10 +1168,10 @@ class _viewInfoState extends State<NavigatorView> {
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
       ViewAllInfoAnimal animal = ViewAllInfoAnimal();
+      pickedImage = File(jsonBody['Libretto']['animalFoto']);
       animal.booklet = Booklet(jsonBody['Libretto']['animalBirthday'],jsonBody['Libretto']['animalColor'],jsonBody['Libretto']['animalKind'],jsonBody['Libretto']['animalName'],jsonBody['Libretto']['animalSpecie'],jsonBody['Libretto']['animalVeterinaryName']);
       animal.passport = Passport(jsonBody['Passaporto']['animalDateMicrochip'],jsonBody['Passaporto']['animalDescription'],jsonBody['Passaporto']['animalMicrochip'],jsonBody['Passaporto']['entityIssuingAnimal']);
-      int count = 0;
-      var url = Uri.parse(
+      url = Uri.parse(
           "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
               typeOfUser +
               "//" +
@@ -1172,7 +1181,8 @@ class _viewInfoState extends State<NavigatorView> {
               ".json?");
       final response2 = await http.get(url);
       if (response2.statusCode == 200) {
-        jsonDecode(response2.body).forEach((key, value) async {
+        dynamic json = jsonDecode(response2.body);
+        json.forEach((key, value) {
           NewVaccine vaccine = NewVaccine();
           vaccine.veterinaryName = value["veterinaryName"];
           vaccine.medicine = value["medicine"];
