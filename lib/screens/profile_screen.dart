@@ -222,12 +222,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Row(
                 children: const [
-                  Text("Logout  "),
                   ImageIcon(
                     AssetImage("assets/icons/logout.png"),
                     color: Colors.black,
-                    size: 15,
+                    size: 18,
                   ),
+                  SizedBox(width: 8,),
+                  Text(
+                    "Logout",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  
                 ],
               ),
               style: ElevatedButton.styleFrom(
@@ -314,11 +320,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ImageIcon(
                     AssetImage("assets/icons/delete.png"),
                     color: Colors.red,
-                    size: 22,
+                    size: 20,
                   ),
                   SizedBox(width: 8),
                   Text(
-                    "Cancella account  ",
+                    "Cancella account",
                     textAlign: TextAlign.left,
                     style: TextStyle(fontSize: 18, color: Colors.red),
                   ),
@@ -374,8 +380,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             logoutButton,
                             const Padding(padding: EdgeInsets.only(bottom: 10)),
                             const Divider(
-                              color: Colors.black,
-                              height: 3,
+                            color: Colors.black,
+                            //height: 20,
+                            thickness: 2,
+                            indent: 3,
+                            endIndent: 3,
                             ),
                             const Padding(padding: EdgeInsets.only(bottom: 10)),
                             cancellaAccount,

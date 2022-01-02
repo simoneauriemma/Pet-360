@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -13,15 +12,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pet360/model/booklet.dart';
 import 'package:pet360/model/new_vaccine.dart';
 import 'package:pet360/model/passport.dart';
-import 'package:pet360/model/vaccines.dart';
 import 'package:pet360/model/view_all_info_animal.dart';
-import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/screens/dashboard.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:http/http.dart' as http;
 
-double _currentSliderValue = 1;
 
 //campi di aggiunta info animale
 final nameController = new TextEditingController();
@@ -184,7 +180,7 @@ class _viewInfoState extends State<NavigatorView> {
                    MaterialPageRoute(builder: (context) => Dashboard()));
 
                   },
-                  child: Text('Yes')),
+                  child: Text('Sì')),
               TextButton(
                   onPressed: () {
                     // Close the dialog
@@ -298,7 +294,7 @@ class _viewInfoState extends State<NavigatorView> {
                               )),
                              
                                 
-                                Align(alignment: Alignment.centerRight,                                        
+                             /*   Align(alignment: Alignment.centerRight,                                        
                                 child: IconButton(
                                 padding: EdgeInsets.only(right: 30),
                                 icon: Image.asset("assets/icons/edit.png"),                                
@@ -306,7 +302,7 @@ class _viewInfoState extends State<NavigatorView> {
                                     //
                                 },
                                 ),  
-                              ),
+                              ),*/
                               
                               
                           
@@ -538,7 +534,7 @@ class _viewInfoState extends State<NavigatorView> {
                                             fontSize: 13.0)),
                                   ],
                                 ),
-                        SizedBox(width: 10,),                       
+                        SizedBox(width: 40,),                       
                         IconButton(
                          icon: Image.asset("assets/icons/edit.png"),
                           onPressed: () {
@@ -761,7 +757,7 @@ class _viewInfoState extends State<NavigatorView> {
                       height: 20,
                     ),
                       
-                                Align(alignment: Alignment.centerRight,                                        
+                                /*Align(alignment: Alignment.centerRight,                                        
                                 child: IconButton(
                                 padding: EdgeInsets.only(right: 30),
                                 icon: Image.asset("assets/icons/edit.png"),                                
@@ -769,8 +765,8 @@ class _viewInfoState extends State<NavigatorView> {
                                     //
                                 },
                                 ),  
-                              ),
-                              SizedBox(height: 20,),
+                              ),*/
+                    //SizedBox(height: 20,),
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -920,28 +916,61 @@ class _viewInfoState extends State<NavigatorView> {
                         SizedBox(
                           height: 30,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                          Text("AirTag1"),                         
-                          IconButton(
-                            icon: Image.asset("assets/icons/delete.png", width: 23,height: 23,color: Colors.red),
-                            onPressed: (){
-                                //
-                          }),
-                        ],),
-                        
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                          Text("AirTag2"),                         
-                          IconButton(
-                            icon: Image.asset("assets/icons/delete.png", width: 23,height: 23,color: Colors.red),
-                            onPressed: (){
-                                //
-                          }),
-                        ],),
-                        
+                        Stack(alignment: AlignmentDirectional.topCenter,
+                        children:[                        
+                          ElevatedButton(
+                          child: Text("AirTag1"),
+                          style: ElevatedButton.styleFrom(
+                            onPrimary: Colors.black,
+                            primary: Colors.white,
+                            elevation: 5,
+                            minimumSize: Size(140, 40),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                          ),
+                          onPressed: () {
+                            //
+                            airTag1 = "1 dispositivo"; //TODO DA CAMBIARE
+                          },
+                        ),
+                        Positioned(
+                        bottom: 5,
+                        left: 105,                       
+                        child: IconButton(onPressed: (){                                       
+                               airTag1 = "1 dispositivo";
+                               },
+                              icon: Icon(Icons.remove_circle,
+                              size: 25, color: Colors.black54))),
+                        ]
+                      ),
+
+                      Stack(alignment: AlignmentDirectional.topCenter,
+                        children:[                        
+                          ElevatedButton(
+                          child: Text("AirTag2"),
+                          style: ElevatedButton.styleFrom(
+                            onPrimary: Colors.black,
+                            primary: Colors.white,
+                            elevation: 5,
+                            minimumSize: Size(140, 40),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                          ),
+                          onPressed: () {                            
+                            airTag2 = "2 dispositivo"; //TODO DA CAMBIARE
+                          },
+                        ),
+                        Positioned(
+                        bottom: 5,
+                        left: 105,
+                        //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
+                        child: IconButton(onPressed: (){
+                                  //
+                                },
+                              icon: Icon(Icons.remove_circle,
+                              size: 25, color: Colors.black54))),
+                        ]
+                      ),
                        
                       ])
                     ),
