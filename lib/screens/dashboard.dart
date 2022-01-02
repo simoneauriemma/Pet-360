@@ -145,6 +145,7 @@ class _DashboardState extends State<Dashboard> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => NavigatorView()));
+                              UserSharedPreferences.setAnimalName(snapshot.data![index].animalName!);
                             },
                             child: Container(
                               width: 100,
