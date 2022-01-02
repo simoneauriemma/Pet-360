@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,10 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pet360/model/booklet.dart';
 import 'package:pet360/model/new_vaccine.dart';
+import 'package:pet360/model/passport.dart';
+import 'package:pet360/model/vaccines.dart';
+import 'package:pet360/model/view_all_info_animal.dart';
+import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/screens/dashboard.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
+import 'package:http/http.dart' as http;
 
 double _currentSliderValue = 1;
 
@@ -42,11 +49,20 @@ class NavigatorView extends StatefulWidget {
 
 class _viewInfoState extends State<NavigatorView> {
   File? pickedImage;
+  Future<ViewAllInfoAnimal>? futureAnimal;
   List<NewVaccine> lstVaccines = List.empty(growable: true);
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
-  NewVaccine firstVaccine = NewVaccine();
   var jsonBody, airTag1, airTag2;
   firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    final uid = _auth.currentUser!.uid;
+    //print("Type" + UserSharedPreferences.getTypeOfUser().toString());
+    futureAnimal =
+        fetchAnimal(UserSharedPreferences.getTypeOfUser().toString(), uid+"//Animali", UserSharedPreferences.getAnimalName().toString());
+  }
 
   void imagePickerOption() {
     showDialog(
@@ -136,7 +152,7 @@ class _viewInfoState extends State<NavigatorView> {
   int currentStep = 0;
   bool isLoading = false;
 
-  List<Step> getSteps() => [
+  List<Step> getSteps(data) => [
         Step(
           isActive: currentStep >= 0,
           title: Text(''),
@@ -309,6 +325,7 @@ class _viewInfoState extends State<NavigatorView> {
                                   filled: true,
                                   fillColor: Colors.transparent,
                                   labelText: "Nome",
+                                  hintText: data.surnameName,
                                 )),
                           ),
                           SizedBox(
@@ -972,34 +989,45 @@ class _viewInfoState extends State<NavigatorView> {
       ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text("Modifica animale"),
-        centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomeScreen()));
-          },
-        ),
-      ),
-      body: Stepper(
-        type: StepperType.horizontal,
-        steps: getSteps(),
-        currentStep: currentStep,
-        onStepContinue: null,
-        onStepCancel: null,
-        onStepTapped: (step) => setState(() {
-          currentStep = step;
-        }),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => FutureBuilder<ViewAllInfoAnimal>(
+      future: futureAnimal,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              title: Text("Modifica animale"),
+              centerTitle: true,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+              ),
+            ),
+            body: Stepper(
+              type: StepperType.horizontal,
+              steps: getSteps(snapshot.hasData),
+              currentStep: currentStep,
+              onStepContinue: null,
+              onStepCancel: null,
+              onStepTapped: (step) =>
+                  setState(() {
+                    currentStep = step;
+                  }),
+            ),
+          );
+        }
+        return SizedBox(
+          height: MediaQuery.of(context).size.height / 1,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      });
 
   Future<void> uploadFile(String filePath) async {
     File file = File(filePath);
@@ -1116,4 +1144,49 @@ class _viewInfoState extends State<NavigatorView> {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
   }
+
+  Future<ViewAllInfoAnimal> fetchAnimal(
+      String typeOfUser, String uidUser, String path) async {
+    var url = Uri.parse(
+        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
+            typeOfUser +
+            "//" +
+            uidUser +
+            "//" +
+            path +
+            ".json?");
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      jsonBody = json.decode(response.body);
+      ViewAllInfoAnimal animal = ViewAllInfoAnimal();
+      animal.booklet = Booklet(jsonBody['Libretto']['animalBirthday'],jsonBody['Libretto']['animalColor'],jsonBody['Libretto']['animalKind'],jsonBody['Libretto']['animalName'],jsonBody['Libretto']['animalSpecie'],jsonBody['Libretto']['animalVeterinaryName']);
+      animal.passport = Passport(jsonBody['Passaporto']['animalDateMicrochip'],jsonBody['Passaporto']['animalDescription'],jsonBody['Passaporto']['animalMicrochip'],jsonBody['Passaporto']['entityIssuingAnimal']);
+      int count = 0;
+      var url = Uri.parse(
+          "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
+              typeOfUser +
+              "//" +
+              uidUser +
+              "//" +
+              path+"//Vaccini//" +
+              ".json?");
+      final response2 = await http.get(url);
+      if (response2.statusCode == 200) {
+        jsonDecode(response2.body).forEach((key, value) async {
+          NewVaccine vaccine = NewVaccine();
+          vaccine.veterinaryName = value["veterinaryName"];
+          vaccine.medicine = value["medicine"];
+          vaccine.date = value ["date"];
+          vaccine.vaccineType = value ["vaccineType"];
+          lstVaccines.add(vaccine);
+        });
+      } else {
+        throw Exception('Failed to load album');
+      }
+      return animal;
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
 }

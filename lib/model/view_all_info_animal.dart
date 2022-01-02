@@ -6,7 +6,6 @@ import 'package:pet360/model/vaccines.dart';
 class ViewAllInfoAnimal implements InterfaceModel {
   late Booklet booklet;
   late Passport passport;
-  late Vaccines vaccines;
 
   @override
   getAddressShop() {
