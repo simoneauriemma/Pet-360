@@ -19,6 +19,7 @@ double _currentSliderValue = 1;
 
 //campi di aggiunta info animale
 final nameController = new TextEditingController();
+final soprannomeController= new TextEditingController();
 final specieController = new TextEditingController();
 final razzaController = new TextEditingController();
 final coloreController = new TextEditingController();
@@ -42,11 +43,14 @@ class NavigatorAdd extends StatefulWidget {
 }
 
 class _addInfoState extends State<NavigatorAdd> {
+  int _value = 1;
   File? pickedImage;
   List<NewVaccine> lstVaccines = List.empty(growable: true);
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
   NewVaccine firstVaccine = NewVaccine();
   var jsonBody, airTag1, airTag2;
+  // The inital group value
+  String _selectedGender = 'Male';
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -163,7 +167,7 @@ class _addInfoState extends State<NavigatorAdd> {
                   Container(
                       padding: EdgeInsets.only(top: 20),
                       width: MediaQuery.of(context).size.width / 1.1,
-                      height: 620,
+                      height: 750,
                       //sfondo con sfocatura
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -225,15 +229,15 @@ class _addInfoState extends State<NavigatorAdd> {
                                   ),
                                   Positioned(
                                     bottom: 0,
-                                    right: 2,
+                                    left: 63,
                                     child: IconButton(
                                       onPressed: () {
                                         imagePickerOption();
                                       },
                                       icon: const Icon(
-                                        Icons.camera_alt,
+                                        Icons.add_a_photo_rounded,
                                         color: Colors.black,
-                                        size: 35,
+                                        size: 30,
                                       ),
                                     ),
                                   ),
@@ -254,6 +258,26 @@ class _addInfoState extends State<NavigatorAdd> {
                                   filled: true,
                                   fillColor: Colors.transparent,
                                   labelText: "Nome",
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                           SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: soprannomeController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  soprannomeController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
+                                //Nome
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Soprannome",
                                 )),
                           ),
                           SizedBox(
@@ -371,6 +395,31 @@ class _addInfoState extends State<NavigatorAdd> {
                                   labelText: "Nome veterinario",
                                 )),
                           ),
+                          SizedBox(height: 20,),
+                          Row(                            
+                            children: [
+                              Padding(padding: EdgeInsets.only(left: 45)),
+                              Text("Sesso: ",style: TextStyle(fontSize: 16,color: Colors.black54),),
+                              Radio(value: 1, 
+                              groupValue: _value, 
+                              onChanged: (value){
+                                setState(() {
+                                  _value=1;
+                                });
+                              },
+                              ),                                
+                              Text("M"),   
+                              Radio(value: 2, 
+                              groupValue: _value, 
+                              onChanged: (value){
+                                setState(() {
+                                  _value=2;
+                                });
+                              },
+                              ),                                
+                              Text("F"),          
+                            ],
+                          )
                         ],
                       )),
                 ],
@@ -910,7 +959,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                         airTag1 = "1 dispositivo";
                                       },
                                       icon: Icon(Icons.add_circle_rounded,
-                                          size: 25, color: Colors.black))),
+                                          size: 25, color: Colors.black54))),
                         ]
                       ),
 
@@ -956,7 +1005,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                         airTag2 = "2 dispositivo";
                                       },
                                       icon: Icon(Icons.add_circle_rounded,
-                                          size: 25, color: Colors.black))),
+                                          size: 25, color: Colors.black54))),
                         
                         ]
                       ),
@@ -1143,7 +1192,7 @@ class _addInfoState extends State<NavigatorAdd> {
                 "/Animali/" +
                 animalName +
                 "/Vaccini/" +
-                i.toString())
+                "Vaccino_"+i.toString())
             .set({
           'vaccineType': lstVaccines[i].vaccineType,
           'medicine': lstVaccines[i].medicine,
@@ -1159,7 +1208,7 @@ class _addInfoState extends State<NavigatorAdd> {
                 "/Animali/" +
                 animalName +
                 "/Vaccini/" +
-                lstVaccines.length.toString())
+                "Vaccino_"+lstVaccines.length.toString())
             .set({
           'vaccineType': tipoVaccinoController.text,
           'medicine': farmacoSommController.text,

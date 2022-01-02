@@ -311,16 +311,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Row(
                 children: const [
+                  ImageIcon(
+                    AssetImage("assets/icons/delete.png"),
+                    color: Colors.red,
+                    size: 22,
+                  ),
+                  SizedBox(width: 8),
                   Text(
                     "Cancella account  ",
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: Colors.red),
                   ),
-                  ImageIcon(
-                    AssetImage("assets/icons/delete.png"),
-                    color: Colors.black,
-                    size: 22,
-                  ),
+                  
                 ],
               ),
             );
@@ -331,16 +333,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Row(
                 children: const [
-                  Text(
-                    "Logout  ",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18),
-                  ),
                   ImageIcon(
                     AssetImage("assets/icons/logout.png"),
                     color: Colors.black,
                     size: 18,
                   ),
+                  SizedBox(width: 8,),
+                  Text(
+                    "Logout",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  
                 ],
               ),
             );
@@ -444,15 +448,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                   Positioned(
                                     bottom: 0,
-                                    right: 2,
+                                    left: 63,
                                     child: IconButton(
                                       onPressed: () {
                                         imagePickerOption();
                                       },
                                       icon: const Icon(
-                                        Icons.camera_alt,
+                                        Icons.add_a_photo_rounded,
                                         color: Colors.black,
-                                        size: 35,
+                                        size: 30,
                                       ),
                                     ),
                                   ),

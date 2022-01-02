@@ -64,13 +64,18 @@ class _DashboardState extends State<Dashboard> {
                                   children: [
                                     Padding(padding: EdgeInsets.only(top: 60)),
                                     Text(
+                                     
                                       "Benvenuto!",
-                                      style: Theme.of(context)
+                                       textAlign: TextAlign.left,
+                                      style: 
+                                      Theme.of(context)
                                           .textTheme
                                           .headline5!
                                           .copyWith(
                                               color: Colors.black,
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,
+                                      
+                                              ),
                                     ),
                                     Text(
                                       _firstName,
