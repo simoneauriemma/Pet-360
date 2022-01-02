@@ -23,6 +23,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   Future<List<ViewAnimalsHome>>? futureAnimal;
   final _auth = FirebaseAuth.instance;
+  String _firstName = "Utente";
 
   @override
   void initState() {
@@ -31,6 +32,7 @@ class _DashboardState extends State<Dashboard> {
     futureAnimal = fetchAnimals(
         UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
     downloadFileExample("/data/user/0/com.example.pet360/cache/dog.png");
+    _firstName = UserSharedPreferences.getNameOfUser()!;
   }
 
   @override

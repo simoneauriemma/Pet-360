@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, snapshot) {
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
           if (snapshot.hasData) {
+            UserSharedPreferences.setNameOfUser(snapshot.data!.getFirstName());
             return Scaffold(
               extendBody: true,
               bottomNavigationBar: CurvedNavigationBar(
