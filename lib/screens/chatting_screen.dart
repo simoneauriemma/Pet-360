@@ -72,99 +72,32 @@ class _Chatting_screenState extends State<Chatting_screen> {
                   constraints: BoxConstraints.tightFor(width: 120, height: 40),
                   child: ElevatedButton(
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            //title: Text("Informazioni"),
-                            content: Container(
-                              height: 140.0,
-                              child: Column(
-                                //mainAxisAlignment: MainAxisAlignment.center,
-                                //crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    "Sei sicuro di voler lasciare la chat?",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Padding(padding: EdgeInsets.only(bottom: 30)),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        ConstrainedBox(
-                                          constraints: BoxConstraints.tightFor(
-                                              width: 50, height: 40),
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pushAndRemoveUntil(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ReviewChat()),
-                                                      (route) => false);
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Text("Sì"),
-                                              ],
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                              onPrimary: Colors.black,
-                                              primary: Colors.white,
-                                              minimumSize: Size(40, 40),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                            ),
-                                          ),
-                                        ),
-                                        Text("     "),
-                                        ConstrainedBox(
-                                          constraints: BoxConstraints.tightFor(
-                                              width: 50, height: 40),
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pushAndRemoveUntil(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              Chatting_screen()),
-                                                      (route) => false);
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Text("No"),
-                                              ],
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                              onPrimary: Colors.black,
-                                              primary: Colors.white,
-                                              minimumSize: Size(40, 40),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: Text('Conferma'),
+            content: Text('Sei sicuro di voler lasciare la chat?'),
+            actions: [
+              //"Si" button
+              TextButton(
+                  onPressed: () {
+                    // Remove the animal
+                  Navigator.push(
+                   context,
+                   MaterialPageRoute(builder: (context) => ReviewChat()));
+
+                  },
+                  child: Text('Sì')),
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('No'))
+            ],
+          );
+        });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
