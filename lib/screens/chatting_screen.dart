@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
@@ -72,32 +71,43 @@ class _Chatting_screenState extends State<Chatting_screen> {
                   constraints: BoxConstraints.tightFor(width: 120, height: 40),
                   child: ElevatedButton(
                     onPressed: () {
-                    showDialog(
-        context: context,
-        builder: (BuildContext ctx) {
-          return AlertDialog(
-            title: Text('Conferma'),
-            content: Text('Sei sicuro di voler lasciare la chat?'),
-            actions: [
-              //"Si" button
-              TextButton(
-                  onPressed: () {
-                    // Remove the animal
-                  Navigator.push(
-                   context,
-                   MaterialPageRoute(builder: (context) => ReviewChat()));
-
-                  },
-                  child: Text('Sì')),
-              TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('No'))
-            ],
-          );
-        });
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext ctx) {
+                            return AlertDialog(
+                              title: Text(
+                                'Conferma',
+                                textAlign: TextAlign.center,
+                              ),
+                              content:
+                                  Text('Sei sicuro di voler lasciare la chat?'),
+                              actions: [
+                                //"Si" button
+                                TextButton(
+                                    onPressed: () {
+                                      // Remove the animal
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ReviewChat()));
+                                    },
+                                    child: Text(
+                                      'Sì',
+                                      style: TextStyle(fontSize: 20),
+                                    )),
+                                TextButton(
+                                    onPressed: () {
+                                      // Close the dialog
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'No',
+                                      style: TextStyle(fontSize: 20),
+                                    ))
+                              ],
+                            );
+                          });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +169,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Write message...",
+                          hintText: "Scrivi qui...",
                           hintStyle: TextStyle(color: Colors.black54),
                           border: InputBorder.none),
                     ),

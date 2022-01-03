@@ -221,14 +221,17 @@ void initializeFlutterFire() async {
                     MaterialPageRoute(builder: (context) => HomeScreen())),
               })
           .catchError((e) {
-        GFToast.showToast('Email o password errate, riprova', context,
-            toastPosition: GFToastPosition.BOTTOM,
-            textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
-            backgroundColor: Colors.grey.shade200,
-            trailing: Icon(
+        GFToast.showToast(
+          'Email o password errate, riprova',
+          context,
+          toastPosition: GFToastPosition.BOTTOM,
+          textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
+          backgroundColor: Colors.grey.shade200,
+          /*trailing: Icon(
               Icons.notifications,
               color: Colors.black,
-            ));
+            ),*/
+        );
       });
     }
   }

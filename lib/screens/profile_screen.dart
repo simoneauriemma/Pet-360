@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -16,6 +17,7 @@ import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
+
 import 'home_screen.dart';
 import 'login_screen.dart';
 
@@ -216,38 +218,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
 
-            final logout1Button = ElevatedButton(
-              onPressed: () {
-                LogOut();
-              },
-              child: Row(
-                children: const [
-                  ImageIcon(
-                    AssetImage("assets/icons/logout.png"),
-                    color: Colors.black,
-                    size: 18,
-                  ),
-                  SizedBox(width: 8,),
-                  Text(
-                    "Logout",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  
-                ],
-              ),
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white,
-                //onSurface: Colors.grey,
-                //side: BorderSide(color: Colors.lightGreen, width: 2),
-                //elevation: 5,
-                minimumSize: Size(120, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-              ),
-            );
-
             final modifyButton = ElevatedButton(
               onPressed: () {
                 Modify(
@@ -283,34 +253,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.circular(15)),
               ),
             );
-            /*final modifyButton = Material(
-              elevation: 5,
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.lightGreen.shade300,
-              child: MaterialButton(
-                padding: EdgeInsets.fromLTRB(20, 15, 15, 20),
-                minWidth: MediaQuery.of(context).size.width,
-                onPressed: () {
-                  Modify(
-                      nameController.text,
-                      surnameController.text,
-                      emailController.text,
-                      cityController.text,
-                      phoneNumberController.text,
-                      nameShopController.text,
-                      cityShopController.text,
-                      addressShopController.text);
-                },
-                child: const Text(
-                  "Salva",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ); */
+
             final cancellaAccount = GestureDetector(
               onTap: () {
                 eliminateAccount();
@@ -319,14 +262,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: const [
                   ImageIcon(
                     AssetImage("assets/icons/delete.png"),
-                    color: Colors.red,
+                    color: Colors.redAccent,
                     size: 20,
                   ),
                   SizedBox(width: 8),
                   Text(
                     "Cancella account",
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18, color: Colors.red),
+                    style: TextStyle(fontSize: 18, color: Colors.redAccent),
                   ),
                   
                 ],
@@ -380,11 +323,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             logoutButton,
                             const Padding(padding: EdgeInsets.only(bottom: 10)),
                             const Divider(
-                            color: Colors.black,
-                            //height: 20,
-                            thickness: 2,
-                            indent: 3,
-                            endIndent: 3,
+                              color: Colors.black,
+                              //height: 20,
+                              thickness: 1,
+                              indent: 3,
+                              endIndent: 3,
                             ),
                             const Padding(padding: EdgeInsets.only(bottom: 10)),
                             cancellaAccount,
