@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet360/components/show_message.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
@@ -59,8 +60,6 @@ class _Chatting_screenState extends State<Chatting_screen> {
                   width: 2,
                 ),
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "<https://randomuser.me/api/portraits/men/5.jpg>"),
                   maxRadius: 20,
                 ),
                 SizedBox(
@@ -158,6 +157,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
       ),
       body: Stack(
         children: <Widget>[
+          ShowMessages(),
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(

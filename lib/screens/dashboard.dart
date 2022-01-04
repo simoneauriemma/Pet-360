@@ -192,18 +192,16 @@ class _DashboardState extends State<Dashboard> {
                         },
                       ),
                     ),
-                    Spacer(),
+                    //Spacer(),
+
                     Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Image.asset(
-                        "assets/storyset/homeimg.png",
-                        height: size.width / 2,
-                        width: size.width / 2,
-                      ),
+                      alignment: Alignment.center,
+                      child: Image.asset("assets/icons/logoPet360.png",
+                          height: size.width / 0.95,
+                          width: size.width / 2,
+                          color: const Color.fromRGBO(255, 255, 255, 0.4),
+                          colorBlendMode: BlendMode.modulate),
                     ),
-                    const Padding(
-                        padding: EdgeInsets.only(
-                            left: 0, right: 0, top: 0, bottom: 80)),
                   ],
                 ),
               ),

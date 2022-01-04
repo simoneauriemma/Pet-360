@@ -148,8 +148,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (snapshot.hasData) {
             final nameField = TextFormField(
               autofocus: false,
+              //initialValue: snapshot.data!.getFirstName(),
               controller: nameController,
               keyboardType: TextInputType.name,
+
               onSaved: (value) {
                 nameController.text = value!;
               },
@@ -458,7 +460,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     SizedBox(width: 320, child: emailField),
                                     SizedBox(height: 20),
                                     SizedBox(width: 320, child: cityField),
-                                    SizedBox(height: 30),
+                                    SizedBox(height: 50),
                                     SizedBox(width: 320, child: modifyButton),
                                     SizedBox(height: 20),
                                   ],
@@ -671,9 +673,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 SizedBox(width: 320, child: phoneNumber),
                                 SizedBox(height: 30),
                                 SizedBox(width: 320, child: addressShop),
-                                SizedBox(height: 30),
+                                SizedBox(height: 50),
                                 SizedBox(width: 320, child: modifyButton),
-                                SizedBox(height: 30),
+                                SizedBox(height: 50),
                               ],
                             )),
                       ],
@@ -769,7 +771,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                               padding: EdgeInsets.only(top: 20),
                               width: MediaQuery.of(context).size.width,
-                              height: 800,
+                              height: 850,
                               //sfondo con sfocatura
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -799,7 +801,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   SizedBox(height: 20),
                                   SizedBox(width: 320, child: cityField),
                                   SizedBox(height: 20),
-                                  Text("Informazioni aggiuntive"),
+                                  Padding(padding: EdgeInsets.only(top: 20)),
+                                  Text(
+                                    "Informazioni aggiuntive",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                   SizedBox(width: 320, child: nameShop),
                                   SizedBox(height: 30),
                                   SizedBox(width: 320, child: cityShop),
@@ -807,8 +815,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   SizedBox(width: 320, child: phoneNumber),
                                   SizedBox(height: 30),
                                   SizedBox(width: 320, child: addressShop),
-                                  SizedBox(height: 30),
+                                  SizedBox(height: 50),
                                   SizedBox(width: 320, child: modifyButton),
+                                  SizedBox(height: 50),
                                 ],
                               )),
                         ]),
@@ -932,7 +941,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(height: 20),
                               SizedBox(width: 320, child: cityField),
                               SizedBox(height: 20),
-                              Text("Informazioni aggiuntive"),
+                              Padding(padding: EdgeInsets.only(top: 20)),
+                              Text(
+                                "Informazioni aggiuntive",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
                               SizedBox(width: 320, child: nameShop),
                               SizedBox(height: 30),
                               SizedBox(width: 320, child: cityShop),

@@ -9,6 +9,8 @@ class ShowMessages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("sono quic");
+
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection(_auth.currentUser!.uid.toString())
@@ -32,9 +34,9 @@ class ShowMessages extends StatelessWidget {
               return ListTile(
                 title: Column(
                   crossAxisAlignment:
-                      x['receiver']! == _auth.currentUser!.uid.toString()
-                          ? CrossAxisAlignment.start
-                          : CrossAxisAlignment.end,
+                  x['receiver']! == _auth.currentUser!.uid.toString()
+                      ? CrossAxisAlignment.start
+                      : CrossAxisAlignment.end,
                   children: [Text(x['time'])],
                 ),
               );
