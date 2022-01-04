@@ -9,13 +9,14 @@ class ShowMessages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("sono quic");
+    var groupId = Object.hash(
+        _auth.currentUser!.uid.hashCode, UserSharedPreferences.getUIDOfUser());
 
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
-          .collection(_auth.currentUser!.uid.toString())
-          .where('sender', isEqualTo: UserSharedPreferences.getUIDOfUser())
-          .where('receiver', isEqualTo: UserSharedPreferences.getUIDOfUser())
+          .collection("Messages")
+          .doc(groupId.toString())
+          .collection(groupId.toString())
           .orderBy("time")
           .snapshots(),
       builder: (context, snapshot) {
@@ -31,13 +32,15 @@ class ShowMessages extends StatelessWidget {
             physics: ScrollPhysics(),
             itemBuilder: (context, i) {
               QueryDocumentSnapshot x = snapshot.data!.docs[i];
+
+              //print(x);
               return ListTile(
                 title: Column(
                   crossAxisAlignment:
-                  x['receiver']! == _auth.currentUser!.uid.toString()
-                      ? CrossAxisAlignment.start
-                      : CrossAxisAlignment.end,
-                  children: [Text(x['time'])],
+                      x['receiver']! == _auth.currentUser!.uid.toString()
+                          ? CrossAxisAlignment.start
+                          : CrossAxisAlignment.end,
+                  children: [Text(x['message'])],
                 ),
               );
             });

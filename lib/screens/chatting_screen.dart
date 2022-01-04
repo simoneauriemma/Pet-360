@@ -215,22 +215,27 @@ class _Chatting_screenState extends State<Chatting_screen> {
 
   void sendMessage() {
     if (msgController.text.isNotEmpty) {
-      _firestore.collection(_auth.currentUser!.uid.toString()).doc().set({
-        "message": msgController.text.trim(),
-        "sender": "",
-        "receiver": UserSharedPreferences.getUIDOfUser(),
-        "time": DateTime.now()
-      });
+      var groupId = Object.hash(_auth.currentUser!.uid.hashCode,
+          UserSharedPreferences.getUIDOfUser());
 
       _firestore
-          .collection(UserSharedPreferences.getUIDOfUser().toString())
-          .doc()
+          .collection("Messages")
+          .doc(groupId.toString())
+          .collection(groupId.toString())
+          .doc(DateTime.now().millisecondsSinceEpoch.toString())
           .set({
         "message": msgController.text.trim(),
         "sender": _auth.currentUser!.uid,
-        "receiver": "",
-        "time": DateTime.now()
+        "receiver": UserSharedPreferences.getUIDOfUser(),
+        "time": DateTime.now().toString()
       });
+
+      /*_firestore.collection("Messages").doc().set({
+        "message": msgController.text.trim(),
+        "sender": _auth.currentUser!.uid,
+        "receiver": UserSharedPreferences.getUIDOfUser(),
+        "time": DateTime.now().toString()
+      });*/
 
       msgController.clear();
     }
