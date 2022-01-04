@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
+import 'package:camera/camera.dart';
+import 'package:get/get.dart';
+
 
 class IAscreen extends StatefulWidget {
   const IAscreen({Key? key}) : super(key: key);
@@ -12,30 +15,36 @@ class IAscreen extends StatefulWidget {
 }
 
 class _IAscreenState extends State<IAscreen> {
-  File? _imageFile;
-  List? _classifiedResult; //per memorizzare il risultato della classificazione
+  List<CameraDescription>? cameras;
+  Future<void>main()async{
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras= await availableCameras();
+  }
 
+  bool isWorking=false;
+  String result="";
+  CameraController? cameraController;
+  CameraImage? imgCamera;
   
-  @override
-  void initState() {
-    super.initState();
-    loadImageModel();
-  }
-
-  Future selectImage() async {
-    final picker = ImagePicker();
-    var image = await picker.pickImage(source: ImageSource.gallery, maxHeight: 300);
+  initCamera(){
+    cameraController=CameraController(cameras![0],ResolutionPreset.medium);
+    cameraController!.initialize().then((value) {
+    if(!mounted){
+      return;
+    }
     setState(() {
-      if (image != null) {
-        _imageFile = File(image.path);
-      } else {
-        print('No image selected.');
-      }
+      cameraController!.startImageStream((imageFromStream) => 
+      {
+        if(!isWorking){
+          isWorking=true,
+          imgCamera=imageFromStream,
+        }
+      });
     });
-    classifyImage(image!.path);
+  });
   }
-
-  Future loadImageModel() async {
+ 
+Future loadImageModel() async {
   var result = await Tflite.loadModel(
     model: "assets/mobilenet_v1_1.0_224_quant.tflite",
     labels: "assets/labels_mobilenet_quant_v1_224.txt",
@@ -43,29 +52,48 @@ class _IAscreenState extends State<IAscreen> {
   print("result: $result");
 }
 
-
-Future classifyImage(image) async {
-    _classifiedResult = null;
-    // Run tensorflowlite image classification model on the image
-    print("classification start $image");
-     final List? result = await Tflite.runModelOnImage(
-      path: image,
-      numResults: 6,
-      threshold: 0.05,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-    print("classification done");
-    setState(() {
-      if (image != null) {
-        _imageFile = File(image.path);
-        _classifiedResult = result;
-      } else {
-        print('No image selected.');
-      }
-    });
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadImageModel();
   }
 
+  runModelOnStreamFrames()async{
+    if(imgCamera!=null){
+      var recognitions = await Tflite.runModelOnFrame(
+        bytesList: imgCamera!.planes.map((plane) {
+          return plane.bytes;
+        }).toList(),
+
+        imageHeight: imgCamera!.height,
+        imageWidth: imgCamera!.width,
+        imageMean: 127.5,
+        imageStd: 127.5,
+        rotation: 90,
+        numResults: 2,
+        threshold: 0.1,
+        asynch: true,
+        );
+        result="";
+
+        recognitions!.forEach((response) { 
+          result+=response["labels"] + "  " + (response["confidence"] as double).toStringAsFixed(2)+ "\n\n";
+        });
+        setState(() {
+          result;
+        });
+        isWorking=false;
+    }
+  }
+
+  @override
+  void dispose()async {
+    // TODO: implement dispose
+    super.dispose();
+    await Tflite.close();
+    cameraController?.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,118 +110,61 @@ Future classifyImage(image) async {
           },
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(children: [
-            Container(
-              width: 350,
-              height: 500,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-                  Text(
-                    "RICONOSCI LA RAZZA DEL TUO CANE",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 30,),
-               Container(
-              margin: EdgeInsets.all(15),
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                border: Border.all(color: Colors.white),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: Offset(2, 2),
-                    spreadRadius: 2,
-                    blurRadius: 1,
-                  ),
-                ],
-              ),
-              child: (_imageFile != null)?
-              Image.file(_imageFile!) :
-              Image.asset("assets/icons/razza_cane.jpg")
-            ),
-            SizedBox(height: 20,),
-            ElevatedButton(
-              onPressed: (){
-                 selectImage();
-              },
-              child: ConstrainedBox(
-                constraints: BoxConstraints.tightFor(
-                    width: MediaQuery.of(context).size.width, height: 50),
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Seleziona immagine",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white,
-                onSurface: Colors.grey,
-                side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
-                elevation: 5,
-                //minimumSize: Size(100, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-              ),
-                ),
-                SizedBox(height: 20),
-                SingleChildScrollView(
-                  child: Column(
-                    children: 
-                    _classifiedResult!=null ? _classifiedResult!.map((result) {
-                        return Card(
-                          elevation: 0.0,
-                          color: Colors.lightGreen,
-                          child: Container(
-                            width: 300,
-                            margin: EdgeInsets.all(10),
-                            child: Center(
-                              child: Text("${result["label"]} :  ${(result["confidence"] * 100).toStringAsFixed(1)}%",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        );
-                    } ).toList()
-                   :[],
-                  ),
-                )
-                ]
-              ),
-            ),
-          ]),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/icons/back.jpg"),
+            ),          
         ),
-      ),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Center(
+                  child: Container(
+                    height: 320.0,
+                    width: 360.0,
+                    child: Image.asset("assets/icons/frame.jpg"),
+                  ),
+                ),
+                Center(
+                  child: TextButton(
+                    onPressed: (){
+                      initCamera();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top:35),
+                      height: 270,
+                      width: 360,
+                      child: imgCamera==null ?
+                      Container(
+                        height: 270,
+                        width: 360,
+                        child: Icon(Icons.photo_camera_front),
+                      ): AspectRatio(aspectRatio: cameraController!.value.aspectRatio,
+                      child: CameraPreview(cameraController!),
+                      ),
+                    ),
+                    ),
+                  )
+              ],
+            ),
+            Center(child: Container(
+              margin: const EdgeInsets.only(top: 55),
+              child: SingleChildScrollView(
+                child: Text(result,
+                style: const TextStyle(
+                  backgroundColor: Colors.white54,
+                   fontSize: 25,
+                   color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+                ),
+              ),
+            ),)
+          ],
+        ),
+      )
     );
   }
 }
