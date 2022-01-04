@@ -68,6 +68,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                             voto: "5",
                             phonenum: snapshot.data![index].numberPhone!,
                             indirizzo: snapshot.data![index].addressShop!,
+                            UID: snapshot.data![index].uid!,
                           ),
                         ),
                       ),
@@ -139,7 +140,8 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
         },
       );
 
-  Future<List<TrainerModel>> getAddestratoriList(String typeOfUser, String uidUser, String path) async{
+  Future<List<TrainerModel>> getAddestratoriList(
+      String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
             typeOfUser +
@@ -153,6 +155,8 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
       List<TrainerModel> list = List.empty(growable: true);
       jsonDecode(response.body).forEach((key, value) {
         TrainerModel user = TrainerModel();
+        //print(key.toString());
+        user.uid = key.toString();
         user.nameShop = value['nameShop'];
         user.surnameName = value['surnameName'];
         user.firstName = value['firstName'];
@@ -165,5 +169,4 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
       throw Exception('Failed to load album');
     }
   }
-
 }

@@ -1,12 +1,10 @@
 import 'dart:convert';
 
-import 'package:accordion/accordion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pet360/components/widget_list.dart';
-import 'package:pet360/model/interface_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet360/components/widget_list.dart';
 import 'package:pet360/model/veterinary_model.dart';
 
 class ListVeterinariChat extends StatefulWidget {
@@ -73,9 +71,10 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                             voto: "5",
                             phonenum: snapshot.data![index].numberPhone!,
                             indirizzo: snapshot.data![index].addressShop!,
+                            UID: snapshot.data![index].uid!,
                           ),
                         ),
-                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -143,7 +142,9 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
           );
         },
       );
-  Future<List<VeterinaryModel>> getVeterinaryList(String typeOfUser, String uidUser, String path) async{
+
+  Future<List<VeterinaryModel>> getVeterinaryList(
+      String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
             typeOfUser +
@@ -157,6 +158,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
       List<VeterinaryModel> list = List.empty(growable: true);
       jsonDecode(response.body).forEach((key, value) {
         VeterinaryModel user = VeterinaryModel();
+        user.uid = key.toString();
         user.nameShop = value['nameShop'];
         user.firstName = value['firstName'];
         user.surnameName = value['surnameName'];

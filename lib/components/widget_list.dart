@@ -9,6 +9,7 @@ class WidgetList extends StatelessWidget {
   final String voto;
   final String phonenum;
   final String indirizzo;
+  final String UID;
 
   WidgetList({
     required this.name,
@@ -17,6 +18,7 @@ class WidgetList extends StatelessWidget {
     required this.phonenum,
     required this.indirizzo,
     required this.voto,
+    required this.UID,
   });
 
   @override
@@ -293,6 +295,7 @@ class WidgetList extends StatelessWidget {
       ),
       onTap: () {
         UserSharedPreferences.setNameChat(name.toString());
+        UserSharedPreferences.setUIDOfUser(UID);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => Chatting_screen()),
             (route) => false);

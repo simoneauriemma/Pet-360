@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
@@ -13,8 +15,26 @@ class Chatting_screen extends StatefulWidget {
 }
 
 class _Chatting_screenState extends State<Chatting_screen> {
+  final msgController = new TextEditingController();
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
+    final msgText = TextFormField(
+      autofocus: false,
+      controller: msgController,
+      keyboardType: TextInputType.name,
+      onSaved: (value) {
+        msgController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+          hintText: "Scrivi qui...",
+          hintStyle: TextStyle(color: Colors.black54),
+          border: InputBorder.none),
+    );
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -80,7 +100,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                 textAlign: TextAlign.center,
                               ),
                               content:
-                                  Text('Sei sicuro di voler lasciare la chat?'),
+                              Text('Sei sicuro di voler lasciare la chat?'),
                               actions: [
                                 //"Si" button
                                 TextButton(
@@ -167,18 +187,15 @@ class _Chatting_screenState extends State<Chatting_screen> {
                     width: 15,
                   ),
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Scrivi qui...",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: InputBorder.none),
-                    ),
+                    child: msgText,
                   ),
                   SizedBox(
                     width: 15,
                   ),
                   FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      sendMessage();
+                    },
                     child: Icon(
                       Icons.send,
                       color: Colors.white,
@@ -194,5 +211,28 @@ class _Chatting_screenState extends State<Chatting_screen> {
         ],
       ),
     );
+  }
+
+  void sendMessage() {
+    if (msgController.text.isNotEmpty) {
+      _firestore.collection(_auth.currentUser!.uid.toString()).doc().set({
+        "message": msgController.text.trim(),
+        "sender": "",
+        "receiver": UserSharedPreferences.getUIDOfUser(),
+        "time": DateTime.now()
+      });
+
+      _firestore
+          .collection(UserSharedPreferences.getUIDOfUser().toString())
+          .doc()
+          .set({
+        "message": msgController.text.trim(),
+        "sender": _auth.currentUser!.uid,
+        "receiver": "",
+        "time": DateTime.now()
+      });
+
+      msgController.clear();
+    }
   }
 }
