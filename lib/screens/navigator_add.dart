@@ -158,12 +158,8 @@ class _addInfoState extends State<NavigatorAdd> {
         Step(
           isActive: currentStep >= 0,
           title: Text(''),
-          content: Container(
-            //color: Colors.transparent.withOpacity(0.5),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.only(bottom: 100),
-              child: Column(
-                children: [
+          content:  Column(
+                children: [                
                   Container(
                       padding: EdgeInsets.only(top: 20),
                       width: MediaQuery.of(context).size.width / 1.1,
@@ -422,25 +418,26 @@ class _addInfoState extends State<NavigatorAdd> {
                           )
                         ],
                       )),
+                //Padding(padding: EdgeInsets.only(bottom: 100))
                 ],
               ),
-            ),
-          ),
+           
         ),
         Step(
           isActive: currentStep >= 1,
           title: Text(''),
-          content: Column(children: [
+          content:          
+          Column(children: [
             Container(
               width: MediaQuery.of(context).size.width / 1.1,
-              height: 500,
+              height: 450,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(0)),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
@@ -729,6 +726,7 @@ class _addInfoState extends State<NavigatorAdd> {
               ),
             ),
           ]),
+           
         ),
         Step(
             isActive: currentStep >= 2,
@@ -1111,7 +1109,7 @@ class _addInfoState extends State<NavigatorAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text("Aggiungi un nuovo animale"),
@@ -1129,18 +1127,52 @@ class _addInfoState extends State<NavigatorAdd> {
         type: StepperType.horizontal,
         steps: getSteps(),
         currentStep: currentStep,
-        onStepContinue: null,
-        onStepCancel: null,
+         controlsBuilder: (BuildContext context,
+          {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
+        return Row(
+          mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+              onPressed: onStepCancel,
+              icon: Icon(Icons.arrow_back_ios),            
+            ),
+                      
+            IconButton(
+              padding: EdgeInsets.only(top: 15),
+              onPressed: onStepContinue,
+             icon: Icon(Icons.arrow_forward_ios),            
+            ),
+          
+          ],
+        );
+      },
+        onStepContinue: (){
+          setState(() {
+             if(currentStep < (getSteps().length-1)){
+              currentStep +=1;
+             }
+          });
+         
+        },
+        onStepCancel: (){ 
+          setState(() {
+            if(currentStep == 0){
+            return;
+            }
+          currentStep -=1;
+          });         
+        },
         onStepTapped: (step) => setState(() {
           currentStep = step;
-        }),
-      ),
+        }),        
+      ),      
     );
   }
 
   Future<void> uploadFile(String filePath) async {
     File file = File(filePath);
-
     try {
       await firebase_storage.FirebaseStorage.instance
           .ref('uploads/' + filePath.split("/").last)
