@@ -100,7 +100,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                 textAlign: TextAlign.center,
                               ),
                               content:
-                              Text('Sei sicuro di voler lasciare la chat?'),
+                                  Text('Sei sicuro di voler lasciare la chat?'),
                               actions: [
                                 //"Si" button
                                 TextButton(
