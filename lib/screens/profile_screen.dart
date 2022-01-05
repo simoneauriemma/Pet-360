@@ -162,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: snapshot.data!.getFirstName(),
+                labelText: "Nome",
               ),
             );
 
@@ -180,7 +180,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.supervised_user_circle_outlined),
-                hintText: snapshot.data!.getSurnameName(),
+                labelText: "Cognome",
               ),
             );
 
@@ -198,7 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.mail),
-                hintText: _auth.currentUser!.email,
+                labelText: "Email",
               ),
             );
 
@@ -216,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.location_city),
-                hintText: snapshot.data!.getCityName(),
+                labelText: "Città",
               ),
             );
 
@@ -552,7 +552,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.phone),
-                hintText: snapshot.data!.getPhoneNumber(),
+                labelText: "Numero di telefono",
               ),
             );
 
@@ -570,7 +570,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.shop),
-                hintText: snapshot.data!.getNameShop(),
+                labelText: "Nome del negozio",
               ),
             );
 
@@ -588,7 +588,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.apartment_rounded),
-                hintText: snapshot.data!.getCityShop(),
+                labelText: "Nome della città",
               ),
             );
 
@@ -606,7 +606,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 filled: true,
                 fillColor: Colors.transparent,
                 prefixIcon: Icon(Icons.home),
-                hintText: snapshot.data!.getAddressShop(),
+                labelText: "Indirizzo del negozio",
               ),
             );
 
@@ -1122,7 +1122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         'photo': path,
       });
     }
-    if (email != "") {
+    if (email != _auth.currentUser!.email) {
       GFToast.showToast('Non è possibile modificare la mail', context,
           toastPosition: GFToastPosition.TOP,
           textStyle: TextStyle(fontSize: 16, color: GFColors.DARK),
@@ -1259,6 +1259,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         case "Utente":
           {
             UserModel user = UserModel.fromJson(jsonDecode(response.body));
+            nameController.text = user.firstName!;
+            surnameController.text = user.surnameName!;
+            emailController.text = _auth.currentUser!.email!;
+            cityController.text = user.cityName!;
             await downloadFileExample(user.getPhoto());
             return user;
           }
@@ -1266,6 +1270,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           {
             TrainerModel user =
                 TrainerModel.fromJson(jsonDecode(response.body));
+            nameController.text = user.firstName!;
+            surnameController.text = user.surnameName!;
+            emailController.text = _auth.currentUser!.email!;
+            cityController.text = user.cityName!;
+            cityShopController.text = user.cityShop!;
+            addressShopController.text = user.addressShop!;
+            nameShopController.text = user.nameShop!;
+            phoneNumberController.text = user.numberPhone!;
             await downloadFileExample(user.getPhoto());
             return user;
           }
@@ -1273,6 +1285,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           {
             VeterinaryModel user =
                 VeterinaryModel.fromJson(jsonDecode(response.body));
+            nameController.text = user.firstName!;
+            surnameController.text = user.surnameName!;
+            emailController.text = _auth.currentUser!.email!;
+            cityController.text = user.cityName!;
+            cityShopController.text = user.cityShop!;
+            addressShopController.text = user.addressShop!;
+            nameShopController.text = user.nameShop!;
+            phoneNumberController.text = user.numberPhone!;
             await downloadFileExample(user.getPhoto());
             return user;
           }
