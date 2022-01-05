@@ -9,8 +9,13 @@ class ShowMessages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var groupId = Object.hash(
-        _auth.currentUser!.uid.hashCode, UserSharedPreferences.getUIDOfUser());
+    var groupId = _auth.currentUser!.uid.toString() +
+        UserSharedPreferences.getUIDOfUser().toString();
+
+    if (UserSharedPreferences.getTypeOfUser().toString() != "Utente") {
+      groupId = UserSharedPreferences.getTypeOfUser().toString() +
+          _auth.currentUser!.uid.toString();
+    }
 
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
@@ -35,14 +40,21 @@ class ShowMessages extends StatelessWidget {
 
               //print(x);
               return ListTile(
-                title: Column(
-                  crossAxisAlignment:
-                      x['receiver']! == _auth.currentUser!.uid.toString()
-                          ? CrossAxisAlignment.start
-                          : CrossAxisAlignment.end,
-                  children: [Text(x['message'])],
-                ),
-              );
+                  title: Column(
+                crossAxisAlignment:
+                    x['receiver']! == _auth.currentUser!.uid.toString()
+                        ? CrossAxisAlignment.start
+                        : CrossAxisAlignment.end,
+                children: [
+                  Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      color: x['receiver']! == _auth.currentUser!.uid.toString()
+                          ? Colors.red.withOpacity(0.4)
+                          : Colors.blue.withOpacity(0.2),
+                      child: Text(x['message']))
+                ],
+              ));
             });
       },
     );

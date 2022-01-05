@@ -215,8 +215,13 @@ class _Chatting_screenState extends State<Chatting_screen> {
 
   void sendMessage() {
     if (msgController.text.isNotEmpty) {
-      var groupId = Object.hash(_auth.currentUser!.uid.hashCode,
-          UserSharedPreferences.getUIDOfUser());
+      var groupId = _auth.currentUser!.uid.toString() +
+          UserSharedPreferences.getUIDOfUser().toString();
+
+      if (UserSharedPreferences.getTypeOfUser().toString() != "Utente") {
+        groupId = UserSharedPreferences.getTypeOfUser().toString() +
+            _auth.currentUser!.uid.toString();
+      }
 
       _firestore
           .collection("Messages")
