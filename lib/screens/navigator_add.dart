@@ -1123,12 +1123,12 @@ class _addInfoState extends State<NavigatorAdd> {
           },
         ),
       ),
-      /*body: Stepper(
+      body: Stepper(
         type: StepperType.horizontal,
         steps: getSteps(),
-        currentStep: currentStep,
-         controlsBuilder: (BuildContext context,
-          {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
+        currentStep: currentStep,        
+         controlsBuilder: null,
+         /* (context, {onStepContinue,onStepCancel}) {
         return Row(
           mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1147,7 +1147,7 @@ class _addInfoState extends State<NavigatorAdd> {
           
           ],
         );
-      },
+      },*/
         onStepContinue: (){
           setState(() {
              if(currentStep < (getSteps().length-1)){
@@ -1167,7 +1167,7 @@ class _addInfoState extends State<NavigatorAdd> {
         onStepTapped: (step) => setState(() {
           currentStep = step;
         }),
-      ), */
+      ), 
     );
   }
 
