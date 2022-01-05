@@ -219,7 +219,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
           UserSharedPreferences.getUIDOfUser().toString();
 
       if (UserSharedPreferences.getTypeOfUser().toString() != "Utente") {
-        groupId = UserSharedPreferences.getTypeOfUser().toString() +
+        groupId = UserSharedPreferences.getUIDOfUser().toString() +
             _auth.currentUser!.uid.toString();
       }
 
@@ -232,7 +232,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
         "message": msgController.text.trim(),
         "sender": _auth.currentUser!.uid,
         "receiver": UserSharedPreferences.getUIDOfUser(),
-        "time": DateTime.now().toString()
+        "time": DateTime.now().millisecondsSinceEpoch.toString()
       });
 
       /*_firestore.collection("Messages").doc().set({

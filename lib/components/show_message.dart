@@ -13,16 +13,18 @@ class ShowMessages extends StatelessWidget {
         UserSharedPreferences.getUIDOfUser().toString();
 
     if (UserSharedPreferences.getTypeOfUser().toString() != "Utente") {
-      groupId = UserSharedPreferences.getTypeOfUser().toString() +
+      groupId = UserSharedPreferences.getUIDOfUser().toString() +
           _auth.currentUser!.uid.toString();
     }
+
+    print(groupId);
 
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection("Messages")
           .doc(groupId.toString())
           .collection(groupId.toString())
-          .orderBy("time")
+          .orderBy("time", descending: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -32,6 +34,7 @@ class ShowMessages extends StatelessWidget {
         }
         return ListView.builder(
             itemCount: snapshot.data!.docs.length,
+            reverse: true,
             shrinkWrap: true,
             primary: true,
             physics: ScrollPhysics(),
