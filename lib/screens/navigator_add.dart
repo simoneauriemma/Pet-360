@@ -689,7 +689,6 @@ class _addInfoState extends State<NavigatorAdd> {
                                 Padding(padding: EdgeInsets.only(left: 7)),
                                 Image.asset("assets/icons/vaccine.png",
                                     width: 25, height: 25),
-                                //Text(" "+ generateNumber[index]+".", style: TextStyle(color: Colors.black, fontSize: 18.0)),
                                 Padding(padding: EdgeInsets.only(left: 13)),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -714,7 +713,199 @@ class _addInfoState extends State<NavigatorAdd> {
                                             color: Colors.grey,
                                             fontSize: 13.0)),
                                   ],
-                                )
+                                ),
+                                Spacer(),
+                                IconButton(onPressed: (){
+                                    showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    "Aggiungi informazioni sul vaccino",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.questrial(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: [
+                                        SizedBox(
+                                          width: 280,
+                                          child: TextFormField(
+                                              autofocus: false,
+                                              controller: tipoVaccinoController,
+                                              keyboardType: TextInputType.name,
+                                              onSaved: (value) {
+                                                tipoVaccinoController.text =
+                                                value!;
+                                              },
+                                              textInputAction:
+                                              TextInputAction.next,
+
+                                              //Tipo vaccino
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.transparent,
+                                                labelText: "Tipo vaccino",
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          width: 280,
+                                          child: TextFormField(
+                                            autofocus: false,
+                                            controller: dataSommController,
+                                            keyboardType: TextInputType.name,
+                                            onSaved: (value) {
+                                              dataSommController.text = value!;
+                                            },
+                                            textInputAction:
+                                            TextInputAction.next,
+
+                                            //Data somministrazione vaccino
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.transparent,
+                                              labelText:
+                                              "Data somministrazione",
+                                            ),
+                                            onTap: () async {
+                                              var date = await showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(1900),
+                                                  lastDate: DateTime(2100));
+                                              dataSommController.text = date
+                                                  .toString()
+                                                  .substring(0, 10);
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          width: 280,
+                                          child: TextFormField(
+                                              autofocus: false,
+                                              controller: farmacoSommController,
+                                              keyboardType: TextInputType.name,
+                                              onSaved: (value) {
+                                                farmacoSommController.text =
+                                                value!;
+                                              },
+                                              textInputAction:
+                                              TextInputAction.next,
+
+                                              //Farmaco somministrato
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.transparent,
+                                                labelText:
+                                                "Farmaco somministrato",
+                                              )),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          width: 280,
+                                          child: TextFormField(
+                                              autofocus: false,
+                                              controller: nomeVeterController,
+                                              keyboardType: TextInputType.name,
+                                              onSaved: (value) {
+                                                nomeVeterController.text =
+                                                value!;
+                                              },
+                                              textInputAction:
+                                              TextInputAction.next,
+
+                                              //Nome veterinario
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.transparent,
+                                                labelText: "Nome veterinario",
+                                              )),
+                                        ),
+                                        const SizedBox(
+                                          height: 40,
+                                        ),
+                                        ConstrainedBox(
+                                          constraints: BoxConstraints.tightFor(
+                                              width: 120, height: 40),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              debugPrint("Add new vax");
+                                              NewVaccine tmp = NewVaccine();
+                                              tmp.veterinaryName =
+                                                  nomeVeterController.text;
+                                              tmp.date =
+                                                  dataSommController.text;
+                                              tmp.vaccineType =
+                                                  tipoVaccinoController.text;
+                                              tmp.medicine =
+                                                  farmacoSommController.text;
+                                              lstVaccines.add(tmp);
+                                              nomeVeterController.text = "";
+                                              dataSommController.text = "";
+                                              tipoVaccinoController.text = "";
+                                              farmacoSommController.text = "";
+                                              Navigator.of(context,
+                                                      rootNavigator: true)
+                                                  .pop();
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text("Aggiungi  ",
+                                                    style:
+                                                        GoogleFonts.questrial(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    )),
+                                                Icon(
+                                                  Icons.save_rounded,
+                                                  size: 20,
+                                                ),
+                                              ],
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                              onPrimary: Colors.black,
+                                              primary: Colors.white,
+                                              alignment: Alignment.center,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                                }, 
+                                icon: Image.asset("assets/icons/edit.png",width: 23,height: 23)
+                                ),                                
+                                IconButton(onPressed: (){
+                                  //
+                                }, 
+                                icon: Image.asset("assets/icons/delete.png",width: 25,height: 25, color: Colors.red.shade400)
+                                ), 
                               ],
                             ),
                           ),
@@ -1109,7 +1300,7 @@ class _addInfoState extends State<NavigatorAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text("Aggiungi un nuovo animale"),
@@ -1123,11 +1314,33 @@ class _addInfoState extends State<NavigatorAdd> {
           },
         ),
       ),
-      body: Stepper(
+      body: Container(
+        padding: EdgeInsets.only(bottom: 70),
+        child: Stepper(
         type: StepperType.horizontal,
+        physics: ClampingScrollPhysics(),
         steps: getSteps(),
         currentStep: currentStep,        
-         controlsBuilder: null,
+         controlsBuilder: (BuildContext context, ControlsDetails controls) {
+            return Row(
+          mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+              onPressed: controls.onStepCancel,             
+             icon: Image.asset("assets/icons/back.png",color:Colors.lightGreen,width: 25,height: 25,),            
+            ),
+                      
+            IconButton(
+              padding: EdgeInsets.only(top: 15),
+              onPressed: controls.onStepContinue,
+             icon: Image.asset("assets/icons/next.png",color:Colors.lightGreen,width: 25,height: 25,),            
+            ),
+          
+          ],
+        );
+         },
          /* (context, {onStepContinue,onStepCancel}) {
         return Row(
           mainAxisSize: MainAxisSize.max,
@@ -1167,6 +1380,7 @@ class _addInfoState extends State<NavigatorAdd> {
         onStepTapped: (step) => setState(() {
           currentStep = step;
         }),
+      ),
       ), 
     );
   }

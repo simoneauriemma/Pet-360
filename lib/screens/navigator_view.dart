@@ -16,10 +16,13 @@ import 'package:pet360/model/view_all_info_animal.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
+
 
 
 //campi di aggiunta info animale
 final nameController = new TextEditingController();
+final soprannomeController = new TextEditingController();
 final specieController = new TextEditingController();
 final razzaController = new TextEditingController();
 final coloreController = new TextEditingController();
@@ -43,6 +46,7 @@ class NavigatorView extends StatefulWidget {
 }
 
 class _viewInfoState extends State<NavigatorView> {
+  int _value = 1;
   File? pickedImage;
   Future<ViewAllInfoAnimal>? futureAnimal;
   List<NewVaccine> lstVaccines = List.empty(growable: true);
@@ -151,11 +155,8 @@ class _viewInfoState extends State<NavigatorView> {
         Step(
           isActive: currentStep >= 0,
           title: Text(''),
-          content: Container(
-            //color: Colors.transparent.withOpacity(0.5),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.only(bottom: 100),
-              child: Column(
+          content:             
+               Column(
                 children: [
                        Row(     
                     mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
@@ -214,7 +215,7 @@ class _viewInfoState extends State<NavigatorView> {
                   Container(
                       padding: EdgeInsets.only(top: 20),
                       width: MediaQuery.of(context).size.width / 1.1,
-                      height: 700,
+                      height: 770,
                       //sfondo con sfocatura
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -238,8 +239,10 @@ class _viewInfoState extends State<NavigatorView> {
                           Text(
                             "DATI LIBRETTO ANIMALE",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.questrial(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           SizedBox(
                             height: 30,
@@ -292,19 +295,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 ],
                               )),
                              
-                                
-                             /*   Align(alignment: Alignment.centerRight,                                        
-                                child: IconButton(
-                                padding: EdgeInsets.only(right: 30),
-                                icon: Image.asset("assets/icons/edit.png"),                                
-                                onPressed: (){
-                                    //
-                                },
-                                ),  
-                              ),*/
-
-
-                          
+                                                       
                           SizedBox(
                             width: 280,
                             child: TextFormField(
@@ -320,6 +311,26 @@ class _viewInfoState extends State<NavigatorView> {
                                   filled: true,
                                   fillColor: Colors.transparent,
                                   labelText: "Nome",
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                           SizedBox(
+                            width: 280,
+                            child: TextFormField(
+                                autofocus: false,
+                                controller: soprannomeController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  soprannomeController.text = value!;
+                                },
+                                textInputAction: TextInputAction.next,
+                                //Nome
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  labelText: "Soprannome",
                                 )),
                           ),
                           SizedBox(
@@ -436,13 +447,36 @@ class _viewInfoState extends State<NavigatorView> {
                                   fillColor: Colors.transparent,
                                   labelText: "Nome veterinario",
                                 )),
-                          ),                          
+                          ),   
+                           SizedBox(height: 20,),
+                          Row(                            
+                            children: [
+                              Padding(padding: EdgeInsets.only(left: 45)),
+                              Text("Sesso: ",style: TextStyle(fontSize: 16,color: Colors.black54),),
+                              Radio(value: 1, 
+                              groupValue: _value, 
+                              onChanged: (value){
+                                setState(() {
+                                  _value=1;
+                                });
+                              },
+                              ),                                
+                              Text("M"),   
+                              Radio(value: 2, 
+                              groupValue: _value, 
+                              onChanged: (value){
+                                setState(() {
+                                  _value=2;
+                                });
+                              },
+                              ),                                
+                              Text("F"),          
+                            ],
+                          )                      
                         ],
                       )),
                 ],
-              ),
-            ),
-          ),
+              ),            
         ),
         Step(
           isActive: currentStep >= 1,
@@ -475,12 +509,14 @@ class _viewInfoState extends State<NavigatorView> {
                   Text(
                     "LISTA VACCINI",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.questrial(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-
                   Expanded(
                     child: ListView.builder(
                       itemCount: this.lstVaccines.length,
@@ -488,7 +524,7 @@ class _viewInfoState extends State<NavigatorView> {
                       itemBuilder: (_, int index) => Container(
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5.0),
+                            horizontal: 10.0, vertical:15.0),
                         child: Card(
                           elevation: 2.0,
                           color: Colors.grey.shade100,
@@ -525,7 +561,7 @@ class _viewInfoState extends State<NavigatorView> {
                                         style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 13.0)),
-                                    SizedBox(
+                                   SizedBox(
                                       height: 3,
                                     ),
                                     Text(
@@ -545,9 +581,9 @@ class _viewInfoState extends State<NavigatorView> {
                                             fontSize: 13.0)),
                                   ],
                                 ),
-                        SizedBox(width: 40,),                       
+                        Spacer(),                     
                         IconButton(
-                         icon: Image.asset("assets/icons/edit.png"),
+                         icon: Image.asset("assets/icons/edit.png",width: 23,height: 23),
                           onPressed: () {
                             showDialog(
                               context: context,
@@ -715,6 +751,11 @@ class _viewInfoState extends State<NavigatorView> {
                           },
                                                       
                         ),
+                        IconButton(onPressed: (){
+                                  //
+                                }, 
+                                icon: Image.asset("assets/icons/delete.png",width: 25,height: 25, color: Colors.red.shade400)
+                                ), 
                       
                        ],
                        ),
@@ -736,7 +777,7 @@ class _viewInfoState extends State<NavigatorView> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: 440,
+                  height: 380,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -757,11 +798,13 @@ class _viewInfoState extends State<NavigatorView> {
                     SizedBox(
                       height: 30,
                     ),
-                    Text(
+                   Text(
                       "PASSAPORTO ANIMALE",
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.questrial(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     SizedBox(
                       height: 20,
@@ -906,9 +949,11 @@ class _viewInfoState extends State<NavigatorView> {
                       children: [
                         Text(
                           "LOCALIZZAZIONE",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                           textAlign: TextAlign.center,
+                          style: GoogleFonts.questrial(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         SizedBox(
                           height: 40,
@@ -1042,17 +1087,57 @@ class _viewInfoState extends State<NavigatorView> {
                 },
               ),
             ),
-            body: Stepper(
-              type: StepperType.horizontal,
-              steps: getSteps(snapshot.data!),
-              currentStep: currentStep,
-              onStepContinue: null,
-              onStepCancel: null,
-              onStepTapped: (step) =>
-                  setState(() {
-                    currentStep = step;
-                  }),
+            body: Container(
+        padding: EdgeInsets.only(bottom: 70),
+        child: Stepper(
+        type: StepperType.horizontal,
+        physics: ClampingScrollPhysics(),
+        steps: getSteps(snapshot.data!),
+        currentStep: currentStep,        
+         controlsBuilder: (BuildContext context, ControlsDetails controls) {
+            return Row(
+          mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+              onPressed: controls.onStepCancel,             
+             icon: Image.asset("assets/icons/back.png",color:Colors.lightGreen,width: 25,height: 25,),            
             ),
+                      
+            IconButton(
+              padding: EdgeInsets.only(top: 15),
+              onPressed: controls.onStepContinue,
+             icon: Image.asset("assets/icons/next.png",color:Colors.lightGreen,width: 25,height: 25,),            
+            ),
+          
+          ],
+        );
+        },     
+        onStepContinue: (){
+          setState(() {
+             if(currentStep < (getSteps(snapshot.data!).length-1)){
+              currentStep +=1;
+             }
+             return;
+          });
+         
+        },
+        onStepCancel: (){ 
+          setState(() {
+            if(currentStep == 0){
+            return null;
+
+            }
+          currentStep -=1;
+          });         
+        },
+        onStepTapped: (step) => setState(() {
+          currentStep = step;
+        }),
+        
+      ),
+      ),
           );
         }
         return SizedBox(
