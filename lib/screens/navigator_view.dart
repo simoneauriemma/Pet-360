@@ -175,10 +175,10 @@ class _viewInfoState extends State<NavigatorView> {
               TextButton(
                   onPressed: () {
                     // Remove the animal
+                    removeAnimal();
                   Navigator.push(
                    context,
-                   MaterialPageRoute(builder: (context) => Dashboard()));
-
+                   MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
                   child: Text('Sì')),
               TextButton(
@@ -303,8 +303,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 },
                                 ),  
                               ),*/
-                              
-                              
+
+
                           
                           SizedBox(
                             width: 280,
@@ -320,8 +320,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  //labelText: "Nome",
-                                  hintText: data.booklet.animalName,
+                                  labelText: "Nome",
                                 )),
                           ),
                           SizedBox(
@@ -343,8 +342,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  //labelText: "Data di nascita",
-                                  hintText: data.booklet.animalBirthday,
+                                  labelText: "Data di nascita",
                                 ),
                                 onTap: () async {
                                   var date = await showDatePicker(
@@ -374,8 +372,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  //labelText: "Specie",
-                                  hintText: data.booklet.animalSpecie,
+                                  labelText: "Specie",
                                 )),
                           ),
                           SizedBox(
@@ -396,8 +393,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  //labelText: "Razza",
-                                  hintText: data.booklet.animalKind,
+                                  labelText: "Razza",
                                 )),
                           ),
                           SizedBox(
@@ -418,8 +414,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  //labelText: "Colore",
-                                  hintText: data.booklet.animalColor,
+                                  labelText: "Colore",
                                 )),
                           ),
                           SizedBox(
@@ -440,8 +435,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.transparent,
-                                  //labelText: "Nome veterinario",
-                                  hintText: data.booklet.animalVeterinaryName,
+                                  labelText: "Nome veterinario",
                                 )),
                           ),                          
                         ],
@@ -782,8 +776,7 @@ class _viewInfoState extends State<NavigatorView> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
-                            //labelText: "Descrizione animale",
-                            hintText: data.passport.animalDescription,
+                            labelText: "Descrizione animale",
                           )),
                     ),
                     // ),
@@ -805,8 +798,7 @@ class _viewInfoState extends State<NavigatorView> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
-                            //labelText: "N° microchip",
-                            hintText: data.passport.animalMicrochip,
+                            labelText: "N° microchip",
                           )),
                     ),
                     SizedBox(
@@ -828,8 +820,7 @@ class _viewInfoState extends State<NavigatorView> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.transparent,
-                          //labelText: "Data applicazione microchip",
-                          hintText: data.passport.animalDateMicrochip,
+                          labelText: "Data applicazione microchip",
                         ),
                         onTap: () async {
                           var date = await showDatePicker(
@@ -862,8 +853,7 @@ class _viewInfoState extends State<NavigatorView> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
-                            //labelText: "Ente rilasciante",
-                            hintText: data.passport.animalIssuingAnimal,
+                            labelText: "Ente rilasciante",
                           )),
                     ),
                   ]),
@@ -1031,6 +1021,16 @@ class _viewInfoState extends State<NavigatorView> {
       future: futureAnimal,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          nameController.text = snapshot.data!.booklet.animalName;
+          dataController.text = snapshot.data!.booklet.animalBirthday;
+          specieController.text = snapshot.data!.booklet.animalSpecie;
+          razzaController.text = snapshot.data!.booklet.animalKind;
+          coloreController.text = snapshot.data!.booklet.animalColor;
+          nomeVeterController.text = snapshot.data!.booklet.animalVeterinaryName;
+          descrizioneController.text = snapshot.data!.passport.animalDescription;
+          microchipController.text = snapshot.data!.passport.animalMicrochip;
+          dataMicrochipController.text = snapshot.data!.passport.animalDateMicrochip;
+          enteController.text = snapshot.data!.passport.animalIssuingAnimal;
           return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
@@ -1079,6 +1079,30 @@ class _viewInfoState extends State<NavigatorView> {
     }
   }
 
+  Future<void> removePhoto(String filePath) async {
+    try {
+      if (filePath.split("/").last != "dog.png") {
+        await firebase_storage.FirebaseStorage.instance
+            .ref('uploads/' + filePath.split("/").last)
+            .delete();
+      }
+    } on firebase_storage.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+    }
+  }
+
+  removeAnimal(){
+    final DBRef = FirebaseDatabase.instance
+        .reference()
+        .child(UserSharedPreferences.getTypeOfUser().toString());
+    DBRef.child(_auth.currentUser!.uid.toString() +
+        "/Animali/" +
+        UserSharedPreferences.getAnimalName().toString()).remove();
+    if (pickedImage != null) {
+      removePhoto(pickedImage!.path);
+    }
+  }
+
   saveData(
       String animalName,
       String animalBirthday,
@@ -1112,13 +1136,15 @@ class _viewInfoState extends State<NavigatorView> {
       'animalColor': animalColor,
       'animalVeterinaryName': animalVeterinaryName,
     });
-    if (lstVaccines.isNotEmpty) {
+    DBRef.child(_auth.currentUser!.uid.toString() +
+        "/Animali/" +
+        UserSharedPreferences.getAnimalName().toString()+"/Vaccini").remove();
       for (int i = 0; i < lstVaccines.length; i++) {
         DBRef.child(_auth.currentUser!.uid.toString() +
                 "/Animali/" +
                 animalName +
                 "/Vaccini/" +
-                i.toString())
+                "Vaccino_"+i.toString())
             .set({
           'vaccineType': lstVaccines[i].vaccineType,
           'medicine': lstVaccines[i].medicine,
@@ -1134,7 +1160,7 @@ class _viewInfoState extends State<NavigatorView> {
                 "/Animali/" +
                 animalName +
                 "/Vaccini/" +
-                lstVaccines.length.toString())
+                "Vaccino_"+lstVaccines.length.toString())
             .set({
           'vaccineType': tipoVaccinoController.text,
           'medicine': farmacoSommController.text,
@@ -1143,24 +1169,6 @@ class _viewInfoState extends State<NavigatorView> {
         });
       }
       lstVaccines.clear();
-    } else {
-      if (nomeVeterController.text != "" ||
-          dataSommController.text != "" ||
-          tipoVaccinoController.text != "" ||
-          farmacoSommController.text != "") {
-        DBRef.child(_auth.currentUser!.uid.toString() +
-                "/Animali/" +
-                animalName +
-                "/Vaccini/" +
-                lstVaccines.length.toString())
-            .set({
-          'vaccineType': tipoVaccinoController.text,
-          'medicine': farmacoSommController.text,
-          'date': dataSommController.text,
-          'veterinaryName': nomeVeterController.text,
-        });
-      }
-    }
     DBRef.child(_auth.currentUser!.uid.toString() +
             "/Animali/" +
             animalName +
@@ -1176,8 +1184,8 @@ class _viewInfoState extends State<NavigatorView> {
             animalName +
             "/Dispositivi")
         .set({
-      'airTag1': airTag1,
-      'airTag2': airTag2,
+      'airTag1': "dispositivo1",
+      'airTag2': "dispositivo2",
     });
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
