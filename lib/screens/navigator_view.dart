@@ -13,7 +13,6 @@ import 'package:pet360/model/booklet.dart';
 import 'package:pet360/model/new_vaccine.dart';
 import 'package:pet360/model/passport.dart';
 import 'package:pet360/model/view_all_info_animal.dart';
-import 'package:pet360/screens/dashboard.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 import 'package:http/http.dart' as http;
@@ -526,6 +525,24 @@ class _viewInfoState extends State<NavigatorView> {
                                         style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 13.0)),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                        " " +
+                                            lstVaccines[index].medicine.toString(),
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 13.0)),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                        " " +
+                                            lstVaccines[index].veterinaryName.toString(),
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 13.0)),
                                   ],
                                 ),
                         SizedBox(width: 40,),                       
@@ -649,15 +666,14 @@ class _viewInfoState extends State<NavigatorView> {
                                         child: ElevatedButton(
                                           onPressed: () {     
                                             //salva modifiche info vaccini                                       
-                                            NewVaccine tmp = NewVaccine();
-                                            tmp.veterinaryName =
+                                            lstVaccines[index].veterinaryName =
                                                 nomeVeterController.text;
-                                            tmp.date = dataSommController.text;
-                                            tmp.vaccineType =
+                                            lstVaccines[index].date =
+                                                dataSommController.text;
+                                            lstVaccines[index].vaccineType =
                                                 tipoVaccinoController.text;
-                                            tmp.medicine =
+                                            lstVaccines[index].medicine =
                                                 farmacoSommController.text;
-                                            lstVaccines.add(tmp);
                                             nomeVeterController.text = "";
                                             dataSommController.text = "";
                                             tipoVaccinoController.text = "";
@@ -978,16 +994,6 @@ class _viewInfoState extends State<NavigatorView> {
                         microchipController.text,
                         dataMicrochipController.text,
                         enteController.text);
-                    nameController.text = "";
-                    dataController.text = "";
-                    specieController.text = "";
-                    razzaController.text = "";
-                    coloreController.text = "";
-                    veterinarioController.text = "";
-                    descrizioneController.text = "";
-                    microchipController.text = "";
-                    dataMicrochipController.text = "";
-                    enteController.text = "";
                   },
                  child: ConstrainedBox(
                 constraints: BoxConstraints.tightFor(
@@ -1021,16 +1027,6 @@ class _viewInfoState extends State<NavigatorView> {
       future: futureAnimal,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          nameController.text = snapshot.data!.booklet.animalName;
-          dataController.text = snapshot.data!.booklet.animalBirthday;
-          specieController.text = snapshot.data!.booklet.animalSpecie;
-          razzaController.text = snapshot.data!.booklet.animalKind;
-          coloreController.text = snapshot.data!.booklet.animalColor;
-          nomeVeterController.text = snapshot.data!.booklet.animalVeterinaryName;
-          descrizioneController.text = snapshot.data!.passport.animalDescription;
-          microchipController.text = snapshot.data!.passport.animalMicrochip;
-          dataMicrochipController.text = snapshot.data!.passport.animalDateMicrochip;
-          enteController.text = snapshot.data!.passport.animalIssuingAnimal;
           return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
@@ -1114,6 +1110,10 @@ class _viewInfoState extends State<NavigatorView> {
       String animalMicrochip,
       String animalDateMicrochip,
       String entityIssuingAnimal) {
+    if(animalName != UserSharedPreferences.getAnimalName().toString()){
+      removeAnimal();
+    }
+
     String path = "";
     if (pickedImage != null) {
       path = pickedImage!.path;
@@ -1150,22 +1150,6 @@ class _viewInfoState extends State<NavigatorView> {
           'medicine': lstVaccines[i].medicine,
           'date': lstVaccines[i].date,
           'veterinaryName': lstVaccines[i].veterinaryName,
-        });
-      }
-      if (nomeVeterController.text != "" ||
-          dataSommController.text != "" ||
-          tipoVaccinoController.text != "" ||
-          farmacoSommController.text != "") {
-        DBRef.child(_auth.currentUser!.uid.toString() +
-                "/Animali/" +
-                animalName +
-                "/Vaccini/" +
-                "Vaccino_"+lstVaccines.length.toString())
-            .set({
-          'vaccineType': tipoVaccinoController.text,
-          'medicine': farmacoSommController.text,
-          'date': dataSommController.text,
-          'veterinaryName': nomeVeterController.text,
         });
       }
       lstVaccines.clear();
@@ -1208,27 +1192,39 @@ class _viewInfoState extends State<NavigatorView> {
       pickedImage = File(jsonBody['Libretto']['animalFoto']);
       animal.booklet = Booklet(jsonBody['Libretto']['animalBirthday'],jsonBody['Libretto']['animalColor'],jsonBody['Libretto']['animalKind'],jsonBody['Libretto']['animalName'],jsonBody['Libretto']['animalSpecie'],jsonBody['Libretto']['animalVeterinaryName']);
       animal.passport = Passport(jsonBody['Passaporto']['animalDateMicrochip'],jsonBody['Passaporto']['animalDescription'],jsonBody['Passaporto']['animalMicrochip'],jsonBody['Passaporto']['entityIssuingAnimal']);
-      url = Uri.parse(
-          "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
-              typeOfUser +
-              "//" +
-              uidUser +
-              "//" +
-              path+"//Vaccini//" +
-              ".json?");
-      final response2 = await http.get(url);
-      if (response2.statusCode == 200) {
-        dynamic json = jsonDecode(response2.body);
-        json.forEach((key, value) {
-          NewVaccine vaccine = NewVaccine();
-          vaccine.veterinaryName = value["veterinaryName"];
-          vaccine.medicine = value["medicine"];
-          vaccine.date = value ["date"];
-          vaccine.vaccineType = value ["vaccineType"];
-          lstVaccines.add(vaccine);
-        });
-      } else {
-        throw Exception('Failed to load album');
+      nameController.text = animal.booklet.animalName;
+      dataController.text = animal.booklet.animalBirthday;
+      specieController.text = animal.booklet.animalSpecie;
+      razzaController.text = animal.booklet.animalKind;
+      coloreController.text = animal.booklet.animalColor;
+      veterinarioController.text = animal.booklet.animalVeterinaryName;
+      descrizioneController.text = animal.passport.animalDescription;
+      microchipController.text = animal.passport.animalMicrochip;
+      dataMicrochipController.text = animal.passport.animalDateMicrochip;
+      enteController.text = animal.passport.animalIssuingAnimal;
+      if(jsonBody['Vaccini'] != null){
+        url = Uri.parse(
+            "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
+                typeOfUser +
+                "//" +
+                uidUser +
+                "//" +
+                path+"//Vaccini//" +
+                ".json?");
+        final response2 = await http.get(url);
+        if (response2.statusCode == 200) {
+          dynamic json = jsonDecode(response2.body);
+          json.forEach((key, value) {
+            NewVaccine vaccine = NewVaccine();
+            vaccine.veterinaryName = value["veterinaryName"];
+            vaccine.medicine = value["medicine"];
+            vaccine.date = value ["date"];
+            vaccine.vaccineType = value ["vaccineType"];
+            lstVaccines.add(vaccine);
+          });
+        } else {
+          throw Exception('Failed to load album');
+        }
       }
       return animal;
     } else {
