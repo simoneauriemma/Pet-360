@@ -155,7 +155,8 @@ class _DashboardState extends State<Dashboard> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => NavigatorView()));
-                              UserSharedPreferences.setAnimalName(snapshot.data![index].animalName!);
+                              UserSharedPreferences.setAnimalName(
+                                  snapshot.data![index].animalName!);
                             },
                             child: Container(
                               width: 100,
@@ -192,16 +193,18 @@ class _DashboardState extends State<Dashboard> {
                         },
                       ),
                     ),
-                    //Spacer(),
-
+                    Spacer(),
                     Align(
-                      alignment: Alignment.center,
-                      child: Image.asset("assets/icons/logoPet360.png",
-                          height: size.width / 0.95,
-                          width: size.width / 2,
-                          color: const Color.fromRGBO(255, 255, 255, 0.4),
-                          colorBlendMode: BlendMode.modulate),
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/storyset/homeimg.png",
+                        height: size.width / 2,
+                        width: size.width / 2,
+                      ),
                     ),
+                    const Padding(
+                        padding: EdgeInsets.only(
+                            left: 0, right: 0, top: 0, bottom: 80)),
                   ],
                 ),
               ),
@@ -310,7 +313,7 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ],
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Clicca su '+' per aggiungere un animale da gestire!",
                         textAlign: TextAlign.center,

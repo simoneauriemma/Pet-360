@@ -258,22 +258,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             final cancellaAccount = GestureDetector(
               onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(32.0))),
+                      title: Text(
+                        "Sei sicuro/a di voler eliminare questo account?",
+                        textAlign: TextAlign.center,
+                      ),
+                      actions: [
+                        //"Si" button
+                        TextButton(
+                          onPressed: () {
+                            eliminateAccount();
+                          },
+                          child: Text(
+                            'Sì',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Close the dialog
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'No',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
                 eliminateAccount();
               },
               child: Row(
                 children: const [
-                  ImageIcon(
-                    AssetImage("assets/icons/delete.png"),
-                    color: Colors.redAccent,
-                    size: 20,
-                  ),
-                  SizedBox(width: 8),
                   Text(
                     "Cancella account",
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18, color: Colors.redAccent),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
-                  
+                  SizedBox(width: 8),
+                  ImageIcon(
+                    AssetImage("assets/icons/delete.png"),
+                    color: Colors.black,
+                    size: 20,
+                  ),
                 ],
               ),
             );
@@ -284,18 +320,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Row(
                 children: const [
-                  ImageIcon(
-                    AssetImage("assets/icons/logout.png"),
-                    color: Colors.black,
-                    size: 18,
-                  ),
-                  SizedBox(width: 8,),
                   Text(
                     "Logout",
                     textAlign: TextAlign.left,
                     style: TextStyle(fontSize: 18),
                   ),
-                  
+                  SizedBox(
+                    width: 8,
+                  ),
+                  ImageIcon(
+                    AssetImage("assets/icons/logout.png"),
+                    color: Colors.black,
+                    size: 18,
+                  ),
+                ],
+              ),
+            );
+
+            final linguaButton = GestureDetector(
+              onTap: () {
+                //
+              },
+              child: Row(
+                children: [
+                  Text(
+                    "Lingua",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Image.asset(
+                    "assets/icons/italy.png",
+                    height: 30,
+                    width: 30,
+                  ),
                 ],
               ),
             );
@@ -318,12 +378,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textAlign: TextAlign.center,
                       ),
                       content: Container(
-                        height: 100.0,
+                        height: MediaQuery.of(context).size.height / 5.5,
+                        // width: MediaQuery.of(context).size.width / 1.2,
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            logoutButton,
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                            linguaButton,
                             const Divider(
                               color: Colors.black,
                               //height: 20,
@@ -331,7 +392,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               indent: 3,
                               endIndent: 3,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                            logoutButton,
+                            const Divider(
+                              color: Colors.black,
+                              //height: 20,
+                              thickness: 1,
+                              indent: 3,
+                              endIndent: 3,
+                            ),
                             cancellaAccount,
                           ],
                         ),
@@ -563,7 +631,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 body: SingleChildScrollView(
-                    child: Form(
+                  child: Form(
                     key: _formkey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -629,7 +697,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Container(
                             padding: EdgeInsets.only(top: 20),
                             width: MediaQuery.of(context).size.width * 1.2,
-                            height: 850,
+                            height: MediaQuery.of(context).size.width * 2.2,
                             //sfondo con sfocatura
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -659,12 +727,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 SizedBox(height: 20),
                                 SizedBox(width: 320, child: cityField),
                                 SizedBox(height: 20),
-                                Padding(padding: EdgeInsets.only(top: 20)),
+                                SizedBox(
+                                  height: 20,
+                                ),
                                 Text(
                                   "Informazioni aggiuntive",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18),
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 SizedBox(width: 320, child: nameShop),
                                 SizedBox(height: 30),
@@ -675,7 +748,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 SizedBox(width: 320, child: addressShop),
                                 SizedBox(height: 50),
                                 SizedBox(width: 320, child: modifyButton),
-                                SizedBox(height: 50),
+                                SizedBox(height: 100),
                               ],
                             )),
                       ],
@@ -705,122 +778,128 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 body: SingleChildScrollView(
-                    child: Form(
+                  child: Form(
                     key: _formkey,
                     child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Stack(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.shade300, width: 3),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(100)),
-                                    color: Colors.grey.shade200,
-                                  ),
-                                  child: ClipOval(
-                                    child: pickedImage != null
-                                        ? Image.file(
-                                            pickedImage!,
-                                            width: 100,
-                                            height: 100,
-                                            fit: BoxFit.cover,
-                                          )
-                                        :
-                                        //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                        SizedBox(
-                                            child: Image.asset(
-                                                "assets/icons/user_default.png"),
-                                          ),
-                                  ),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: 20),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade300, width: 3),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
+                                  color: Colors.grey.shade200,
                                 ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 2,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      imagePickerOption();
-                                    },
-                                    icon: const Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.black,
-                                      size: 35,
-                                    ),
-                                  ),
+                                child: ClipOval(
+                                  child: pickedImage != null
+                                      ? Image.file(
+                                          pickedImage!,
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        )
+                                      :
+                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                      SizedBox(
+                                          child: Image.asset(
+                                              "assets/icons/user_default.png"),
+                                        ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.only(bottom: 10)),
-                          Text(
-                            snapshot.data!.getFirstName() +
-                                " " +
-                                snapshot.data!.getSurnameName(),
-                            style: GoogleFonts.questrial(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.only(bottom: 30)),
-                          Container(
-                              padding: EdgeInsets.only(top: 20),
-                              width: MediaQuery.of(context).size.width,
-                              height: 850,
-                              //sfondo con sfocatura
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ],
                               ),
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 50),
-                                  SizedBox(width: 320, child: nameField),
-                                  SizedBox(height: 20),
-                                  SizedBox(width: 320, child: surnameField),
-                                  SizedBox(height: 20),
-                                  SizedBox(width: 320, child: emailField),
-                                  SizedBox(height: 20),
-                                  SizedBox(width: 320, child: cityField),
-                                  SizedBox(height: 20),
-                                  Padding(padding: EdgeInsets.only(top: 20)),
-                                  Text(
-                                    "Informazioni aggiuntive",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                              Positioned(
+                                bottom: 0,
+                                right: 2,
+                                child: IconButton(
+                                  onPressed: () {
+                                    imagePickerOption();
+                                  },
+                                  icon: const Icon(
+                                    Icons.camera_alt,
+                                    color: Colors.black,
+                                    size: 35,
                                   ),
-                                  SizedBox(width: 320, child: nameShop),
-                                  SizedBox(height: 30),
-                                  SizedBox(width: 320, child: cityShop),
-                                  SizedBox(height: 30),
-                                  SizedBox(width: 320, child: phoneNumber),
-                                  SizedBox(height: 30),
-                                  SizedBox(width: 320, child: addressShop),
-                                  SizedBox(height: 50),
-                                  SizedBox(width: 320, child: modifyButton),
-                                  SizedBox(height: 50),
-                                ],
-                              )),
-                        ]),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 10)),
+                        Text(
+                          snapshot.data!.getFirstName() +
+                              " " +
+                              snapshot.data!.getSurnameName(),
+                          style: GoogleFonts.questrial(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 30)),
+                        Container(
+                          padding: EdgeInsets.only(top: 20),
+                          width: MediaQuery.of(context).size.width * 1.2,
+                          height: MediaQuery.of(context).size.width * 2.2,
+                          //sfondo con sfocatura
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 50),
+                              SizedBox(width: 320, child: nameField),
+                              SizedBox(height: 20),
+                              SizedBox(width: 320, child: surnameField),
+                              SizedBox(height: 20),
+                              SizedBox(width: 320, child: emailField),
+                              SizedBox(height: 20),
+                              SizedBox(width: 320, child: cityField),
+                              SizedBox(height: 20),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Informazioni aggiuntive",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(width: 320, child: nameShop),
+                              SizedBox(height: 30),
+                              SizedBox(width: 320, child: cityShop),
+                              SizedBox(height: 30),
+                              SizedBox(width: 320, child: phoneNumber),
+                              SizedBox(height: 30),
+                              SizedBox(width: 320, child: addressShop),
+                              SizedBox(height: 50),
+                              SizedBox(width: 320, child: modifyButton),
+                              SizedBox(height: 80),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -944,8 +1023,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Padding(padding: EdgeInsets.only(top: 20)),
                               Text(
                                 "Informazioni aggiuntive",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
+                                style: GoogleFonts.questrial(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               SizedBox(width: 320, child: nameShop),
                               SizedBox(height: 30),

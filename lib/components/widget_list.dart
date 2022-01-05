@@ -28,6 +28,7 @@ class WidgetList extends StatelessWidget {
         children: [
           Container(
             //margin: EdgeInsets.only(left: 20, right: 20),
+            width: MediaQuery.of(context).size.width / 1.1,
             padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -115,177 +116,133 @@ class WidgetList extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                /*ConstrainedBox(
-            constraints: BoxConstraints.tightFor(width: 60, height: 40),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Chatting_screen()),
-                        (route) => false);
-              },
-              child: Row(
-                children: [
-                  ImageIcon(
-                    AssetImage("assets/icons/messager2.png"),
-                    color: Colors.black,
-                    size: 25,
-                  ),
-                ],
-              ),
-              style: ElevatedButton.styleFrom(
-               // onPrimary: Colors.black,
-                shadowColor: Colors.transparent,
-                primary: Colors.white,
-              ),
-            ),
-          ), */
-                ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 50, height: 40),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(32.0))),
-                            content: Container(
-                              height: 190.0,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    name + " " + surname,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.lightGreen,
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0))),
+                          content: Container(
+                            height: MediaQuery.of(context).size.height / 3.3,
+                            child: Column(
+                              children: [
+                                Text(
+                                  name + " " + surname,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.lightGreen,
+                                  ),
+                                ),
+                                Padding(padding: EdgeInsets.only(bottom: 30)),
+                                Row(
+                                  children: [
+                                    Text("Nome negozio:",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[800],
+                                        )),
+                                    Text(shopname,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Colors.grey[800],
+                                        )),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Cellulare: ",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[800],
+                                        )),
+                                    Text(phonenum,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Colors.grey[800],
+                                        )),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Indirizzo: ",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[800],
+                                        )),
+                                    Text(indirizzo,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Colors.grey[800],
+                                        )),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text("Voto: ",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[800],
+                                        )),
+                                    Text(voto,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Colors.grey[800],
+                                        )),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(bottom: 20),
+                                ),
+                                ConstrainedBox(
+                                  constraints: const BoxConstraints.tightFor(
+                                      width: 140, height: 50),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      UserSharedPreferences.setNameChat(
+                                          name.toString());
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Chatting_screen()),
+                                          (route) => false);
+                                    },
+                                    child: Row(
+                                      children: const [
+                                        Text("Chatta ora  "),
+                                        ImageIcon(
+                                          AssetImage(
+                                              "assets/icons/messager2.png"),
+                                          color: Colors.black,
+                                          size: 15,
+                                        ),
+                                      ],
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      onPrimary: Colors.black,
+                                      primary: Colors.white,
+                                      minimumSize: Size(40, 40),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
                                     ),
                                   ),
-                                  Padding(padding: EdgeInsets.only(bottom: 30)),
-                                  Row(
-                                    children: [
-                                      Text("Nome negozio:",
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey[800],
-                                          )),
-                                      Text(shopname,
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.grey[800],
-                                          )),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Cellulare: ",
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey[800],
-                                          )),
-                                      Text(phonenum,
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.grey[800],
-                                          )),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Indirizzo: ",
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey[800],
-                                          )),
-                                      Text(indirizzo,
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.grey[800],
-                                          )),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Voto: ",
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey[800],
-                                          )),
-                                      Text(voto,
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.grey[800],
-                                          )),
-                                    ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(bottom: 20),
-                                  ),
-                                  ConstrainedBox(
-                                    constraints: const BoxConstraints.tightFor(
-                                        width: 120, height: 40),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        UserSharedPreferences.setNameChat(
-                                            name.toString());
-                                        Navigator.of(context)
-                                            .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Chatting_screen()),
-                                                (route) => false);
-                                      },
-                                      child: Row(
-                                        children: const [
-                                          Text("Chatta ora  "),
-                                          ImageIcon(
-                                            AssetImage(
-                                                "assets/icons/messager2.png"),
-                                            color: Colors.black,
-                                            size: 15,
-                                          ),
-                                        ],
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        onPrimary: Colors.black,
-                                        primary: Colors.white,
-                                        minimumSize: Size(40, 40),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                      );
-                    },
-                    child: Row(
-                      children: const [
-                        ImageIcon(
-                          AssetImage("assets/icons/information.png"),
-                          color: Colors.black,
-                          size: 18,
-                        ),
-                      ],
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                    ),
-                  ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  icon: Icon(Icons.info_outline_rounded),
                 ),
               ],
             ),

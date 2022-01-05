@@ -1123,7 +1123,7 @@ class _addInfoState extends State<NavigatorAdd> {
           },
         ),
       ),
-      body: Stepper(
+      /*body: Stepper(
         type: StepperType.horizontal,
         steps: getSteps(),
         currentStep: currentStep,
@@ -1166,8 +1166,8 @@ class _addInfoState extends State<NavigatorAdd> {
         },
         onStepTapped: (step) => setState(() {
           currentStep = step;
-        }),        
-      ),      
+        }),
+      ), */
     );
   }
 
