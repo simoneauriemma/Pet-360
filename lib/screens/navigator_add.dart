@@ -729,7 +729,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                         builder: (BuildContext context) {
                                           return AlertDialog(
                                             title: Text(
-                                              "Aggiungi informazioni sul vaccino",
+                                              "Modifica informazioni del vaccino",
                                               textAlign: TextAlign.center,
                                               style: GoogleFonts.questrial(
                                                 fontSize: 20,
@@ -886,8 +886,6 @@ class _addInfoState extends State<NavigatorAdd> {
                                                             height: 40),
                                                     child: ElevatedButton(
                                                       onPressed: () {
-                                                        debugPrint(
-                                                            "Add new vax");
                                                         NewVaccine tmp =
                                                             NewVaccine();
                                                         tmp.veterinaryName =
@@ -902,6 +900,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                         tmp.medicine =
                                                             farmacoSommController
                                                                 .text;
+                                                        lstVaccines.removeAt(index);
                                                         lstVaccines.add(tmp);
                                                         nomeVeterController
                                                             .text = "";
@@ -924,7 +923,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Text("Aggiungi  ",
+                                                          Text("Salva Modifiche  ",
                                                               style: GoogleFonts
                                                                   .questrial(
                                                                 fontSize: 15,
@@ -963,7 +962,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                         width: 23, height: 23)),
                                 IconButton(
                                     onPressed: () {
-                                      //
+                                      lstVaccines.removeAt(index);
                                     },
                                     icon: Image.asset("assets/icons/delete.png",
                                         width: 25,
