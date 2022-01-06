@@ -19,6 +19,7 @@ class _IAscreenState extends State<IAscreen> {
   Future<void>main()async{
     WidgetsFlutterBinding.ensureInitialized();
     cameras= await availableCameras();
+    runApp(IAscreen());
   }
 
   bool isWorking=false;
@@ -38,6 +39,7 @@ class _IAscreenState extends State<IAscreen> {
         if(!isWorking){
           isWorking=true,
           imgCamera=imageFromStream,
+          runModelOnStreamFrames(),
         }
       });
     });
@@ -78,7 +80,7 @@ Future loadImageModel() async {
         result="";
 
         recognitions!.forEach((response) { 
-          result+=response["labels"] + "  " + (response["confidence"] as double).toStringAsFixed(2)+ "\n\n";
+          result+=response["label"] + "  " + (response["confidence"] as double).toStringAsFixed(2)+ "\n\n";
         });
         setState(() {
           result;
@@ -97,7 +99,8 @@ Future loadImageModel() async {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(child:
+    Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text("Riconoscimento"),
@@ -165,6 +168,7 @@ Future loadImageModel() async {
           ],
         ),
       )
+    ),
     );
   }
 }
