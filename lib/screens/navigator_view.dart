@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -8,6 +9,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:pet360/model/booklet.dart';
 import 'package:pet360/model/new_vaccine.dart';
@@ -15,10 +18,6 @@ import 'package:pet360/model/passport.dart';
 import 'package:pet360/model/view_all_info_animal.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:http/http.dart' as http;
-import 'package:google_fonts/google_fonts.dart';
-
-
 
 //campi di aggiunta info animale
 final nameController = new TextEditingController();
@@ -214,19 +213,19 @@ class _viewInfoState extends State<NavigatorView> {
               SizedBox(height: 20,),
                   Container(
                       padding: EdgeInsets.only(top: 20),
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      height: 770,
-                      //sfondo con sfocatura
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  height: MediaQuery.of(context).size.height * 1.15,
+                  //sfondo con sfocatura
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
                             spreadRadius: 5,
                             blurRadius: 7,
                             offset: Offset(0, 3), // changes position of shadow
@@ -294,9 +293,7 @@ class _viewInfoState extends State<NavigatorView> {
                                   ),
                                 ],
                               )),
-                             
-                                                       
-                          SizedBox(
+                      SizedBox(
                             width: 280,
                             child: TextFormField(
                                 autofocus: false,
@@ -484,7 +481,7 @@ class _viewInfoState extends State<NavigatorView> {
           content: Column(children: [
             Container(
               width: MediaQuery.of(context).size.width / 1.1,
-              height: 480,
+              height: MediaQuery.of(context).size.height * 0.55,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.only(
@@ -982,7 +979,7 @@ class _viewInfoState extends State<NavigatorView> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: 380,
+                  height: MediaQuery.of(context).size.height * 0.57,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -1131,7 +1128,7 @@ class _viewInfoState extends State<NavigatorView> {
               children: [
                 Container(
                     width: MediaQuery.of(context).size.width / 1.1,
-                    height: 300,
+                    height: MediaQuery.of(context).size.height * 0.45,
                     padding: EdgeInsets.only(top: 30),
                     decoration: BoxDecoration(
                       color: Colors.white,

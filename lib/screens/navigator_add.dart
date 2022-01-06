@@ -165,7 +165,7 @@ class _addInfoState extends State<NavigatorAdd> {
               Container(
                   padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: 750,
+                  height: MediaQuery.of(context).size.height * 1.1,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
