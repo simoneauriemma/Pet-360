@@ -157,7 +157,10 @@ class _Chatting_screenState extends State<Chatting_screen> {
       ),
       body: Stack(
         children: <Widget>[
-          ShowMessages(),
+          Container(
+              height: MediaQuery.of(context).size.height / 1.3,
+              child:
+                  SingleChildScrollView(reverse: true, child: ShowMessages())),
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
