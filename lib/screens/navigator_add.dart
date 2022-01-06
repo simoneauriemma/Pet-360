@@ -165,7 +165,7 @@ class _addInfoState extends State<NavigatorAdd> {
               Container(
                   padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.1,
+                  height: 750,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -404,6 +404,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                 TextStyle(fontSize: 16, color: Colors.black54),
                           ),
                           Radio(
+                            activeColor: Colors.lightGreen,
                             value: 1,
                             groupValue: _value,
                             onChanged: (value) {
@@ -414,6 +415,7 @@ class _addInfoState extends State<NavigatorAdd> {
                           ),
                           Text("M"),
                           Radio(
+                            activeColor: Colors.lightGreen,
                             value: 2,
                             groupValue: _value,
                             onChanged: (value) {
@@ -989,7 +991,7 @@ class _addInfoState extends State<NavigatorAdd> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 0.56,
+                  height: 400,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
