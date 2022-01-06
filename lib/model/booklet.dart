@@ -5,9 +5,23 @@ class Booklet {
   late String _animalName;
   late String _animalSpecie;
   late String _animalVeterinaryName;
+  late String _animalSesso;
+  late String _animalSoprannome;
 
   Booklet(this._animalBirthday, this._animalColor, this._animalKind,
-      this._animalName, this._animalSpecie, this._animalVeterinaryName);
+      this._animalName, this._animalSpecie, this._animalVeterinaryName,this._animalSesso,this._animalSoprannome);
+
+  String get animalSoprannome => _animalSoprannome;
+
+  set animalSoprannome(String value) {
+    _animalSoprannome = value;
+  }
+
+  String get animalSesso => _animalSesso;
+
+  set animalSesso(String value) {
+    _animalSesso = value;
+  }
 
   String get animalVeterinaryName => _animalVeterinaryName;
 

@@ -1186,7 +1186,7 @@ class _viewInfoState extends State<NavigatorView> {
                           ),
                           onPressed: () {
                             //
-                            airTag1 = "1 dispositivo"; //TODO DA CAMBIARE
+                            airTag1 = "1 dispositivo";
                           },
                         ),
                         Positioned(
@@ -1213,7 +1213,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                           onPressed: () {                            
-                            airTag2 = "2 dispositivo"; //TODO DA CAMBIARE
+                            airTag2 = "2 dispositivo";
                           },
                         ),
                         Positioned(
@@ -1243,7 +1243,8 @@ class _viewInfoState extends State<NavigatorView> {
                         descrizioneController.text,
                         microchipController.text,
                         dataMicrochipController.text,
-                        enteController.text);
+                        enteController.text,
+                    soprannomeController.text);
                   },
                  child: ConstrainedBox(
                 constraints: BoxConstraints.tightFor(
@@ -1399,7 +1400,8 @@ class _viewInfoState extends State<NavigatorView> {
       String animalDescription,
       String animalMicrochip,
       String animalDateMicrochip,
-      String entityIssuingAnimal) {
+      String entityIssuingAnimal,
+      String animalSoprannome) {
     if(animalName != UserSharedPreferences.getAnimalName().toString()){
       removeAnimal();
     }
@@ -1408,6 +1410,10 @@ class _viewInfoState extends State<NavigatorView> {
     if (pickedImage != null) {
       path = pickedImage!.path;
       uploadFile(path);
+    }
+    String sesso = "M";
+    if(_value == 2){
+      sesso = "F";
     }
 
     final DBRef = FirebaseDatabase.instance
@@ -1425,6 +1431,8 @@ class _viewInfoState extends State<NavigatorView> {
       'animalKind': animalKind,
       'animalColor': animalColor,
       'animalVeterinaryName': animalVeterinaryName,
+      'animalSoprannome': animalSoprannome,
+      'animalSesso': sesso,
     });
     DBRef.child(_auth.currentUser!.uid.toString() +
         "/Animali/" +
@@ -1480,7 +1488,7 @@ class _viewInfoState extends State<NavigatorView> {
       jsonBody = json.decode(response.body);
       ViewAllInfoAnimal animal = ViewAllInfoAnimal();
       pickedImage = File(jsonBody['Libretto']['animalFoto']);
-      animal.booklet = Booklet(jsonBody['Libretto']['animalBirthday'],jsonBody['Libretto']['animalColor'],jsonBody['Libretto']['animalKind'],jsonBody['Libretto']['animalName'],jsonBody['Libretto']['animalSpecie'],jsonBody['Libretto']['animalVeterinaryName']);
+      animal.booklet = Booklet(jsonBody['Libretto']['animalBirthday'],jsonBody['Libretto']['animalColor'],jsonBody['Libretto']['animalKind'],jsonBody['Libretto']['animalName'],jsonBody['Libretto']['animalSpecie'],jsonBody['Libretto']['animalVeterinaryName'],jsonBody['Libretto']['animalSesso'],jsonBody['Libretto']['animalSoprannome']);
       animal.passport = Passport(jsonBody['Passaporto']['animalDateMicrochip'],jsonBody['Passaporto']['animalDescription'],jsonBody['Passaporto']['animalMicrochip'],jsonBody['Passaporto']['entityIssuingAnimal']);
       nameController.text = animal.booklet.animalName;
       dataController.text = animal.booklet.animalBirthday;
@@ -1492,6 +1500,12 @@ class _viewInfoState extends State<NavigatorView> {
       microchipController.text = animal.passport.animalMicrochip;
       dataMicrochipController.text = animal.passport.animalDateMicrochip;
       enteController.text = animal.passport.animalIssuingAnimal;
+      soprannomeController.text = animal.booklet.animalSoprannome;
+      if(animal.booklet.animalSesso.toString() == "M"){
+        _value = 1;
+      } else {
+        _value = 2;
+      }
       if(jsonBody['Vaccini'] != null){
         url = Uri.parse(
             "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +

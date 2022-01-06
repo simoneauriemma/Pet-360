@@ -1278,7 +1278,9 @@ class _addInfoState extends State<NavigatorAdd> {
                         descrizioneController.text,
                         microchipController.text,
                         dataMicrochipController.text,
-                        enteController.text);
+                        enteController.text,
+                    soprannomeController.text,
+                        _value);
                     nameController.text = "";
                     dataController.text = "";
                     specieController.text = "";
@@ -1289,6 +1291,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     microchipController.text = "";
                     dataMicrochipController.text = "";
                     enteController.text = "";
+                    soprannomeController.text = "";
                   },
                   child: ConstrainedBox(
                     constraints: BoxConstraints.tightFor(
@@ -1485,7 +1488,13 @@ class _addInfoState extends State<NavigatorAdd> {
       String animalDescription,
       String animalMicrochip,
       String animalDateMicrochip,
-      String entityIssuingAnimal) {
+      String entityIssuingAnimal,
+      String animalSoprannome,
+      int _value) {
+    String sesso = "M";
+    if(_value == 2){
+      sesso = "F";
+    }
     String path = "";
     if (pickedImage != null) {
       path = pickedImage!.path;
@@ -1510,6 +1519,8 @@ class _addInfoState extends State<NavigatorAdd> {
       'animalKind': animalKind,
       'animalColor': animalColor,
       'animalVeterinaryName': animalVeterinaryName,
+      'animalSoprannome': animalSoprannome,
+      'animalSesso': sesso,
     });
     if (lstVaccines.isNotEmpty) {
       for (int i = 0; i < lstVaccines.length; i++) {
