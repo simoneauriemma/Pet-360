@@ -119,6 +119,10 @@ class _ListUtentiState extends State<ListUtenti> {
 
   Future<List<UserModel>> getUserList(
       String typeOfUser, String uidUser, String path) async {
+    /*var snapshot = await FirebaseFirestore.instance
+    .collection("Messages")
+    .where("receiver", isEqualTo: FirebaseAuth.instance.currentUser?.uid).snapshots();*/
+
     var url = Uri.parse(
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
             typeOfUser +

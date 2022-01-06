@@ -216,7 +216,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
     );
   }
 
-  void sendMessage() {
+  void sendMessage() async {
     if (msgController.text.isNotEmpty) {
       var groupId = _auth.currentUser!.uid.toString() +
           UserSharedPreferences.getUIDOfUser().toString();
@@ -224,6 +224,15 @@ class _Chatting_screenState extends State<Chatting_screen> {
       if (UserSharedPreferences.getTypeOfUser().toString() != "Utente") {
         groupId = UserSharedPreferences.getUIDOfUser().toString() +
             _auth.currentUser!.uid.toString();
+      }
+
+      //print(UserSharedPreferences.getFirstTimeChatting().toString());
+      if (UserSharedPreferences.getFirstTimeChatting() == true) {
+        await _firestore.collection("Messages").doc((groupId.toString())).set({
+          "sender": _auth.currentUser!.uid,
+          "receiver": UserSharedPreferences.getUIDOfUser()
+        });
+        UserSharedPreferences.setFirstTimeChatting(false);
       }
 
       _firestore

@@ -6,6 +6,7 @@ class UserSharedPreferences {
   static const _nameChat = 'nameChat';
   static const _nameOfUser = 'nameOfUser';
   static const _UIDOfUser = 'UIDOfUser';
+  static const _firstTimeChatting = "false";
 
   static const _animalName = 'animalName';
 
@@ -38,4 +39,10 @@ class UserSharedPreferences {
       await _preferences!.setString(_animalName, animalName);
 
   static String? getAnimalName() => _preferences!.getString(_animalName);
+
+  static Future setFirstTimeChatting(bool firstTimeChatting) async =>
+      await _preferences!.setBool(_firstTimeChatting, firstTimeChatting);
+
+  static bool? getFirstTimeChatting() =>
+      _preferences!.getBool(_firstTimeChatting);
 }

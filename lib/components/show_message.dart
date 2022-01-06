@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
@@ -17,7 +16,7 @@ class ShowMessages extends StatelessWidget {
           _auth.currentUser!.uid.toString();
     }
 
-    print(groupId);
+    //print(groupId);
 
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
@@ -32,15 +31,28 @@ class ShowMessages extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
+
+        /*print("Shared...." +
+            UserSharedPreferences.getFirstTimeChatting().toString() +
+            "Snap..." +
+            snapshot.data!.docs.length.toString());*/
+
+        if (snapshot.data!.docs.length == 0) {
+          UserSharedPreferences.setFirstTimeChatting(true);
+        } else {
+          UserSharedPreferences.setFirstTimeChatting(false);
+        }
+
+        /*print("Shared...." +
+            UserSharedPreferences.getFirstTimeChatting().toString());*/
+
         return ListView.builder(
             itemCount: snapshot.data!.docs.length,
-            reverse: true,
             shrinkWrap: true,
             primary: true,
             physics: ScrollPhysics(),
             itemBuilder: (context, i) {
               QueryDocumentSnapshot x = snapshot.data!.docs[i];
-
               //print(x);
               return ListTile(
                   title: Column(
