@@ -53,7 +53,7 @@ class ShowMessages extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       color: x['receiver']! == _auth.currentUser!.uid.toString()
-                          ? Colors.red.withOpacity(0.4)
+                          ? Colors.green.withOpacity(0.2)
                           : Colors.blue.withOpacity(0.2),
                       child: Text(x['message']))
                 ],

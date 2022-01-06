@@ -29,7 +29,7 @@ class WidgetList extends StatelessWidget {
           Container(
             //margin: EdgeInsets.only(left: 20, right: 20),
             width: MediaQuery.of(context).size.width / 1.1,
-            padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20),
+            padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 5),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(
@@ -51,69 +51,77 @@ class WidgetList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding: EdgeInsets.only(left: 10.0, right: 5.0),
                   child: Icon(
                     Icons.account_circle,
                     size: 40.0,
                   ),
                 ),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              name + " " + surname,
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.lightGreen,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  name + " " + surname,
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.lightGreen,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    Text("Nome negozio: ",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[800],
+                                        )),
+                                    Text("$shopname",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Colors.grey[800],
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    Text("Voto: ",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey[800],
+                                        )),
+                                    Text("$voto",
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Colors.grey[800],
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                Text("Nome negozio: ",
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[800],
-                                    )),
-                                Text("$shopname",
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Colors.grey[800],
-                                    )),
-                              ],
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                Text("Voto: ",
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[800],
-                                    )),
-                                Text("$voto",
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Colors.grey[800],
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 IconButton(
@@ -131,72 +139,84 @@ class WidgetList extends StatelessWidget {
                               children: [
                                 Text(
                                   name + " " + surname,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                     color: Colors.lightGreen,
                                   ),
                                 ),
-                                Padding(padding: EdgeInsets.only(bottom: 30)),
-                                Row(
-                                  children: [
-                                    Text("Nome negozio:",
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[800],
-                                        )),
-                                    Text(shopname,
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          color: Colors.grey[800],
-                                        )),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Cellulare: ",
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[800],
-                                        )),
-                                    Text(phonenum,
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          color: Colors.grey[800],
-                                        )),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Indirizzo: ",
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[800],
-                                        )),
-                                    Text(indirizzo,
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          color: Colors.grey[800],
-                                        )),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Voto: ",
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey[800],
-                                        )),
-                                    Text(voto,
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          color: Colors.grey[800],
-                                        )),
-                                  ],
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                          padding: EdgeInsets.only(bottom: 30)),
+                                      Row(
+                                        children: [
+                                          Text("Nome negozio:",
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.grey[800],
+                                              )),
+                                          Text(shopname,
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.grey[800],
+                                              )),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Cellulare: ",
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.grey[800],
+                                              )),
+                                          Text(phonenum,
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.grey[800],
+                                              )),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Indirizzo: ",
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.grey[800],
+                                              )),
+                                          Text(indirizzo,
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.grey[800],
+                                              )),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Voto: ",
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.grey[800],
+                                              )),
+                                          Text(voto,
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.grey[800],
+                                              )),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(bottom: 20),

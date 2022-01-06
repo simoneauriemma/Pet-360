@@ -52,6 +52,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text("Scegli immagine da: "),
             content: SingleChildScrollView(
               child: ListBody(
@@ -499,7 +501,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Container(
                                 padding: EdgeInsets.only(top: 20),
                                 width: MediaQuery.of(context).size.width * 1.2,
-                                height: 500,
+                                height: 540,
                                 //sfondo con sfocatura
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -528,9 +530,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     SizedBox(width: 320, child: emailField),
                                     SizedBox(height: 20),
                                     SizedBox(width: 320, child: cityField),
-                                    SizedBox(height: 50),
+                                    SizedBox(height: 30),
                                     SizedBox(width: 320, child: modifyButton),
-                                    SizedBox(height: 20),
+                                    Padding(
+                                        padding: EdgeInsets.only(bottom: 40)),
                                   ],
                                 )),
                           ])),
@@ -697,7 +700,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Container(
                             padding: EdgeInsets.only(top: 20),
                             width: MediaQuery.of(context).size.width * 1.2,
-                            height: MediaQuery.of(context).size.width * 2.2,
+                            height: MediaQuery.of(context).size.width * 2.3,
                             //sfondo con sfocatura
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -746,7 +749,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 SizedBox(width: 320, child: phoneNumber),
                                 SizedBox(height: 30),
                                 SizedBox(width: 320, child: addressShop),
-                                SizedBox(height: 50),
+                                SizedBox(height: 30),
                                 SizedBox(width: 320, child: modifyButton),
                                 SizedBox(height: 100),
                               ],
@@ -844,7 +847,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Container(
                           padding: EdgeInsets.only(top: 20),
                           width: MediaQuery.of(context).size.width * 1.2,
-                          height: MediaQuery.of(context).size.width * 2.2,
+                          height: MediaQuery.of(context).size.width * 2.3,
                           //sfondo con sfocatura
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -905,146 +908,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               );
             }
 
-            return Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                backgroundColor: Colors.white,
-                elevation: 4,
-                title: Text("Profilo"),
-                centerTitle: true,
-                actions: <Widget>[
-                  btnImpostazioni,
-                ],
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
-                  },
-                ),
-              ),
-              body: SingleChildScrollView(
-                child: Form(
-                  key: _formkey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Stack(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 3),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(100)),
-                                color: Colors.grey.shade200,
-                              ),
-                              child: ClipOval(
-                                child: pickedImage != null
-                                    ? Image.file(
-                                        pickedImage!,
-                                        width: 100,
-                                        height: 100,
-                                        fit: BoxFit.cover,
-                                      )
-                                    :
-                                    //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                    SizedBox(
-                                        child: Image.asset(
-                                            "assets/icons/user_default.png"),
-                                      ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 2,
-                              child: IconButton(
-                                onPressed: () {
-                                  imagePickerOption();
-                                },
-                                icon: const Icon(
-                                  Icons.camera_alt,
-                                  color: Colors.black,
-                                  size: 35,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 10)),
-                      Text(
-                        snapshot.data!.getFirstName() +
-                            " " +
-                            snapshot.data!.getSurnameName(),
-                        style: GoogleFonts.questrial(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 30)),
-                      Container(
-                          padding: EdgeInsets.only(top: 20),
-                          width: MediaQuery.of(context).size.width * 1.2,
-                          height: 850,
-                          //sfondo con sfocatura
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              SizedBox(height: 50),
-                              SizedBox(width: 320, child: nameField),
-                              SizedBox(height: 20),
-                              SizedBox(width: 320, child: surnameField),
-                              SizedBox(height: 20),
-                              SizedBox(width: 320, child: emailField),
-                              SizedBox(height: 20),
-                              SizedBox(width: 320, child: cityField),
-                              SizedBox(height: 20),
-                              Padding(padding: EdgeInsets.only(top: 20)),
-                              Text(
-                                "Informazioni aggiuntive",
-                                style: GoogleFonts.questrial(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(width: 320, child: nameShop),
-                              SizedBox(height: 30),
-                              SizedBox(width: 320, child: cityShop),
-                              SizedBox(height: 30),
-                              SizedBox(width: 320, child: phoneNumber),
-                              SizedBox(height: 30),
-                              SizedBox(width: 320, child: addressShop),
-                              SizedBox(height: 30),
-                              SizedBox(width: 320, child: modifyButton),
-                              SizedBox(height: 30),
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-            );
+            return Column();
           }
           // We can show the loading view until the data comes back.
           //debugPrint('Step 1, build loading widget');
