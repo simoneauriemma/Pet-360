@@ -165,7 +165,7 @@ class _addInfoState extends State<NavigatorAdd> {
               Container(
                   padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.1,
+                  height: MediaQuery.of(context).size.height * 1.0,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -1266,9 +1266,73 @@ class _addInfoState extends State<NavigatorAdd> {
                                           size: 25, color: Colors.black54))),
                             ]),
                       ],
-                    )),
-                SizedBox(height: 40),
-                ElevatedButton(
+                    )),     
+
+                
+              ],
+            )),
+      ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: Text("Aggiungi un nuovo animale"),
+        centerTitle: true,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.only(bottom: 70),
+        child: Theme(
+          data: ThemeData(
+            colorScheme: ColorScheme.light(
+              primary: Colors.lightGreen.shade300,
+            ),
+            splashColor: Colors.black54,
+          ),
+          child: Stepper(
+            type: StepperType.horizontal,
+            elevation: 3,
+            physics: ClampingScrollPhysics(),
+            steps: getSteps(),
+            currentStep: currentStep,
+            controlsBuilder: (BuildContext context, ControlsDetails controls) {
+               if(currentStep==0){
+            return Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+               onPressed: controls.onStepContinue,             
+               icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
+            ),
+          ]);
+          }
+
+          if(currentStep==3){
+            return Column(children: [
+              Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+               onPressed: controls.onStepCancel,             
+               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
+            ),
+          ]),
+          SizedBox(height: 50,),
+              ElevatedButton(
                   onPressed: () {
                     saveData(
                         nameController.text,
@@ -1319,111 +1383,27 @@ class _addInfoState extends State<NavigatorAdd> {
                         borderRadius: BorderRadius.circular(15)),
                   ),
                 ),
-
-                /*ElevatedButton(
-                  onPressed: () {
-                    saveData(
-                        nameController.text,
-                        dataController.text,
-                        specieController.text,
-                        razzaController.text,
-                        coloreController.text,
-                        veterinarioController.text,
-                        descrizioneController.text,
-                        microchipController.text,
-                        dataMicrochipController.text,
-                        enteController.text);
-                    nameController.text = "";
-                    dataController.text = "";
-                    specieController.text = "";
-                    razzaController.text = "";
-                    coloreController.text = "";
-                    veterinarioController.text = "";
-                    descrizioneController.text = "";
-                    microchipController.text = "";
-                    dataMicrochipController.text = "";
-                    enteController.text = "";
-                  },
-                  child: Text(
-                    "Salva tutto",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.lightGreen.shade300,
-                    //side: BorderSide(color: Colors.grey.shade300, width: 2),
-                    elevation: 5,
-                    minimumSize: Size(400, 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                ), */
-              ],
-            )),
-      ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text("Aggiungi un nuovo animale"),
-        centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomeScreen()));
-          },
-        ),
-      ),
-      body: Container(
-        padding: EdgeInsets.only(bottom: 70),
-        child: Theme(
-          data: ThemeData(
-            colorScheme: ColorScheme.light(
-              primary: Colors.lightGreen.shade300,
+            ]);
+          }
+          
+             else return Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+               onPressed: controls.onStepCancel,             
+               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
             ),
-            splashColor: Colors.black54,
-          ),
-          child: Stepper(
-            type: StepperType.horizontal,
-            elevation: 3,
-            physics: ClampingScrollPhysics(),
-            steps: getSteps(),
-            currentStep: currentStep,
-            controlsBuilder: (BuildContext context, ControlsDetails controls) {
-              return Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    padding: EdgeInsets.only(top: 15),
-                    onPressed: controls.onStepCancel,
-                    icon: Image.asset(
-                      "assets/icons/back.png",
-                      color: Colors.lightGreen.shade300,
-                      width: 25,
-                      height: 25,
-                    ),
-                  ),
-                  IconButton(
-                    padding: EdgeInsets.only(top: 15),
-                    onPressed: controls.onStepContinue,
-                    icon: Image.asset(
-                      "assets/icons/next.png",
-                      color: Colors.lightGreen.shade300,
-                      width: 25,
-                      height: 25,
-                    ),
-                  ),
-                ],
-              );
+                      
+            IconButton(
+              padding: EdgeInsets.only(top: 15),
+              onPressed: controls.onStepContinue,
+             icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
+            ),
+          
+          ],
+        );
             },
             /* (context, {onStepContinue,onStepCancel}) {
         return Row(

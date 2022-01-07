@@ -162,7 +162,7 @@ class _viewInfoState extends State<NavigatorView> {
                   Container(
                       padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.15,
+                  height: MediaQuery.of(context).size.height * 1.10,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -182,7 +182,8 @@ class _viewInfoState extends State<NavigatorView> {
                       ),
                       child: Column(
                         children: [   
-                          Row(     
+                          Padding(padding: EdgeInsets.only(right: 10),
+                          child: Row(     
                     mainAxisAlignment: MainAxisAlignment.end, //Center Row contents horizontally,
                     crossAxisAlignment: CrossAxisAlignment.end,
                      //Center Row contents vertically,               
@@ -235,7 +236,8 @@ class _viewInfoState extends State<NavigatorView> {
               ),
             ),
               ]
-              ),                  
+              ), 
+                          ),                 
                         SizedBox(height: 30,),                                      
                           Text(
                             "DATI LIBRETTO ANIMALE",
@@ -452,7 +454,9 @@ class _viewInfoState extends State<NavigatorView> {
                             children: [
                               Padding(padding: EdgeInsets.only(left: 45)),
                               Text("Sesso: ",style: TextStyle(fontSize: 16,color: Colors.black54),),
-                              Radio(value: 1, 
+                              Radio(
+                              activeColor: Colors.black54,
+                              value: 1, 
                               groupValue: _value, 
                               onChanged: (value){
                                 setState(() {
@@ -461,7 +465,9 @@ class _viewInfoState extends State<NavigatorView> {
                               },
                               ),                                
                               Text("M"),   
-                              Radio(value: 2, 
+                              Radio(
+                              activeColor: Colors.black54,
+                              value: 2, 
                               groupValue: _value, 
                               onChanged: (value){
                                 setState(() {
@@ -981,7 +987,7 @@ class _viewInfoState extends State<NavigatorView> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 0.57,
+                  height: MediaQuery.of(context).size.height * 0.53,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -1225,12 +1231,68 @@ class _viewInfoState extends State<NavigatorView> {
                               icon: Icon(Icons.remove_circle,
                               size: 25, color: Colors.black54))),
                         ]
-                      ),
-                       
+                      ),                       
                       ])
                     ),
-                SizedBox(height: 40),
-                ElevatedButton(
+              ],
+            )),
+      ];
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<ViewAllInfoAnimal>(
+      future: futureAnimal,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              title: Text("Modifica animale"),
+              centerTitle: true,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+              ),
+            ),
+            body: Container(
+        //padding: EdgeInsets.only(bottom: 70),
+        child: Stepper(
+        type: StepperType.horizontal,
+        physics: ClampingScrollPhysics(),
+        steps: getSteps(snapshot.data!),
+        currentStep: currentStep,        
+        controlsBuilder: (BuildContext context, ControlsDetails controls) {
+          if(currentStep==0){
+            return Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+               onPressed: controls.onStepContinue,             
+               icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
+            ),
+          ]);
+          }
+
+          if(currentStep==3){
+            return Column(children: [
+              Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[    
+             IconButton(
+               padding: EdgeInsets.only(top: 15),
+               onPressed: controls.onStepCancel,             
+               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
+            ),
+          ]),
+          SizedBox(height: 50,),
+              ElevatedButton(
                   onPressed: () {
                     saveData(
                         nameController.text,
@@ -1268,52 +1330,23 @@ class _viewInfoState extends State<NavigatorView> {
                     borderRadius: BorderRadius.circular(15)),
               ),
                 ),
-              ],
-            )),
-      ];
-
-  @override
-  Widget build(BuildContext context) => FutureBuilder<ViewAllInfoAnimal>(
-      future: futureAnimal,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              title: Text("Modifica animale"),
-              centerTitle: true,
-              elevation: 0,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.black),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
-                },
-              ),
-            ),
-            body: Container(
-        padding: EdgeInsets.only(bottom: 70),
-        child: Stepper(
-        type: StepperType.horizontal,
-        physics: ClampingScrollPhysics(),
-        steps: getSteps(snapshot.data!),
-        currentStep: currentStep,        
-         controlsBuilder: (BuildContext context, ControlsDetails controls) {
-            return Row(
-          mainAxisSize: MainAxisSize.max,
+            ]);
+          }
+          
+            else return Row(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[    
              IconButton(
                padding: EdgeInsets.only(top: 15),
-              onPressed: controls.onStepCancel,             
-             icon: Image.asset("assets/icons/back.png",color:Colors.lightGreen,width: 25,height: 25,),            
+               onPressed: controls.onStepCancel,             
+               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
             ),
                       
             IconButton(
               padding: EdgeInsets.only(top: 15),
               onPressed: controls.onStepContinue,
-             icon: Image.asset("assets/icons/next.png",color:Colors.lightGreen,width: 25,height: 25,),            
+             icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
             ),
           
           ],
