@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:pet360/components/appbackground.dart';
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
@@ -42,36 +41,62 @@ class _DashboardState extends State<Dashboard> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Size size = MediaQuery.of(context).size;
-          return AppBackground(
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Center(
-                child: Column(
-                  children: [
-                    Container(
-                      height: size.height * 0.3,
-                      child: Stack(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                              left: 40,
-                              right: 40,
-                            ),
-                            height: size.height * 0.3 - 27,
-                            child: Row(
-                              children: <Widget>[
-                                Column(
-                                  children: [
-                                    Padding(padding: EdgeInsets.only(top: 60)),
-                                    Text(
-                                      "Bentornato",
-                                      textAlign: TextAlign.left,
-                                      style: GoogleFonts.questrial(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Center(
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.lightGreen.shade200,
+                          Colors.lightGreen.shade100,
+                        ],
+                        begin: const FractionalOffset(0.0, 0.0),
+                        end: const FractionalOffset(1.0, 0.0),
+                        stops: [0.0, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(0),
+                          topRight: Radius.circular(0),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    height: size.height * 0.25,
+                    child: Stack(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                          ),
+                          height: size.height * 0.3 - 27,
+                          child: Row(
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(padding: EdgeInsets.only(top: 60)),
+                                  Text(
+                                    "Bentornato",
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.questrial(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    Text(
+                                  ),
+                                  Text(
                                       _firstName,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(fontSize: 20),
@@ -115,27 +140,41 @@ class _DashboardState extends State<Dashboard> {
                                           height: 50,
                                           colorBlendMode: BlendMode.multiply,
                                         ),
-                                      ),
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      height: 140,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
                         ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 55,
+                  ),
+                  Text(
+                    "Lista dei tuoi animali",
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.questrial(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.1,
+                    height: 140,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.1),
@@ -208,42 +247,69 @@ class _DashboardState extends State<Dashboard> {
                   ],
                 ),
               ),
-            ),
           );
         }
         Size size = MediaQuery.of(context).size;
-        return AppBackground(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Center(
-              child: Column(
-                children: [
-                  Container(
-                    height: size.height * 0.3,
-                    child: Stack(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(
-                            left: 40,
-                            right: 40,
-                          ),
-                          height: size.height * 0.3 - 27,
-                          child: Row(
-                            children: <Widget>[
-                              Column(
-                                children: [
-                                  Padding(padding: EdgeInsets.only(top: 60)),
-                                  Text(
-                                    "Benvenuto",
-                                    style: GoogleFonts.questrial(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.lightGreen.shade200,
+                        Colors.lightGreen.shade100,
+                      ],
+                      begin: const FractionalOffset(0.0, 0.0),
+                      end: const FractionalOffset(1.0, 0.0),
+                      stops: [0.0, 1.0],
+                      tileMode: TileMode.clamp,
+                    ),
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(0),
+                        topRight: Radius.circular(0),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  height: size.height * 0.25,
+                  child: Stack(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                        ),
+                        height: size.height * 0.3 - 27,
+                        child: Row(
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(padding: EdgeInsets.only(top: 60)),
+                                Text(
+                                  "Benvenuto",
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.questrial(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Text(
+                                ),
+                                Text(
                                     _firstName,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(fontSize: 20),
+                                ),
                                 ],
                               ),
                               Spacer(),
@@ -283,27 +349,41 @@ class _DashboardState extends State<Dashboard> {
                                         height: 50,
                                         colorBlendMode: BlendMode.multiply,
                                       ),
-                                    ),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    height: 140,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
                       ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 55,
+                ),
+                Text(
+                  "Lista dei tuoi animali",
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.questrial(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  height: 140,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.1),
@@ -339,7 +419,6 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-          ),
         );
       });
 }

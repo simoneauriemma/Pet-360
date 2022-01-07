@@ -79,6 +79,7 @@ class WidgetList2 extends StatelessWidget {
       ),
       onTap: () {
         UserSharedPreferences.setNameChat(name.toString());
+        UserSharedPreferences.setSurnameChat(surname.toString());
         UserSharedPreferences.setUIDOfUser(UID);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => Chatting_screen()),

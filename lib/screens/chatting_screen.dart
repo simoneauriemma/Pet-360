@@ -71,7 +71,9 @@ class _Chatting_screenState extends State<Chatting_screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        UserSharedPreferences.getNameChat().toString(),
+                        UserSharedPreferences.getNameChat().toString() +
+                            " " +
+                            UserSharedPreferences.getSurnameChat().toString(),
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
@@ -87,7 +89,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                   ),
                 ),
                 ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 120, height: 40),
+                  constraints: BoxConstraints.tightFor(width: 100, height: 40),
                   child: ElevatedButton(
                     onPressed: () {
                       showDialog(
@@ -132,7 +134,12 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: const [
-                        Text("Lascia chat"),
+                        Text(
+                          "Lascia chat",
+                          style: TextStyle(
+                            fontSize: 11,
+                          ),
+                        ),
                         /*ImageIcon(
                             AssetImage(
                                 "assets/icons/save.png"),

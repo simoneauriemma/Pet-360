@@ -62,12 +62,21 @@ class ShowMessages extends StatelessWidget {
                         : CrossAxisAlignment.end,
                 children: [
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Text(
+                      x['message'],
+                    ),
+                    decoration: BoxDecoration(
                       color: x['receiver']! == _auth.currentUser!.uid.toString()
                           ? Colors.green.withOpacity(0.2)
                           : Colors.blue.withOpacity(0.2),
-                      child: Text(x['message']))
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                    ),
+                  ),
                 ],
               ));
             });
