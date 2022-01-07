@@ -69,6 +69,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                             phonenum: snapshot.data![index].numberPhone!,
                             indirizzo: snapshot.data![index].addressShop!,
                             UID: snapshot.data![index].uid!,
+                            typeOfUserChat: "Addestratore",
                           ),
                         ),
                       ),

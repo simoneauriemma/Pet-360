@@ -6,11 +6,13 @@ class WidgetList2 extends StatelessWidget {
   final String name;
   final String surname;
   final String UID;
+  final String typeOfUserChat;
 
   WidgetList2({
     required this.name,
     required this.surname,
     required this.UID,
+    required this.typeOfUserChat,
   });
 
   @override
@@ -81,6 +83,7 @@ class WidgetList2 extends StatelessWidget {
         UserSharedPreferences.setNameChat(name.toString());
         UserSharedPreferences.setSurnameChat(surname.toString());
         UserSharedPreferences.setUIDOfUser(UID);
+        UserSharedPreferences.setTypeOfUserChat(typeOfUserChat);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => Chatting_screen()),
             (route) => false);

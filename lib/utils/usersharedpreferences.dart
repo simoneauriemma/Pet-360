@@ -8,6 +8,7 @@ class UserSharedPreferences {
   static const _nameOfUser = 'nameOfUser';
   static const _UIDOfUser = 'UIDOfUser';
   static const _firstTimeChatting = "false";
+  static const _typeOfUserChat = 'Utente';
 
   static const _animalName = 'animalName';
 
@@ -15,6 +16,11 @@ class UserSharedPreferences {
     _preferences = await SharedPreferences.getInstance();
     //setTypeOfUser("");
   }
+
+  static Future setTypeOfUserChat(String typeOfUserChat) async =>
+      await _preferences!.setString(_typeOfUserChat, typeOfUserChat);
+
+  static String? getTypeOfUserChat() => _preferences!.getString(_typeOfUserChat);
 
   static Future setTypeOfUser(String typeOfUser) async =>
       await _preferences!.setString(_typeOfUser, typeOfUser);

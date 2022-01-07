@@ -72,6 +72,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                             phonenum: snapshot.data![index].numberPhone!,
                             indirizzo: snapshot.data![index].addressShop!,
                             UID: snapshot.data![index].uid!,
+                            typeOfUserChat: "Veterinario",
                           ),
                         ),
                       ),

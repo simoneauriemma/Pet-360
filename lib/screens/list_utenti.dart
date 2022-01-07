@@ -67,6 +67,7 @@ class _ListUtentiState extends State<ListUtenti> {
                           name: snapshot.data![index].firstName!,
                           surname: snapshot.data![index].surnameName!,
                           UID: snapshot.data![index].uid!,
+                          typeOfUserChat: "Utente",
                         ),
                       ),
                     ),
