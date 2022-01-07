@@ -32,22 +32,15 @@ class ShowMessages extends StatelessWidget {
           );
         }
 
-        /*print("Shared...." +
-            UserSharedPreferences.getFirstTimeChatting().toString() +
-            "Snap..." +
-            snapshot.data!.docs.length.toString());*/
-
         if (snapshot.data!.docs.length == 0) {
           UserSharedPreferences.setFirstTimeChatting(true);
         } else {
           UserSharedPreferences.setFirstTimeChatting(false);
         }
 
-        /*print("Shared...." +
-            UserSharedPreferences.getFirstTimeChatting().toString());*/
-
         return ListView.builder(
             itemCount: snapshot.data!.docs.length,
+            reverse: true,
             shrinkWrap: true,
             primary: true,
             physics: ScrollPhysics(),

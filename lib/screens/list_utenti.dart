@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -119,9 +121,21 @@ class _ListUtentiState extends State<ListUtenti> {
 
   Future<List<UserModel>> getUserList(
       String typeOfUser, String uidUser, String path) async {
-    /*var snapshot = await FirebaseFirestore.instance
-    .collection("Messages")
-    .where("receiver", isEqualTo: FirebaseAuth.instance.currentUser?.uid).snapshots();*/
+    var snapshot = await FirebaseFirestore.instance
+        .collection("Messages")
+        .where("receiver", isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+        .snapshots();
+
+    //print("snappppp" + snapshot.length.toString());
+    List<String> chatOn = List.empty(growable: true);
+    snapshot.forEach((element) {
+      List<QueryDocumentSnapshot> x = element.docs;
+      for (int i = 0; i < x.length; i++) {
+        QueryDocumentSnapshot element = x[i];
+        print(element["sender"]);
+        chatOn.add(element["sender"].toString());
+      }
+    });
 
     var url = Uri.parse(
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
@@ -135,11 +149,13 @@ class _ListUtentiState extends State<ListUtenti> {
     if (response.statusCode == 200) {
       List<UserModel> list = List.empty(growable: true);
       jsonDecode(response.body).forEach((key, value) {
-        UserModel user = UserModel();
-        user.uid = key.toString();
-        user.firstName = value['firstName'];
-        user.surnameName = value['surnameName'];
-        list.add(user);
+        if (chatOn.contains(key.toString())) {
+          UserModel user = UserModel();
+          user.uid = key.toString();
+          user.firstName = value['firstName'];
+          user.surnameName = value['surnameName'];
+          list.add(user);
+        }
       });
       return list;
     } else {
