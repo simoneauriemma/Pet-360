@@ -580,51 +580,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               SizedBox(height: 20),
                               Align(
-                                alignment: Alignment.center,
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey.shade300,
-                                            width: 3),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(100)),
-                                        color: Colors.grey.shade200,
-                                      ),
-                                      child: ClipOval(
-                                        child: pickedImage != null
-                                            ? Image.file(
-                                                pickedImage!,
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover,
-                                              )
-                                            :
-                                            //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                            SizedBox(
-                                                child: Image.asset(
-                                                    "assets/icons/user_default.png"),
-                                              ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 0,
-                                      left: 63,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          imagePickerOption();
-                                        },
-                                        icon: const Icon(
-                                          Icons.add_a_photo_rounded,
-                                          color: Colors.black,
-                                          size: 30,
+                          alignment: Alignment.center,
+                          child: Stack(
+                            children: [
+                              Container(                                
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade400, width: 3),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
+                                  color: Colors.grey.shade400,
+                                ),
+                                child: ClipOval(
+                                  child: pickedImage != null
+                                      ? Image.file(
+                                          pickedImage!,
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        )
+                                      :
+                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                      SizedBox(
+                                          width: 100.0,
+                                          height: 100.0,
                                         ),
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ),
+                              Positioned(
+                                top: 60,
+                                left: 42,
+                                child: RawMaterialButton(
+                                  onPressed: () {
+                                    imagePickerOption();
+                                  },
+                                  //elevation: 8,
+                                  shape: CircleBorder(),
+                                  child:Icon(Icons.add_a_photo_rounded, color: Colors.black,size: 25,),     
+                                  fillColor: Colors.grey.shade400,
+                                  padding: EdgeInsets.all(8),                       
+                                  
+                                
+                                ),
+                              ),
+                            ],
+                          )),
                               Padding(padding: EdgeInsets.only(bottom: 10)),
                               Text(
                                 snapshot.data!.getFirstName() +

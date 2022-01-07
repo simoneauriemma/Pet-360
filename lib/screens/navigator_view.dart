@@ -157,11 +157,37 @@ class _viewInfoState extends State<NavigatorView> {
           content:             
                Column(
                 children: [
-                       Row(     
-                    mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
-                    crossAxisAlignment: CrossAxisAlignment.center, //Center Row contents vertically,               
-                    children:[
-                      ElevatedButton(
+                       
+              SizedBox(height: 10,),
+                  Container(
+                      padding: EdgeInsets.only(top: 20),
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  height: MediaQuery.of(context).size.height * 1.15,
+                  //sfondo con sfocatura
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [   
+                          Row(     
+                    mainAxisAlignment: MainAxisAlignment.end, //Center Row contents horizontally,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                     //Center Row contents vertically,               
+                    children:[                      
+                      ElevatedButton(                        
               onPressed: () {
                 showDialog(
         context: context,
@@ -194,7 +220,7 @@ class _viewInfoState extends State<NavigatorView> {
                 children:  [
                   Text("Elimina animale: ",style: TextStyle(fontSize: 15),),
                       SizedBox(width: 4,),
-                      Image.asset("assets/icons/delete.png", width: 23,height: 23,color: Colors.red),
+                      Image.asset("assets/icons/delete.png", width: 23,height: 23,color: Colors.black),
                     ]  
               ),
               style: ElevatedButton.styleFrom(
@@ -205,35 +231,11 @@ class _viewInfoState extends State<NavigatorView> {
                 //elevation: 5,
                 minimumSize: Size(120, 40),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(10)),
               ),
             ),
               ]
-              ),
-              SizedBox(height: 20,),
-                  Container(
-                      padding: EdgeInsets.only(top: 20),
-                  width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.15,
-                  //sfondo con sfocatura
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [                     
+              ),                  
                         SizedBox(height: 30,),                                      
                           Text(
                             "DATI LIBRETTO ANIMALE",
@@ -248,51 +250,51 @@ class _viewInfoState extends State<NavigatorView> {
                           ),
                          
                           Align(
-                              alignment: Alignment.center,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300,
-                                          width: 3),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(100)),
-                                      color: Colors.grey.shade200,
-                                    ),
-                                    child: ClipOval(
-                                      child: pickedImage != null
-                                          ? Image.file(
-                                              pickedImage!,
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.cover,
-                                            )
-                                          :
-                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                          SizedBox(
-                                              width: 100.0,
-                                              height: 100.0,
-                                              //child: Image.file(File(snapshot.data![index].pathImg.toString()),),
-                                            ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 2,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        imagePickerOption();
-                                      },
-                                      icon: const Icon(
-                                        Icons.add_a_photo_rounded,
-                                        color: Colors.black,
-                                        size: 30,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
+                          alignment: Alignment.center,
+                          child: Stack(
+                            children: [
+                              Container(                                
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade400, width: 3),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
+                                  color: Colors.grey.shade400,
+                                ),
+                                child: ClipOval(
+                                  child: pickedImage != null
+                                      ? Image.file(
+                                          pickedImage!,
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        )
+                                      :
+                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                      SizedBox(
+                                          width: 100.0,
+                                          height: 100.0,
+                                        ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 60,
+                                left: 42,
+                                child: RawMaterialButton(
+                                  onPressed: () {
+                                    imagePickerOption();
+                                  },
+                                  //elevation: 8,
+                                  shape: CircleBorder(),
+                                  child:Icon(Icons.add_a_photo_rounded, color: Colors.black,size: 25,),     
+                                  fillColor: Colors.grey.shade400,
+                                  padding: EdgeInsets.all(8),                       
+                                  
+                                
+                                ),
+                              ),
+                            ],
+                          )),
                       SizedBox(
                             width: 280,
                             child: TextFormField(

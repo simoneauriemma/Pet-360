@@ -200,13 +200,13 @@ class _addInfoState extends State<NavigatorAdd> {
                           alignment: Alignment.center,
                           child: Stack(
                             children: [
-                              Container(
+                              Container(                                
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.grey.shade300, width: 3),
+                                      color: Colors.grey.shade400, width: 3),
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(100)),
-                                  color: Colors.grey.shade200,
+                                  color: Colors.grey.shade400,
                                 ),
                                 child: ClipOval(
                                   child: pickedImage != null
@@ -225,17 +225,19 @@ class _addInfoState extends State<NavigatorAdd> {
                                 ),
                               ),
                               Positioned(
-                                bottom: 0,
-                                left: 63,
-                                child: IconButton(
+                                top: 60,
+                                left: 42,
+                                child: RawMaterialButton(
                                   onPressed: () {
                                     imagePickerOption();
                                   },
-                                  icon: const Icon(
-                                    Icons.add_a_photo_rounded,
-                                    color: Colors.black,
-                                    size: 30,
-                                  ),
+                                  //elevation: 8,
+                                  shape: CircleBorder(),
+                                  child:Icon(Icons.add_a_photo_rounded, color: Colors.black,size: 25,),     
+                                  fillColor: Colors.grey.shade400,
+                                  padding: EdgeInsets.all(8),                       
+                                  
+                                
                                 ),
                               ),
                             ],
