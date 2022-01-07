@@ -316,7 +316,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
 
-            final logoutButton = GestureDetector(
+            /*final logoutButton = GestureDetector(
               onTap: () {
                 LogOut();
               },
@@ -336,6 +336,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     size: 18,
                   ),
                 ],
+              ),
+            ); */
+
+            final logoutButton = ConstrainedBox(
+              constraints: BoxConstraints.tightFor(width: 120, height: 40),
+              child: ElevatedButton(
+                onPressed: () {
+                  LogOut();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "Logout",
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    /*ImageIcon(
+                            AssetImage(
+                                "assets/icons/save.png"),
+                            color: Colors.black,
+                            size: 15,
+                          ), */
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  onPrimary: Colors.black,
+                  primary: Colors.white,
+                  alignment: Alignment.center,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                ),
               ),
             );
 
@@ -362,11 +396,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
 
+            bool isSwitched = false;
+            final notifiche = Row(
+              children: [
+                Text(
+                  "Notifiche",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 18),
+                ),
+                Switch(
+                  value: isSwitched,
+                  onChanged: (value) {
+                    setState(() {
+                      isSwitched = value;
+                    });
+                  },
+                ),
+              ],
+            );
+
+            final aiuto = Row(
+              children: [
+                Text(
+                  "Help",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Image.asset(
+                  "assets/icons/help.png",
+                  height: 25,
+                  width: 25,
+                ),
+              ],
+            );
+
+            final privacy = Row(
+              children: [
+                Text(
+                  "Privacy & Policy",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Image.asset(
+                  "assets/icons/shield.png",
+                  height: 25,
+                  width: 25,
+                ),
+              ],
+            );
+
+            final termini = Row(
+              children: [
+                Text(
+                  "Termini & Condizioni",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Image.asset(
+                  "assets/icons/audit.png",
+                  height: 20,
+                  width: 20,
+                ),
+              ],
+            );
+
             final btnImpostazioni = IconButton(
               //key: btnKey,
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.menu_rounded),
               padding: EdgeInsets.only(right: 15),
-              iconSize: 30,
+              iconSize: 35,
               onPressed: () {
                 showDialog(
                   context: context,
@@ -380,12 +487,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textAlign: TextAlign.center,
                       ),
                       content: Container(
-                        height: MediaQuery.of(context).size.height / 5.5,
+                        height: MediaQuery.of(context).size.height * 0.5,
                         // width: MediaQuery.of(context).size.width / 1.2,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            notifiche,
+                            const Divider(
+                              color: Colors.black,
+                              //height: 20,
+                              thickness: 1,
+                              indent: 3,
+                              endIndent: 3,
+                            ),
                             linguaButton,
                             const Divider(
                               color: Colors.black,
@@ -394,7 +509,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               indent: 3,
                               endIndent: 3,
                             ),
-                            logoutButton,
+                            cancellaAccount,
                             const Divider(
                               color: Colors.black,
                               //height: 20,
@@ -402,7 +517,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               indent: 3,
                               endIndent: 3,
                             ),
-                            cancellaAccount,
+                            aiuto,
+                            const Divider(
+                              color: Colors.black,
+                              //height: 20,
+                              thickness: 1,
+                              indent: 3,
+                              endIndent: 3,
+                            ),
+                            privacy,
+                            const Divider(
+                              color: Colors.black,
+                              //height: 20,
+                              thickness: 1,
+                              indent: 3,
+                              endIndent: 3,
+                            ),
+                            termini,
+                            SizedBox(
+                              height: 30,
+                            ),
+                            logoutButton,
                           ],
                         ),
                       ),
@@ -435,108 +570,143 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //child: Padding
                   //padding: const EdgeInsets.all(36.0),
                   child: Form(
-                      key: _formkey,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(height: 20),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300,
-                                          width: 3),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(100)),
-                                      color: Colors.grey.shade200,
-                                    ),
-                                    child: ClipOval(
-                                      child: pickedImage != null
-                                          ? Image.file(
-                                              pickedImage!,
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.cover,
-                                            )
-                                          :
-                                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                          SizedBox(
-                                              child: Image.asset(
-                                                  "assets/icons/user_default.png"),
-                                            ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    left: 63,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        imagePickerOption();
-                                      },
-                                      icon: const Icon(
-                                        Icons.add_a_photo_rounded,
-                                        color: Colors.black,
-                                        size: 30,
+                    key: _formkey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.shade300,
+                                            width: 3),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(100)),
+                                        color: Colors.grey.shade200,
+                                      ),
+                                      child: ClipOval(
+                                        child: pickedImage != null
+                                            ? Image.file(
+                                                pickedImage!,
+                                                width: 100,
+                                                height: 100,
+                                                fit: BoxFit.cover,
+                                              )
+                                            :
+                                            //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                            SizedBox(
+                                                child: Image.asset(
+                                                    "assets/icons/user_default.png"),
+                                              ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(padding: EdgeInsets.only(bottom: 10)),
-                            Text(
-                              snapshot.data!.getFirstName() +
-                                  " " +
-                                  snapshot.data!.getSurnameName(),
-                              style: GoogleFonts.questrial(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Padding(padding: EdgeInsets.only(bottom: 30)),
-                            Container(
-                                padding: EdgeInsets.only(top: 20),
-                                width: MediaQuery.of(context).size.width * 1.2,
-                                height: 540,
-                                //sfondo con sfocatura
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10),
-                                      bottomRight: Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.1),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: Offset(
-                                          0, 3), // changes position of shadow
+                                    Positioned(
+                                      bottom: 0,
+                                      left: 63,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          imagePickerOption();
+                                        },
+                                        icon: const Icon(
+                                          Icons.add_a_photo_rounded,
+                                          color: Colors.black,
+                                          size: 30,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 50),
-                                    SizedBox(width: 320, child: nameField),
-                                    SizedBox(height: 20),
-                                    SizedBox(width: 320, child: surnameField),
-                                    SizedBox(height: 20),
-                                    SizedBox(width: 320, child: emailField),
-                                    SizedBox(height: 20),
-                                    SizedBox(width: 320, child: cityField),
-                                    SizedBox(height: 30),
-                                    SizedBox(width: 320, child: modifyButton),
-                                    Padding(
-                                        padding: EdgeInsets.only(bottom: 40)),
-                                  ],
-                                )),
-                          ])),
+                              ),
+                              Padding(padding: EdgeInsets.only(bottom: 10)),
+                              Text(
+                                snapshot.data!.getFirstName() +
+                                    " " +
+                                    snapshot.data!.getSurnameName(),
+                                style: GoogleFonts.questrial(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.only(bottom: 30)),
+                              Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1.3,
+                                  height: 540,
+                                  //sfondo con sfocatura
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20),
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.1),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 50),
+                                      SizedBox(width: 320, child: nameField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: surnameField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: emailField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: cityField),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: modifyButton),
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 40),
+                                      ),
+                                    ],
+                                  )),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.grey.shade200,
+                                Colors.grey.shade100,
+                              ],
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 0.0),
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               );
             }
@@ -637,123 +807,165 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Form(
                     key: _formkey,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      //mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(height: 20),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Stack(
+                        Container(
+                          child: Column(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade300, width: 3),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100)),
-                                  color: Colors.grey.shade200,
-                                ),
-                                child: ClipOval(
-                                  child: pickedImage != null
-                                      ? Image.file(
-                                          pickedImage!,
-                                          width: 100,
-                                          height: 100,
-                                          fit: BoxFit.cover,
-                                        )
-                                      :
-                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                      SizedBox(
-                                          child: Image.asset(
-                                              "assets/icons/user_default.png"),
+                              SizedBox(height: 20),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.shade300,
+                                            width: 3),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(100)),
+                                        color: Colors.grey.shade200,
+                                      ),
+                                      child: ClipOval(
+                                        child: pickedImage != null
+                                            ? Image.file(
+                                                pickedImage!,
+                                                width: 100,
+                                                height: 100,
+                                                fit: BoxFit.cover,
+                                              )
+                                            :
+                                            //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                            SizedBox(
+                                                child: Image.asset(
+                                                    "assets/icons/user_default.png"),
+                                              ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      left: 63,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          imagePickerOption();
+                                        },
+                                        icon: const Icon(
+                                          Icons.add_a_photo_rounded,
+                                          color: Colors.black,
+                                          size: 30,
                                         ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Positioned(
-                                bottom: 0,
-                                right: 2,
-                                child: IconButton(
-                                  onPressed: () {
-                                    imagePickerOption();
-                                  },
-                                  icon: const Icon(
-                                    Icons.camera_alt,
-                                    color: Colors.black,
-                                    size: 35,
-                                  ),
+                              Padding(padding: EdgeInsets.only(bottom: 10)),
+                              Text(
+                                snapshot.data!.getFirstName() +
+                                    " " +
+                                    snapshot.data!.getSurnameName(),
+                                style: GoogleFonts.questrial(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
+                              ),
+                              Text(
+                                "Veterinario",
+                                style: GoogleFonts.questrial(
+                                  fontSize: 15,
+                                  color: Colors.lightGreen.shade300,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.only(bottom: 30)),
+                              Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1.2,
+                                  height:
+                                      MediaQuery.of(context).size.width * 2.8,
+                                  //sfondo con sfocatura
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.1),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 50),
+                                      SizedBox(width: 320, child: nameField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: surnameField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: emailField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: cityField),
+                                      SizedBox(height: 20),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        "Informazioni aggiuntive",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      SizedBox(width: 320, child: nameShop),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: cityShop),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: phoneNumber),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: addressShop),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: modifyButton),
+                                      SizedBox(height: 100),
+                                    ],
+                                  )),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.grey.shade200,
+                                Colors.grey.shade100,
+                              ],
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 0.0),
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
                         ),
-                        Padding(padding: EdgeInsets.only(bottom: 10)),
-                        Text(
-                          snapshot.data!.getFirstName() +
-                              " " +
-                              snapshot.data!.getSurnameName(),
-                          style: GoogleFonts.questrial(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Padding(padding: EdgeInsets.only(bottom: 30)),
-                        Container(
-                            padding: EdgeInsets.only(top: 20),
-                            width: MediaQuery.of(context).size.width * 1.2,
-                            height: MediaQuery.of(context).size.width * 2.3,
-                            //sfondo con sfocatura
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                SizedBox(height: 50),
-                                SizedBox(width: 320, child: nameField),
-                                SizedBox(height: 20),
-                                SizedBox(width: 320, child: surnameField),
-                                SizedBox(height: 20),
-                                SizedBox(width: 320, child: emailField),
-                                SizedBox(height: 20),
-                                SizedBox(width: 320, child: cityField),
-                                SizedBox(height: 20),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Informazioni aggiuntive",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(width: 320, child: nameShop),
-                                SizedBox(height: 30),
-                                SizedBox(width: 320, child: cityShop),
-                                SizedBox(height: 30),
-                                SizedBox(width: 320, child: phoneNumber),
-                                SizedBox(height: 30),
-                                SizedBox(width: 320, child: addressShop),
-                                SizedBox(height: 30),
-                                SizedBox(width: 320, child: modifyButton),
-                                SizedBox(height: 100),
-                              ],
-                            )),
                       ],
                     ),
                   ),
@@ -784,78 +996,154 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Form(
                     key: _formkey,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      //mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(height: 20),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Stack(
+                        Container(
+                          child: Column(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade300, width: 3),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100)),
-                                  color: Colors.grey.shade200,
-                                ),
-                                child: ClipOval(
-                                  child: pickedImage != null
-                                      ? Image.file(
-                                          pickedImage!,
-                                          width: 100,
-                                          height: 100,
-                                          fit: BoxFit.cover,
-                                        )
-                                      :
-                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                                      SizedBox(
-                                          child: Image.asset(
-                                              "assets/icons/user_default.png"),
+                              SizedBox(height: 20),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.shade300,
+                                            width: 3),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(100)),
+                                        color: Colors.grey.shade200,
+                                      ),
+                                      child: ClipOval(
+                                        child: pickedImage != null
+                                            ? Image.file(
+                                                pickedImage!,
+                                                width: 100,
+                                                height: 100,
+                                                fit: BoxFit.cover,
+                                              )
+                                            :
+                                            //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                            SizedBox(
+                                                child: Image.asset(
+                                                    "assets/icons/user_default.png"),
+                                              ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      left: 63,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          imagePickerOption();
+                                        },
+                                        icon: const Icon(
+                                          Icons.add_a_photo_rounded,
+                                          color: Colors.black,
+                                          size: 30,
                                         ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Positioned(
-                                bottom: 0,
-                                right: 2,
-                                child: IconButton(
-                                  onPressed: () {
-                                    imagePickerOption();
-                                  },
-                                  icon: const Icon(
-                                    Icons.camera_alt,
-                                    color: Colors.black,
-                                    size: 35,
+                              Padding(padding: EdgeInsets.only(bottom: 10)),
+                              Text(
+                                snapshot.data!.getFirstName() +
+                                    " " +
+                                    snapshot.data!.getSurnameName(),
+                                style: GoogleFonts.questrial(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "Addestratore",
+                                style: GoogleFonts.questrial(
+                                  fontSize: 15,
+                                  color: Colors.lightGreen.shade300,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.only(bottom: 30)),
+                              Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1.2,
+                                  height:
+                                      MediaQuery.of(context).size.width * 2.8,
+                                  //sfondo con sfocatura
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.1),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 50),
+                                      SizedBox(width: 320, child: nameField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: surnameField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: emailField),
+                                      SizedBox(height: 20),
+                                      SizedBox(width: 320, child: cityField),
+                                      SizedBox(height: 20),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        "Informazioni aggiuntive",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      SizedBox(width: 320, child: nameShop),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: cityShop),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: phoneNumber),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: addressShop),
+                                      SizedBox(height: 30),
+                                      SizedBox(width: 320, child: modifyButton),
+                                      SizedBox(height: 100),
+                                    ],
+                                  )),
                             ],
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.only(bottom: 10)),
-                        Text(
-                          snapshot.data!.getFirstName() +
-                              " " +
-                              snapshot.data!.getSurnameName(),
-                          style: GoogleFonts.questrial(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Padding(padding: EdgeInsets.only(bottom: 30)),
-                        Container(
-                          padding: EdgeInsets.only(top: 20),
-                          width: MediaQuery.of(context).size.width * 1.2,
-                          height: MediaQuery.of(context).size.width * 2.3,
-                          //sfondo con sfocatura
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.grey.shade200,
+                                Colors.grey.shade100,
+                              ],
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 0.0),
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp,
+                            ),
                             borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.1),
@@ -864,40 +1152,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 offset:
                                     Offset(0, 3), // changes position of shadow
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              SizedBox(height: 50),
-                              SizedBox(width: 320, child: nameField),
-                              SizedBox(height: 20),
-                              SizedBox(width: 320, child: surnameField),
-                              SizedBox(height: 20),
-                              SizedBox(width: 320, child: emailField),
-                              SizedBox(height: 20),
-                              SizedBox(width: 320, child: cityField),
-                              SizedBox(height: 20),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Informazioni aggiuntive",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(width: 320, child: nameShop),
-                              SizedBox(height: 30),
-                              SizedBox(width: 320, child: cityShop),
-                              SizedBox(height: 30),
-                              SizedBox(width: 320, child: phoneNumber),
-                              SizedBox(height: 30),
-                              SizedBox(width: 320, child: addressShop),
-                              SizedBox(height: 50),
-                              SizedBox(width: 320, child: modifyButton),
-                              SizedBox(height: 80),
                             ],
                           ),
                         ),

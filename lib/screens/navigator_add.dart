@@ -404,7 +404,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                 TextStyle(fontSize: 16, color: Colors.black54),
                           ),
                           Radio(
-                            activeColor: Colors.lightGreen,
+                            activeColor: Colors.black54,
                             value: 1,
                             groupValue: _value,
                             onChanged: (value) {
@@ -415,7 +415,7 @@ class _addInfoState extends State<NavigatorAdd> {
                           ),
                           Text("M"),
                           Radio(
-                            activeColor: Colors.lightGreen,
+                            activeColor: Colors.black54,
                             value: 2,
                             groupValue: _value,
                             onChanged: (value) {
@@ -1385,7 +1385,7 @@ class _addInfoState extends State<NavigatorAdd> {
         child: Theme(
           data: ThemeData(
             colorScheme: ColorScheme.light(
-              primary: Colors.lightGreen,
+              primary: Colors.lightGreen.shade300,
             ),
             splashColor: Colors.black54,
           ),
@@ -1405,7 +1405,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     onPressed: controls.onStepCancel,
                     icon: Image.asset(
                       "assets/icons/back.png",
-                      color: Colors.lightGreen,
+                      color: Colors.lightGreen.shade300,
                       width: 25,
                       height: 25,
                     ),
@@ -1415,7 +1415,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     onPressed: controls.onStepContinue,
                     icon: Image.asset(
                       "assets/icons/next.png",
-                      color: Colors.lightGreen,
+                      color: Colors.lightGreen.shade300,
                       width: 25,
                       height: 25,
                     ),

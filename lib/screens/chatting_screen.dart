@@ -35,7 +35,6 @@ class _Chatting_screenState extends State<Chatting_screen> {
           hintStyle: TextStyle(color: Colors.black54),
           border: InputBorder.none),
     );
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

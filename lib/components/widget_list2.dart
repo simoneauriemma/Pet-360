@@ -61,8 +61,8 @@ class WidgetList2 extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: const TextStyle(
                                 fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.lightGreen,
+                                //fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
                           ),
