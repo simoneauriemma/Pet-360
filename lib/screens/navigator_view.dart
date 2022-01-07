@@ -256,10 +256,10 @@ class _viewInfoState extends State<NavigatorView> {
                               Container(                                
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.grey.shade400, width: 3),
+                                      color: Colors.grey.shade300, width: 3),
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(100)),
-                                  color: Colors.grey.shade400,
+                                  color: Colors.grey.shade200,
                                 ),
                                 child: ClipOval(
                                   child: pickedImage != null
