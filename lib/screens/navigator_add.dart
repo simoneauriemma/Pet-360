@@ -165,7 +165,7 @@ class _addInfoState extends State<NavigatorAdd> {
               Container(
                   padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.0,
+                  height: MediaQuery.of(context).size.height * 1.1,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -233,11 +233,13 @@ class _addInfoState extends State<NavigatorAdd> {
                                   },
                                   //elevation: 8,
                                   shape: CircleBorder(),
-                                  child:Icon(Icons.add_a_photo_rounded, color: Colors.black,size: 25,),     
-                                  fillColor: Colors.grey.shade400,
-                                  padding: EdgeInsets.all(8),                       
-                                  
-                                
+                                  child: Icon(
+                                    Icons.add_a_photo_rounded,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ),
+                                  fillColor: Colors.lightGreen.shade300,
+                                  padding: EdgeInsets.all(8),
                                 ),
                               ),
                             ],
@@ -1313,9 +1315,13 @@ class _addInfoState extends State<NavigatorAdd> {
           children: <Widget>[    
              IconButton(
                padding: EdgeInsets.only(top: 15),
-               onPressed: controls.onStepContinue,             
-               icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
+                        onPressed: controls.onStepContinue,
+                        icon: Image.asset(
+                          "assets/icons/arrow-right.png",
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
           ]);
           }
 
@@ -1327,9 +1333,13 @@ class _addInfoState extends State<NavigatorAdd> {
           children: <Widget>[    
              IconButton(
                padding: EdgeInsets.only(top: 15),
-               onPressed: controls.onStepCancel,             
-               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
+                          onPressed: controls.onStepCancel,
+                          icon: Image.asset(
+                            "assets/icons/arrow-left.png",
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
           ]),
           SizedBox(height: 50,),
               ElevatedButton(
@@ -1392,15 +1402,23 @@ class _addInfoState extends State<NavigatorAdd> {
           children: <Widget>[    
              IconButton(
                padding: EdgeInsets.only(top: 15),
-               onPressed: controls.onStepCancel,             
-               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
+                      onPressed: controls.onStepCancel,
+                      icon: Image.asset(
+                        "assets/icons/arrow-left.png",
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
                       
             IconButton(
               padding: EdgeInsets.only(top: 15),
-              onPressed: controls.onStepContinue,
-             icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
+                      onPressed: controls.onStepContinue,
+                      icon: Image.asset(
+                        "assets/icons/arrow-right.png",
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
           
           ],
         );

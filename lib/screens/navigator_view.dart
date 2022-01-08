@@ -51,15 +51,16 @@ class _viewInfoState extends State<NavigatorView> {
   List<NewVaccine> lstVaccines = List.empty(growable: true);
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
   var jsonBody, airTag1, airTag2;
-  firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
 
   @override
   void initState() {
     super.initState();
     final uid = _auth.currentUser!.uid;
     //print("Type" + UserSharedPreferences.getTypeOfUser().toString());
-    futureAnimal =
-        fetchAnimal(UserSharedPreferences.getTypeOfUser().toString(), uid+"//Animali", UserSharedPreferences.getAnimalName().toString());
+    futureAnimal = fetchAnimal(UserSharedPreferences.getTypeOfUser().toString(),
+        uid + "//Animali", UserSharedPreferences.getAnimalName().toString());
   }
 
   void imagePickerOption() {
@@ -67,6 +68,8 @@ class _viewInfoState extends State<NavigatorView> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text("Scegli immagine da: "),
             content: SingleChildScrollView(
               child: ListBody(
@@ -154,15 +157,94 @@ class _viewInfoState extends State<NavigatorView> {
         Step(
           isActive: currentStep >= 0,
           title: Text(''),
-          content:             
-               Column(
-                children: [
-                       
-              SizedBox(height: 10,),
-                  Container(
-                      padding: EdgeInsets.only(top: 20),
+          content: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  //Center Row contents horizontally,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  //Center Row contents vertically,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext ctx) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(32.0))),
+                                title: Text(
+                                  'Eliminazione animale',
+                                  textAlign: TextAlign.center,
+                                ),
+                                content: Text(
+                                  'Sei sicuro di voler eliminare?',
+                                  textAlign: TextAlign.center,
+                                ),
+                                actions: [
+                                  // The "Yes" button
+                                  TextButton(
+                                    onPressed: () {
+                                      // Remove the animal
+                                      removeAnimal();
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeScreen()));
+                                    },
+                                    child: Text(
+                                      'Sì',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        // Close the dialog
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        'No',
+                                        style: TextStyle(fontSize: 20),
+                                      ))
+                                ],
+                              );
+                            });
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            "Elimina animale ",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Image.asset("assets/icons/delete.png",
+                              width: 20, height: 20, color: Colors.black),
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        onPrimary: Colors.black,
+                        primary: Colors.white,
+                        //onSurface: Colors.grey,
+                        //side: BorderSide(color: Colors.lightGreen, width: 2),
+                        //elevation: 5,
+                        minimumSize: Size(120, 40),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.10,
+                  height: MediaQuery.of(context).size.height * 1.2,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -174,88 +256,33 @@ class _viewInfoState extends State<NavigatorView> {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
                       ),
-                      child: Column(
-                        children: [   
-                          Padding(padding: EdgeInsets.only(right: 10),
-                          child: Row(     
-                    mainAxisAlignment: MainAxisAlignment.end, //Center Row contents horizontally,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                     //Center Row contents vertically,               
-                    children:[                      
-                      ElevatedButton(                        
-              onPressed: () {
-                showDialog(
-        context: context,
-        builder: (BuildContext ctx) {
-          return AlertDialog(
-            title: Text('Conferma'),
-            content: Text('Sei sicuro di voler eliminare?'),
-            actions: [
-              // The "Yes" button
-              TextButton(
-                  onPressed: () {
-                    // Remove the animal
-                    removeAnimal();
-                  Navigator.push(
-                   context,
-                   MaterialPageRoute(builder: (context) => HomeScreen()));
-                  },
-                  child: Text('Sì')),
-              TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('No'))
-            ],
-          );
-        });
-              },
-              child: Row(
-                children:  [
-                  Text("Elimina animale: ",style: TextStyle(fontSize: 15),),
-                      SizedBox(width: 4,),
-                      Image.asset("assets/icons/delete.png", width: 23,height: 23,color: Colors.black),
-                    ]  
-              ),
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white,
-                //onSurface: Colors.grey,
-                //side: BorderSide(color: Colors.lightGreen, width: 2),
-                //elevation: 5,
-                minimumSize: Size(120, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-              ),
-            ),
-              ]
-              ), 
-                          ),                 
-                        SizedBox(height: 30,),                                      
-                          Text(
-                            "DATI LIBRETTO ANIMALE",
-                            textAlign: TextAlign.center,
-                          style: GoogleFonts.questrial(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                         
-                          Align(
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        "DATI LIBRETTO ANIMALE",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.questrial(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Align(
                           alignment: Alignment.center,
                           child: Stack(
                             children: [
-                              Container(                                
+                              Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.grey.shade300, width: 3),
@@ -288,200 +315,208 @@ class _viewInfoState extends State<NavigatorView> {
                                   },
                                   //elevation: 8,
                                   shape: CircleBorder(),
-                                  child:Icon(Icons.add_a_photo_rounded, color: Colors.black,size: 25,),     
-                                  fillColor: Colors.grey.shade400,
-                                  padding: EdgeInsets.all(8),                       
-                                  
-                                
+                                  child: Icon(
+                                    Icons.add_a_photo_rounded,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ),
+                                  fillColor: Colors.lightGreen.shade300,
+                                  padding: EdgeInsets.all(8),
                                 ),
                               ),
                             ],
                           )),
                       SizedBox(
-                            width: 280,
-                            child: TextFormField(
-                                autofocus: false,
-                                controller: nameController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  nameController.text = value!;
-                                },
-                                textInputAction: TextInputAction.next,
-                                //Nome
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  labelText: "Nome",
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                           SizedBox(
-                            width: 280,
-                            child: TextFormField(
-                                autofocus: false,
-                                controller: soprannomeController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  soprannomeController.text = value!;
-                                },
-                                textInputAction: TextInputAction.next,
-                                //Nome
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  labelText: "Soprannome",
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                              width: 280,
-                              child: TextFormField(
-                                autofocus: false,
-                                controller: dataController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  dataController.text = value!;
-                                },
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: nameController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              nameController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
+                            //Nome
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Nome",
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: soprannomeController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              soprannomeController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
+                            //Nome
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Soprannome",
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                          width: 280,
+                          child: TextFormField(
+                            autofocus: false,
+                            controller: dataController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              dataController.text = value!;
+                            },
 
-                                textInputAction: TextInputAction.next,
+                            textInputAction: TextInputAction.next,
 
-                                //DataNascita
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  labelText: "Data di nascita",
-                                ),
-                                onTap: () async {
-                                  var date = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100));
-                                  dataController.text =
-                                      date.toString().substring(0, 10);
-                                },
-                              )),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: 280,
-                            child: TextFormField(
-                                autofocus: false,
-                                controller: specieController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  specieController.text = value!;
-                                },
-                                textInputAction: TextInputAction.next,
+                            //DataNascita
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Data di nascita",
+                            ),
+                            onTap: () async {
+                              var date = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime(2100));
+                              dataController.text =
+                                  date.toString().substring(0, 10);
+                            },
+                          )),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: specieController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              specieController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                                //Specie
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  labelText: "Specie",
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: 280,
-                            child: TextFormField(
-                                autofocus: false,
-                                controller: razzaController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  razzaController.text = value!;
-                                },
-                                textInputAction: TextInputAction.next,
+                            //Specie
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Specie",
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: razzaController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              razzaController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                                //Razza
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  labelText: "Razza",
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: 280,
-                            child: TextFormField(
-                                autofocus: false,
-                                controller: coloreController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  coloreController.text = value!;
-                                },
-                                textInputAction: TextInputAction.next,
+                            //Razza
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Razza",
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: coloreController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              coloreController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                                //Colore
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  labelText: "Colore",
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: 280,
-                            child: TextFormField(
-                                autofocus: false,
-                                controller: veterinarioController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  veterinarioController.text = value!;
-                                },
-                                textInputAction: TextInputAction.next,
+                            //Colore
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Colore",
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: veterinarioController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              veterinarioController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                                //NomeVeterinario
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  labelText: "Nome veterinario",
-                                )),
-                          ),   
-                           SizedBox(height: 20,),
-                          Row(                            
-                            children: [
-                              Padding(padding: EdgeInsets.only(left: 45)),
-                              Text("Sesso: ",style: TextStyle(fontSize: 16,color: Colors.black54),),
-                              Radio(
-                              activeColor: Colors.black54,
-                              value: 1, 
-                              groupValue: _value, 
-                              onChanged: (value){
-                                setState(() {
-                                  _value=1;
-                                });
-                              },
-                              ),                                
-                              Text("M"),   
-                              Radio(
-                              activeColor: Colors.black54,
-                              value: 2, 
-                              groupValue: _value, 
-                              onChanged: (value){
-                                setState(() {
-                                  _value=2;
-                                });
-                              },
-                              ),                                
-                              Text("F"),          
-                            ],
-                          )                      
+                            //NomeVeterinario
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Nome veterinario",
+                            )),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Padding(padding: EdgeInsets.only(left: 45)),
+                          Text(
+                            "Sesso: ",
+                            style:
+                                TextStyle(fontSize: 16, color: Colors.black54),
+                          ),
+                          Radio(
+                            activeColor: Colors.black54,
+                            value: 1,
+                            groupValue: _value,
+                            onChanged: (value) {
+                              setState(() {
+                                _value = 1;
+                              });
+                            },
+                          ),
+                          Text("M"),
+                          Radio(
+                            activeColor: Colors.black54,
+                            value: 2,
+                            groupValue: _value,
+                            onChanged: (value) {
+                              setState(() {
+                                _value = 2;
+                              });
+                            },
+                          ),
+                          Text("F"),
                         ],
-                      )),
-                ],
-              ),            
+                      )
+                    ],
+                  )),
+            ],
+          ),
         ),
         Step(
           isActive: currentStep >= 1,
@@ -522,7 +557,6 @@ class _viewInfoState extends State<NavigatorView> {
                   SizedBox(
                     height: 20,
                   ),
-
                   Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -540,6 +574,9 @@ class _viewInfoState extends State<NavigatorView> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(32.0))),
                                   title: Text(
                                     "Aggiungi informazioni sul vaccino",
                                     textAlign: TextAlign.center,
@@ -548,254 +585,6 @@ class _viewInfoState extends State<NavigatorView> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(32.0))),
-                                  content: SingleChildScrollView(
-                                    child: ListBody(
-                                      children: [
-                                        SizedBox(
-                                          width: 280,
-                                          child: TextFormField(
-                                              autofocus: false,
-                                              controller: tipoVaccinoController,
-                                              keyboardType: TextInputType.name,
-                                              onSaved: (value) {
-                                                tipoVaccinoController.text =
-                                                value!;
-                                              },
-                                              textInputAction:
-                                              TextInputAction.next,
-
-                                              //Tipo vaccino
-                                              decoration: InputDecoration(
-                                                filled: true,
-                                                fillColor: Colors.transparent,
-                                                labelText: "Tipo vaccino",
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          width: 280,
-                                          child: TextFormField(
-                                            autofocus: false,
-                                            controller: dataSommController,
-                                            keyboardType: TextInputType.name,
-                                            onSaved: (value) {
-                                              dataSommController.text = value!;
-                                            },
-                                            textInputAction:
-                                            TextInputAction.next,
-
-                                            //Data somministrazione vaccino
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor: Colors.transparent,
-                                              labelText:
-                                              "Data somministrazione",
-                                            ),
-                                            onTap: () async {
-                                              var date = await showDatePicker(
-                                                  context: context,
-                                                  initialDate: DateTime.now(),
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100));
-                                              dataSommController.text = date
-                                                  .toString()
-                                                  .substring(0, 10);
-                                            },
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          width: 280,
-                                          child: TextFormField(
-                                              autofocus: false,
-                                              controller: farmacoSommController,
-                                              keyboardType: TextInputType.name,
-                                              onSaved: (value) {
-                                                farmacoSommController.text =
-                                                value!;
-                                              },
-                                              textInputAction:
-                                              TextInputAction.next,
-
-                                              //Farmaco somministrato
-                                              decoration: InputDecoration(
-                                                filled: true,
-                                                fillColor: Colors.transparent,
-                                                labelText:
-                                                "Farmaco somministrato",
-                                              )),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          width: 280,
-                                          child: TextFormField(
-                                              autofocus: false,
-                                              controller: nomeVeterController,
-                                              keyboardType: TextInputType.name,
-                                              onSaved: (value) {
-                                                nomeVeterController.text =
-                                                value!;
-                                              },
-                                              textInputAction:
-                                              TextInputAction.next,
-
-                                              //Nome veterinario
-                                              decoration: InputDecoration(
-                                                filled: true,
-                                                fillColor: Colors.transparent,
-                                                labelText: "Nome veterinario",
-                                              )),
-                                        ),
-                                        const SizedBox(
-                                          height: 40,
-                                        ),
-                                        ConstrainedBox(
-                                          constraints: BoxConstraints.tightFor(
-                                              width: 120, height: 40),
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              debugPrint("Add new vax");
-                                              NewVaccine tmp = NewVaccine();
-                                              tmp.veterinaryName =
-                                                  nomeVeterController.text;
-                                              tmp.date =
-                                                  dataSommController.text;
-                                              tmp.vaccineType =
-                                                  tipoVaccinoController.text;
-                                              tmp.medicine =
-                                                  farmacoSommController.text;
-                                              lstVaccines.add(tmp);
-                                              nomeVeterController.text = "";
-                                              dataSommController.text = "";
-                                              tipoVaccinoController.text = "";
-                                              farmacoSommController.text = "";
-                                              Navigator.of(context,
-                                                      rootNavigator: true)
-                                                  .pop();
-                                            },
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Text("Aggiungi  ",
-                                                    style:
-                                                        GoogleFonts.questrial(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    )),
-                                                Icon(
-                                                  Icons.save_rounded,
-                                                  size: 20,
-                                                ),
-                                              ],
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                              onPrimary: Colors.black,
-                                              primary: Colors.white,
-                                              alignment: Alignment.center,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          icon: Icon(Icons.add_circle_outline,
-                              color: Colors.lightGreen),
-                          iconSize: 30,
-                        ),
-                      ]),
-
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: this.lstVaccines.length,
-                      shrinkWrap: true,
-                      itemBuilder: (_, int index) => Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical:5.0),
-                        child: Card(
-                          elevation: 2.0,
-                          color: Colors.grey.shade100,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0)),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 15.0),
-                            child: Row(
-                              children: [
-                                Padding(padding: EdgeInsets.only(left: 7)),
-                                Image.asset("assets/icons/vaccine.png",
-                                    width: 25, height: 25),
-                                Padding(padding: EdgeInsets.only(left: 13)),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        " " +
-                                            lstVaccines[index].vaccineType.toString(),
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                        " " +
-                                            lstVaccines[index].date.toString(),
-                                        style: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 13.0)),
-                                   SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                        " " +
-                                            lstVaccines[index].medicine.toString(),
-                                        style: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 13.0)),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                        " " +
-                                            lstVaccines[index].veterinaryName.toString(),
-                                        style: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 13.0)),
-                                  ],
-                                ),
-                        Spacer(),                     
-                        IconButton(
-                         icon: Image.asset("assets/icons/edit.png",width: 23,height: 23),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: [
@@ -877,7 +666,7 @@ class _viewInfoState extends State<NavigatorView> {
                                                     "Farmaco somministrato",
                                               )),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         SizedBox(
@@ -900,55 +689,63 @@ class _viewInfoState extends State<NavigatorView> {
                                                 labelText: "Nome veterinario",
                                               )),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 40,
                                         ),
-                                    ConstrainedBox(
-                                      constraints: BoxConstraints.tightFor(
-                                          width: 120, height: 40),
-                                        child: ElevatedButton(
-                                          onPressed: () {     
-                                            //salva modifiche info vaccini                                       
-                                            lstVaccines[index].veterinaryName =
-                                                nomeVeterController.text;
-                                            lstVaccines[index].date =
-                                                dataSommController.text;
-                                            lstVaccines[index].vaccineType =
-                                                tipoVaccinoController.text;
-                                            lstVaccines[index].medicine =
-                                                farmacoSommController.text;
-                                            nomeVeterController.text = "";
-                                            dataSommController.text = "";
-                                            tipoVaccinoController.text = "";
-                                            farmacoSommController.text = "";
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pop();
-                                          },
-
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: const [
-                                              Text("Salva modifiche  "),
-                                              ImageIcon(
-                                                AssetImage(
-                                                    "assets/icons/save.png"),
-                                                color: Colors.black,
-                                                size: 17,
-                                              ),
-                                            ],
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            onPrimary: Colors.black,
-                                            primary: Colors.white,
-                                            alignment: Alignment.center,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15)),
+                                        ConstrainedBox(
+                                          constraints: BoxConstraints.tightFor(
+                                              width: 120, height: 40),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              debugPrint("Add new vax");
+                                              NewVaccine tmp = NewVaccine();
+                                              tmp.veterinaryName =
+                                                  nomeVeterController.text;
+                                              tmp.date =
+                                                  dataSommController.text;
+                                              tmp.vaccineType =
+                                                  tipoVaccinoController.text;
+                                              tmp.medicine =
+                                                  farmacoSommController.text;
+                                              lstVaccines.add(tmp);
+                                              nomeVeterController.text = "";
+                                              dataSommController.text = "";
+                                              tipoVaccinoController.text = "";
+                                              farmacoSommController.text = "";
+                                              Navigator.of(context,
+                                                  rootNavigator: true)
+                                                  .pop();
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              children: [
+                                                Text("Aggiungi  ",
+                                                    style:
+                                                    GoogleFonts.questrial(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                    )),
+                                                Icon(
+                                                  Icons.save_rounded,
+                                                  size: 20,
+                                                ),
+                                              ],
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                              onPrimary: Colors.black,
+                                              primary: Colors.white,
+                                              alignment: Alignment.center,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      15)),
+                                            ),
                                           ),
                                         ),
-                                       ),
                                       ],
                                     ),
                                   ),
@@ -956,20 +753,315 @@ class _viewInfoState extends State<NavigatorView> {
                               },
                             );
                           },
-                                                      
+                          icon: Icon(Icons.add_circle_outline,
+                              color: Colors.lightGreen),
+                          iconSize: 30,
                         ),
-                        IconButton(onPressed: (){
-                          setState(() {
-                             lstVaccines.removeAt(index);
+                      ]),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: this.lstVaccines.length,
+                      shrinkWrap: true,
+                      itemBuilder: (_, int index) => Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 5.0),
+                        child: Card(
+                          elevation: 2.0,
+                          color: Colors.grey.shade100,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0)),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 15.0),
+                            child: Row(
+                              children: [
+                                Padding(padding: EdgeInsets.only(left: 7)),
+                                Image.asset("assets/icons/vaccine.png",
+                                    width: 25, height: 25),
+                                Padding(padding: EdgeInsets.only(left: 13)),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        " " +
+                                            lstVaccines[index]
+                                                .vaccineType
+                                                .toString(),
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                        " " +
+                                            lstVaccines[index].date.toString(),
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 13.0)),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                        " " +
+                                            lstVaccines[index]
+                                                .medicine
+                                                .toString(),
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 13.0)),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                        " " +
+                                            lstVaccines[index]
+                                                .veterinaryName
+                                                .toString(),
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 13.0)),
+                                  ],
+                                ),
+                                Spacer(),
+                                IconButton(
+                                  icon: Image.asset("assets/icons/edit.png",
+                                      width: 23, height: 23),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(32.0))),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: [
+                                                SizedBox(
+                                                  width: 280,
+                                                  child: TextFormField(
+                                                      autofocus: false,
+                                                      controller:
+                                                          tipoVaccinoController,
+                                                      keyboardType:
+                                                          TextInputType.name,
+                                                      onSaved: (value) {
+                                                        tipoVaccinoController
+                                                            .text = value!;
+                                                      },
+                                                      textInputAction:
+                                                          TextInputAction.next,
 
-                          });
-                                }, 
-                                icon: Image.asset("assets/icons/delete.png",width: 25,height: 25, color: Colors.red.shade400)
-                                ), 
-                      
-                       ],
-                       ),
-                       ),
+                                                      //Tipo vaccino
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.transparent,
+                                                        labelText:
+                                                            "Tipo vaccino",
+                                                      )),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                SizedBox(
+                                                  width: 280,
+                                                  child: TextFormField(
+                                                    autofocus: false,
+                                                    controller:
+                                                        dataSommController,
+                                                    keyboardType:
+                                                        TextInputType.name,
+                                                    onSaved: (value) {
+                                                      dataSommController.text =
+                                                          value!;
+                                                    },
+                                                    textInputAction:
+                                                        TextInputAction.next,
+
+                                                    //Data somministrazione vaccino
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor:
+                                                          Colors.transparent,
+                                                      labelText:
+                                                          "Data somministrazione",
+                                                    ),
+                                                    onTap: () async {
+                                                      var date =
+                                                          await showDatePicker(
+                                                              context: context,
+                                                              initialDate:
+                                                                  DateTime
+                                                                      .now(),
+                                                              firstDate:
+                                                                  DateTime(
+                                                                      1900),
+                                                              lastDate:
+                                                                  DateTime(
+                                                                      2100));
+                                                      dataSommController.text =
+                                                          date
+                                                              .toString()
+                                                              .substring(0, 10);
+                                                    },
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                SizedBox(
+                                                  width: 280,
+                                                  child: TextFormField(
+                                                      autofocus: false,
+                                                      controller:
+                                                          farmacoSommController,
+                                                      keyboardType:
+                                                          TextInputType.name,
+                                                      onSaved: (value) {
+                                                        farmacoSommController
+                                                            .text = value!;
+                                                      },
+                                                      textInputAction:
+                                                          TextInputAction.next,
+
+                                                      //Farmaco somministrato
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.transparent,
+                                                        labelText:
+                                                            "Farmaco somministrato",
+                                                      )),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                SizedBox(
+                                                  width: 280,
+                                                  child: TextFormField(
+                                                      autofocus: false,
+                                                      controller:
+                                                          nomeVeterController,
+                                                      keyboardType:
+                                                          TextInputType.name,
+                                                      onSaved: (value) {
+                                                        nomeVeterController
+                                                            .text = value!;
+                                                      },
+                                                      textInputAction:
+                                                          TextInputAction.next,
+
+                                                      //Nome veterinario
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.transparent,
+                                                        labelText:
+                                                            "Nome veterinario",
+                                                      )),
+                                                ),
+                                                SizedBox(
+                                                  height: 40,
+                                                ),
+                                                ConstrainedBox(
+                                                  constraints:
+                                                      BoxConstraints.tightFor(
+                                                          width: 120,
+                                                          height: 40),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      //salva modifiche info vaccini
+                                                      lstVaccines[index]
+                                                              .veterinaryName =
+                                                          nomeVeterController
+                                                              .text;
+                                                      lstVaccines[index].date =
+                                                          dataSommController
+                                                              .text;
+                                                      lstVaccines[index]
+                                                              .vaccineType =
+                                                          tipoVaccinoController
+                                                              .text;
+                                                      lstVaccines[index]
+                                                              .medicine =
+                                                          farmacoSommController
+                                                              .text;
+                                                      nomeVeterController.text =
+                                                          "";
+                                                      dataSommController.text =
+                                                          "";
+                                                      tipoVaccinoController
+                                                          .text = "";
+                                                      farmacoSommController
+                                                          .text = "";
+                                                      Navigator.of(context,
+                                                              rootNavigator:
+                                                                  true)
+                                                          .pop();
+                                                    },
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: const [
+                                                        Text(
+                                                            "Salva modifiche  "),
+                                                        ImageIcon(
+                                                          AssetImage(
+                                                              "assets/icons/save.png"),
+                                                          color: Colors.black,
+                                                          size: 17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      onPrimary: Colors.black,
+                                                      primary: Colors.white,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        lstVaccines.removeAt(index);
+                                      });
+                                    },
+                                    icon: Image.asset("assets/icons/delete.png",
+                                        width: 25,
+                                        height: 25,
+                                        color: Colors.red.shade400)),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -987,7 +1079,7 @@ class _viewInfoState extends State<NavigatorView> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 0.53,
+                  height: MediaQuery.of(context).size.height * 0.57,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -1008,7 +1100,7 @@ class _viewInfoState extends State<NavigatorView> {
                     SizedBox(
                       height: 30,
                     ),
-                   Text(
+                    Text(
                       "PASSAPORTO ANIMALE",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.questrial(
@@ -1019,15 +1111,15 @@ class _viewInfoState extends State<NavigatorView> {
                     SizedBox(
                       height: 20,
                     ),
-                      
-                                /*Align(alignment: Alignment.centerRight,                                        
+
+                    /*Align(alignment: Alignment.centerRight,
                                 child: IconButton(
                                 padding: EdgeInsets.only(right: 30),
-                                icon: Image.asset("assets/icons/edit.png"),                                
+                                icon: Image.asset("assets/icons/edit.png"),
                                 onPressed: (){
                                     //
                                 },
-                                ),  
+                                ),
                               ),*/
                     //SizedBox(height: 20,),
                     SizedBox(
@@ -1155,85 +1247,87 @@ class _viewInfoState extends State<NavigatorView> {
                       ],
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "LOCALIZZAZIONE",
-                           textAlign: TextAlign.center,
-                          style: GoogleFonts.questrial(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "DISPOSITIVI PER LA GEOLOCALIZZAZIONE",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.questrial(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Text(
-                          "Dispositivi collegati:",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 15, fontStyle: FontStyle.italic),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Stack(alignment: AlignmentDirectional.topCenter,
-                        children:[                        
-                          ElevatedButton(
-                          child: Text("AirTag1"),
-                          style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.black,
-                            primary: Colors.white,
-                            elevation: 5,
-                            minimumSize: Size(140, 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
+                          SizedBox(
+                            height: 40,
                           ),
-                          onPressed: () {
-                            //
-                            airTag1 = "1 dispositivo";
-                          },
-                        ),
-                        Positioned(
-                        bottom: 5,
-                        left: 105,                       
-                        child: IconButton(onPressed: (){                                       
-                               airTag1 = "1 dispositivo";
-                               },
-                              icon: Icon(Icons.remove_circle,
-                              size: 25, color: Colors.black54))),
-                        ]
-                      ),
-
-                      Stack(alignment: AlignmentDirectional.topCenter,
-                        children:[                        
-                          ElevatedButton(
-                          child: Text("AirTag2"),
-                          style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.black,
-                            primary: Colors.white,
-                            elevation: 5,
-                            minimumSize: Size(140, 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
+                          Text(
+                            "Dispositivi collegati:",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 15, fontStyle: FontStyle.italic),
                           ),
-                          onPressed: () {                            
-                            airTag2 = "2 dispositivo";
-                          },
-                        ),
-                        Positioned(
-                        bottom: 5,
-                        left: 105,
-                        //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
-                        child: IconButton(onPressed: (){
-                                  //
-                                },
-                              icon: Icon(Icons.remove_circle,
-                              size: 25, color: Colors.black54))),
-                        ]
-                      ),                       
-                      ])
-                    ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Stack(
+                              alignment: AlignmentDirectional.topCenter,
+                              children: [
+                                ElevatedButton(
+                                  child: Text("AirTag1"),
+                                  style: ElevatedButton.styleFrom(
+                                    onPrimary: Colors.black,
+                                    primary: Colors.white,
+                                    elevation: 5,
+                                    minimumSize: Size(140, 40),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                  ),
+                                  onPressed: () {
+                                    //
+                                    airTag1 = "1 dispositivo";
+                                  },
+                                ),
+                                Positioned(
+                                    bottom: 5,
+                                    left: 105,
+                                    child: IconButton(
+                                        onPressed: () {
+                                          airTag1 = "1 dispositivo";
+                                        },
+                                        icon: Icon(Icons.remove_circle,
+                                            size: 25, color: Colors.black54))),
+                              ]),
+                          Stack(
+                              alignment: AlignmentDirectional.topCenter,
+                              children: [
+                                ElevatedButton(
+                                  child: Text("AirTag2"),
+                                  style: ElevatedButton.styleFrom(
+                                    onPrimary: Colors.black,
+                                    primary: Colors.white,
+                                    elevation: 5,
+                                    minimumSize: Size(140, 40),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                  ),
+                                  onPressed: () {
+                                    airTag2 = "2 dispositivo";
+                                  },
+                                ),
+                                Positioned(
+                                    bottom: 5,
+                                    left: 105,
+                                    //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
+                                    child: IconButton(
+                                        onPressed: () {
+                                          //
+                                        },
+                                        icon: Icon(Icons.remove_circle,
+                                            size: 25, color: Colors.black54))),
+                              ]),
+                        ])),
               ],
             )),
       ];
@@ -1259,123 +1353,146 @@ class _viewInfoState extends State<NavigatorView> {
               ),
             ),
             body: Container(
-        //padding: EdgeInsets.only(bottom: 70),
-        child: Stepper(
-        type: StepperType.horizontal,
-        physics: ClampingScrollPhysics(),
-        steps: getSteps(snapshot.data!),
-        currentStep: currentStep,        
-        controlsBuilder: (BuildContext context, ControlsDetails controls) {
-          if(currentStep==0){
-            return Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[    
-             IconButton(
-               padding: EdgeInsets.only(top: 15),
-               onPressed: controls.onStepContinue,             
-               icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
-          ]);
-          }
-
-          if(currentStep==3){
-            return Column(children: [
-              Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[    
-             IconButton(
-               padding: EdgeInsets.only(top: 15),
-               onPressed: controls.onStepCancel,             
-               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
-          ]),
-          SizedBox(height: 50,),
-              ElevatedButton(
-                  onPressed: () {
-                    saveData(
-                        nameController.text,
-                        dataController.text,
-                        specieController.text,
-                        razzaController.text,
-                        coloreController.text,
-                        veterinarioController.text,
-                        descrizioneController.text,
-                        microchipController.text,
-                        dataMicrochipController.text,
-                        enteController.text,
-                    soprannomeController.text);
-                  },
-                 child: ConstrainedBox(
-                constraints: BoxConstraints.tightFor(
-                    width: MediaQuery.of(context).size.width, height: 50),
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Salva tutto",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18),
+              //padding: EdgeInsets.only(bottom: 70),
+              child: Theme(
+                data: ThemeData(
+                  colorScheme: ColorScheme.light(
+                    primary: Colors.lightGreen.shade300,
                   ),
+                  splashColor: Colors.black54,
                 ),
-              ),
-                  style: ElevatedButton.styleFrom(
-                onPrimary: Colors.black,
-                primary: Colors.white,
-                onSurface: Colors.grey,
-                side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
-                elevation: 5,
-                //minimumSize: Size(100, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-              ),
-                ),
-            ]);
-          }
-          
-            else return Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[    
-             IconButton(
-               padding: EdgeInsets.only(top: 15),
-               onPressed: controls.onStepCancel,             
-               icon: Image.asset("assets/icons/arrow-left.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
-                      
-            IconButton(
-              padding: EdgeInsets.only(top: 15),
-              onPressed: controls.onStepContinue,
-             icon: Image.asset("assets/icons/arrow-right.png",color:Colors.black54,width: 25,height: 25,),            
-            ),
-          
-          ],
-        );
-        },     
-        onStepContinue: (){
-          setState(() {
-             if(currentStep < (getSteps(snapshot.data!).length-1)){
-              currentStep +=1;
-             }
-             return;
-          });
-         
-        },
-        onStepCancel: (){ 
-          setState(() {
-            if(currentStep == 0){
-            return null;
+                child: Stepper(
+                  type: StepperType.horizontal,
+                  physics: ClampingScrollPhysics(),
+                  steps: getSteps(snapshot.data!),
+                  currentStep: currentStep,
+                  controlsBuilder:
+                      (BuildContext context, ControlsDetails controls) {
+                    if (currentStep == 0) {
+                      return Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            IconButton(
+                              padding: EdgeInsets.only(top: 15),
+                              onPressed: controls.onStepContinue,
+                              icon: Image.asset(
+                                "assets/icons/arrow-right.png",
+                                width: 40,
+                                height: 40,
+                              ),
+                            ),
+                          ]);
+                    }
 
-            }
-          currentStep -=1;
-          });         
-        },
-        onStepTapped: (step) => setState(() {
-          currentStep = step;
-        }),
-        
-      ),
-      ),
+                    if (currentStep == 3) {
+                      return Column(children: [
+                        Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              IconButton(
+                                padding: EdgeInsets.only(top: 15),
+                                onPressed: controls.onStepCancel,
+                                icon: Image.asset(
+                                  "assets/icons/arrow-left.png",
+                                  width: 40,
+                                  height: 40,
+                                ),
+                              ),
+                            ]),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            saveData(
+                                nameController.text,
+                                dataController.text,
+                                specieController.text,
+                                razzaController.text,
+                                coloreController.text,
+                                veterinarioController.text,
+                                descrizioneController.text,
+                                microchipController.text,
+                                dataMicrochipController.text,
+                                enteController.text,
+                                soprannomeController.text);
+                          },
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints.tightFor(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Salva tutto",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            onPrimary: Colors.black,
+                            primary: Colors.white,
+                            onSurface: Colors.grey,
+                            side: BorderSide(
+                                color: Colors.lightGreen.shade200, width: 2),
+                            elevation: 5,
+                            //minimumSize: Size(100, 40),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                          ),
+                        ),
+                      ]);
+                    } else
+                      return Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          IconButton(
+                            padding: EdgeInsets.only(top: 15),
+                            onPressed: controls.onStepCancel,
+                            icon: Image.asset(
+                              "assets/icons/arrow-left.png",
+                              width: 40,
+                              height: 40,
+                            ),
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.only(top: 15),
+                            onPressed: controls.onStepContinue,
+                            icon: Image.asset(
+                              "assets/icons/arrow-right.png",
+                              width: 40,
+                              height: 40,
+                            ),
+                          ),
+                        ],
+                      );
+                  },
+                  onStepContinue: () {
+                    setState(() {
+                      if (currentStep < (getSteps(snapshot.data!).length - 1)) {
+                        currentStep += 1;
+                      }
+                      return;
+                    });
+                  },
+                  onStepCancel: () {
+                    setState(() {
+                      if (currentStep == 0) {
+                        return null;
+                      }
+                      currentStep -= 1;
+                    });
+                  },
+                  onStepTapped: (step) => setState(() {
+                    currentStep = step;
+                  }),
+                ),
+              ),
+            ),
           );
         }
         return SizedBox(
@@ -1391,7 +1508,7 @@ class _viewInfoState extends State<NavigatorView> {
 
     try {
       await firebase_storage.FirebaseStorage.instance
-          .ref('uploads/'+filePath.split("/").last)
+          .ref('uploads/' + filePath.split("/").last)
           .putFile(file);
     } on firebase_storage.FirebaseException catch (e) {
       // e.g, e.code == 'canceled'
@@ -1410,13 +1527,14 @@ class _viewInfoState extends State<NavigatorView> {
     }
   }
 
-  removeAnimal(){
+  removeAnimal() {
     final DBRef = FirebaseDatabase.instance
         .reference()
         .child(UserSharedPreferences.getTypeOfUser().toString());
     DBRef.child(_auth.currentUser!.uid.toString() +
-        "/Animali/" +
-        UserSharedPreferences.getAnimalName().toString()).remove();
+            "/Animali/" +
+            UserSharedPreferences.getAnimalName().toString())
+        .remove();
     if (pickedImage != null) {
       removePhoto(pickedImage!.path);
     }
@@ -1434,7 +1552,7 @@ class _viewInfoState extends State<NavigatorView> {
       String animalDateMicrochip,
       String entityIssuingAnimal,
       String animalSoprannome) {
-    if(animalName != UserSharedPreferences.getAnimalName().toString()){
+    if (animalName != UserSharedPreferences.getAnimalName().toString()) {
       removeAnimal();
     }
 
@@ -1444,7 +1562,7 @@ class _viewInfoState extends State<NavigatorView> {
       uploadFile(path);
     }
     String sesso = "M";
-    if(_value == 2){
+    if (_value == 2) {
       sesso = "F";
     }
 
@@ -1467,22 +1585,25 @@ class _viewInfoState extends State<NavigatorView> {
       'animalSesso': sesso,
     });
     DBRef.child(_auth.currentUser!.uid.toString() +
-        "/Animali/" +
-        UserSharedPreferences.getAnimalName().toString()+"/Vaccini").remove();
-      for (int i = 0; i < lstVaccines.length; i++) {
-        DBRef.child(_auth.currentUser!.uid.toString() +
-                "/Animali/" +
-                animalName +
-                "/Vaccini/" +
-                "Vaccino_"+i.toString())
-            .set({
-          'vaccineType': lstVaccines[i].vaccineType,
-          'medicine': lstVaccines[i].medicine,
-          'date': lstVaccines[i].date,
-          'veterinaryName': lstVaccines[i].veterinaryName,
-        });
-      }
-      lstVaccines.clear();
+            "/Animali/" +
+            UserSharedPreferences.getAnimalName().toString() +
+            "/Vaccini")
+        .remove();
+    for (int i = 0; i < lstVaccines.length; i++) {
+      DBRef.child(_auth.currentUser!.uid.toString() +
+              "/Animali/" +
+              animalName +
+              "/Vaccini/" +
+              "Vaccino_" +
+              i.toString())
+          .set({
+        'vaccineType': lstVaccines[i].vaccineType,
+        'medicine': lstVaccines[i].medicine,
+        'date': lstVaccines[i].date,
+        'veterinaryName': lstVaccines[i].veterinaryName,
+      });
+    }
+    lstVaccines.clear();
     DBRef.child(_auth.currentUser!.uid.toString() +
             "/Animali/" +
             animalName +
@@ -1520,8 +1641,20 @@ class _viewInfoState extends State<NavigatorView> {
       jsonBody = json.decode(response.body);
       ViewAllInfoAnimal animal = ViewAllInfoAnimal();
       pickedImage = File(jsonBody['Libretto']['animalFoto']);
-      animal.booklet = Booklet(jsonBody['Libretto']['animalBirthday'],jsonBody['Libretto']['animalColor'],jsonBody['Libretto']['animalKind'],jsonBody['Libretto']['animalName'],jsonBody['Libretto']['animalSpecie'],jsonBody['Libretto']['animalVeterinaryName'],jsonBody['Libretto']['animalSesso'],jsonBody['Libretto']['animalSoprannome']);
-      animal.passport = Passport(jsonBody['Passaporto']['animalDateMicrochip'],jsonBody['Passaporto']['animalDescription'],jsonBody['Passaporto']['animalMicrochip'],jsonBody['Passaporto']['entityIssuingAnimal']);
+      animal.booklet = Booklet(
+          jsonBody['Libretto']['animalBirthday'],
+          jsonBody['Libretto']['animalColor'],
+          jsonBody['Libretto']['animalKind'],
+          jsonBody['Libretto']['animalName'],
+          jsonBody['Libretto']['animalSpecie'],
+          jsonBody['Libretto']['animalVeterinaryName'],
+          jsonBody['Libretto']['animalSesso'],
+          jsonBody['Libretto']['animalSoprannome']);
+      animal.passport = Passport(
+          jsonBody['Passaporto']['animalDateMicrochip'],
+          jsonBody['Passaporto']['animalDescription'],
+          jsonBody['Passaporto']['animalMicrochip'],
+          jsonBody['Passaporto']['entityIssuingAnimal']);
       nameController.text = animal.booklet.animalName;
       dataController.text = animal.booklet.animalBirthday;
       specieController.text = animal.booklet.animalSpecie;
@@ -1533,19 +1666,20 @@ class _viewInfoState extends State<NavigatorView> {
       dataMicrochipController.text = animal.passport.animalDateMicrochip;
       enteController.text = animal.passport.animalIssuingAnimal;
       soprannomeController.text = animal.booklet.animalSoprannome;
-      if(animal.booklet.animalSesso.toString() == "M"){
+      if (animal.booklet.animalSesso.toString() == "M") {
         _value = 1;
       } else {
         _value = 2;
       }
-      if(jsonBody['Vaccini'] != null){
+      if (jsonBody['Vaccini'] != null) {
         url = Uri.parse(
             "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
                 typeOfUser +
                 "//" +
                 uidUser +
                 "//" +
-                path+"//Vaccini//" +
+                path +
+                "//Vaccini//" +
                 ".json?");
         final response2 = await http.get(url);
         if (response2.statusCode == 200) {
@@ -1554,8 +1688,8 @@ class _viewInfoState extends State<NavigatorView> {
             NewVaccine vaccine = NewVaccine();
             vaccine.veterinaryName = value["veterinaryName"];
             vaccine.medicine = value["medicine"];
-            vaccine.date = value ["date"];
-            vaccine.vaccineType = value ["vaccineType"];
+            vaccine.date = value["date"];
+            vaccine.vaccineType = value["vaccineType"];
             lstVaccines.add(vaccine);
           });
         } else {
@@ -1567,5 +1701,4 @@ class _viewInfoState extends State<NavigatorView> {
       throw Exception('Failed to load album');
     }
   }
-
 }

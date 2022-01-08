@@ -1,11 +1,7 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:tflite/tflite.dart';
-import 'package:camera/camera.dart';
-import 'package:get/get.dart';
-
 
 class IAscreen extends StatefulWidget {
   const IAscreen({Key? key}) : super(key: key);
@@ -16,6 +12,7 @@ class IAscreen extends StatefulWidget {
 
 class _IAscreenState extends State<IAscreen> {
   List<CameraDescription>? cameras;
+
   Future<void>main()async{
     WidgetsFlutterBinding.ensureInitialized();
     cameras= await availableCameras();
@@ -26,35 +23,35 @@ class _IAscreenState extends State<IAscreen> {
   String result="";
   CameraController? cameraController;
   CameraImage? imgCamera;
-  
+
   initCamera(){
     cameraController=CameraController(cameras![0],ResolutionPreset.medium);
     cameraController!.initialize().then((value) {
-    if(!mounted){
-      return;
-    }
-    setState(() {
-      cameraController!.startImageStream((imageFromStream) => 
-      {
-        if(!isWorking){
-          isWorking=true,
-          imgCamera=imageFromStream,
-          runModelOnStreamFrames(),
-        }
+      if(!mounted){
+        return;
+      }
+      setState(() {
+        cameraController!.startImageStream((imageFromStream) =>
+        {
+          if(!isWorking){
+            isWorking=true,
+            imgCamera=imageFromStream,
+            runModelOnStreamFrames(),
+          }
+        });
       });
     });
-  });
   }
- 
-Future loadImageModel() async {
-  var result = await Tflite.loadModel(
-    model: "assets/mobilenet_v1_1.0_224_quant.tflite",
-    labels: "assets/labels_mobilenet_quant_v1_224.txt",
-  );
-  print("result: $result");
+
+  Future loadImageModel() async {
+    var result = await Tflite.loadModel(
+      model: "assets/mobilenet_v1_1.0_224_quant.tflite",
+      labels: "assets/labels_mobilenet_quant_v1_224.txt",
+    );
+    print("result: $result");
 }
 
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -76,16 +73,16 @@ Future loadImageModel() async {
         numResults: 2,
         threshold: 0.1,
         asynch: true,
-        );
-        result="";
+      );
+      result="";
 
-        recognitions!.forEach((response) { 
-          result+=response["label"] + "  " + (response["confidence"] as double).toStringAsFixed(2)+ "\n\n";
-        });
-        setState(() {
-          result;
-        });
-        isWorking=false;
+      recognitions!.forEach((response) {
+        result+=response["label"] + "  " + (response["confidence"] as double).toStringAsFixed(2)+ "\n\n";
+      });
+      setState(() {
+        result;
+      });
+      isWorking=false;
     }
   }
 
@@ -101,73 +98,73 @@ Future loadImageModel() async {
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text("Riconoscimento"),
-        centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/icons/back.jpg"),
-            ),          
-        ),
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Center(
-                  child: Container(
-                    height: 320.0,
-                    width: 360.0,
-                    child: Image.asset("assets/icons/frame.jpg"),
-                  ),
-                ),
-                Center(
-                  child: TextButton(
-                    onPressed: (){
-                      initCamera();
-                    },
+        appBar: AppBar(
+            backgroundColor: Colors.white,
+            title: Text("Riconoscimento cani"),
+            centerTitle: true,
+            elevation: 4,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/icons/back.jpg"),
+            ),
+          ),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Center(
                     child: Container(
-                      margin: EdgeInsets.only(top:35),
-                      height: 270,
-                      width: 360,
-                      child: imgCamera==null ?
-                      Container(
+                      height: 320.0,
+                      width: 360.0,
+                      child: Image.asset("assets/icons/frame.jpg"),
+                    ),
+                  ),
+                  Center(
+                    child: TextButton(
+                      onPressed: (){
+                        initCamera();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top:35),
                         height: 270,
                         width: 360,
-                        child: Icon(Icons.photo_camera_front),
-                      ): AspectRatio(aspectRatio: cameraController!.value.aspectRatio,
-                      child: CameraPreview(cameraController!),
+                        child: imgCamera==null ?
+                        Container(
+                          height: 270,
+                          width: 360,
+                          child: Icon(Icons.photo_camera_front),
+                        ): AspectRatio(aspectRatio: cameraController!.value.aspectRatio,
+                          child: CameraPreview(cameraController!),
+                        ),
                       ),
                     ),
-                    ),
                   )
-              ],
-            ),
-            Center(child: Container(
-              margin: const EdgeInsets.only(top: 55),
-              child: SingleChildScrollView(
-                child: Text(result,
-                style: const TextStyle(
-                  backgroundColor: Colors.white54,
-                   fontSize: 25,
-                   color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-                ),
+                ],
               ),
-            ),)
-          ],
-        ),
-      )
+              Center(child: Container(
+                margin: const EdgeInsets.only(top: 55),
+                child: SingleChildScrollView(
+                  child: Text(result,
+                    style: const TextStyle(
+                      backgroundColor: Colors.white54,
+                      fontSize: 25,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),)
+            ],
+          ),
+        )
     ),
     );
   }

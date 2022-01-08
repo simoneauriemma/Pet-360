@@ -16,6 +16,8 @@ import 'package:pet360/model/interface_model.dart';
 import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
+import 'package:pet360/screens/privacy_policy_screen.dart';
+import 'package:pet360/screens/termini_condizioni_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
 import 'home_screen.dart';
@@ -350,17 +352,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: const [
                     Text(
-                      "Logout",
+                      "Logout  ",
                       style: TextStyle(
                         fontSize: 15,
                       ),
                     ),
-                    /*ImageIcon(
-                            AssetImage(
-                                "assets/icons/save.png"),
-                            color: Colors.black,
-                            size: 15,
-                          ), */
+                    ImageIcon(
+                      AssetImage("assets/icons/logout.png"),
+                      color: Colors.black,
+                      size: 15,
+                    ),
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
@@ -415,6 +416,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             );
 
+            final privacy = GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => PrivacyPolicy_screen()));
+              },
+              child: Row(
+                children: [
+                  Text(
+                    "Privacy & Policy",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  /*Image.asset(
+                    "assets/icons/shield.png",
+                    height: 22,
+                    width: 22,
+                  ),*/
+                ],
+              ),
+            );
+
+            final termini = GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => TerminiCodizioni_screen()));
+              },
+              child: Row(
+                children: [
+                  Text(
+                    "Termini & Condizioni",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  /*Image.asset(
+                    "assets/icons/audit.png",
+                    height: 22,
+                    width: 22,
+                  ),*/
+                ],
+              ),
+            );
+
             final aiuto = Row(
               children: [
                 Text(
@@ -433,47 +482,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             );
 
-            final privacy = Row(
-              children: [
-                Text(
-                  "Privacy & Policy",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Image.asset(
-                  "assets/icons/shield.png",
-                  height: 25,
-                  width: 25,
-                ),
-              ],
-            );
-
-            final termini = Row(
-              children: [
-                Text(
-                  "Termini & Condizioni",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Image.asset(
-                  "assets/icons/audit.png",
-                  height: 20,
-                  width: 20,
-                ),
-              ],
-            );
-
             final btnImpostazioni = IconButton(
               //key: btnKey,
-              icon: Icon(Icons.menu_rounded),
+              icon: Icon(Icons.settings_applications_sharp),
               padding: EdgeInsets.only(right: 15),
-              iconSize: 35,
+              iconSize: 40,
               onPressed: () {
                 showDialog(
                   context: context,
@@ -487,7 +500,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textAlign: TextAlign.center,
                       ),
                       content: Container(
-                        height: MediaQuery.of(context).size.height * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.55,
                         // width: MediaQuery.of(context).size.width / 1.2,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -612,16 +625,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 left: 42,
                                 child: RawMaterialButton(
                                   onPressed: () {
-                                    imagePickerOption();
-                                  },
-                                  //elevation: 8,
-                                  shape: CircleBorder(),
-                                  child:Icon(Icons.add_a_photo_rounded, color: Colors.black,size: 25,),     
-                                  fillColor: Colors.grey.shade400,
-                                  padding: EdgeInsets.all(8),                       
-                                  
-                                
-                                ),
+                                            imagePickerOption();
+                                          },
+                                          //elevation: 8,
+                                          shape: CircleBorder(),
+                                          child: Icon(
+                                            Icons.add_a_photo_rounded,
+                                            color: Colors.black,
+                                            size: 25,
+                                          ),
+                                          fillColor: Colors.grey.shade300,
+                                          padding: EdgeInsets.all(8),
+                                        ),
                               ),
                             ],
                           )),
@@ -844,17 +859,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: 0,
-                                      left: 63,
-                                      child: IconButton(
+                                      top: 60,
+                                      left: 42,
+                                      child: RawMaterialButton(
                                         onPressed: () {
                                           imagePickerOption();
                                         },
-                                        icon: const Icon(
+                                        //elevation: 8,
+                                        shape: CircleBorder(),
+                                        child: Icon(
                                           Icons.add_a_photo_rounded,
                                           color: Colors.black,
-                                          size: 30,
+                                          size: 25,
                                         ),
+                                        fillColor: Colors.grey.shade300,
+                                        padding: EdgeInsets.all(8),
                                       ),
                                     ),
                                   ],
@@ -883,7 +902,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   width:
                                       MediaQuery.of(context).size.width * 1.2,
                                   height:
-                                      MediaQuery.of(context).size.width * 2.8,
+                                      MediaQuery.of(context).size.width * 2.4,
                                   //sfondo con sfocatura
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -1033,17 +1052,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: 0,
-                                      left: 63,
-                                      child: IconButton(
+                                      top: 60,
+                                      left: 42,
+                                      child: RawMaterialButton(
                                         onPressed: () {
                                           imagePickerOption();
                                         },
-                                        icon: const Icon(
+                                        //elevation: 8,
+                                        shape: CircleBorder(),
+                                        child: Icon(
                                           Icons.add_a_photo_rounded,
                                           color: Colors.black,
-                                          size: 30,
+                                          size: 25,
                                         ),
+                                        fillColor: Colors.grey.shade300,
+                                        padding: EdgeInsets.all(8),
                                       ),
                                     ),
                                   ],
@@ -1072,7 +1095,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   width:
                                       MediaQuery.of(context).size.width * 1.2,
                                   height:
-                                      MediaQuery.of(context).size.width * 2.8,
+                                      MediaQuery.of(context).size.width * 2.4,
                                   //sfondo con sfocatura
                                   decoration: BoxDecoration(
                                     color: Colors.white,
