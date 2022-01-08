@@ -318,10 +318,11 @@ class _viewInfoState extends State<NavigatorView> {
                                   shape: CircleBorder(),
                                   child: Icon(
                                     Icons.add_a_photo_rounded,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     size: 25,
                                   ),
-                                  fillColor: Colors.lightGreen.shade300,
+                                  fillColor: Colors.grey.shade200,
+                                  //fillColor: Colors.lightGreen.shade300,
                                   padding: EdgeInsets.all(8),
                                 ),
                               ),
@@ -1270,9 +1271,14 @@ class _viewInfoState extends State<NavigatorView> {
                           SizedBox(
                             height: 30,
                           ),
-                          Stack(
-                              alignment: AlignmentDirectional.topCenter,
-                              children: [
+                          Expanded(
+                    child: ListView.builder(
+                      itemCount: this.airTags.length,
+                      shrinkWrap: true,
+                      itemBuilder: (_, int index) =>Column(children: [                    
+                              Stack(
+                            alignment: AlignmentDirectional.topCenter,
+                            children: [
                                 ElevatedButton(
                                   child: Text("AirTag1"),
                                   style: ElevatedButton.styleFrom(
@@ -1290,6 +1296,7 @@ class _viewInfoState extends State<NavigatorView> {
                                     }
                                   },
                                 ),
+                    
                                 Positioned(
                                     bottom: 5,
                                     left: 105,
@@ -1300,9 +1307,12 @@ class _viewInfoState extends State<NavigatorView> {
                                           }
                                         },
                                         icon: Icon(Icons.remove_circle,
-                                            size: 25, color: Colors.black54))),
-                              ]),
-                          Stack(
+                                            size: 25, color: Colors.black54))
+                                ),
+                            ]),
+                      ]),
+                    ),),
+                          /*Stack(
                               alignment: AlignmentDirectional.topCenter,
                               children: [
                                 ElevatedButton(
@@ -1334,7 +1344,7 @@ class _viewInfoState extends State<NavigatorView> {
                                         },
                                         icon: Icon(Icons.remove_circle,
                                             size: 25, color: Colors.black54))),
-                              ]),
+                              ]),*/
                         ])),
               ],
             )),
@@ -1675,6 +1685,7 @@ class _viewInfoState extends State<NavigatorView> {
           jsonBody['Passaporto']['animalDescription'],
           jsonBody['Passaporto']['animalMicrochip'],
           jsonBody['Passaporto']['entityIssuingAnimal']);
+      if(jsonBody['Dispositivi']!=null){
       if(jsonBody['Dispositivi']['airTag1'] != null){
         print(jsonBody['Dispositivi']['airTag1']);
         airTags.add(jsonBody['Dispositivi']['airTag1']);
@@ -1682,6 +1693,7 @@ class _viewInfoState extends State<NavigatorView> {
       if(jsonBody['Dispositivi']['airTag2'] != null){
         print(jsonBody['Dispositivi']['airTag2']);
         airTags.add(jsonBody['Dispositivi']['airTag2']);
+      }
       }
       nameController.text = animal.booklet.animalName;
       dataController.text = animal.booklet.animalBirthday;

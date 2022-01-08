@@ -235,10 +235,11 @@ class _addInfoState extends State<NavigatorAdd> {
                                   shape: CircleBorder(),
                                   child: Icon(
                                     Icons.add_a_photo_rounded,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     size: 25,
                                   ),
-                                  fillColor: Colors.lightGreen.shade300,
+                                  fillColor: Colors.grey.shade200,
+                                  //fillColor: Colors.lightGreen.shade300,
                                   padding: EdgeInsets.all(8),
                                 ),
                               ),
