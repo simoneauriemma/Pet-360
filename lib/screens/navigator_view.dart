@@ -50,7 +50,8 @@ class _viewInfoState extends State<NavigatorView> {
   Future<ViewAllInfoAnimal>? futureAnimal;
   List<NewVaccine> lstVaccines = List.empty(growable: true);
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
-  var jsonBody, airTag1, airTag2;
+  List<String> airTags = List.empty(growable: true);
+  var jsonBody;
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -1284,8 +1285,9 @@ class _viewInfoState extends State<NavigatorView> {
                                             BorderRadius.circular(30)),
                                   ),
                                   onPressed: () {
-                                    //
-                                    airTag1 = "1 dispositivo";
+                                    if(airTags.length == 1 || airTags.length == 2){
+                                      airTags[0] = "1 dispositivo";
+                                    }
                                   },
                                 ),
                                 Positioned(
@@ -1293,7 +1295,9 @@ class _viewInfoState extends State<NavigatorView> {
                                     left: 105,
                                     child: IconButton(
                                         onPressed: () {
-                                          airTag1 = "1 dispositivo";
+                                          if(airTags.length == 1 || airTags.length == 2){
+                                            airTags.removeLast();
+                                          }
                                         },
                                         icon: Icon(Icons.remove_circle,
                                             size: 25, color: Colors.black54))),
@@ -1313,7 +1317,9 @@ class _viewInfoState extends State<NavigatorView> {
                                             BorderRadius.circular(30)),
                                   ),
                                   onPressed: () {
-                                    airTag2 = "2 dispositivo";
+                                    if(airTags.length == 2){
+                                      airTags[1] == "2 dispositivo";
+                                    }
                                   },
                                 ),
                                 Positioned(
@@ -1322,7 +1328,9 @@ class _viewInfoState extends State<NavigatorView> {
                                     //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
                                     child: IconButton(
                                         onPressed: () {
-                                          //
+                                          if(airTags.length == 2){
+                                            airTags.removeLast();
+                                          }
                                         },
                                         icon: Icon(Icons.remove_circle,
                                             size: 25, color: Colors.black54))),
@@ -1614,14 +1622,26 @@ class _viewInfoState extends State<NavigatorView> {
       'animalDateMicrochip': animalDateMicrochip,
       'entityIssuingAnimal': entityIssuingAnimal,
     });
-    DBRef.child(_auth.currentUser!.uid.toString() +
+    if(airTags.isNotEmpty){
+      if(airTags.length == 2){
+        DBRef.child(_auth.currentUser!.uid.toString() +
             "/Animali/" +
             animalName +
             "/Dispositivi")
-        .set({
-      'airTag1': "dispositivo1",
-      'airTag2': "dispositivo2",
-    });
+            .set({
+          'airTag1': airTags[0],
+          'airTag2': airTags[1],
+        });
+      } else {
+        DBRef.child(_auth.currentUser!.uid.toString() +
+            "/Animali/" +
+            animalName +
+            "/Dispositivi")
+            .set({
+          'airTag1': airTags[0],
+        });
+      }
+    }
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
   }
@@ -1655,6 +1675,14 @@ class _viewInfoState extends State<NavigatorView> {
           jsonBody['Passaporto']['animalDescription'],
           jsonBody['Passaporto']['animalMicrochip'],
           jsonBody['Passaporto']['entityIssuingAnimal']);
+      if(jsonBody['Dispositivi']['airTag1'] != null){
+        print(jsonBody['Dispositivi']['airTag1']);
+        airTags.add(jsonBody['Dispositivi']['airTag1']);
+      }
+      if(jsonBody['Dispositivi']['airTag2'] != null){
+        print(jsonBody['Dispositivi']['airTag2']);
+        airTags.add(jsonBody['Dispositivi']['airTag2']);
+      }
       nameController.text = animal.booklet.animalName;
       dataController.text = animal.booklet.animalBirthday;
       specieController.text = animal.booklet.animalSpecie;
