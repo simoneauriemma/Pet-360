@@ -1280,7 +1280,7 @@ class _viewInfoState extends State<NavigatorView> {
                             alignment: AlignmentDirectional.topCenter,
                             children: [
                                 ElevatedButton(
-                                  child: Text("AirTag1"),
+                                  child: Text(airTags[index].toString()),
                                   style: ElevatedButton.styleFrom(
                                     onPrimary: Colors.black,
                                     primary: Colors.white,
@@ -1292,7 +1292,7 @@ class _viewInfoState extends State<NavigatorView> {
                                   ),
                                   onPressed: () {
                                     if(airTags.length == 1 || airTags.length == 2){
-                                      airTags[0] = "1 dispositivo";
+                                      airTags[0] = airTags[index].toString();
                                     }
                                   },
                                 ),
@@ -1302,9 +1302,10 @@ class _viewInfoState extends State<NavigatorView> {
                                     left: 105,
                                     child: IconButton(
                                         onPressed: () {
-                                          if(airTags.length == 1 || airTags.length == 2){
-                                            airTags.removeLast();
-                                          }
+                                          setState(() {
+                                           airTags.removeAt(index);
+                                          });                                         
+                                          
                                         },
                                         icon: Icon(Icons.remove_circle,
                                             size: 25, color: Colors.black54))

@@ -1197,7 +1197,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                       backgroundColor: Colors.grey.shade200,
                                       textColor: Colors.black,
                                       fontSize: 15.0);
-                                  airTag1 = "1 dispositivo"; //TODO DA CAMBIARE
+                                  airTag1 = "AirTag1"; //TODO DA CAMBIARE
                                 },
                               ),
                               Positioned(
@@ -1216,7 +1216,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                 Colors.grey.shade200,
                                             textColor: Colors.black,
                                             fontSize: 15.0);
-                                        airTag1 = "1 dispositivo";
+                                        airTag1 = "AirTag1";
                                       },
                                       icon: Icon(Icons.add_circle_rounded,
                                           size: 25, color: Colors.black54))),
@@ -1244,7 +1244,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                       backgroundColor: Colors.grey.shade200,
                                       textColor: Colors.black,
                                       fontSize: 15.0);
-                                  airTag2 = "2 dispositivo"; //TODO DA CAMBIARE
+                                  airTag2 = "AirTag2"; //TODO DA CAMBIARE
                                 },
                               ),
                               Positioned(
@@ -1263,7 +1263,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                 Colors.grey.shade200,
                                             textColor: Colors.black,
                                             fontSize: 15.0);
-                                        airTag2 = "2 dispositivo";
+                                        airTag2 = "AirTag2";
                                       },
                                       icon: Icon(Icons.add_circle_rounded,
                                           size: 25, color: Colors.black54))),
@@ -1389,7 +1389,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     side:
                         BorderSide(color: Colors.lightGreen.shade200, width: 2),
                     elevation: 5,
-//minimumSize: Size(100, 40),
+                    //minimumSize: Size(100, 40),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
                   ),
@@ -1424,26 +1424,7 @@ class _addInfoState extends State<NavigatorAdd> {
           ],
         );
             },
-            /* (context, {onStepContinue,onStepCancel}) {
-        return Row(
-          mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-             IconButton(
-               padding: EdgeInsets.only(top: 15),
-              onPressed: onStepCancel,
-              icon: Icon(Icons.arrow_back_ios),
-            ),
-
-            IconButton(
-              padding: EdgeInsets.only(top: 15),
-              onPressed: onStepContinue,
-             icon: Icon(Icons.arrow_forward_ios),
-            ),
-
-          ],
-        );
-      },*/
+           
             onStepContinue: () {
               setState(() {
                 if (currentStep < (getSteps().length - 1)) {
