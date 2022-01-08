@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
+import 'package:pet360/screens/home_screen.dart';
 import 'ia_screen.dart';
 import 'navigator_view.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   Future<List<ViewAnimalsHome>>? futureAnimal;
+  File? pickedImage;
   final _auth = FirebaseAuth.instance;
   String _firstName = "Utente";
 
@@ -33,6 +35,31 @@ class _DashboardState extends State<Dashboard> {
         UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
     downloadFileExample("/data/user/0/com.example.pet360/cache/dog.png");
     _firstName = UserSharedPreferences.getNameOfUser()!;
+  }
+
+  Future<void> removePhoto(String filePath) async {
+    try {
+      if (filePath.split("/").last != "dog.png") {
+        await firebase_storage.FirebaseStorage.instance
+            .ref('uploads/' + filePath.split("/").last)
+            .delete();
+      }
+    } on firebase_storage.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+    }
+  }
+
+   removeAnimal() {
+    final DBRef = FirebaseDatabase.instance
+        .reference()
+        .child(UserSharedPreferences.getTypeOfUser().toString());
+    DBRef.child(_auth.currentUser!.uid.toString() +
+            "/Animali/" +
+            UserSharedPreferences.getAnimalName().toString())
+        .remove();
+    if (pickedImage != null) {
+      removePhoto(pickedImage!.path);
+    }
   }
 
   @override
@@ -196,6 +223,56 @@ class _DashboardState extends State<Dashboard> {
                                       builder: (context) => NavigatorView()));
                               UserSharedPreferences.setAnimalName(
                                   snapshot.data![index].animalName!);
+                            },
+                            onLongPress: (){
+                              showDialog(
+                            context: context,
+                            builder: (BuildContext ctx) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(32.0))),
+                                title: Text(
+                                  'Eliminazione animale',
+                                  textAlign: TextAlign.center,
+                                ),
+                                content: Text(
+                                  'Sei sicuro di voler eliminare?',
+                                  textAlign: TextAlign.center,
+                                ),
+                                actions: [
+                                  // The "Yes" button
+                                  TextButton(
+                                    onPressed: () {
+                                      // Remove the animal
+                                     /* removeAnimal();
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeScreen()));*/
+                                        setState(() {
+                                          snapshot.data!.removeAt(index);
+                                          Navigator.of(context).pop();
+                                        });
+                                    },
+                                    child: Text(
+                                      'Sì',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        // Close the dialog
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        'No',
+                                        style: TextStyle(fontSize: 20),
+                                      ))
+                                ],
+                              );
+                            });
                             },
                             child: Container(
                               width: 100,
