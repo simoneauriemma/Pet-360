@@ -3,14 +3,15 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:pet360/components/show_message.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 import 'home_screen.dart';
-import 'package:http/http.dart' as http;
 
 class Chatting_screen extends StatefulWidget {
   const Chatting_screen({Key? key}) : super(key: key);
@@ -26,10 +27,12 @@ class _Chatting_screenState extends State<Chatting_screen> {
   var pickedImage;
   Future<bool>? fatto;
 
+  var groupId;
+
   @override
   void initState() {
     super.initState();
-    if(pickedImage == null){
+    if (pickedImage == null) {
       fatto = downloadFoto();
     }
   }
@@ -38,7 +41,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
   Widget build(BuildContext context) => FutureBuilder<bool>(
       future: fatto,
       builder: (context, snapshot) {
-        if(snapshot.hasData) {
+        if (snapshot.hasData) {
           final msgText = TextFormField(
             autofocus: false,
             controller: msgController,
@@ -65,7 +68,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => HomeScreen()));
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()));
                         },
                         icon: Icon(
                           Icons.arrow_back,
@@ -79,16 +83,17 @@ class _Chatting_screenState extends State<Chatting_screen> {
                         maxRadius: 20,
                         child: pickedImage != null
                             ? Image.file(
-                          pickedImage!,
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ) :
-                        //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                        SizedBox(
-                          child: Image.asset(
-                              "assets/icons/user_default.png"),
-                        ),
+                                pickedImage!,
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              )
+                            :
+                            //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                            SizedBox(
+                                child: Image.asset(
+                                    "assets/icons/user_default.png"),
+                              ),
                       ),
                       SizedBox(
                         width: 12,
@@ -101,7 +106,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                             Text(
                               UserSharedPreferences.getNameChat().toString() +
                                   " " +
-                                  UserSharedPreferences.getSurnameChat().toString(),
+                                  UserSharedPreferences.getSurnameChat()
+                                      .toString(),
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600),
                             ),
@@ -117,7 +123,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                         ),
                       ),
                       ConstrainedBox(
-                        constraints: BoxConstraints.tightFor(width: 100, height: 40),
+                        constraints:
+                            BoxConstraints.tightFor(width: 100, height: 40),
                         child: ElevatedButton(
                           onPressed: () {
                             showDialog(
@@ -128,18 +135,28 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                       'Conferma',
                                       textAlign: TextAlign.center,
                                     ),
-                                    content:
-                                    Text('Sei sicuro di voler lasciare la chat?'),
+                                    content: Text(
+                                        'Sei sicuro di voler lasciare la chat?'),
                                     actions: [
                                       //"Si" button
                                       TextButton(
                                           onPressed: () {
-                                            // Remove the animal
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ReviewChat()));
+                                            if (UserSharedPreferences
+                                                        .getTypeOfUser()
+                                                    .toString() ==
+                                                "Utente") {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ReviewChat()));
+                                            } else {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Chatting_screen()));
+                                            }
                                           },
                                           child: Text(
                                             'Sì',
@@ -194,8 +211,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
               children: <Widget>[
                 Container(
                     height: MediaQuery.of(context).size.height / 1.3,
-                    child:
-                    SingleChildScrollView(reverse: true, child: ShowMessages())),
+                    child: SingleChildScrollView(
+                        reverse: true, child: ShowMessages())),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
@@ -275,8 +292,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                   children: <Widget>[
                     IconButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => HomeScreen()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
                       },
                       icon: Icon(
                         Icons.arrow_back,
@@ -290,16 +307,17 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       maxRadius: 20,
                       child: pickedImage != null
                           ? Image.file(
-                        pickedImage!,
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                      ) :
-                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                      SizedBox(
-                        child: Image.asset(
-                            "assets/icons/user_default.png"),
-                      ),
+                              pickedImage!,
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            )
+                          :
+                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                          SizedBox(
+                              child:
+                                  Image.asset("assets/icons/user_default.png"),
+                            ),
                     ),
                     SizedBox(
                       width: 12,
@@ -312,7 +330,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                           Text(
                             UserSharedPreferences.getNameChat().toString() +
                                 " " +
-                                UserSharedPreferences.getSurnameChat().toString(),
+                                UserSharedPreferences.getSurnameChat()
+                                    .toString(),
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           ),
@@ -328,7 +347,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       ),
                     ),
                     ConstrainedBox(
-                      constraints: BoxConstraints.tightFor(width: 100, height: 40),
+                      constraints:
+                          BoxConstraints.tightFor(width: 100, height: 40),
                       child: ElevatedButton(
                         onPressed: () {
                           showDialog(
@@ -339,8 +359,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                     'Conferma',
                                     textAlign: TextAlign.center,
                                   ),
-                                  content:
-                                  Text('Sei sicuro di voler lasciare la chat?'),
+                                  content: Text(
+                                      'Sei sicuro di voler lasciare la chat?'),
                                   actions: [
                                     //"Si" button
                                     TextButton(
@@ -405,8 +425,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
             children: <Widget>[
               Container(
                   height: MediaQuery.of(context).size.height / 1.3,
-                  child:
-                  SingleChildScrollView(reverse: true, child: ShowMessages())),
+                  child: SingleChildScrollView(
+                      reverse: true, child: ShowMessages())),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Container(
@@ -475,10 +495,10 @@ class _Chatting_screenState extends State<Chatting_screen> {
     } on firebase_storage.FirebaseException catch (e) {}
   }
 
-  Future<bool> downloadFoto() async{
+  Future<bool> downloadFoto() async {
     var url = Uri.parse(
         "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
-            UserSharedPreferences.getTypeOfUserChat().toString()+
+            UserSharedPreferences.getTypeOfUserChat().toString() +
             "//" +
             UserSharedPreferences.getUIDOfUser().toString() +
             ".json?");
@@ -493,9 +513,13 @@ class _Chatting_screenState extends State<Chatting_screen> {
     }
   }
 
+  void deleteChat() async {
+    await _firestore.collection("Messages").doc(groupId.toString()).delete();
+  }
+
   void sendMessage() async {
     if (msgController.text.isNotEmpty) {
-      var groupId = _auth.currentUser!.uid.toString() +
+      groupId = _auth.currentUser!.uid.toString() +
           UserSharedPreferences.getUIDOfUser().toString();
 
       if (UserSharedPreferences.getTypeOfUser().toString() != "Utente") {
@@ -512,6 +536,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
         UserSharedPreferences.setFirstTimeChatting(false);
       }
 
+      /*_firestore.collection("Messages").doc(groupId.toString()).delete();*/
       _firestore
           .collection("Messages")
           .doc(groupId.toString())
