@@ -200,7 +200,7 @@ class _addInfoState extends State<NavigatorAdd> {
                           alignment: Alignment.center,
                           child: Stack(
                             children: [
-                              Container(                                
+                              Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.grey.shade300, width: 3),
@@ -400,37 +400,63 @@ class _addInfoState extends State<NavigatorAdd> {
                       SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        children: [
-                          Padding(padding: EdgeInsets.only(left: 45)),
-                          Text(
-                            "Sesso: ",
-                            style:
-                                TextStyle(fontSize: 16, color: Colors.black54),
-                          ),
-                          Radio(
-                            activeColor: Colors.black54,
-                            value: 1,
-                            groupValue: _value,
-                            onChanged: (value) {
-                              setState(() {
-                                _value = 1;
-                              });
-                            },
-                          ),
-                          Text("M"),
-                          Radio(
-                            activeColor: Colors.black54,
-                            value: 2,
-                            groupValue: _value,
-                            onChanged: (value) {
-                              setState(() {
-                                _value = 2;
-                              });
-                            },
-                          ),
-                          Text("F"),
-                        ],
+                      SizedBox(
+                        width: 260,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Sesso",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.black54),
+                            ),
+                            Radio(
+                              activeColor: Colors.black54,
+                              value: 1,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = 1;
+                                });
+                              },
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "M",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Icon(
+                                  Icons.male_rounded,
+                                  size: 18,
+                                  color: Colors.lightGreen,
+                                ),
+                              ],
+                            ),
+                            Radio(
+                              activeColor: Colors.black54,
+                              value: 2,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = 2;
+                                });
+                              },
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "F",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Icon(
+                                  Icons.female_rounded,
+                                  size: 18,
+                                  color: Colors.lightGreen.shade300,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   )),
@@ -675,8 +701,8 @@ class _addInfoState extends State<NavigatorAdd> {
                               },
                             );
                           },
-                          icon: Icon(Icons.add_circle_outline,
-                              color: Colors.lightGreen),
+                          icon: Icon(Icons.add_circle_outline_rounded,
+                              color: Colors.black54),
                           iconSize: 30,
                         ),
                       ]),
@@ -907,7 +933,8 @@ class _addInfoState extends State<NavigatorAdd> {
                                                         tmp.medicine =
                                                             farmacoSommController
                                                                 .text;
-                                                        lstVaccines.removeAt(index);
+                                                        lstVaccines
+                                                            .removeAt(index);
                                                         lstVaccines.add(tmp);
                                                         nomeVeterController
                                                             .text = "";
@@ -930,7 +957,8 @@ class _addInfoState extends State<NavigatorAdd> {
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Text("Salva Modifiche  ",
+                                                          Text(
+                                                              "Salva Modifiche  ",
                                                               style: GoogleFonts
                                                                   .questrial(
                                                                 fontSize: 15,
@@ -1182,7 +1210,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                 style: ElevatedButton.styleFrom(
                                   onPrimary: Colors.black,
                                   primary: Colors.white,
-                                  elevation: 5,
+                                  elevation: 1.5,
                                   minimumSize: Size(140, 40),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30)),
@@ -1229,7 +1257,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                 style: ElevatedButton.styleFrom(
                                   onPrimary: Colors.black,
                                   primary: Colors.white,
-                                  elevation: 5,
+                                  elevation: 1.5,
                                   minimumSize: Size(140, 40),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30)),
@@ -1269,9 +1297,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           size: 25, color: Colors.black54))),
                             ]),
                       ],
-                    )),     
-
-                
+                    )),
               ],
             )),
       ];
@@ -1309,13 +1335,13 @@ class _addInfoState extends State<NavigatorAdd> {
             steps: getSteps(),
             currentStep: currentStep,
             controlsBuilder: (BuildContext context, ControlsDetails controls) {
-               if(currentStep==0){
-            return Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[    
-             IconButton(
-               padding: EdgeInsets.only(top: 15),
+              if (currentStep == 0) {
+                return Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      IconButton(
+                        padding: EdgeInsets.only(top: 15),
                         onPressed: controls.onStepContinue,
                         icon: Image.asset(
                           "assets/icons/arrow-right.png",
@@ -1323,17 +1349,17 @@ class _addInfoState extends State<NavigatorAdd> {
                           height: 40,
                         ),
                       ),
-          ]);
-          }
+                    ]);
+              }
 
-          if(currentStep==3){
-            return Column(children: [
-              Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[    
-             IconButton(
-               padding: EdgeInsets.only(top: 15),
+              if (currentStep == 3) {
+                return Column(children: [
+                  Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        IconButton(
+                          padding: EdgeInsets.only(top: 15),
                           onPressed: controls.onStepCancel,
                           icon: Image.asset(
                             "assets/icons/arrow-left.png",
@@ -1341,68 +1367,69 @@ class _addInfoState extends State<NavigatorAdd> {
                             height: 40,
                           ),
                         ),
-          ]),
-          SizedBox(height: 50,),
-              ElevatedButton(
-                  onPressed: () {
-                    saveData(
-                        nameController.text,
-                        dataController.text,
-                        specieController.text,
-                        razzaController.text,
-                        coloreController.text,
-                        veterinarioController.text,
-                        descrizioneController.text,
-                        microchipController.text,
-                        dataMicrochipController.text,
-                        enteController.text,
-                    soprannomeController.text,
-                        _value);
-                    nameController.text = "";
-                    dataController.text = "";
-                    specieController.text = "";
-                    razzaController.text = "";
-                    coloreController.text = "";
-                    veterinarioController.text = "";
-                    descrizioneController.text = "";
-                    microchipController.text = "";
-                    dataMicrochipController.text = "";
-                    enteController.text = "";
-                    soprannomeController.text = "";
-                  },
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints.tightFor(
-                        width: MediaQuery.of(context).size.width, height: 50),
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Salva tutto",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18),
+                      ]),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      saveData(
+                          nameController.text,
+                          dataController.text,
+                          specieController.text,
+                          razzaController.text,
+                          coloreController.text,
+                          veterinarioController.text,
+                          descrizioneController.text,
+                          microchipController.text,
+                          dataMicrochipController.text,
+                          enteController.text,
+                          soprannomeController.text,
+                          _value);
+                      nameController.text = "";
+                      dataController.text = "";
+                      specieController.text = "";
+                      razzaController.text = "";
+                      coloreController.text = "";
+                      veterinarioController.text = "";
+                      descrizioneController.text = "";
+                      microchipController.text = "";
+                      dataMicrochipController.text = "";
+                      enteController.text = "";
+                      soprannomeController.text = "";
+                    },
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints.tightFor(
+                          width: MediaQuery.of(context).size.width, height: 50),
+                      child: const Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Salva tutto",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ),
+                    style: ElevatedButton.styleFrom(
+                      onPrimary: Colors.black,
+                      primary: Colors.white,
+                      onSurface: Colors.grey,
+                      side: BorderSide(
+                          color: Colors.lightGreen.shade200, width: 2),
+                      elevation: 5,
+                      //minimumSize: Size(100, 40),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                    ),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    onPrimary: Colors.black,
-                    primary: Colors.white,
-                    onSurface: Colors.grey,
-                    side:
-                        BorderSide(color: Colors.lightGreen.shade200, width: 2),
-                    elevation: 5,
-                    //minimumSize: Size(100, 40),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                ),
-            ]);
-          }
-          
-             else return Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[    
-             IconButton(
-               padding: EdgeInsets.only(top: 15),
+                ]);
+              } else
+                return Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      padding: EdgeInsets.only(top: 15),
                       onPressed: controls.onStepCancel,
                       icon: Image.asset(
                         "assets/icons/arrow-left.png",
@@ -1410,9 +1437,8 @@ class _addInfoState extends State<NavigatorAdd> {
                         height: 40,
                       ),
                     ),
-                      
-            IconButton(
-              padding: EdgeInsets.only(top: 15),
+                    IconButton(
+                      padding: EdgeInsets.only(top: 15),
                       onPressed: controls.onStepContinue,
                       icon: Image.asset(
                         "assets/icons/arrow-right.png",
@@ -1420,11 +1446,9 @@ class _addInfoState extends State<NavigatorAdd> {
                         height: 40,
                       ),
                     ),
-          
-          ],
-        );
+                  ],
+                );
             },
-           
             onStepContinue: () {
               setState(() {
                 if (currentStep < (getSteps().length - 1)) {
@@ -1474,7 +1498,7 @@ class _addInfoState extends State<NavigatorAdd> {
       String animalSoprannome,
       int _value) {
     String sesso = "M";
-    if(_value == 2){
+    if (_value == 2) {
       sesso = "F";
     }
     String path = "";

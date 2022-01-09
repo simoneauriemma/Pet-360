@@ -53,7 +53,7 @@ class WidgetList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.only(left: 10.0, right: 5.0),
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Icon(
                     Icons.account_circle,
                     size: 40.0,

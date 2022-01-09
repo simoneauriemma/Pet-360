@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+
   final List<Widget> screens = [
     Dashboard(),
     FindFriends(),

@@ -486,7 +486,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //key: btnKey,
               icon: Icon(Icons.settings_applications_sharp),
               padding: EdgeInsets.only(right: 15),
-              iconSize: 40,
+              iconSize: 35,
               onPressed: () {
                 showDialog(
                   context: context,

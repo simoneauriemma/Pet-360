@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -479,37 +480,63 @@ class _viewInfoState extends State<NavigatorView> {
                       SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        children: [
-                          Padding(padding: EdgeInsets.only(left: 45)),
-                          Text(
-                            "Sesso: ",
-                            style:
-                                TextStyle(fontSize: 16, color: Colors.black54),
-                          ),
-                          Radio(
-                            activeColor: Colors.black54,
-                            value: 1,
-                            groupValue: _value,
-                            onChanged: (value) {
-                              setState(() {
-                                _value = 1;
-                              });
-                            },
-                          ),
-                          Text("M"),
-                          Radio(
-                            activeColor: Colors.black54,
-                            value: 2,
-                            groupValue: _value,
-                            onChanged: (value) {
-                              setState(() {
-                                _value = 2;
-                              });
-                            },
-                          ),
-                          Text("F"),
-                        ],
+                      SizedBox(
+                        width: 260,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Sesso",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.black54),
+                            ),
+                            Radio(
+                              activeColor: Colors.black54,
+                              value: 1,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = 1;
+                                });
+                              },
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "M",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Icon(
+                                  Icons.male_rounded,
+                                  size: 18,
+                                  color: Colors.lightGreen,
+                                ),
+                              ],
+                            ),
+                            Radio(
+                              activeColor: Colors.black54,
+                              value: 2,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = 2;
+                                });
+                              },
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "F",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Icon(
+                                  Icons.female_rounded,
+                                  size: 18,
+                                  color: Colors.lightGreen.shade300,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   )),
@@ -711,21 +738,21 @@ class _viewInfoState extends State<NavigatorView> {
                                               tipoVaccinoController.text = "";
                                               farmacoSommController.text = "";
                                               Navigator.of(context,
-                                                  rootNavigator: true)
+                                                      rootNavigator: true)
                                                   .pop();
                                             },
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 Text("Aggiungi  ",
                                                     style:
-                                                    GoogleFonts.questrial(
+                                                        GoogleFonts.questrial(
                                                       fontSize: 15,
                                                       fontWeight:
-                                                      FontWeight.bold,
+                                                          FontWeight.bold,
                                                     )),
                                                 Icon(
                                                   Icons.save_rounded,
@@ -739,8 +766,8 @@ class _viewInfoState extends State<NavigatorView> {
                                               alignment: Alignment.center,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(
-                                                      15)),
+                                                      BorderRadius.circular(
+                                                          15)),
                                             ),
                                           ),
                                         ),
@@ -751,8 +778,8 @@ class _viewInfoState extends State<NavigatorView> {
                               },
                             );
                           },
-                          icon: Icon(Icons.add_circle_outline,
-                              color: Colors.lightGreen),
+                          icon: Icon(Icons.add_circle_outline_rounded,
+                              color: Colors.black54),
                           iconSize: 30,
                         ),
                       ]),
@@ -1070,31 +1097,32 @@ class _viewInfoState extends State<NavigatorView> {
           ]),
         ),
         Step(
-            isActive: currentStep >= 2,
-            title: Text(''),
-            content: Column(
-              children: [
-                //TITOLO
-                Container(
-                  width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 0.57,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Column(children: [
+          isActive: currentStep >= 2,
+          title: Text(''),
+          content: Column(
+            children: [
+              //TITOLO
+              Container(
+                width: MediaQuery.of(context).size.width / 1.1,
+                height: MediaQuery.of(context).size.height * 0.57,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
                     SizedBox(
                       height: 30,
                     ),
@@ -1123,20 +1151,21 @@ class _viewInfoState extends State<NavigatorView> {
                     SizedBox(
                       width: 280,
                       child: TextFormField(
-                          autofocus: false,
-                          controller: descrizioneController,
-                          keyboardType: TextInputType.name,
-                          onSaved: (value) {
-                            descrizioneController.text = value!;
-                          },
-                          textInputAction: TextInputAction.next,
+                        autofocus: false,
+                        controller: descrizioneController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          descrizioneController.text = value!;
+                        },
+                        textInputAction: TextInputAction.next,
 
-                          //Descrizione animale
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            labelText: "Descrizione animale",
-                          )),
+                        //Descrizione animale
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          labelText: "Descrizione animale",
+                        ),
+                      ),
                     ),
                     // ),
                     SizedBox(
@@ -1215,101 +1244,107 @@ class _viewInfoState extends State<NavigatorView> {
                             labelText: "Ente rilasciante",
                           )),
                     ),
-                  ]),
+                  ],
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
         Step(
             isActive: currentStep >= 3,
             title: Text(''),
             content: Column(
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    height: MediaQuery.of(context).size.height * 0.45,
-                    padding: EdgeInsets.only(top: 30),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  height: MediaQuery.of(context).size.height * 0.45,
+                  padding: EdgeInsets.only(top: 30),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "DISPOSITIVI PER LA GEOLOCALIZZAZIONE",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.questrial(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "DISPOSITIVI PER LA GEOLOCALIZZAZIONE",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.questrial(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Text(
-                            "Dispositivi collegati:",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15, fontStyle: FontStyle.italic),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Expanded(
-                    child: ListView.builder(
-                      itemCount: this.airTags.length,
-                      shrinkWrap: true,
-                      itemBuilder: (_, int index) =>Column(children: [                    
-                              Stack(
-                            alignment: AlignmentDirectional.topCenter,
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        "Dispositivi collegati:",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15, fontStyle: FontStyle.italic),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: this.airTags.length,
+                          shrinkWrap: true,
+                          itemBuilder: (_, int index) => Column(
                             children: [
-                                ElevatedButton(
-                                  child: Text(airTags[index].toString()),
-                                  style: ElevatedButton.styleFrom(
-                                    onPrimary: Colors.black,
-                                    primary: Colors.white,
-                                    elevation: 5,
-                                    minimumSize: Size(140, 40),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
+                              Stack(
+                                alignment: AlignmentDirectional.topCenter,
+                                children: [
+                                  ElevatedButton(
+                                    child: Text(airTags[index].toString()),
+                                    style: ElevatedButton.styleFrom(
+                                      onPrimary: Colors.black,
+                                      primary: Colors.white,
+                                      elevation: 1.5,
+                                      minimumSize: Size(140, 40),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                    ),
+                                    onPressed: () {
+                                      if (airTags.length == 1 ||
+                                          airTags.length == 2) {
+                                        airTags[0] = airTags[index].toString();
+                                      }
+                                    },
                                   ),
-                                  onPressed: () {
-                                    if(airTags.length == 1 || airTags.length == 2){
-                                      airTags[0] = airTags[index].toString();
-                                    }
-                                  },
-                                ),
-                    
-                                Positioned(
-                                    bottom: 5,
-                                    left: 105,
-                                    child: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                           airTags.removeAt(index);
-                                          });                                         
-                                          
-                                        },
-                                        icon: Icon(Icons.remove_circle,
-                                            size: 25, color: Colors.black54))
-                                ),
-                            ]),
-                      ]),
-                    ),),
-                          /*Stack(
+                                  Positioned(
+                                      bottom: 5,
+                                      left: 105,
+                                      child: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              airTags.removeAt(index);
+                                            });
+                                          },
+                                          icon: Icon(Icons.remove_circle,
+                                              size: 25,
+                                              color: Colors.black54))),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      /*Stack(
                               alignment: AlignmentDirectional.topCenter,
                               children: [
                                 ElevatedButton(
@@ -1342,7 +1377,9 @@ class _viewInfoState extends State<NavigatorView> {
                                         icon: Icon(Icons.remove_circle,
                                             size: 25, color: Colors.black54))),
                               ]),*/
-                        ])),
+                    ],
+                  ),
+                ),
               ],
             )),
       ];
@@ -1629,21 +1666,21 @@ class _viewInfoState extends State<NavigatorView> {
       'animalDateMicrochip': animalDateMicrochip,
       'entityIssuingAnimal': entityIssuingAnimal,
     });
-    if(airTags.isNotEmpty){
-      if(airTags.length == 2){
+    if (airTags.isNotEmpty) {
+      if (airTags.length == 2) {
         DBRef.child(_auth.currentUser!.uid.toString() +
-            "/Animali/" +
-            animalName +
-            "/Dispositivi")
+                "/Animali/" +
+                animalName +
+                "/Dispositivi")
             .set({
           'airTag1': airTags[0],
           'airTag2': airTags[1],
         });
       } else {
         DBRef.child(_auth.currentUser!.uid.toString() +
-            "/Animali/" +
-            animalName +
-            "/Dispositivi")
+                "/Animali/" +
+                animalName +
+                "/Dispositivi")
             .set({
           'airTag1': airTags[0],
         });
@@ -1682,15 +1719,15 @@ class _viewInfoState extends State<NavigatorView> {
           jsonBody['Passaporto']['animalDescription'],
           jsonBody['Passaporto']['animalMicrochip'],
           jsonBody['Passaporto']['entityIssuingAnimal']);
-      if(jsonBody['Dispositivi']!=null){
-      if(jsonBody['Dispositivi']['airTag1'] != null){
-        print(jsonBody['Dispositivi']['airTag1']);
-        airTags.add(jsonBody['Dispositivi']['airTag1']);
-      }
-      if(jsonBody['Dispositivi']['airTag2'] != null){
-        print(jsonBody['Dispositivi']['airTag2']);
-        airTags.add(jsonBody['Dispositivi']['airTag2']);
-      }
+      if (jsonBody['Dispositivi'] != null) {
+        if (jsonBody['Dispositivi']['airTag1'] != null) {
+          print(jsonBody['Dispositivi']['airTag1']);
+          airTags.add(jsonBody['Dispositivi']['airTag1']);
+        }
+        if (jsonBody['Dispositivi']['airTag2'] != null) {
+          print(jsonBody['Dispositivi']['airTag2']);
+          airTags.add(jsonBody['Dispositivi']['airTag2']);
+        }
       }
       nameController.text = animal.booklet.animalName;
       dataController.text = animal.booklet.animalBirthday;
