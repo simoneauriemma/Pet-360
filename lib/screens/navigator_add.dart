@@ -1064,8 +1064,8 @@ class _addInfoState extends State<NavigatorAdd> {
                                   child: pickedImage != null
                                       ? Image.file(
                                           pickedImage!,
-                                          width: 110,
-                                          height: 130,
+                                          width: 140,
+                                          height: 110,
                                           fit: BoxFit.cover,
                                         )
                                       :
@@ -1076,8 +1076,8 @@ class _addInfoState extends State<NavigatorAdd> {
                                 
                               ),
                               Positioned(
-                                top: 105,
-                                left: 68,
+                                top: 89,
+                                left: 100,
                                 child: RawMaterialButton(
                                   onPressed: () {
                                     imagePickerOption();

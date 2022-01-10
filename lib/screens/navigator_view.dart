@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -119,7 +118,8 @@ class _viewInfoState extends State<NavigatorView> {
                     ]),
                     onTap: () {
                       setState(() {
-                        pickedImage = null;
+                        pickedImage = File(
+                            "/data/user/0/com.example.pet360/cache/dog.png");
                       });
                       Navigator.of(context, rootNavigator: true).pop();
                     },
@@ -135,9 +135,10 @@ class _viewInfoState extends State<NavigatorView> {
     try {
       final image = await ImagePicker().pickImage(source: imageType);
 
-      if (image == null) return;
-
-      final imageTemp = File(image.path);
+      var imageTemp = File(image!.path);
+      if (image == null) {
+        imageTemp = File("/data/user/0/com.example.pet360/cache/dog.png");
+      }      
 
       setState(() {
         pickedImage = imageTemp;
@@ -297,7 +298,6 @@ class _viewInfoState extends State<NavigatorView> {
                                           fit: BoxFit.cover,
                                         )
                                       :
-                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
                                       SizedBox(
                                           width: 100.0,
                                           height: 100.0,
@@ -1104,7 +1104,7 @@ class _viewInfoState extends State<NavigatorView> {
               //TITOLO
               Container(
                 width: MediaQuery.of(context).size.width / 1.1,
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.8,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.only(
@@ -1133,21 +1133,58 @@ class _viewInfoState extends State<NavigatorView> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    ),                    
 
-                    /*Align(alignment: Alignment.centerRight,
-                                child: IconButton(
-                                padding: EdgeInsets.only(right: 30),
-                                icon: Image.asset("assets/icons/edit.png"),
-                                onPressed: (){
-                                    //
-                                },
+                    SizedBox(
+                        height: 30,
+                      ),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Stack(
+                            children: [
+                              Container(     
+                                margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),                           
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade300, width: 3),                                  
+                                  color: Colors.grey.shade200,
                                 ),
-                              ),*/
-                    //SizedBox(height: 20,),
+                                
+                                  child: pickedImage != null
+                                      ? Image.file(
+                                          pickedImage!,
+                                          width: 140,
+                                          height: 110,
+                                          fit: BoxFit.cover,
+                                        )
+                                      :
+                                      SizedBox(
+                                          width: 100.0,
+                                          height: 100.0,
+                                        ),
+                                
+                              ),
+                              Positioned(
+                                top: 89,
+                                left: 100,
+                                child: RawMaterialButton(
+                                  onPressed: () {
+                                    imagePickerOption();
+                                  },
+                                  //elevation: 8,
+                                  shape: CircleBorder(),
+                                  child: Icon(
+                                    Icons.add_a_photo_rounded,
+                                    color: Colors.black,
+                                    size: 25,
+                                  ),
+                                  fillColor: Colors.grey.shade200,
+                                  //fillColor: Colors.lightGreen.shade300,
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                            ],
+                          )),
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -1613,6 +1650,10 @@ class _viewInfoState extends State<NavigatorView> {
       path = pickedImage!.path;
       uploadFile(path);
     }
+    if (path == "") {
+      path = "/data/user/0/com.example.pet360/cache/dog.png";
+    }
+    
     String sesso = "M";
     if (_value == 2) {
       sesso = "F";
