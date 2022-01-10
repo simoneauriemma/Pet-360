@@ -1,12 +1,8 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,8 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pet360/model/new_vaccine.dart';
 import 'package:pet360/screens/home_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
-double _currentSliderValue = 1;
 
 //campi di aggiunta info animale
 final nameController = new TextEditingController();
@@ -165,7 +159,7 @@ class _addInfoState extends State<NavigatorAdd> {
               Container(
                   padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height * 1.1,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -1023,7 +1017,7 @@ class _addInfoState extends State<NavigatorAdd> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: 400,
+                  height:  MediaQuery.of(context).size.height * 0.80,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -1052,6 +1046,56 @@ class _addInfoState extends State<NavigatorAdd> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    SizedBox(
+                        height: 30,
+                      ),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Stack(
+                            children: [
+                              Container(     
+                                margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),                           
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade300, width: 3),                                  
+                                  color: Colors.grey.shade200,
+                                ),
+                                
+                                  child: pickedImage != null
+                                      ? Image.file(
+                                          pickedImage!,
+                                          width: 110,
+                                          height: 130,
+                                          fit: BoxFit.cover,
+                                        )
+                                      :
+                                      SizedBox(
+                                          width: 100.0,
+                                          height: 100.0,
+                                        ),
+                                
+                              ),
+                              Positioned(
+                                top: 105,
+                                left: 68,
+                                child: RawMaterialButton(
+                                  onPressed: () {
+                                    imagePickerOption();
+                                  },
+                                  //elevation: 8,
+                                  shape: CircleBorder(),
+                                  child: Icon(
+                                    Icons.add_a_photo_rounded,
+                                    color: Colors.black,
+                                    size: 25,
+                                  ),
+                                  fillColor: Colors.grey.shade200,
+                                  //fillColor: Colors.lightGreen.shade300,
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                            ],
+                          )),
                     SizedBox(
                       height: 20,
                     ),
