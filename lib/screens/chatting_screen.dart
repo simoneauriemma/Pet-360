@@ -145,12 +145,14 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                                         .getTypeOfUser()
                                                     .toString() ==
                                                 "Utente") {
+                                              deleteChat();
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
                                                           ReviewChat()));
                                             } else {
+                                              deleteChat();
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
