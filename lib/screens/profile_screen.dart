@@ -303,6 +303,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Row(
                 children: const [
+                  Padding(padding: EdgeInsets.only(top: 20,bottom: 20,left: 10)),
                   Text(
                     "Cancella account",
                     textAlign: TextAlign.left,
@@ -378,8 +379,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: () {
                 //
               },
-              child: Row(
+              child: Row(                
                 children: [
+                  Padding(padding: EdgeInsets.only(top: 20,bottom: 20,left: 10)),
                   Text(
                     "Lingua",
                     textAlign: TextAlign.left,
@@ -400,6 +402,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             bool isSwitched = false;
             final notifiche = Row(
               children: [
+                  Padding(padding: EdgeInsets.only(top: 20,bottom: 20,left: 10)),
                 Text(
                   "Notifiche",
                   textAlign: TextAlign.left,
@@ -423,6 +426,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Row(
                 children: [
+                  Padding(padding: EdgeInsets.only(top: 20,bottom: 20,left: 10)),
                   Text(
                     "Privacy & Policy",
                     textAlign: TextAlign.left,
@@ -447,6 +451,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Row(
                 children: [
+                  Padding(padding: EdgeInsets.only(top: 20,bottom: 20,left: 10)),
                   Text(
                     "Termini & Condizioni",
                     textAlign: TextAlign.left,
@@ -466,6 +471,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             final aiuto = Row(
               children: [
+                  Padding(padding: EdgeInsets.only(top: 20,bottom: 20,left: 10)),
                 Text(
                   "Help",
                   textAlign: TextAlign.left,
@@ -500,8 +506,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textAlign: TextAlign.center,
                       ),
                       content: Container(
-                        height: MediaQuery.of(context).size.height * 0.55,
-                        // width: MediaQuery.of(context).size.width / 1.2,
+                        height: MediaQuery.of(context).size.height * 0.65,
+                         width: MediaQuery.of(context).size.width / 1.2,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -515,14 +521,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               endIndent: 3,
                             ),
                             linguaButton,
-                            const Divider(
-                              color: Colors.black,
-                              //height: 20,
-                              thickness: 1,
-                              indent: 3,
-                              endIndent: 3,
-                            ),
-                            cancellaAccount,
                             const Divider(
                               color: Colors.black,
                               //height: 20,
@@ -547,8 +545,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               endIndent: 3,
                             ),
                             termini,
+                            const Divider(
+                              color: Colors.black,
+                              //height: 20,
+                              thickness: 1,
+                              indent: 3,
+                              endIndent: 3,
+                            ),
+                            cancellaAccount,
                             SizedBox(
-                              height: 30,
+                              height: 60,
                             ),
                             logoutButton,
                           ],
