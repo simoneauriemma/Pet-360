@@ -49,13 +49,12 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-   removeAnimal() {
+   removeAnimal(String animalName) {
     final DBRef = FirebaseDatabase.instance
         .reference()
         .child(UserSharedPreferences.getTypeOfUser().toString());
     DBRef.child(_auth.currentUser!.uid.toString() +
-            "/Animali/" +
-            UserSharedPreferences.getAnimalName().toString())
+            "/Animali/" + animalName)
         .remove();
     if (pickedImage != null) {
       removePhoto(pickedImage!.path);
@@ -245,14 +244,8 @@ class _DashboardState extends State<Dashboard> {
                                   TextButton(
                                     onPressed: () {
                                       // Remove the animal
-                                     /* removeAnimal();
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomeScreen()));*/
+                                      removeAnimal(snapshot.data![index].animalName!);
                                         setState(() {
-                                          snapshot.data!.removeAt(index);
                                           Navigator.of(context).pop();
                                         });
                                     },
