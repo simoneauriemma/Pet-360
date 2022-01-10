@@ -165,7 +165,7 @@ class _addInfoState extends State<NavigatorAdd> {
               Container(
                   padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.1,
+                  height: MediaQuery.of(context).size.height,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -423,11 +423,11 @@ class _addInfoState extends State<NavigatorAdd> {
                               children: [
                                 Text(
                                   "M",
-                                  style: TextStyle(fontSize: 12),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                                 Icon(
                                   Icons.male_rounded,
-                                  size: 18,
+                                  size: 25,
                                   color: Colors.lightGreen,
                                 ),
                               ],
@@ -446,12 +446,12 @@ class _addInfoState extends State<NavigatorAdd> {
                               children: [
                                 Text(
                                   "F",
-                                  style: TextStyle(fontSize: 12),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                                 Icon(
                                   Icons.female_rounded,
-                                  size: 18,
-                                  color: Colors.lightGreen.shade300,
+                                  size: 25,
+                                  color: Colors.lightGreen,
                                 ),
                               ],
                             ),

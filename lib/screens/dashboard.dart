@@ -246,6 +246,7 @@ class _DashboardState extends State<Dashboard> {
                                       // Remove the animal
                                       removeAnimal(snapshot.data![index].animalName!);
                                         setState(() {
+                                          snapshot.data!.removeAt(index);
                                           Navigator.of(context).pop();
                                         });
                                     },

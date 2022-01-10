@@ -159,7 +159,7 @@ class _viewInfoState extends State<NavigatorView> {
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
-                child: Row(
+                /*child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   //Center Row contents horizontally,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -211,8 +211,8 @@ class _viewInfoState extends State<NavigatorView> {
                                 ],
                               );
                             });
-                      },
-                      child: Row(
+                      },*/
+                      /*child: Row(
                         children: [
                           Text(
                             "Elimina animale ",
@@ -237,12 +237,12 @@ class _viewInfoState extends State<NavigatorView> {
                       ),
                     ),
                   ],
-                ),
+                ),*/
               ),
               Container(
                   padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.2,
+                  height: MediaQuery.of(context).size.height,
                   //sfondo con sfocatura
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -263,7 +263,7 @@ class _viewInfoState extends State<NavigatorView> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       Text(
                         "DATI LIBRETTO ANIMALE",
@@ -503,11 +503,11 @@ class _viewInfoState extends State<NavigatorView> {
                               children: [
                                 Text(
                                   "M",
-                                  style: TextStyle(fontSize: 12),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                                 Icon(
                                   Icons.male_rounded,
-                                  size: 18,
+                                  size: 25,
                                   color: Colors.lightGreen,
                                 ),
                               ],
@@ -526,12 +526,12 @@ class _viewInfoState extends State<NavigatorView> {
                               children: [
                                 Text(
                                   "F",
-                                  style: TextStyle(fontSize: 12),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                                 Icon(
                                   Icons.female_rounded,
-                                  size: 18,
-                                  color: Colors.lightGreen.shade300,
+                                  size: 25,
+                                  color: Colors.lightGreen,
                                 ),
                               ],
                             ),
@@ -1104,7 +1104,7 @@ class _viewInfoState extends State<NavigatorView> {
               //TITOLO
               Container(
                 width: MediaQuery.of(context).size.width / 1.1,
-                height: MediaQuery.of(context).size.height * 0.57,
+                height: MediaQuery.of(context).size.height * 0.5,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.only(
