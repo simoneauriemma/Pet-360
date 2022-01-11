@@ -7,11 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:pet360/screens/home_screen.dart';
 import 'ia_screen.dart';
 import 'navigator_view.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:image_picker/image_picker.dart';
 
 
 class Dashboard extends StatefulWidget {

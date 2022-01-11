@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:pet360/screens/find_fiends.dart';
 import 'package:pet360/screens/navigator_add.dart';
 import 'package:pet360/screens/profile_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
 import 'dashboard.dart';
 
 class HomeScreen extends StatefulWidget {

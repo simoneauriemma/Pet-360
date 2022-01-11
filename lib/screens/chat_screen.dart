@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/list_addestratore_chat.dart';
 import 'package:pet360/screens/list_utenti.dart';

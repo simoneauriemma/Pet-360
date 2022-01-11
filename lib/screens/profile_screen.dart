@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +16,6 @@ import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/screens/privacy_policy_screen.dart';
 import 'package:pet360/screens/termini_condizioni_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
 import 'home_screen.dart';
 import 'login_screen.dart';
 

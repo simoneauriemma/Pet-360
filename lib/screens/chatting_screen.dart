@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/show_message.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
 import 'home_screen.dart';
 
 class Chatting_screen extends StatefulWidget {
@@ -79,22 +76,30 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       SizedBox(
                         width: 2,
                       ),
-                      CircleAvatar(
-                        maxRadius: 20,
-                        child: pickedImage != null
-                            ? Image.file(
-                                pickedImage!,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              )
-                            :
-                            //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-                            SizedBox(
-                                child: Image.asset(
-                                    "assets/icons/user_default.png"),
-                              ),
-                      ),
+                      Container(                                
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade300, width: 1),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
+                                  color: Colors.grey.shade200,
+                                ),
+                                child: ClipOval(
+                      child: pickedImage != null
+                          ? Image.file(
+                              pickedImage!,
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            )
+                          :
+                          SizedBox(
+                              width: 43.0,
+                              height: 43.0,
+                              child:
+                                  Image.asset("assets/icons/user_default.png"),
+                            ),
+                    ),),
                       SizedBox(
                         width: 12,
                       ),
@@ -184,7 +189,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                               Text(
                                 "Lascia chat",
                                 style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 12,
                                 ),
                               ),
                               /*ImageIcon(
@@ -305,22 +310,30 @@ class _Chatting_screenState extends State<Chatting_screen> {
                     SizedBox(
                       width: 2,
                     ),
-                    CircleAvatar(
-                      maxRadius: 20,
+                    Container(                                
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.shade300, width: 1),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(100)),
+                                  color: Colors.grey.shade200,
+                                ),
+                                child: ClipOval(
                       child: pickedImage != null
                           ? Image.file(
                               pickedImage!,
-                              width: 100,
-                              height: 100,
+                              width: 80,
+                              height: 80,
                               fit: BoxFit.cover,
                             )
                           :
-                          //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
                           SizedBox(
+                              width: 43.0,
+                              height: 43.0,
                               child:
                                   Image.asset("assets/icons/user_default.png"),
                             ),
-                    ),
+                    ),),
                     SizedBox(
                       width: 12,
                     ),
@@ -398,7 +411,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                             Text(
                               "Lascia chat",
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 12,
                               ),
                             ),
                             /*ImageIcon(

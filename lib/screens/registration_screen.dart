@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
 import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-
 import 'home_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
