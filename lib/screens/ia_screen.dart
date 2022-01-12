@@ -1,6 +1,13 @@
-import 'package:camera/camera.dart';
+import 'dart:io';
+import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
-import 'package:tflite/tflite.dart';
+import 'package:image_picker/image_picker.dart';
+import 'classifier.dart';
+import 'classifier_quant.dart';
+import 'package:logger/logger.dart';
+import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class IAscreen extends StatefulWidget {
   const IAscreen({Key? key}) : super(key: key);
@@ -9,162 +16,182 @@ class IAscreen extends StatefulWidget {
   _IAscreenState createState() => _IAscreenState();
 }
 
-class _IAscreenState extends State<IAscreen> {
-  List<CameraDescription>? cameras;
+class _IAscreenState extends State<IAscreen> { 
+  late Classifier _classifier;
 
-  Future<void>main()async{
-    WidgetsFlutterBinding.ensureInitialized();
-    cameras= await availableCameras();
-    runApp(IAscreen());
-  }
+  var logger = Logger();
 
-  bool isWorking=false;
-  String result="";
-  CameraController? cameraController;
-  CameraImage? imgCamera;
+  File? _image;
+  final picker = ImagePicker();
 
-  initCamera(){
-    cameraController=CameraController(cameras![0],ResolutionPreset.medium);
-    cameraController!.initialize().then((value) {
-      if(!mounted){
-        return;
-      }
-      setState(() {
-        cameraController!.startImageStream((imageFromStream) =>
-        {
-          if(!isWorking){
-            isWorking=true,
-            imgCamera=imageFromStream,
-            runModelOnStreamFrames(),
-          }
-        });
-      });
-    });
-  }
+  Image? _imageWidget;
 
-  Future loadImageModel() async {
-    var result = await Tflite.loadModel(
-      model: "assets/mobilenet_v1_1.0_224_quant.tflite",
-      labels: "assets/labels_mobilenet_quant_v1_224.txt",
-    );
-    print("result: $result");
-}
+  img.Image? fox;
+
+  Category? category;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    loadImageModel();
+    _classifier = ClassifierQuant();
   }
 
-  runModelOnStreamFrames()async{
-    if(imgCamera!=null){
-      var recognitions = await Tflite.runModelOnFrame(
-        bytesList: imgCamera!.planes.map((plane) {
-          return plane.bytes;
-        }).toList(),
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
-        imageHeight: imgCamera!.height,
-        imageWidth: imgCamera!.width,
-        imageMean: 127.5,
-        imageStd: 127.5,
-        rotation: 90,
-        numResults: 2,
-        threshold: 0.1,
-        asynch: true,
-      );
-      result="";
+    setState(() {
+      _image = File(pickedFile!.path);
+      _imageWidget = Image.file(_image!);
 
-      recognitions!.forEach((response) {
-        result+=response["label"] + "  " + (response["confidence"] as double).toStringAsFixed(2)+ "\n\n";
-      });
-      setState(() {
-        result;
-      });
-      isWorking=false;
-    }
+      _predict();
+    });
   }
 
-  @override
-  void dispose()async {
-    // TODO: implement dispose
-    super.dispose();
-    await Tflite.close();
-    cameraController?.dispose();
+  void _predict() async {
+    img.Image imageInput = img.decodeImage(_image!.readAsBytesSync())!;
+    var pred = _classifier.predict(imageInput);
+
+    setState(() {
+      this.category = pred;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child:
-    Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: Text("Riconoscimento cani"),
-            centerTitle: true,
-            elevation: 4,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/icons/back.jpg"),
-            ),
-          ),
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Center(
-                    child: Container(
-                      height: 320.0,
-                      width: 360.0,
-                      child: Image.asset("assets/icons/frame.jpg"),
-                    ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: Text("Riconoscimento"),
+        centerTitle: true,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Container(
+              /*width: 350,
+              height: 600,*/
+              width: MediaQuery.of(context).size.width / 1.1,
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
                   ),
-                  Center(
-                    child: TextButton(
-                      onPressed: (){
-                        initCamera();
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(top:35),
-                        height: 270,
-                        width: 360,
-                        child: imgCamera==null ?
-                        Container(
-                          height: 270,
-                          width: 360,
-                          child: Icon(Icons.photo_camera_front),
-                        ): AspectRatio(aspectRatio: cameraController!.value.aspectRatio,
-                          child: CameraPreview(cameraController!),
-                        ),
-                      ),
-                    ),
-                  )
                 ],
               ),
-              Center(child: Container(
-                margin: const EdgeInsets.only(top: 55),
-                child: SingleChildScrollView(
-                  child: Text(result,
-                    style: const TextStyle(
-                      backgroundColor: Colors.white54,
-                      fontSize: 25,
-                      color: Colors.black,
-                    ),
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  Text(
+                    "RICONOSCI LA RAZZA \n DEL TUO ANIMALE",
                     textAlign: TextAlign.center,
+                    style: GoogleFonts.questrial(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+               Container(
+              margin: EdgeInsets.all(15),
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+                border: Border.all(color: Colors.white),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(2, 2),
+                    spreadRadius: 2,
+                    blurRadius: 1,
+                  ),
+                ],
+              ),
+              child: _image == null
+                ? Text('Nessuna immagine selezionata')
+                : Container(
+                    constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height / 2),
+                    
+                    child: _imageWidget,
+                  ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            category != null ? category!.label : '',
+            style: TextStyle(fontSize: 23, fontWeight: FontWeight.w800, color: Colors.lightGreen),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            category != null
+                ? 'Accuratezza: ${category!.score.toStringAsFixed(3)}'
+                : '',
+            style: TextStyle(fontSize: 18),
+          ),
+          SizedBox(height: 40),
+        ElevatedButton(
+              onPressed: (){
+                 getImage();
+              },
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(
+                    width: 300, 
+                    height: 50),
+                child: const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Seleziona immagine",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
-              ),)
-            ],
-          ),
-        )
-    ),
+              ),
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.black,
+                primary: Colors.white,
+                onSurface: Colors.grey,
+                side: BorderSide(color: Colors.lightGreen.shade200, width: 2),
+                elevation: 5,
+                //minimumSize: Size(100, 40),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+              ),
+      ),
+        ],
+      ),
+      
+      ),
+      
+          ]),
+        ),
+      ),
+      /*floatingActionButton: FloatingActionButton(
+        onPressed: getImage,
+        tooltip: 'Pick Image',
+        child: Icon(Icons.add_a_photo),
+      ),*/
     );
   }
 }

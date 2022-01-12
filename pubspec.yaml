@@ -51,8 +51,7 @@ dependencies:
   shared_preferences: ^2.0.9
   google_maps_flutter: ^2.1.1
   google_fonts: ^2.0.0
-  fluttertoast: ^8.0.8
-  tflite: ^1.1.2
+  fluttertoast: ^8.0.8  
   image: ^3.1.0
   image_save: ^5.0.0
   firebase_storage: ^10.2.4
@@ -64,6 +63,9 @@ dependencies:
   geocoding: ^2.0.1
   cloud_firestore: ^3.1.5
   camera: ^0.9.4+1
+  tflite_flutter: ^0.9.0
+  tflite_flutter_helper: ^0.3.1
+  logger: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -98,8 +100,9 @@ flutter:
     - assets/markers/
     - assets/icons/
     - assets/storyset/
-    - assets/labels_mobilenet_quant_v1_224.txt
+    - assets/labels.txt
     - assets/mobilenet_v1_1.0_224_quant.tflite
+    - assets/mobilenet_v1_1.0_224.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
