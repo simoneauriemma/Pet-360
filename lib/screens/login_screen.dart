@@ -158,51 +158,53 @@ void initializeFlutterFire() async {
               child: Padding(
                 padding: const EdgeInsets.all(36.0),
                 child: Form(
-                    key: _formKey,
-                    child: Column(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                          height: 200,
+                          child: Image.asset(
+                            "assets/icons/logoPet360.png",
+                            fit: BoxFit.contain,
+                          )),
+                      SizedBox(height: 45),
+                      emailFilds,
+                      SizedBox(height: 25),
+                      passwordFilds,
+                      SizedBox(height: 35),
+                      loginButton,
+                      SizedBox(height: 15),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(
-                              height: 200,
-                              child: Image.asset(
-                                "assets/icons/logoPet360.png",
-                                fit: BoxFit.contain,
-                              )),
-                          SizedBox(height: 45),
-                          emailFilds,
-                          SizedBox(height: 25),
-                          passwordFilds,
-                          SizedBox(height: 35),
-                          loginButton,
-                          SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Non hai un account? ",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RegistrationScreen()));
-                                },
-                                child: Text(
-                                  "Clicca qui!",
-                                  style: TextStyle(
-                                      color: Colors.lightGreen,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 18),
-                                ),
-                              ),
-                            ],
+                          Text(
+                            "Non hai un account? ",
+                            style: TextStyle(fontSize: 18),
                           ),
-                        ])),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          RegistrationScreen()));
+                            },
+                            child: Text(
+                              "Clicca qui!",
+                              style: TextStyle(
+                                  color: Colors.lightGreen,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
