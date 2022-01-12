@@ -111,20 +111,20 @@ class _DashboardState extends State<Dashboard> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(padding: EdgeInsets.only(top: 60)),
+                                  Padding(padding: EdgeInsets.only(top: 70)),
                                   Text(
                                     "Bentornato",
                                     textAlign: TextAlign.left,
                                     style: GoogleFonts.questrial(
-                                      fontSize: 30,
+                                      fontSize: 32,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                      _firstName,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(fontSize: 20),
-                                    ),
+                                    _firstName,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(fontSize: 22),
+                                  ),
                                   ],
                                 ),
                                 Spacer(),
@@ -181,7 +181,7 @@ class _DashboardState extends State<Dashboard> {
                     "Lista dei tuoi animali",
                     textAlign: TextAlign.left,
                     style: GoogleFonts.questrial(
-                      fontSize: 15,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -365,19 +365,19 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(padding: EdgeInsets.only(top: 60)),
+                                Padding(padding: EdgeInsets.only(top: 70)),
                                 Text(
                                   "Benvenuto",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.questrial(
-                                    fontSize: 30,
+                                    fontSize: 35,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                    _firstName,
+                                  _firstName,
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 25),
                                 ),
                                 ],
                               ),
@@ -435,7 +435,7 @@ class _DashboardState extends State<Dashboard> {
                   "Lista dei tuoi animali",
                   textAlign: TextAlign.left,
                   style: GoogleFonts.questrial(
-                    fontSize: 15,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

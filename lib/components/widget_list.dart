@@ -31,7 +31,7 @@ class WidgetList extends StatelessWidget {
           Container(
             //margin: EdgeInsets.only(left: 20, right: 20),
             width: MediaQuery.of(context).size.width / 1.1,
-            padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 5),
+            padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(

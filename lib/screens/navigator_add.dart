@@ -157,26 +157,28 @@ class _addInfoState extends State<NavigatorAdd> {
           content: Column(
             children: [
               Container(
-                  padding: EdgeInsets.only(top: 20),
-                  width: MediaQuery.of(context).size.width / 1.1,
-                  height: MediaQuery.of(context).size.height * 1.1,
-                  //sfondo con sfocatura
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
+                padding: EdgeInsets.only(top: 20),
+                width: MediaQuery.of(context).size.width / 1.1,
+                height: MediaQuery.of(context).size.height * 0.9,
+                //sfondo con sfocatura
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
                       Text(
@@ -453,7 +455,9 @@ class _addInfoState extends State<NavigatorAdd> {
                         ),
                       )
                     ],
-                  )),
+                  ),
+                ),
+              ),
               //Padding(padding: EdgeInsets.only(bottom: 100))
             ],
           ),
@@ -1017,7 +1021,7 @@ class _addInfoState extends State<NavigatorAdd> {
                 //TITOLO
                 Container(
                   width: MediaQuery.of(context).size.width / 1.1,
-                  height:  MediaQuery.of(context).size.height * 0.80,
+                  height: MediaQuery.of(context).size.height * 0.7,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -1034,46 +1038,46 @@ class _addInfoState extends State<NavigatorAdd> {
                       ),
                     ],
                   ),
-                  child: Column(children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "PASSAPORTO ANIMALE",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.questrial(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(children: [
+                      SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    SizedBox(
+                      Text(
+                        "PASSAPORTO ANIMALE",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.questrial(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
                         height: 30,
                       ),
                       Align(
                           alignment: Alignment.center,
                           child: Stack(
                             children: [
-                              Container(     
-                                margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),                           
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.grey.shade300, width: 3),                                  
+                                      color: Colors.grey.shade300, width: 3),
                                   color: Colors.grey.shade200,
                                 ),
-                                
-                                  child: pickedImage != null
-                                      ? Image.file(
-                                          pickedImage!,
-                                          width: 140,
-                                          height: 110,
-                                          fit: BoxFit.cover,
-                                        )
-                                      :
-                                      SizedBox(
-                                          width: 100.0,
-                                          height: 100.0,
-                                        ),
-                                
+                                child: pickedImage != null
+                                    ? Image.file(
+                                        pickedImage!,
+                                        width: 140,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : SizedBox(
+                                        width: 100.0,
+                                        height: 100.0,
+                                      ),
                               ),
                               Positioned(
                                 top: 89,
@@ -1096,105 +1100,106 @@ class _addInfoState extends State<NavigatorAdd> {
                               ),
                             ],
                           )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      width: 280,
-                      child: TextFormField(
-                          autofocus: false,
-                          controller: descrizioneController,
-                          keyboardType: TextInputType.name,
-                          onSaved: (value) {
-                            descrizioneController.text = value!;
-                          },
-                          textInputAction: TextInputAction.next,
-
-                          //Descrizione animale
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            labelText: "Descrizione animale",
-                          )),
-                    ),
-                    // ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      width: 280,
-                      child: TextFormField(
-                          autofocus: false,
-                          controller: microchipController,
-                          keyboardType: TextInputType.name,
-                          onSaved: (value) {
-                            microchipController.text = value!;
-                          },
-                          textInputAction: TextInputAction.next,
-
-                          //Numero microchip
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            labelText: "N° microchip",
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-
-                    SizedBox(
-                      width: 280,
-                      child: TextFormField(
-                        autofocus: false,
-                        controller: dataMicrochipController,
-                        keyboardType: TextInputType.name,
-                        onSaved: (value) {
-                          dataMicrochipController.text = value!;
-                        },
-                        textInputAction: TextInputAction.next,
-
-                        //Data applicazione microchip
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.transparent,
-                          labelText: "Data applicazione microchip",
-                        ),
-                        onTap: () async {
-                          var date = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100));
-                          dataMicrochipController.text =
-                              date.toString().substring(0, 10);
-                        },
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: descrizioneController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              descrizioneController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                    const SizedBox(
-                      height: 10,
-                    ),
+                            //Descrizione animale
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Descrizione animale",
+                            )),
+                      ),
+                      // ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: microchipController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              microchipController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                    SizedBox(
-                      width: 280,
-                      child: TextFormField(
+                            //Numero microchip
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "N° microchip",
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
                           autofocus: false,
-                          controller: enteController,
+                          controller: dataMicrochipController,
                           keyboardType: TextInputType.name,
                           onSaved: (value) {
-                            enteController.text = value!;
+                            dataMicrochipController.text = value!;
                           },
                           textInputAction: TextInputAction.next,
 
-                          //Ente rilasciante
+                          //Data applicazione microchip
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
-                            labelText: "Ente rilasciante",
-                          )),
-                    ),
-                  ]),
+                            labelText: "Data applicazione microchip",
+                          ),
+                          onTap: () async {
+                            var date = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100));
+                            dataMicrochipController.text =
+                                date.toString().substring(0, 10);
+                          },
+                        ),
+                      ),
+
+                      const SizedBox(
+                        height: 10,
+                      ),
+
+                      SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: enteController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              enteController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
+
+                            //Ente rilasciante
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              labelText: "Ente rilasciante",
+                            )),
+                      ),
+                    ]),
+                  ),
                 ),
               ],
             )),
