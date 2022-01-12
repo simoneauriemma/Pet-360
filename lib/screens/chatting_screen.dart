@@ -88,8 +88,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       child: pickedImage != null
                           ? Image.file(
                               pickedImage!,
-                              width: 80,
-                              height: 80,
+                              width: 43,
+                              height: 43,
                               fit: BoxFit.cover,
                             )
                           :
@@ -322,8 +322,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       child: pickedImage != null
                           ? Image.file(
                               pickedImage!,
-                              width: 80,
-                              height: 80,
+                              width: 43,
+                              height: 43,
                               fit: BoxFit.cover,
                             )
                           :

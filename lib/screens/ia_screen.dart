@@ -116,17 +116,20 @@ class _IAscreenState extends State<IAscreen> {
                   Radius.circular(15),
                 ),
                 border: Border.all(color: Colors.white),
-                boxShadow: [
+              /*  boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
                     offset: Offset(2, 2),
                     spreadRadius: 2,
                     blurRadius: 1,
                   ),
-                ],
+                ],*/
               ),
               child: _image == null
-                ? Text('Nessuna immagine selezionata')
+                ? Text('Nessuna immagine è stata ancora selezionata!\nSeleziona una immagine', 
+                textAlign: TextAlign.center, 
+                style: TextStyle(fontSize: 20),
+                )
                 : Container(
                     constraints: BoxConstraints(
                         maxHeight: MediaQuery.of(context).size.height / 2),
