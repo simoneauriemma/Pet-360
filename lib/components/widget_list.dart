@@ -136,7 +136,7 @@ class WidgetList extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(32.0))),
                           content: Container(
-                            height: MediaQuery.of(context).size.height / 3.3,
+                            height: MediaQuery.of(context).size.height / 3.2,
                             child: Column(
                               children: [
                                 Text(
@@ -220,8 +220,8 @@ class WidgetList extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 20),
+                                SizedBox(
+                                  height: 40,
                                 ),
                                 ConstrainedBox(
                                   constraints: const BoxConstraints.tightFor(
@@ -266,7 +266,10 @@ class WidgetList extends StatelessWidget {
                       },
                     );
                   },
-                  icon: Icon(Icons.info_outline_rounded),
+                  icon: Icon(
+                    Icons.info_outline_rounded,
+                    size: 30,
+                  ),
                 ),
               ],
             ),

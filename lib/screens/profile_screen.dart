@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -16,6 +17,7 @@ import 'package:pet360/model/veterinary_model.dart';
 import 'package:pet360/screens/privacy_policy_screen.dart';
 import 'package:pet360/screens/termini_condizioni_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
+
 import 'home_screen.dart';
 import 'login_screen.dart';
 
@@ -502,60 +504,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textAlign: TextAlign.center,
                       ),
                       content: Container(
-                        height: MediaQuery.of(context).size.height * 0.65,
-                         width: MediaQuery.of(context).size.width / 1.2,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            notifiche,
-                            const Divider(
-                              color: Colors.black,
-                              //height: 20,
-                              thickness: 1,
-                              indent: 3,
-                              endIndent: 3,
+                          height: MediaQuery.of(context).size.height * 0.6,
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Padding(
+                                    padding: EdgeInsets.only(bottom: 20)),
+                                notifiche,
+                                const Divider(
+                                  color: Colors.black,
+                                  //height: 20,
+                                  thickness: 1,
+                                  indent: 3,
+                                  endIndent: 3,
+                                ),
+                                linguaButton,
+                                const Divider(
+                                  color: Colors.black,
+                                  //height: 20,
+                                  thickness: 1,
+                                  indent: 3,
+                                  endIndent: 3,
+                                ),
+                                aiuto,
+                                const Divider(
+                                  color: Colors.black,
+                                  //height: 20,
+                                  thickness: 1,
+                                  indent: 3,
+                                  endIndent: 3,
+                                ),
+                                privacy,
+                                const Divider(
+                                  color: Colors.black,
+                                  //height: 20,
+                                  thickness: 1,
+                                  indent: 3,
+                                  endIndent: 3,
+                                ),
+                                termini,
+                                const Divider(
+                                  color: Colors.black,
+                                  //height: 20,
+                                  thickness: 1,
+                                  indent: 3,
+                                  endIndent: 3,
+                                ),
+                                cancellaAccount,
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                logoutButton,
+                              ],
                             ),
-                            linguaButton,
-                            const Divider(
-                              color: Colors.black,
-                              //height: 20,
-                              thickness: 1,
-                              indent: 3,
-                              endIndent: 3,
-                            ),
-                            aiuto,
-                            const Divider(
-                              color: Colors.black,
-                              //height: 20,
-                              thickness: 1,
-                              indent: 3,
-                              endIndent: 3,
-                            ),
-                            privacy,
-                            const Divider(
-                              color: Colors.black,
-                              //height: 20,
-                              thickness: 1,
-                              indent: 3,
-                              endIndent: 3,
-                            ),
-                            termini,
-                            const Divider(
-                              color: Colors.black,
-                              //height: 20,
-                              thickness: 1,
-                              indent: 3,
-                              endIndent: 3,
-                            ),
-                            cancellaAccount,
-                            SizedBox(
-                              height: 60,
-                            ),
-                            logoutButton,
-                          ],
-                        ),
-                      ),
+                          )),
                     );
                   },
                 );

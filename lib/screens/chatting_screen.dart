@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -8,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:pet360/components/show_message.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
+
 import 'home_screen.dart';
 
 class Chatting_screen extends StatefulWidget {
@@ -136,6 +138,9 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                 context: context,
                                 builder: (BuildContext ctx) {
                                   return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(32.0))),
                                     title: Text(
                                       'Conferma',
                                       textAlign: TextAlign.center,
@@ -147,8 +152,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                       TextButton(
                                           onPressed: () {
                                             if (UserSharedPreferences
-                                                        .getTypeOfUser()
-                                                    .toString() ==
+                                                .getTypeOfUser()
+                                                .toString() ==
                                                 "Utente") {
                                               deleteChat();
                                               Navigator.push(
