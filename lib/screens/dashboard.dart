@@ -1,15 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
+
 import 'ia_screen.dart';
 import 'navigator_view.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -66,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
         if (snapshot.hasData) {
           Size size = MediaQuery.of(context).size;
           return Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.grey.shade100,
             body: Center(
               child: Column(
                 children: [
@@ -320,7 +322,7 @@ class _DashboardState extends State<Dashboard> {
         }
         Size size = MediaQuery.of(context).size;
         return Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.grey.shade100,
           body: Center(
             child: Column(
               children: [
@@ -464,13 +466,13 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     child: const Center(
                       child: Text(
-                        "Clicca su '+' per aggiungere un animale da gestire!",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.black),
-                      ),
+                        "Clicca su '+' per aggiungere un animale\n da gestire!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black),
+                    ),
                     ),
                   ),
                   Spacer(),

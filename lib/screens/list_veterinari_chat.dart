@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -29,6 +30,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
           //print("Snap: " + snapshot.toString() + jsonBody.toString());
           if (snapshot.hasData) {
             return Scaffold(
+              backgroundColor: Colors.grey.shade100,
               body: SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height,

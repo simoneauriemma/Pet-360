@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -1429,6 +1430,7 @@ class _viewInfoState extends State<NavigatorView> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
+            backgroundColor: Colors.grey.shade100,
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               backgroundColor: Colors.transparent,

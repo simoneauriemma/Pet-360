@@ -19,7 +19,10 @@ class _ReviewChatState extends State<ReviewChat> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text("Valuta la conversazione"),
@@ -36,58 +39,6 @@ class _ReviewChatState extends State<ReviewChat> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.lightGreen.shade100,
-                    Colors.grey.shade300,
-                  ],
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(1.0, 0.0),
-                  stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp,
-                ),
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(0),
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              height: MediaQuery.of(context).size.height * 0.15,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Lascia un voto a",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.questrial(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    UserSharedPreferences.getNameChat().toString(),
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.questrial(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.lightGreen,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             SizedBox(
               height: 40,
             ),
@@ -95,7 +46,7 @@ class _ReviewChatState extends State<ReviewChat> {
               child: Container(
                 padding: EdgeInsets.only(top: 20),
                 width: MediaQuery.of(context).size.width / 1.1,
-                height: 330,
+                height: 550,
                 //sfondo con sfocatura
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -113,29 +64,28 @@ class _ReviewChatState extends State<ReviewChat> {
                     ),
                   ],
                 ),
-
                 child: Column(
                   children: [
-                    /*Text(
-                    "Lascia un voto a",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.questrial(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      "Lascia un voto a",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.questrial(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    UserSharedPreferences.getNameChat().toString(),
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.questrial(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.lightGreen,
+                    Text(
+                      UserSharedPreferences.getNameChat().toString(),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.questrial(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.lightGreen,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ), */
+                    SizedBox(
+                      height: 20,
+                    ),
                     RatingBar(
                       initialRating: 0.0,
                       minRating: 0.0,
@@ -159,14 +109,14 @@ class _ReviewChatState extends State<ReviewChat> {
                     Text(
                       'VOTO: $rating',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 30,
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width / 1.3,
-                      height: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.width / 3.5,
                       //sfondo con sfocatura
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
@@ -188,6 +138,14 @@ class _ReviewChatState extends State<ReviewChat> {
                         ],
                       ),
                     ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/storyset/img_review.png",
+                        height: size.width / 2,
+                        width: size.width / 2,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -196,7 +154,8 @@ class _ReviewChatState extends State<ReviewChat> {
               height: 40,
             ),
             ConstrainedBox(
-              constraints: BoxConstraints.tightFor(width: 280, height: 50),
+              constraints: BoxConstraints.tightFor(
+                  width: MediaQuery.of(context).size.width / 1.1, height: 50),
               child: ElevatedButton(
                 onPressed: () {
                   Fluttertoast.showToast(
