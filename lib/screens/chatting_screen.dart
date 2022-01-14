@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/show_message.dart';
+import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
@@ -78,30 +79,30 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       SizedBox(
                         width: 2,
                       ),
-                      Container(                                
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade300, width: 1),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100)),
-                                  color: Colors.grey.shade200,
+                      Container(
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.grey.shade300, width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(100)),
+                          color: Colors.grey.shade200,
+                        ),
+                        child: ClipOval(
+                          child: pickedImage != null
+                              ? Image.file(
+                                  pickedImage!,
+                                  width: 43,
+                                  height: 43,
+                                  fit: BoxFit.cover,
+                                )
+                              : SizedBox(
+                                  width: 43.0,
+                                  height: 43.0,
+                                  child: Image.asset(
+                                      "assets/icons/user_default.png"),
                                 ),
-                                child: ClipOval(
-                      child: pickedImage != null
-                          ? Image.file(
-                              pickedImage!,
-                              width: 43,
-                              height: 43,
-                              fit: BoxFit.cover,
-                            )
-                          :
-                          SizedBox(
-                              width: 43.0,
-                              height: 43.0,
-                              child:
-                                  Image.asset("assets/icons/user_default.png"),
-                            ),
-                    ),),
+                        ),
+                      ),
                       SizedBox(
                         width: 12,
                       ),
@@ -152,8 +153,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                       TextButton(
                                           onPressed: () {
                                             if (UserSharedPreferences
-                                                .getTypeOfUser()
-                                                .toString() ==
+                                                        .getTypeOfUser()
+                                                    .toString() ==
                                                 "Utente") {
                                               deleteChat();
                                               Navigator.push(
@@ -167,7 +168,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          Chatting_screen()));
+                                                          ChatScreen()));
                                             }
                                           },
                                           child: Text(
@@ -315,30 +316,30 @@ class _Chatting_screenState extends State<Chatting_screen> {
                     SizedBox(
                       width: 2,
                     ),
-                    Container(                                
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade300, width: 1),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100)),
-                                  color: Colors.grey.shade200,
-                                ),
-                                child: ClipOval(
-                      child: pickedImage != null
-                          ? Image.file(
-                              pickedImage!,
-                              width: 43,
-                              height: 43,
-                              fit: BoxFit.cover,
-                            )
-                          :
-                          SizedBox(
-                              width: 43.0,
-                              height: 43.0,
-                              child:
-                                  Image.asset("assets/icons/user_default.png"),
-                            ),
-                    ),),
+                    Container(
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(100)),
+                        color: Colors.grey.shade200,
+                      ),
+                      child: ClipOval(
+                        child: pickedImage != null
+                            ? Image.file(
+                                pickedImage!,
+                                width: 43,
+                                height: 43,
+                                fit: BoxFit.cover,
+                              )
+                            : SizedBox(
+                                width: 43.0,
+                                height: 43.0,
+                                child: Image.asset(
+                                    "assets/icons/user_default.png"),
+                              ),
+                      ),
+                    ),
                     SizedBox(
                       width: 12,
                     ),
@@ -534,6 +535,14 @@ class _Chatting_screenState extends State<Chatting_screen> {
   }
 
   void deleteChat() async {
+    groupId = _auth.currentUser!.uid.toString() +
+        UserSharedPreferences.getUIDOfUser().toString();
+
+    if (UserSharedPreferences.getTypeOfUser().toString() != "Utente") {
+      groupId = UserSharedPreferences.getUIDOfUser().toString() +
+          _auth.currentUser!.uid.toString();
+    }
+    //print("group id chat...." + groupId.toString());
     await _firestore.collection("Messages").doc(groupId.toString()).delete();
   }
 

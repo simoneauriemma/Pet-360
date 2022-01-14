@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +132,7 @@ class _ListUtentiState extends State<ListUtenti> {
       List<QueryDocumentSnapshot> x = element.docs;
       for (int i = 0; i < x.length; i++) {
         QueryDocumentSnapshot element = x[i];
-        print(element["sender"]);
+        //print(element["sender"]);
         chatOn.add(element["sender"].toString());
       }
     });
