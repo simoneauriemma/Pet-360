@@ -602,7 +602,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           alignment: Alignment.center,
                           child: Stack(
                             children: [
-                              Container(                                
+                              Container(  
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),                              
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.grey.shade300, width: 3),
@@ -619,7 +621,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           fit: BoxFit.cover,
                                         )
                                       :
-                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
                                       SizedBox(
                                           width: 100.0,
                                           height: 100.0,
@@ -627,8 +628,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               Positioned(
-                                top: 60,
-                                left: 42,
+                                top: 70,
+                                left: 50,
                                 child: RawMaterialButton(
                                   onPressed: () {
                                             imagePickerOption();
