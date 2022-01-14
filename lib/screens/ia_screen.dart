@@ -137,9 +137,7 @@ class _IAscreenState extends State<IAscreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
-                height: 30,
-              ),
+              
               SizedBox(
                 height: 40,
               ),
@@ -152,9 +150,9 @@ class _IAscreenState extends State<IAscreen> {
                       children: [
                         Container(
                             width: MediaQuery.of(context).size.width / 1.1,
-                            height: 400,
+                            height: MediaQuery.of(context).size.height * 0.6,
                             //margin: EdgeInsets.all(25),
-                            padding: EdgeInsets.only(left: 25, right: 25),
+                            padding: EdgeInsets.only(left: 25, right: 25,top: 25),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
@@ -211,6 +209,7 @@ class _IAscreenState extends State<IAscreen> {
                                           getImage();
                                         },
                                       ),
+                                SizedBox(height: 15,),
                                 Text(
                                   category != null ? category!.label : '',
                                   style: GoogleFonts.questrial(
@@ -261,7 +260,45 @@ class _IAscreenState extends State<IAscreen> {
                               borderRadius: BorderRadius.circular(15)),
                         ),
                       ), */
-                        FloatingActionButton(
+                        /*FloatingActionButton(
+                          clipBehavior: Clip.antiAlias,
+                          onPressed: getImage,
+                          tooltip: 'Scegli immagine',
+                          //child: Icon(Icons.add_a_photo, color: Colors.white,),
+                          elevation: 5,
+                          child: Container(
+                            width: 56,
+                            height: 56,
+                            child: Icon(
+                              Icons.add_a_photo,
+                              color: Colors.black87,
+                            ),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.lightGreen.shade100,
+                                  Colors.lightGreen.shade200,
+                                ],
+                                begin: const FractionalOffset(0.0, 0.0),
+                                end: const FractionalOffset(1.0, 0.0),
+                                stops: [0.0, 1.0],
+                                tileMode: TileMode.clamp,
+                              ),
+                            ),
+                          ),
+                        ),*/
+                        SizedBox(height: 5),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
                           clipBehavior: Clip.antiAlias,
                           onPressed: getImage,
                           tooltip: 'Scegli immagine',
@@ -289,16 +326,6 @@ class _IAscreenState extends State<IAscreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 5),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

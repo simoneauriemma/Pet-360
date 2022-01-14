@@ -255,7 +255,7 @@ class _viewInfoState extends State<NavigatorView> {
                 child: Container(
                     padding: EdgeInsets.only(top: 20),
                     width: MediaQuery.of(context).size.width / 1.1,
-                    height: MediaQuery.of(context).size.height * 0.9,
+                    height: MediaQuery.of(context).size.height * 1.0,
                     //sfondo con sfocatura
                     decoration: BoxDecoration(
                       color: Colors.white,
