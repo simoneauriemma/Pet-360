@@ -49,7 +49,7 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-   removeAnimal(String animalName) {
+   removeAnimal(String animalName, String pathPassport) {
     final DBRef = FirebaseDatabase.instance
         .reference()
         .child(UserSharedPreferences.getTypeOfUser().toString());
@@ -59,6 +59,7 @@ class _DashboardState extends State<Dashboard> {
     if (pickedImage != null) {
       removePhoto(pickedImage!.path);
     }
+    removePhoto(pathPassport);
   }
 
   @override
@@ -244,7 +245,7 @@ class _DashboardState extends State<Dashboard> {
                                   TextButton(
                                     onPressed: () {
                                       // Remove the animal
-                                      removeAnimal(snapshot.data![index].animalName!);
+                                      removeAnimal(snapshot.data![index].animalName!,snapshot.data![index].pathPassaport!);
                                         setState(() {
                                           snapshot.data!.removeAt(index);
                                           Navigator.of(context).pop();
@@ -524,6 +525,7 @@ Future<List<ViewAnimalsHome>> fetchAnimals(
       ViewAnimalsHome animal = ViewAnimalsHome();
       animal.animalName = key;
       animal.pathImg = value["Libretto"]["animalFoto"];
+      animal.pathPassaport = value["Passaporto"]["animalFotoPassaporto"];
       list.add(animal);
     });
     return list;

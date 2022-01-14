@@ -3,20 +3,21 @@ import 'package:pet360/model/interface_model.dart';
 class ViewAnimalsHome implements InterfaceModel {
   String? animalName;
   String? pathImg;
+  String? pathPassaport;
   List<ViewAnimalsHome> animalsList = [];
 
-  ViewAnimalsHome({this.animalName, this.pathImg});
+  ViewAnimalsHome({this.animalName, this.pathImg, this.pathPassaport});
 
   factory ViewAnimalsHome.fromJson(Map<String, dynamic> json) {
     return ViewAnimalsHome(animalName: json.keys.first, pathImg: "");
   }
 
   factory ViewAnimalsHome.fromMap(map) {
-    return ViewAnimalsHome(animalName: map['name'], pathImg: map['pathImg']);
+    return ViewAnimalsHome(animalName: map['name'], pathImg: map['pathImg'], pathPassaport: map['pathPassaport']);
   }
 
   Map<String, dynamic> toMap() {
-    return {'name': animalName, 'pathImg': pathImg};
+    return {'name': animalName, 'pathImg': pathImg, 'pathPassaport': pathPassaport};
   }
 
   @override

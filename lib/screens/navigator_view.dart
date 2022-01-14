@@ -43,7 +43,7 @@ class NavigatorView extends StatefulWidget {
 
 class _viewInfoState extends State<NavigatorView> {
   int _value = 1;
-  File? pickedImage;
+  File? pickedImageAnimal,pickedImagePassport;
   Future<ViewAllInfoAnimal>? futureAnimal;
   List<NewVaccine> lstVaccines = List.empty(growable: true);
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
@@ -61,7 +61,7 @@ class _viewInfoState extends State<NavigatorView> {
         uid + "//Animali", UserSharedPreferences.getAnimalName().toString());
   }
 
-  void imagePickerOption() {
+  void imagePickerOption(bool animalOrPassport) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -81,7 +81,7 @@ class _viewInfoState extends State<NavigatorView> {
                       Text("Camera"),
                     ]),
                     onTap: () {
-                      getImage(ImageSource.camera);
+                      getImage(ImageSource.camera,animalOrPassport);
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
@@ -95,7 +95,7 @@ class _viewInfoState extends State<NavigatorView> {
                       Text("Galleria"),
                     ]),
                     onTap: () {
-                      getImage(ImageSource.gallery);
+                      getImage(ImageSource.gallery,animalOrPassport);
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
@@ -119,8 +119,13 @@ class _viewInfoState extends State<NavigatorView> {
                     ]),
                     onTap: () {
                       setState(() {
-                        pickedImage = File(
-                            "/data/user/0/com.example.pet360/cache/dog.png");
+                        if(animalOrPassport){
+                          pickedImageAnimal = File(
+                              "/data/user/0/com.example.pet360/cache/dog.png");
+                        } else {
+                          pickedImagePassport = File(
+                              "/data/user/0/com.example.pet360/cache/dog.png");
+                        }
                       });
                       Navigator.of(context, rootNavigator: true).pop();
                     },
@@ -132,7 +137,7 @@ class _viewInfoState extends State<NavigatorView> {
         });
   }
 
-  getImage(ImageSource imageType) async {
+  getImage(ImageSource imageType,bool animalOrPassport) async {
     try {
       final image = await ImagePicker().pickImage(source: imageType);
 
@@ -142,7 +147,12 @@ class _viewInfoState extends State<NavigatorView> {
       }
 
       setState(() {
-        pickedImage = imageTemp;
+        if(animalOrPassport){
+          pickedImageAnimal = imageTemp;
+        }
+        else {
+          pickedImagePassport = imageTemp;
+        }
       });
       Get.back();
     } catch (err) {
@@ -292,9 +302,9 @@ class _viewInfoState extends State<NavigatorView> {
                                     color: Colors.grey.shade200,
                                   ),
                                   child: ClipOval(
-                                    child: pickedImage != null
+                                    child: pickedImageAnimal != null
                                         ? Image.file(
-                                            pickedImage!,
+                                      pickedImageAnimal!,
                                             width: 100,
                                             height: 100,
                                             fit: BoxFit.cover,
@@ -310,7 +320,7 @@ class _viewInfoState extends State<NavigatorView> {
                                   left: 42,
                                   child: RawMaterialButton(
                                     onPressed: () {
-                                      imagePickerOption();
+                                      imagePickerOption(true);
                                     },
                                     //elevation: 8,
                                     shape: CircleBorder(),
@@ -1154,9 +1164,9 @@ class _viewInfoState extends State<NavigatorView> {
                                       color: Colors.grey.shade300, width: 3),
                                   color: Colors.grey.shade200,
                                 ),
-                                child: pickedImage != null
+                                child: pickedImagePassport != null
                                     ? Image.file(
-                                        pickedImage!,
+                                  pickedImagePassport!,
                                         width: 140,
                                         height: 110,
                                         fit: BoxFit.cover,
@@ -1171,7 +1181,7 @@ class _viewInfoState extends State<NavigatorView> {
                                 left: 100,
                                 child: RawMaterialButton(
                                   onPressed: () {
-                                    imagePickerOption();
+                                    imagePickerOption(false);
                                   },
                                   //elevation: 8,
                                   shape: CircleBorder(),
@@ -1628,8 +1638,11 @@ class _viewInfoState extends State<NavigatorView> {
             "/Animali/" +
             UserSharedPreferences.getAnimalName().toString())
         .remove();
-    if (pickedImage != null) {
-      removePhoto(pickedImage!.path);
+    if (pickedImageAnimal != null) {
+      removePhoto(pickedImageAnimal!.path);
+    }
+    if (pickedImagePassport != null) {
+      removePhoto(pickedImagePassport!.path);
     }
   }
 
@@ -1649,13 +1662,21 @@ class _viewInfoState extends State<NavigatorView> {
       removeAnimal();
     }
 
-    String path = "";
-    if (pickedImage != null) {
-      path = pickedImage!.path;
-      uploadFile(path);
+    String pathAnimal = "";
+    String pathPassport = "";
+    if (pickedImageAnimal != null) {
+      pathAnimal = pickedImageAnimal!.path;
+      uploadFile(pathAnimal);
     }
-    if (path == "") {
-      path = "/data/user/0/com.example.pet360/cache/dog.png";
+    if (pathAnimal == "") {
+      pathAnimal = "/data/user/0/com.example.pet360/cache/dog.png";
+    }
+    if (pickedImagePassport != null) {
+      pathPassport = pickedImagePassport!.path;
+      uploadFile(pathPassport);
+    }
+    if (pathPassport == "") {
+      pathPassport = "/data/user/0/com.example.pet360/cache/dog.png";
     }
 
     String sesso = "M";
@@ -1671,7 +1692,7 @@ class _viewInfoState extends State<NavigatorView> {
             animalName +
             "/Libretto")
         .set({
-      'animalFoto': path,
+      'animalFoto': pathAnimal,
       'animalName': animalName,
       'animalBirthday': animalBirthday,
       'animalSpecie': animalSpecie,
@@ -1706,6 +1727,7 @@ class _viewInfoState extends State<NavigatorView> {
             animalName +
             "/Passaporto")
         .set({
+      'animalFotoPassaporto': pathPassport,
       'animalDescription': animalDescription,
       'animalMicrochip': animalMicrochip,
       'animalDateMicrochip': animalDateMicrochip,
@@ -1749,7 +1771,8 @@ class _viewInfoState extends State<NavigatorView> {
     if (response.statusCode == 200) {
       jsonBody = json.decode(response.body);
       ViewAllInfoAnimal animal = ViewAllInfoAnimal();
-      pickedImage = File(jsonBody['Libretto']['animalFoto']);
+      pickedImageAnimal = File(jsonBody['Libretto']['animalFoto']);
+      pickedImagePassport = File(jsonBody['Passaporto']['animalFotoPassaporto']);
       animal.booklet = Booklet(
           jsonBody['Libretto']['animalBirthday'],
           jsonBody['Libretto']['animalColor'],
