@@ -293,6 +293,8 @@ class _viewInfoState extends State<NavigatorView> {
                             child: Stack(
                               children: [
                                 Container(
+                                  margin: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Colors.grey.shade300, width: 3),
@@ -315,8 +317,8 @@ class _viewInfoState extends State<NavigatorView> {
                                   ),
                                 ),
                                 Positioned(
-                                  top: 60,
-                                  left: 42,
+                                  top: 70,
+                                  left: 50,
                                   child: RawMaterialButton(
                                     onPressed: () {
                                       imagePickerOption(true);

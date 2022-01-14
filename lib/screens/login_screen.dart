@@ -90,7 +90,7 @@ void initializeFlutterFire() async {
         filled: true,
         labelText: "Password",
         fillColor: Colors.transparent,
-        prefixIcon: Icon(Icons.password_rounded),
+        prefixIcon: Icon(Icons.lock_rounded),
       ),
     );
 

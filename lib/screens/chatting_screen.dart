@@ -448,9 +448,11 @@ class _Chatting_screenState extends State<Chatting_screen> {
           ),
           body: Stack(
             children: <Widget>[
-              
-              Container(
-                  height: MediaQuery.of(context).size.height / 1.3,
+             Container(                  
+                  decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage("assets/icons/background.jpg"), fit: BoxFit.cover),
+                  ),
+                    height: MediaQuery.of(context).size.height,
                   child: SingleChildScrollView(
                       reverse: true, child: ShowMessages())),
               Align(

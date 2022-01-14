@@ -207,8 +207,10 @@ class _addInfoState extends State<NavigatorAdd> {
                       Align(
                           alignment: Alignment.center,
                           child: Stack(
-                            children: [
+                            children: [                              
                               Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.grey.shade300, width: 3),
@@ -224,8 +226,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           height: 100,
                                           fit: BoxFit.cover,
                                         )
-                                      :
-                                      //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+                                      :                                      
                                       SizedBox(
                                           width: 100.0,
                                           height: 100.0,
@@ -233,8 +234,8 @@ class _addInfoState extends State<NavigatorAdd> {
                                 ),
                               ),
                               Positioned(
-                                top: 60,
-                                left: 42,
+                                top: 70,
+                                left: 50,
                                 child: RawMaterialButton(
                                   onPressed: () {
                                     imagePickerOption(true);
