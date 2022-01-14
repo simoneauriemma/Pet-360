@@ -504,11 +504,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textAlign: TextAlign.center,
                       ),
                       content: Container(
-                          height: MediaQuery.of(context).size.height * 0.6,
+                          //height: MediaQuery.of(context).size.height * 0.6,
                           width: MediaQuery.of(context).size.width / 1.2,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Column(
+                          child:  Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const Padding(
@@ -555,12 +553,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 cancellaAccount,
                                 SizedBox(
-                                  height: 60,
+                                  height: 50,
                                 ),
                                 logoutButton,
+                                SizedBox(height: 10,)
                               ],
                             ),
-                          )),
+                          ),
                     );
                   },
                 );

@@ -11,24 +11,7 @@ class AppBackgroundHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            const Color(0xFF3366FF),
-            const Color(0xFF00CCFF),
-          ],
-          begin: const FractionalOffset(0.0, 0.0),
-          end: const FractionalOffset(1.0, 0.0),
-          stops: [0.0, 1.0],
-          tileMode: TileMode.clamp,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: child,
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      ),
+      child: Image.asset("assets/icons/background.jpg"),
     );
   }
 }

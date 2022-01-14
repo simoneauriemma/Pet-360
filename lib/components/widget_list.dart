@@ -138,7 +138,9 @@ class WidgetList extends StatelessWidget {
                           content: Container(
                             height: MediaQuery.of(context).size.height / 3.2,
                             child: Column(
+                          
                               children: [
+                                SizedBox(height: 10,),
                                 Text(
                                   name + " " + surname,
                                   textAlign: TextAlign.center,
@@ -159,12 +161,13 @@ class WidgetList extends StatelessWidget {
                                           padding: EdgeInsets.only(bottom: 30)),
                                       Row(
                                         children: [
-                                          Text("Nome negozio:",
+                                          Text("Nome negozio: ",
                                               style: TextStyle(
                                                 fontSize: 15.0,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.grey[800],
                                               )),
+
                                           Text(shopname,
                                               style: TextStyle(
                                                 fontSize: 15.0,
@@ -172,6 +175,7 @@ class WidgetList extends StatelessWidget {
                                               )),
                                         ],
                                       ),
+                                      SizedBox(height: 5,),
                                       Row(
                                         children: [
                                           Text("Cellulare: ",
@@ -187,6 +191,7 @@ class WidgetList extends StatelessWidget {
                                               )),
                                         ],
                                       ),
+                                      SizedBox(height: 5,),
                                       Row(
                                         children: [
                                           Text("Indirizzo: ",
@@ -202,6 +207,7 @@ class WidgetList extends StatelessWidget {
                                               )),
                                         ],
                                       ),
+                                      SizedBox(height: 5,),
                                       Row(
                                         children: [
                                           Text("Voto: ",
@@ -221,7 +227,7 @@ class WidgetList extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 40,
+                                  height: 30,
                                 ),
                                 ConstrainedBox(
                                   constraints: const BoxConstraints.tightFor(
@@ -239,6 +245,7 @@ class WidgetList extends StatelessWidget {
                                           (route) => false);
                                     },
                                     child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: const [
                                         Text("Chatta ora  "),
                                         ImageIcon(

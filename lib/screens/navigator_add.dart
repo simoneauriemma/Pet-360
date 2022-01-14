@@ -191,9 +191,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     ),
                   ],
                 ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
+                child: Column(
                     children: [
                       Text(
                         "DATI LIBRETTO ANIMALE",
@@ -473,7 +471,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     ],
                   ),
                 ),
-              ),
+          
               //Padding(padding: EdgeInsets.only(bottom: 100))
             ],
           ),
@@ -1387,7 +1385,7 @@ class _addInfoState extends State<NavigatorAdd> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.only(bottom: 70),
+        //padding: EdgeInsets.only(bottom: 70),
         child: Theme(
           data: ThemeData(
             colorScheme: ColorScheme.light(
@@ -1408,7 +1406,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       IconButton(
-                        padding: EdgeInsets.only(top: 15),
+                        //padding: EdgeInsets.only(top: 15),
                         onPressed: controls.onStepContinue,
                         icon: Image.asset(
                           "assets/icons/arrow-right.png",
@@ -1416,6 +1414,8 @@ class _addInfoState extends State<NavigatorAdd> {
                           height: 40,
                         ),
                       ),
+                      Padding(padding: EdgeInsets.only(bottom: 130))
+
                     ]);
               }
 

@@ -251,8 +251,7 @@ class _viewInfoState extends State<NavigatorView> {
                   ],
                 ),*/
               ),
-              SingleChildScrollView(
-                child: Container(
+              Container(
                     padding: EdgeInsets.only(top: 20),
                     width: MediaQuery.of(context).size.width / 1.1,
                     //height: MediaQuery.of(context).size.height * 1.0,
@@ -552,7 +551,7 @@ class _viewInfoState extends State<NavigatorView> {
                          SizedBox(height: 10,),
                       ],
                     )),
-              ),
+              
             ],
           ),
         ),
@@ -1134,8 +1133,7 @@ class _viewInfoState extends State<NavigatorView> {
                     ),
                   ],
                 ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+               
                   child: Column(
                     children: [
                       SizedBox(
@@ -1297,8 +1295,7 @@ class _viewInfoState extends State<NavigatorView> {
                       SizedBox(height: 40,),
                     ],
                   ),
-                ),
-              ),
+                ),              
             ],
           ),
         ),
