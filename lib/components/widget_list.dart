@@ -238,6 +238,8 @@ class WidgetList extends StatelessWidget {
                                           name.toString());
                                       UserSharedPreferences.setSurnameChat(
                                           surname.toString());
+                                      UserSharedPreferences.setUIDOfUser(UID);
+                                      UserSharedPreferences.setTypeOfUserChat(typeOfUserChat);
                                       Navigator.of(context).pushAndRemoveUntil(
                                           MaterialPageRoute(
                                               builder: (context) =>

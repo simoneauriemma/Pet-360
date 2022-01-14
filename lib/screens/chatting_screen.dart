@@ -32,9 +32,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
   @override
   void initState() {
     super.initState();
-    if (pickedImage == null) {
-      fatto = downloadFoto();
-    }
+    fatto = downloadFoto();
   }
 
   @override
