@@ -40,13 +40,13 @@ class _ReviewChatState extends State<ReviewChat> {
         child: Column(
           children: [
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             Center(
               child: Container(
                 padding: EdgeInsets.only(top: 20),
                 width: MediaQuery.of(context).size.width / 1.1,
-                height: 550,
+                //height: 550,
                 //sfondo con sfocatura
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -146,12 +146,13 @@ class _ReviewChatState extends State<ReviewChat> {
                         width: size.width / 2,
                       ),
                     ),
+                    SizedBox(height: 20,),
                   ],
                 ),
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             ConstrainedBox(
               constraints: BoxConstraints.tightFor(

@@ -150,9 +150,9 @@ class _IAscreenState extends State<IAscreen> {
                       children: [
                         Container(
                             width: MediaQuery.of(context).size.width / 1.1,
-                            height: MediaQuery.of(context).size.height * 0.6,
+                            //height: MediaQuery.of(context).size.height * 0.6,
                             //margin: EdgeInsets.all(25),
-                            padding: EdgeInsets.only(left: 25, right: 25,top: 25),
+                            padding: EdgeInsets.only(left: 25, right: 25,top: 25,bottom: 25),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
@@ -198,11 +198,10 @@ class _IAscreenState extends State<IAscreen> {
                                       )
                                     : InkWell(
                                         child: Container(
-                                          constraints: BoxConstraints(
+                                          /*constraints: BoxConstraints(
                                               maxHeight: MediaQuery.of(context)
                                                       .size
-                                                      .height /
-                                                  2),
+                                                      .height / 2),*/
                                           child: _imageWidget,
                                         ),
                                         onTap: () {

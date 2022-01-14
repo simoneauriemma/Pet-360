@@ -255,7 +255,7 @@ class _viewInfoState extends State<NavigatorView> {
                 child: Container(
                     padding: EdgeInsets.only(top: 20),
                     width: MediaQuery.of(context).size.width / 1.1,
-                    height: MediaQuery.of(context).size.height * 1.0,
+                    //height: MediaQuery.of(context).size.height * 1.0,
                     //sfondo con sfocatura
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -548,7 +548,8 @@ class _viewInfoState extends State<NavigatorView> {
                               ),
                             ],
                           ),
-                        )
+                        ),
+                         SizedBox(height: 10,),
                       ],
                     )),
               ),
@@ -1116,7 +1117,7 @@ class _viewInfoState extends State<NavigatorView> {
               //TITOLO
               Container(
                 width: MediaQuery.of(context).size.width / 1.1,
-                height: MediaQuery.of(context).size.height * 0.7,
+                //height: MediaQuery.of(context).size.height * 0.7,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.only(
@@ -1293,6 +1294,7 @@ class _viewInfoState extends State<NavigatorView> {
                               labelText: "Ente rilasciante",
                             )),
                       ),
+                      SizedBox(height: 40,),
                     ],
                   ),
                 ),
