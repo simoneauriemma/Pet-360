@@ -31,7 +31,7 @@ class _FindFriendsState extends State<FindFriends> {
   final _auth = FirebaseAuth.instance;
   LatLng _initialPosition = LatLng(37.42796133580664, -122.085749655962);
   late CameraPosition _kGooglePlex;
-  int count = 0;
+  bool aBool1=false,aBool2 = false;
 
   @override
   void initState() {
@@ -89,6 +89,26 @@ class _FindFriendsState extends State<FindFriends> {
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
+                            double convertedX = 0;
+                            double convertedY = 0;
+                            Random random = Random();
+                            String doubleNumberX = "0.00000"+random.nextInt(10).toString();
+                            String doubleNumberY = "0.00000"+random.nextInt(10).toString();
+                            aBool1 = random.nextBool();
+                            aBool2 = random.nextBool();
+                            if(!aBool1){
+                              doubleNumberX = "-0.00000"+random.nextInt(10).toString();
+                            } else {
+                              doubleNumberX = "0.00000"+random.nextInt(10).toString();
+                            }
+                            if(!aBool2){
+                              doubleNumberY = "-0.00000"+random.nextInt(10).toString();
+                            } else {
+                              doubleNumberY = "0.00000"+random.nextInt(10).toString();
+                            }
+                            convertedX = double.parse(doubleNumberX);
+                            convertedY = double.parse(doubleNumberY);
+                            _initialPosition = LatLng(_initialPosition.latitude+convertedX, _initialPosition.longitude+convertedY);
                             setMarker(context,snapshot.data![index],_initialPosition.latitude,_initialPosition.longitude);
                             return GestureDetector(
                               onTap: () {
@@ -222,24 +242,12 @@ class _FindFriendsState extends State<FindFriends> {
   }
 
   setMarker(context,data,x,y) async{
-    count++;
-    double convertedX = 0;
-    double convertedY = 0;
-    if(count == 100){
-      Random random = Random();
-      String doubleNumberX = "0.000"+random.nextInt(10).toString();
-      String doubleNumberY = "0.000"+random.nextInt(10).toString();
-      convertedX = double.parse(doubleNumberX);
-      convertedY = double.parse(doubleNumberY);
-      _initialPosition = LatLng(x+convertedX, y+convertedY);
-      count = 0;
-    }
-    String street = await _getAddressFromLatLng(x+convertedX,y+convertedY);
+    String street = await _getAddressFromLatLng(x,y);
 
     Marker marker;
     marker = Marker(
       markerId: MarkerId(data.animalName.toString()),
-      position: LatLng(x+convertedX, y+convertedY),
+      position: LatLng(x, y),
       icon: await _getAssetIcon(context, data.pathImg.toString())
           .then((value) => value),
       infoWindow: InfoWindow(
