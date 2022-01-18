@@ -244,12 +244,14 @@ class _FindFriendsState extends State<FindFriends> {
   setMarker(context,data,x,y) async{
     String street = await _getAddressFromLatLng(x,y);
 
+    final Uint8List? markerIcon = await _getText(200, 100, data.animalName);
     Marker marker;
     marker = Marker(
       markerId: MarkerId(data.animalName.toString()),
       position: LatLng(x, y),
-      icon: await _getAssetIcon(context, data.pathImg.toString())
-          .then((value) => value),
+      icon: BitmapDescriptor.fromBytes(markerIcon!),
+      /*icon: await _getAssetIcon(context, data.pathImg.toString())
+          .then((value) => value),*/
       infoWindow: InfoWindow(
         title: data.animalName.toString(),
         snippet: street,
@@ -258,6 +260,32 @@ class _FindFriendsState extends State<FindFriends> {
     setState(() {
       _markers.add(marker);
     });
+  }
+
+  Future<Uint8List?> _getText(int width, int height, String animalName) async {
+    final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(pictureRecorder);
+    final Paint paint = Paint()..color = Colors.blue;
+    final Radius radius = Radius.circular(20.0);
+    canvas.drawRRect(
+        RRect.fromRectAndCorners(
+          Rect.fromLTWH(0.0, 0.0, width.toDouble(), height.toDouble()),
+          topLeft: radius,
+          topRight: radius,
+          bottomLeft: radius,
+          bottomRight: radius,
+        ),
+        paint);
+    TextPainter painter = TextPainter(textDirection: TextDirection.ltr);
+    painter.text = TextSpan(
+      text: animalName,
+      style: TextStyle(fontSize: 25.0, color: Colors.white),
+    );
+    painter.layout();
+    painter.paint(canvas, Offset((width * 0.5) - painter.width * 0.5, (height * 0.5) - painter.height * 0.5));
+    final img = await pictureRecorder.endRecording().toImage(width, height);
+    final data = await img.toByteData(format: ui.ImageByteFormat.png);
+    return data?.buffer.asUint8List();
   }
 
   Future<BitmapDescriptor> _getAssetIcon(
