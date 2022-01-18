@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
-import 'dart:ui';
+import 'dart:ui' as ui;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
@@ -254,18 +254,16 @@ class _FindFriendsState extends State<FindFriends> {
 
   Future<BitmapDescriptor> _getAssetIcon(
       BuildContext context, String icon) async {
-    final Completer<BitmapDescriptor> bitmapIcon =
-    Completer<BitmapDescriptor>();
-    final ImageConfiguration config =
-    createLocalImageConfiguration(context, size: Size(5, 5));
+    final Completer<BitmapDescriptor> bitmapIcon = Completer<BitmapDescriptor>();
+    final ImageConfiguration config = createLocalImageConfiguration(context, size: Size(5, 5));
 
     FileImage(File(icon))
         .resolve(config)
         .addListener(ImageStreamListener((ImageInfo image, bool sync) async {
-      final ByteData? bytes =
-      await image.image.toByteData(format: ImageByteFormat.png);
-      final BitmapDescriptor bitmap =
-      BitmapDescriptor.fromBytes(bytes!.buffer.asUint8List());
+      final ByteData? bytes = await image.image.toByteData(format: ui.ImageByteFormat.png);
+      ui.Codec codec = await ui.instantiateImageCodec(bytes!.buffer.asUint8List(), targetWidth: 200);
+      ui.FrameInfo fi = await codec.getNextFrame();
+      final BitmapDescriptor bitmap = BitmapDescriptor.fromBytes((await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List());
       bitmapIcon.complete(bitmap);
     }));
 
