@@ -25,6 +25,7 @@ class VeterinaryModel implements InterfaceModel {
   String? airTag1;
   String? airTag2;
   String? photo;
+  double? voto;
 
   VeterinaryModel({
     this.uid,
@@ -51,6 +52,7 @@ class VeterinaryModel implements InterfaceModel {
     this.entityIssuingAnimal,
     this.microchipAnimal,
     this.photo,
+    this.voto,
   });
 
   factory VeterinaryModel.fromJson(Map<String, dynamic> json) {
@@ -75,6 +77,7 @@ class VeterinaryModel implements InterfaceModel {
       entityIssuingAnimal: json['entityIssuingAnimal'],
       microchipAnimal: json['microchipAnimal'],
       photo: json['photo'],
+      voto: json['votes'],
     );
   }
 
@@ -105,6 +108,7 @@ class VeterinaryModel implements InterfaceModel {
       entityIssuingAnimal: map['entityIssuingAnimal'],
       microchipAnimal: map['microchipAnimal'],
       photo: map['photo'],
+      voto: map['votes'],
     );
   }
 
@@ -136,7 +140,13 @@ class VeterinaryModel implements InterfaceModel {
       'entityIssuingAnimal': entityIssuingAnimal,
       'microchipAnimal': microchipAnimal,
       'photo': photo,
+      'votes': voto,
     };
+  }
+
+  @override
+  getVoto(){
+    return voto;
   }
 
   @override

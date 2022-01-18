@@ -121,6 +121,11 @@ class UserModel implements InterfaceModel {
   }
 
   @override
+  getVoto() {
+    return null;
+  }
+
+  @override
   getFirstName() {
     return firstName;
   }

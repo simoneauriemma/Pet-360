@@ -25,6 +25,7 @@ class TrainerModel implements InterfaceModel {
   String? airTag1;
   String? airTag2;
   String? photo;
+  double? voto;
 
   //var lstVaccines = List.empty();
 
@@ -53,6 +54,7 @@ class TrainerModel implements InterfaceModel {
     this.entityIssuingAnimal,
     this.microchipAnimal,
     this.photo,
+    this.voto,
   });
 
   //receive data from server
@@ -82,6 +84,7 @@ class TrainerModel implements InterfaceModel {
       entityIssuingAnimal: map['entityIssuingAnimal'],
       microchipAnimal: map['microchipAnimal'],
       photo: map['photo'],
+      voto: map['votes'],
     );
   }
 
@@ -107,6 +110,7 @@ class TrainerModel implements InterfaceModel {
       entityIssuingAnimal: json['entityIssuingAnimal'],
       microchipAnimal: json['microchipAnimal'],
       photo:json['photo'],
+      voto: json['votes'],
     );
   }
 
@@ -138,6 +142,7 @@ class TrainerModel implements InterfaceModel {
       'entityIssuingAnimal': entityIssuingAnimal,
       'microchipAnimal': microchipAnimal,
       'photo': photo,
+      'votes': voto,
     };
   }
 
@@ -245,6 +250,11 @@ class TrainerModel implements InterfaceModel {
   @override
   getPhoto() {
     return photo;
+  }
+
+  @override
+  getVoto() {
+    return voto;
   }
 
 /*addVaccine(NewVaccine vaccine){

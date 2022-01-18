@@ -605,6 +605,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'numberPhone': veterinaryModel.numberPhone,
                         'cityShop': veterinaryModel.cityShop,
                         'addressShop': veterinaryModel.addressShop,
+                        'votes': 0.1,
                         'photo':
                             "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),
@@ -651,6 +652,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         'numberPhone': trainerModel.numberPhone,
                         'cityShop': trainerModel.cityShop,
                         'addressShop': trainerModel.addressShop,
+                        'votes': 0.1,
                         'photo':
                             "/data/user/0/com.example.pet360/cache/user_default.png",
                       }),

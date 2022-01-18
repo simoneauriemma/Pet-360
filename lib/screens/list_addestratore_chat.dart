@@ -65,7 +65,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                             name: snapshot.data![index].firstName!,
                             surname: snapshot.data![index].surnameName!,
                             shopname: snapshot.data![index].nameShop!,
-                            voto: "5",
+                            voto: snapshot.data![index].voto!.toString(),
                             phonenum: snapshot.data![index].numberPhone!,
                             indirizzo: snapshot.data![index].addressShop!,
                             UID: snapshot.data![index].uid!,
@@ -163,6 +163,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
         user.firstName = value['firstName'];
         user.numberPhone = value['numberPhone'];
         user.addressShop = value['addressShop'];
+        user.voto = double.parse(double.parse(value['votes'].toString()).toStringAsFixed(2));
         list.add(user);
       });
       return list;

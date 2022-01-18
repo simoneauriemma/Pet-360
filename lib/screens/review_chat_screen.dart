@@ -1,9 +1,15 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet360/screens/chatting_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import 'home_screen.dart';
 
@@ -167,6 +173,7 @@ class _ReviewChatState extends State<ReviewChat> {
                       backgroundColor: Colors.grey.shade200,
                       textColor: Colors.black,
                       fontSize: 18.0);
+                  saveRating();
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
@@ -194,5 +201,28 @@ class _ReviewChatState extends State<ReviewChat> {
         ),
       ),
     );
+  }
+  saveRating() async{
+    var url = Uri.parse(
+        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
+            UserSharedPreferences.getTypeOfUserChat().toString() +
+            "//" +
+            UserSharedPreferences.getUIDOfUser().toString() +
+            ".json?");
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonBody = jsonDecode(response.body);
+      double vote = jsonBody['votes'];
+      print("Votes" + vote.toString());
+      double newRating = (rating+vote)/2;
+      final DBRef = FirebaseDatabase.instance
+          .reference()
+          .child(UserSharedPreferences.getTypeOfUserChat().toString());
+      DBRef.child(UserSharedPreferences.getUIDOfUser().toString()).update({
+        'votes': newRating,
+      });
+    } else {
+      throw Exception('Failed to load album');
+    }
   }
 }

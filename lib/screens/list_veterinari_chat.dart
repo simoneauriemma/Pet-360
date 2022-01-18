@@ -68,7 +68,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                             name: snapshot.data![index].firstName!,
                             surname: snapshot.data![index].surnameName!,
                             shopname: snapshot.data![index].nameShop!,
-                            voto: "5",
+                            voto: snapshot.data![index].voto!.toString(),
                             phonenum: snapshot.data![index].numberPhone!,
                             indirizzo: snapshot.data![index].addressShop!,
                             UID: snapshot.data![index].uid!,
@@ -165,6 +165,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
         user.surnameName = value['surnameName'];
         user.numberPhone = value['numberPhone'];
         user.addressShop = value['addressShop'];
+        user.voto = double.parse(double.parse(value['votes'].toString()).toStringAsFixed(2));
         list.add(user);
       });
       return list;

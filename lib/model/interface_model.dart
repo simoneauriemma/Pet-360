@@ -1,4 +1,7 @@
 class InterfaceModel {
+
+  getVoto() {}
+
   getFirstName() {}
 
   getSurnameName() {}
