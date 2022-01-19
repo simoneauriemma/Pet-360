@@ -110,12 +110,12 @@ class _viewInfoState extends State<NavigatorView> {
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Row(children: [
-                      Icon(Icons.remove_circle, color: Colors.red),
+                      Icon(Icons.remove_circle, color: Colors.black),
                       Padding(
                         padding: EdgeInsets.only(right: 10),
                       ),
                       Text("Rimuovi immagine",
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.black)),
                     ]),
                     onTap: () {
                       setState(() {
@@ -553,7 +553,6 @@ class _viewInfoState extends State<NavigatorView> {
                          SizedBox(height: 10,),
                       ],
                     )),
-              
             ],
           ),
         ),
@@ -1457,7 +1456,7 @@ class _viewInfoState extends State<NavigatorView> {
               ),
             ),
             body: Container(
-              //padding: EdgeInsets.only(bottom: 70),
+              padding: EdgeInsets.only(bottom: 50),
               child: Theme(
                 data: ThemeData(
                   colorScheme: ColorScheme.light(
@@ -1475,18 +1474,18 @@ class _viewInfoState extends State<NavigatorView> {
                     if (currentStep == 0) {
                       return Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            IconButton(
-                              padding: EdgeInsets.only(top: 15),
-                              onPressed: controls.onStepContinue,
-                              icon: Image.asset(
-                                "assets/icons/arrow-right.png",
-                                width: 40,
-                                height: 40,
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: controls.onStepContinue,
+                            icon: Image.asset(
+                              "assets/icons/arrow-right.png",
+                              width: 40,
+                              height: 40,
                             ),
-                          ]);
+                          ),
+                        ],
+                      );
                     }
 
                     if (currentStep == 3) {
@@ -1496,7 +1495,6 @@ class _viewInfoState extends State<NavigatorView> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               IconButton(
-                                padding: EdgeInsets.only(top: 15),
                                 onPressed: controls.onStepCancel,
                                 icon: Image.asset(
                                   "assets/icons/arrow-left.png",

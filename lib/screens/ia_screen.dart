@@ -31,6 +31,14 @@ class _IAscreenState extends State<IAscreen> {
 
   Category? category;
 
+  Row textAccuratezza = Row(
+    children: [
+      Text(
+        "Ciao sono Bobby! Ti aiuterò a capire \n qual è la razza del tuo animale",
+      )
+    ],
+  );
+
   @override
   void initState() {
     super.initState();
@@ -55,6 +63,48 @@ class _IAscreenState extends State<IAscreen> {
     setState(() {
       this.category = pred;
     });
+
+    if (category!.score <= 0.4) {
+      textAccuratezza = Row(
+        children: [
+          Text(
+            "Non sono affatto sicuro\n della razza del tuo animale!\n Ma ho provato ad indovinare",
+            textAlign: TextAlign.center,
+          ),
+          //Icon(Icons.sentiment_dissatisfied_outlined),
+        ],
+      );
+    } else if (category!.score > 0.4 && category!.score <= 0.6) {
+      textAccuratezza = Row(
+        children: [
+          Text(
+            "Sono mediamente sicuro di aver\n azzeccato  la razza del tuo animale!\n Potrei aver sbagliato",
+            textAlign: TextAlign.center,
+          ),
+          //Icon(Icons.sentiment_neutral_outlined ),
+        ],
+      );
+    } else if (category!.score > 0.6 && category!.score <= 0.9) {
+      textAccuratezza = Row(
+        children: [
+          Text(
+            "Sono abbastanza sicuro di aver\n indovinato la razza del tuo animale!\n Ho indovinato, vero?",
+            textAlign: TextAlign.center,
+          ),
+          //Icon(Icons.sentiment_satisfied ),
+        ],
+      );
+    } else if (category!.score > 0.9) {
+      textAccuratezza = Row(
+        children: [
+          Text(
+            "Sono sicuro di aver azzeccato\n la razza del tuo aniamale!",
+            textAlign: TextAlign.center,
+          ),
+          //Icon(Icons.sentiment_satisfied_alt_rounded ),
+        ],
+      );
+    }
   }
 
   @override
@@ -81,65 +131,53 @@ class _IAscreenState extends State<IAscreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              /*Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.grey.shade300,
-                      Colors.grey.shade300,
-                    ],
-                    begin: const FractionalOffset(0.0, 0.0),
-                    end: const FractionalOffset(1.0, 0.0),
-                    stops: [0.0, 1.0],
-                    tileMode: TileMode.clamp,
-                  ),
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(0),
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                height: MediaQuery.of(context).size.height * 0.20,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 30),
-                    Text(
-                      "RICONOSCI LA RAZZA DEL\n TUO ANIMALE",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.questrial(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                  ],
-                ),
-              ), */
-              SizedBox(height: 50),
-              Text(
+              /*Text(
                 "RICONOSCI LA RAZZA DEL\n TUO ANIMALE",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.questrial(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              
-              SizedBox(
-                height: 40,
+              ),*/
+              Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 50),
+                    child: Image.asset(
+                      "assets/storyset/robot.png",
+                      height: size.width / 2,
+                      width: size.width / 2,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Container(
+                        width: 280,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.1),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            textAccuratezza,
+                          ],
+                        )),
+                  )
+                ],
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
@@ -149,145 +187,91 @@ class _IAscreenState extends State<IAscreen> {
                     child: Column(
                       children: [
                         Container(
-                            width: MediaQuery.of(context).size.width / 1.1,
-                            //height: MediaQuery.of(context).size.height * 0.6,
-                            //margin: EdgeInsets.all(25),
-                            padding: EdgeInsets.only(left: 25, right: 25,top: 25,bottom: 25),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              border: Border.all(color: Colors.white),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(2, 2),
-                                  spreadRadius: 2,
-                                  blurRadius: 1,
-                                ),
-                              ],
+                          width: MediaQuery.of(context).size.width / 1.1,
+                          //height: MediaQuery.of(context).size.height * 0.6,
+                          //margin: EdgeInsets.all(25),
+                          padding: EdgeInsets.only(
+                              left: 25, right: 25, top: 25, bottom: 25),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
                             ),
-                            child: Column(
-                              children: [
-                                _image == null
-                                    ? InkWell(
-                                        child: Column(
-                                          children: [
-                                            SizedBox(height: 73),
-                                            Text(
-                                              'Seleziona un\'immagine!',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontStyle: FontStyle.italic),
+                            border: Border.all(color: Colors.white),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(2, 2),
+                                spreadRadius: 2,
+                                blurRadius: 1,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              _image == null
+                                  ? InkWell(
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: 73),
+                                          Text(
+                                            'Seleziona un\'immagine!',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Image.asset(
+                                              "assets/storyset/set_img.png",
+                                              height: size.width / 1.8,
+                                              width: size.width / 1.8,
                                             ),
-                                            Align(
-                                              alignment: Alignment.bottomCenter,
-                                              child: Image.asset(
-                                                "assets/storyset/set_img.png",
-                                                height: size.width / 1.8,
-                                                width: size.width / 1.8,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        onTap: () {
-                                          getImage();
-                                        },
-                                      )
-                                    : InkWell(
-                                        child: Container(
-                                          /*constraints: BoxConstraints(
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        getImage();
+                                      },
+                                    )
+                                  : InkWell(
+                                      child: Container(
+                                        /*constraints: BoxConstraints(
                                               maxHeight: MediaQuery.of(context)
                                                       .size
                                                       .height / 2),*/
-                                          child: _imageWidget,
-                                        ),
-                                        onTap: () {
-                                          getImage();
-                                        },
+                                        child: _imageWidget,
                                       ),
-                                SizedBox(height: 15,),
-                                Text(
-                                  category != null ? category!.label : '',
-                                  style: GoogleFonts.questrial(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.lightGreen.shade300,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  category != null
-                                      ? 'ACCURATEZZA: ${category!.score.toStringAsFixed(3)}'
-                                      : '',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        SizedBox(height: 20),
-                        /*ElevatedButton(
-                        onPressed: () {
-                          getImage();
-                        },
-                        child: ConstrainedBox(
-                          constraints:
-                              BoxConstraints.tightFor(width: 260, height: 50),
-                          child: const Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Seleziona immagine",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          onPrimary: Colors.black,
-                          primary: Colors.white,
-                          onSurface: Colors.grey,
-                          side: BorderSide(
-                              color: Colors.lightGreen.shade200, width: 2),
-                          elevation: 5,
-                          //minimumSize: Size(100, 40),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                        ),
-                      ), */
-                        /*FloatingActionButton(
-                          clipBehavior: Clip.antiAlias,
-                          onPressed: getImage,
-                          tooltip: 'Scegli immagine',
-                          //child: Icon(Icons.add_a_photo, color: Colors.white,),
-                          elevation: 5,
-                          child: Container(
-                            width: 56,
-                            height: 56,
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black87,
-                            ),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.lightGreen.shade100,
-                                  Colors.lightGreen.shade200,
-                                ],
-                                begin: const FractionalOffset(0.0, 0.0),
-                                end: const FractionalOffset(1.0, 0.0),
-                                stops: [0.0, 1.0],
-                                tileMode: TileMode.clamp,
+                                      onTap: () {
+                                        getImage();
+                                      },
+                                    ),
+                              SizedBox(
+                                height: 15,
                               ),
-                            ),
+                              Text(
+                                category != null ? category!.label : '',
+                                style: GoogleFonts.questrial(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.lightGreen.shade300,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                category != null
+                                    ? 'ACCURATEZZA: ${category!.score.toStringAsFixed(3)}'
+                                    : '',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
-                        ),*/
-                        SizedBox(height: 5),
+                        ),
+                        SizedBox(height: 20),
                       ],
                     ),
                   ),
@@ -298,33 +282,33 @@ class _IAscreenState extends State<IAscreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-                          clipBehavior: Clip.antiAlias,
-                          onPressed: getImage,
-                          tooltip: 'Scegli immagine',
-                          //child: Icon(Icons.add_a_photo, color: Colors.white,),
-                          elevation: 5,
-                          child: Container(
-                            width: 56,
-                            height: 56,
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black87,
-                            ),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.lightGreen.shade100,
-                                  Colors.lightGreen.shade200,
-                                ],
-                                begin: const FractionalOffset(0.0, 0.0),
-                                end: const FractionalOffset(1.0, 0.0),
-                                stops: [0.0, 1.0],
-                                tileMode: TileMode.clamp,
-                              ),
-                            ),
-                          ),
-                        ),
+        clipBehavior: Clip.antiAlias,
+        onPressed: getImage,
+        tooltip: 'Scegli immagine',
+        //child: Icon(Icons.add_a_photo, color: Colors.white,),
+        elevation: 5,
+        child: Container(
+          width: 60,
+          height: 60,
+          child: Icon(
+            Icons.add_a_photo,
+            color: Colors.black87,
+          ),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Colors.lightGreen.shade100,
+                Colors.lightGreen.shade200,
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.0, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

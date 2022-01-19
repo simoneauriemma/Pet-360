@@ -137,140 +137,157 @@ class WidgetList extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(32.0))),
                           content: Container(
                             height: MediaQuery.of(context).size.height / 3.2,
-                            child: Column(
-                          
-                              children: [
-                                SizedBox(height: 10,),
-                                Text(
-                                  name + " " + surname,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Colors.lightGreen,
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                          padding: EdgeInsets.only(bottom: 30)),
-                                      Row(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                padding: EdgeInsets.only(bottom: 5),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      name + " " + surname,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.lightGreen,
+                                      ),
+                                    ),
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text("Nome negozio: ",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey[800],
-                                              )),
-
-                                          Text(shopname,
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                color: Colors.grey[800],
-                                              )),
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 30)),
+                                          Row(
+                                            children: [
+                                              Text("Nome negozio: ",
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                              Text(shopname,
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text("Cellulare: ",
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                              Text(phonenum,
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text("Indirizzo: ",
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                              Text(indirizzo,
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text("Voto: ",
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                              Text(voto,
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    color: Colors.grey[800],
+                                                  )),
+                                            ],
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(height: 5,),
-                                      Row(
-                                        children: [
-                                          Text("Cellulare: ",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey[800],
-                                              )),
-                                          Text(phonenum,
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                color: Colors.grey[800],
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(height: 5,),
-                                      Row(
-                                        children: [
-                                          Text("Indirizzo: ",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey[800],
-                                              )),
-                                          Text(indirizzo,
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                color: Colors.grey[800],
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(height: 5,),
-                                      Row(
-                                        children: [
-                                          Text("Voto: ",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey[800],
-                                              )),
-                                          Text(voto,
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                                color: Colors.grey[800],
-                                              )),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                ConstrainedBox(
-                                  constraints: const BoxConstraints.tightFor(
-                                      width: 140, height: 50),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      UserSharedPreferences.setNameChat(
-                                          name.toString());
-                                      UserSharedPreferences.setSurnameChat(
-                                          surname.toString());
-                                      UserSharedPreferences.setUIDOfUser(UID);
-                                      UserSharedPreferences.setTypeOfUserChat(typeOfUserChat);
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Chatting_screen()),
-                                          (route) => false);
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: const [
-                                        Text("Chatta ora  "),
-                                        ImageIcon(
-                                          AssetImage(
-                                              "assets/icons/messager2.png"),
-                                          color: Colors.black,
-                                          size: 15,
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    ConstrainedBox(
+                                      constraints:
+                                          const BoxConstraints.tightFor(
+                                              width: 140, height: 50),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          UserSharedPreferences.setNameChat(
+                                              name.toString());
+                                          UserSharedPreferences.setSurnameChat(
+                                              surname.toString());
+                                          UserSharedPreferences.setUIDOfUser(
+                                              UID);
+                                          UserSharedPreferences
+                                              .setTypeOfUserChat(
+                                                  typeOfUserChat);
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Chatting_screen()),
+                                                  (route) => false);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: const [
+                                            Text("Chatta ora  "),
+                                            ImageIcon(
+                                              AssetImage(
+                                                  "assets/icons/messager2.png"),
+                                              color: Colors.black,
+                                              size: 15,
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                        style: ElevatedButton.styleFrom(
+                                          onPrimary: Colors.black,
+                                          primary: Colors.white,
+                                          minimumSize: Size(40, 40),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                        ),
+                                      ),
                                     ),
-                                    style: ElevatedButton.styleFrom(
-                                      onPrimary: Colors.black,
-                                      primary: Colors.white,
-                                      minimumSize: Size(40, 40),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                    ),
-                                  ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
+                              )),
                         );
                       },
                     );

@@ -39,7 +39,7 @@ class NavigatorAdd extends StatefulWidget {
 
 class _addInfoState extends State<NavigatorAdd> {
   int _value = 1;
-  File? pickedImageAnimal,pickedImagePassport;
+  File? pickedImageAnimal, pickedImagePassport;
   List<NewVaccine> lstVaccines = List.empty(growable: true);
   List<String> generateNumber = List.generate(10, (index) => "${index + 1}");
   NewVaccine firstVaccine = NewVaccine();
@@ -59,7 +59,8 @@ class _addInfoState extends State<NavigatorAdd> {
       pickedImageAnimal = File("/data/user/0/com.example.pet360/cache/dog.png");
     }
     if (pickedImagePassport == null) {
-      pickedImagePassport = File("/data/user/0/com.example.pet360/cache/dog.png");
+      pickedImagePassport =
+          File("/data/user/0/com.example.pet360/cache/dog.png");
     }
   }
 
@@ -83,7 +84,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       Text("Camera"),
                     ]),
                     onTap: () {
-                      getImage(ImageSource.camera,animalOrPassport);
+                      getImage(ImageSource.camera, animalOrPassport);
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
@@ -97,7 +98,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       Text("Galleria"),
                     ]),
                     onTap: () {
-                      getImage(ImageSource.gallery,animalOrPassport);
+                      getImage(ImageSource.gallery, animalOrPassport);
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
@@ -112,17 +113,17 @@ class _addInfoState extends State<NavigatorAdd> {
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Row(children: [
-                      Icon(Icons.remove_circle, color: Colors.red),
+                      Icon(Icons.remove_circle, color: Colors.black),
                       Padding(
                         padding: EdgeInsets.only(right: 10),
                       ),
                       Text("Rimuovi immagine",
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.black)),
                     ]),
                     onTap: () {
                       setState(() {
                         //true è la foto dell'animale false è il passaporto
-                        if(animalOrPassport){
+                        if (animalOrPassport) {
                           pickedImageAnimal = File(
                               "/data/user/0/com.example.pet360/cache/dog.png");
                         } else {
@@ -140,7 +141,7 @@ class _addInfoState extends State<NavigatorAdd> {
         });
   }
 
-  getImage(ImageSource imageType,bool animalOrPassport) async {
+  getImage(ImageSource imageType, bool animalOrPassport) async {
     try {
       final image = await ImagePicker().pickImage(source: imageType);
       var imageTemp = File(image!.path);
@@ -149,7 +150,7 @@ class _addInfoState extends State<NavigatorAdd> {
       }
 
       setState(() {
-        if(animalOrPassport){
+        if (animalOrPassport) {
           pickedImageAnimal = imageTemp;
         } else {
           pickedImagePassport = imageTemp;
@@ -192,287 +193,287 @@ class _addInfoState extends State<NavigatorAdd> {
                   ],
                 ),
                 child: Column(
-                    children: [
-                      Text(
-                        "DATI LIBRETTO ANIMALE",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.questrial(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  children: [
+                    Text(
+                      "DATI LIBRETTO ANIMALE",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.questrial(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Align(
-                          alignment: Alignment.center,
-                          child: Stack(
-                            children: [                              
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade300, width: 3),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(100)),
-                                  color: Colors.grey.shade200,
-                                ),
-                                child: ClipOval(
-                                  child: pickedImageAnimal != null
-                                      ? Image.file(
-                                    pickedImageAnimal!,
-                                          width: 100,
-                                          height: 100,
-                                          fit: BoxFit.cover,
-                                        )
-                                      :                                      
-                                      SizedBox(
-                                          width: 100.0,
-                                          height: 100.0,
-                                        ),
-                                ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Stack(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.grey.shade300, width: 3),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(100)),
+                                color: Colors.grey.shade200,
                               ),
-                              Positioned(
-                                top: 70,
-                                left: 50,
-                                child: RawMaterialButton(
-                                  onPressed: () {
-                                    imagePickerOption(true);
-                                  },
-                                  //elevation: 8,
-                                  shape: CircleBorder(),
-                                  child: Icon(
-                                    Icons.add_a_photo_rounded,
-                                    color: Colors.black,
-                                    size: 25,
-                                  ),
-                                  fillColor: Colors.grey.shade200,
-                                  //fillColor: Colors.lightGreen.shade300,
-                                  padding: EdgeInsets.all(8),
+                              child: ClipOval(
+                                child: pickedImageAnimal != null
+                                    ? Image.file(
+                                        pickedImageAnimal!,
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : SizedBox(
+                                        width: 100.0,
+                                        height: 100.0,
+                                      ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 70,
+                              left: 50,
+                              child: RawMaterialButton(
+                                onPressed: () {
+                                  imagePickerOption(true);
+                                },
+                                //elevation: 8,
+                                shape: CircleBorder(),
+                                child: Icon(
+                                  Icons.add_a_photo_rounded,
+                                  color: Colors.black,
+                                  size: 25,
                                 ),
+                                fillColor: Colors.grey.shade200,
+                                //fillColor: Colors.lightGreen.shade300,
+                                padding: EdgeInsets.all(8),
+                              ),
+                            ),
+                          ],
+                        )),
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: nameController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            nameController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
+                          //Nome
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: "Nome",
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: soprannomeController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            soprannomeController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
+                          //Nome
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: "Soprannome",
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                        width: 280,
+                        child: TextFormField(
+                          autofocus: false,
+                          controller: dataController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            dataController.text = value!;
+                          },
+
+                          textInputAction: TextInputAction.next,
+
+                          //DataNascita
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: "Data di nascita",
+                          ),
+                          onTap: () async {
+                            var date = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100));
+                            dataController.text =
+                                date.toString().substring(0, 10);
+                          },
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: specieController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            specieController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
+
+                          //Specie
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: "Specie",
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: razzaController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            razzaController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
+
+                          //Razza
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: "Razza",
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: coloreController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            coloreController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
+
+                          //Colore
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: "Colore",
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: veterinarioController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            veterinarioController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
+
+                          //NomeVeterinario
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: "Nome veterinario",
+                          )),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: 260,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Sesso",
+                            style:
+                                TextStyle(fontSize: 16, color: Colors.black54),
+                          ),
+                          Radio(
+                            activeColor: Colors.black54,
+                            value: 1,
+                            groupValue: _value,
+                            onChanged: (value) {
+                              setState(() {
+                                _value = 1;
+                              });
+                            },
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "M",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              Icon(
+                                Icons.male_rounded,
+                                size: 25,
+                                color: Colors.lightGreen,
                               ),
                             ],
-                          )),
-                      SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: nameController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              nameController.text = value!;
+                          ),
+                          Radio(
+                            activeColor: Colors.black54,
+                            value: 2,
+                            groupValue: _value,
+                            onChanged: (value) {
+                              setState(() {
+                                _value = 2;
+                              });
                             },
-                            textInputAction: TextInputAction.next,
-                            //Nome
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              labelText: "Nome",
-                            )),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "F",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              Icon(
+                                Icons.female_rounded,
+                                size: 25,
+                                color: Colors.lightGreen,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: soprannomeController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              soprannomeController.text = value!;
-                            },
-                            textInputAction: TextInputAction.next,
-                            //Nome
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              labelText: "Soprannome",
-                            )),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                            autofocus: false,
-                            controller: dataController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              dataController.text = value!;
-                            },
-
-                            textInputAction: TextInputAction.next,
-
-                            //DataNascita
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              labelText: "Data di nascita",
-                            ),
-                            onTap: () async {
-                              var date = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100));
-                              dataController.text =
-                                  date.toString().substring(0, 10);
-                            },
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: specieController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              specieController.text = value!;
-                            },
-                            textInputAction: TextInputAction.next,
-
-                            //Specie
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              labelText: "Specie",
-                            )),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: razzaController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              razzaController.text = value!;
-                            },
-                            textInputAction: TextInputAction.next,
-
-                            //Razza
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              labelText: "Razza",
-                            )),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: coloreController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              coloreController.text = value!;
-                            },
-                            textInputAction: TextInputAction.next,
-
-                            //Colore
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              labelText: "Colore",
-                            )),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: veterinarioController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              veterinarioController.text = value!;
-                            },
-                            textInputAction: TextInputAction.next,
-
-                            //NomeVeterinario
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              labelText: "Nome veterinario",
-                            )),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: 260,
-                        child: Row(
-                          children: [
-                            Text(
-                              "Sesso",
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.black54),
-                            ),
-                            Radio(
-                              activeColor: Colors.black54,
-                              value: 1,
-                              groupValue: _value,
-                              onChanged: (value) {
-                                setState(() {
-                                  _value = 1;
-                                });
-                              },
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "M",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                Icon(
-                                  Icons.male_rounded,
-                                  size: 25,
-                                  color: Colors.lightGreen,
-                                ),
-                              ],
-                            ),
-                            Radio(
-                              activeColor: Colors.black54,
-                              value: 2,
-                              groupValue: _value,
-                              onChanged: (value) {
-                                setState(() {
-                                  _value = 2;
-                                });
-                              },
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "F",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                Icon(
-                                  Icons.female_rounded,
-                                  size: 25,
-                                  color: Colors.lightGreen,
-                                ),
-                              ],
-                            ),                           
-                          ],
-                        ),
-                        
-                      ),
-                       SizedBox(height: 10,),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
-          
+              ),
+
               //Padding(padding: EdgeInsets.only(bottom: 100))
             ],
           ),
@@ -1213,7 +1214,9 @@ class _addInfoState extends State<NavigatorAdd> {
                               labelText: "Ente rilasciante",
                             )),
                       ),
-                      SizedBox(height: 40,),
+                      SizedBox(
+                        height: 40,
+                      ),
                     ]),
                   ),
                 ),
@@ -1386,7 +1389,7 @@ class _addInfoState extends State<NavigatorAdd> {
         ),
       ),
       body: Container(
-        //padding: EdgeInsets.only(bottom: 70),
+        padding: EdgeInsets.only(bottom: 50),
         child: Theme(
           data: ThemeData(
             colorScheme: ColorScheme.light(
@@ -1407,7 +1410,6 @@ class _addInfoState extends State<NavigatorAdd> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       IconButton(
-                        //padding: EdgeInsets.only(top: 15),
                         onPressed: controls.onStepContinue,
                         icon: Image.asset(
                           "assets/icons/arrow-right.png",
@@ -1415,11 +1417,8 @@ class _addInfoState extends State<NavigatorAdd> {
                           height: 40,
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 130))
-
                     ]);
               }
-
               if (currentStep == 3) {
                 return Column(children: [
                   Row(

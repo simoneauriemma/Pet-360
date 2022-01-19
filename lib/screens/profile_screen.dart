@@ -488,7 +488,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             final btnImpostazioni = IconButton(
               //key: btnKey,
-              icon: Icon(Icons.settings_applications_sharp),
+              icon: Icon(Icons.settings),
               padding: EdgeInsets.only(right: 15),
               iconSize: 35,
               onPressed: () {
