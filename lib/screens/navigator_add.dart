@@ -60,7 +60,7 @@ class _addInfoState extends State<NavigatorAdd> {
     }
     if (pickedImagePassport == null) {
       pickedImagePassport =
-          File("/data/user/0/com.example.pet360/cache/dog.png");
+          File("/data/user/0/com.example.pet360/cache/passport.png");
     }
   }
 
@@ -128,7 +128,7 @@ class _addInfoState extends State<NavigatorAdd> {
                               "/data/user/0/com.example.pet360/cache/dog.png");
                         } else {
                           pickedImagePassport = File(
-                              "/data/user/0/com.example.pet360/cache/dog.png");
+                              "/data/user/0/com.example.pet360/cache/passport.png");
                         }
                       });
                       Navigator.of(context, rootNavigator: true).pop();
@@ -1582,7 +1582,7 @@ class _addInfoState extends State<NavigatorAdd> {
       uploadFile(pathPassport);
     }
     if (pathPassport == "") {
-      pathPassport = "/data/user/0/com.example.pet360/cache/dog.png";
+      pathPassport = "/data/user/0/com.example.pet360/cache/passport.png";
     }
 
     final DBRef = FirebaseDatabase.instance

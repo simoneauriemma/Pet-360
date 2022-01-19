@@ -124,7 +124,7 @@ class _viewInfoState extends State<NavigatorView> {
                               "/data/user/0/com.example.pet360/cache/dog.png");
                         } else {
                           pickedImagePassport = File(
-                              "/data/user/0/com.example.pet360/cache/dog.png");
+                              "/data/user/0/com.example.pet360/cache/passport.png");
                         }
                       });
                       Navigator.of(context, rootNavigator: true).pop();
@@ -1619,7 +1619,7 @@ class _viewInfoState extends State<NavigatorView> {
 
   Future<void> removePhoto(String filePath) async {
     try {
-      if (filePath.split("/").last != "dog.png") {
+      if (filePath.split("/").last != "dog.png" && filePath.split("/").last != "passport.png") {
         await firebase_storage.FirebaseStorage.instance
             .ref('uploads/' + filePath.split("/").last)
             .delete();
@@ -1675,7 +1675,7 @@ class _viewInfoState extends State<NavigatorView> {
       uploadFile(pathPassport);
     }
     if (pathPassport == "") {
-      pathPassport = "/data/user/0/com.example.pet360/cache/dog.png";
+      pathPassport = "/data/user/0/com.example.pet360/cache/passport.png";
     }
 
     String sesso = "M";
