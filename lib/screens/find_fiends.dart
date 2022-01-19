@@ -32,13 +32,17 @@ class _FindFriendsState extends State<FindFriends> {
   LatLng _initialPosition = LatLng(37.42796133580664, -122.085749655962);
   late CameraPosition _kGooglePlex;
   bool aBool1=false,aBool2 = false;
+  bool aBool3 = true;
 
   @override
   void initState() {
     super.initState();
     final uid = _auth.currentUser!.uid;
-    animalList = fetchAnimals(
-        UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
+    if(aBool3){
+      animalList = fetchAnimals(
+          UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
+      aBool3 = false;
+    }
     _getUserLocation();
   }
 
