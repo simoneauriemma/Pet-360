@@ -116,7 +116,7 @@ class _DashboardState extends State<Dashboard> {
                                 children: [
                                   Padding(padding: EdgeInsets.only(top: 70)),
                                   Text(
-                                    "Bentornato/a",
+                                    "Bentornato\\a",
                                     textAlign: TextAlign.left,
                                     style: GoogleFonts.questrial(
                                       fontSize: 32,
@@ -370,7 +370,7 @@ class _DashboardState extends State<Dashboard> {
                               children: [
                                 Padding(padding: EdgeInsets.only(top: 70)),
                                 Text(
-                                  "Benvenuto/a",
+                                  "Benvenuto\\a",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.questrial(
                                     fontSize: 35,
