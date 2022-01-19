@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pet360/screens/chatting_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
@@ -11,6 +13,7 @@ class WidgetList extends StatelessWidget {
   final String indirizzo;
   final String UID;
   final String typeOfUserChat;
+  final String photo;
 
   WidgetList({
     required this.name,
@@ -21,6 +24,7 @@ class WidgetList extends StatelessWidget {
     required this.voto,
     required this.UID,
     required this.typeOfUserChat,
+    required this.photo,
   });
 
   @override
@@ -52,11 +56,21 @@ class WidgetList extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Icon(
-                    Icons.account_circle,
-                    size: 40.0,
+                  child: Column(
+                      children:[
+                        Container(
+                          child: ClipOval(
+                            child: Image.file(
+                                File(photo),
+                              width: 45,
+                              height: 45,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
                   ),
                 ),
                 Expanded(

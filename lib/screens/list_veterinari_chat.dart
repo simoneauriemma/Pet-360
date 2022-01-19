@@ -73,6 +73,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                             indirizzo: snapshot.data![index].addressShop!,
                             UID: snapshot.data![index].uid!,
                             typeOfUserChat: "Veterinario",
+                            photo: snapshot.data![index].photo!,
                           ),
                         ),
                       ),
@@ -166,6 +167,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
         user.numberPhone = value['numberPhone'];
         user.addressShop = value['addressShop'];
         user.voto = double.parse(double.parse(value['votes'].toString()).toStringAsFixed(2));
+        user.photo = value['photo'];
         list.add(user);
       });
       return list;
