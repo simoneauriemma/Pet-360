@@ -34,12 +34,13 @@ class _DashboardState extends State<Dashboard> {
     futureAnimal = fetchAnimals(
         UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
     downloadFileExample("/data/user/0/com.example.pet360/cache/dog.png");
+    downloadFileExample("/data/user/0/com.example.pet360/cache/passport.png");
     _firstName = UserSharedPreferences.getNameOfUser()!;
   }
 
   Future<void> removePhoto(String filePath) async {
     try {
-      if (filePath.split("/").last != "dog.png") {
+      if (filePath.split("/").last != "dog.png" && filePath.split("/").last != "passport.png") {
         await firebase_storage.FirebaseStorage.instance
             .ref('uploads/' + filePath.split("/").last)
             .delete();

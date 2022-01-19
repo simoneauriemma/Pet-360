@@ -1226,7 +1226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> removePhoto(String filePath) async {
     try {
-      if (filePath.split("/").last != "user_default.png") {
+      if (filePath.split("/").last != "user_default.png" && filePath.split("/").last != "passport.png") {
         await firebase_storage.FirebaseStorage.instance
             .ref('uploads/' + filePath.split("/").last)
             .delete();
