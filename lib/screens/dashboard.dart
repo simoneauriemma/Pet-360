@@ -90,8 +90,8 @@ class _DashboardState extends State<Dashboard> {
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(0),
                           topRight: Radius.circular(0),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20)),
+                          bottomLeft: Radius.circular(35),
+                          bottomRight: Radius.circular(35)),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.1),
@@ -199,10 +199,10 @@ class _DashboardState extends State<Dashboard> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
                       ),
                         boxShadow: [
                           BoxShadow(
@@ -344,8 +344,8 @@ class _DashboardState extends State<Dashboard> {
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(0),
                         topRight: Radius.circular(0),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
+                        bottomLeft: Radius.circular(35),
+                        bottomRight: Radius.circular(35)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.1),
