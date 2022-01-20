@@ -139,12 +139,17 @@ class _IAscreenState extends State<IAscreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text("Riconosci la razza del tuo animale"),
+        backgroundColor: Colors.grey.shade100,
+        title: Text(
+          "Riconosci la razza del tuo animale",
+          style: TextStyle(
+            fontSize: 15,
+          ),
+        ),
         centerTitle: true,
-        elevation: 4,
+        elevation: 2,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back_rounded, color: Colors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -210,16 +215,18 @@ class _IAscreenState extends State<IAscreen> {
                     child: Column(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width / 1.1,
-                          //height: MediaQuery.of(context).size.height * 0.6,
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
                           //margin: EdgeInsets.all(25),
                           padding: EdgeInsets.only(
-                              left: 20, right: 20, bottom: 20, top: 20),
+                              left: 20, right: 20, bottom: 20, top: 40),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(35),
+                                topRight: Radius.circular(35),
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(0)),
                             border: Border.all(color: Colors.white),
                             boxShadow: [
                               BoxShadow(
@@ -266,6 +273,9 @@ class _IAscreenState extends State<IAscreen> {
                                         getImage();
                                       },
                                     ),
+                              SizedBox(
+                                height: 40,
+                              ),
                               Text(
                                 category != null ? category!.label : '',
                                 style: GoogleFonts.questrial(
@@ -287,7 +297,6 @@ class _IAscreenState extends State<IAscreen> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 50),
                       ],
                     ),
                   ),

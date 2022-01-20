@@ -240,7 +240,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: const Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Salva le modifiche",
+                    "Salva modifiche",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18),
                   ),
@@ -490,7 +490,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //key: btnKey,
               icon: Icon(Icons.settings),
               padding: EdgeInsets.only(right: 15),
-              iconSize: 35,
+              iconSize: 30,
               onPressed: () {
                 showDialog(
                   context: context,
@@ -570,21 +570,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  elevation: 4,
-                  title: Text("Profilo"),
+                  elevation: 2,
+                  title: Text(
+                    "Profilo",
+                    style: TextStyle(fontSize: 18),
+                  ),
                   centerTitle: true,
                   actions: <Widget>[
                     btnImpostazioni,
                   ],
                   leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    icon: Icon(Icons.arrow_back_rounded, color: Colors.black),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen()));
                     },
                   ),
                 ),
-                backgroundColor: Colors.transparent,
+                //backgroundColor: Colors.transparent,
                 body: SingleChildScrollView(
                   //child: Padding
                   //padding: const EdgeInsets.all(36.0),
@@ -811,14 +814,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  elevation: 4,
-                  title: Text("Profilo"),
+                  elevation: 2,
+                  title: Text(
+                    "Profilo",
+                    style: TextStyle(fontSize: 18),
+                  ),
                   centerTitle: true,
                   actions: <Widget>[
                     btnImpostazioni,
                   ],
                   leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    icon: Icon(Icons.arrow_back_rounded, color: Colors.black),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen()));
@@ -1002,14 +1008,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  elevation: 4,
-                  title: Text("Profilo"),
+                  elevation: 2,
+                  title: Text(
+                    "Profilo",
+                    style: TextStyle(fontSize: 18),
+                  ),
                   centerTitle: true,
                   actions: <Widget>[
                     btnImpostazioni,
                   ],
                   leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    icon: Icon(Icons.arrow_back_rounded, color: Colors.black),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen()));

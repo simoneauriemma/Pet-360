@@ -4,17 +4,18 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/model/map_style.dart';
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
-import 'package:geocoding/geocoding.dart';
+
 import 'home_screen.dart';
 
 class FindFriends extends StatefulWidget {
@@ -58,14 +59,17 @@ class _FindFriendsState extends State<FindFriends> {
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                title: Text("Geolocalizza i tuoi animali"),
+                title: Text(
+                  "Geolocalizza i tuoi animali",
+                  style: TextStyle(fontSize: 18),
+                ),
                 centerTitle: true,
                 elevation: 4,
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
                 ),
               ),
@@ -160,14 +164,17 @@ class _FindFriendsState extends State<FindFriends> {
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                title: Text("Geolocalizza i tuoi animali"),
+                title: Text(
+                  "Geolocalizza i tuoi animali",
+                  style: TextStyle(fontSize: 18),
+                ),
                 centerTitle: true,
                 elevation: 4,
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
                 ),
               ),

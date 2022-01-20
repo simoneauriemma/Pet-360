@@ -256,7 +256,7 @@ class _addInfoState extends State<NavigatorAdd> {
                           ],
                         )),
                     SizedBox(
-                      width: 280,
+                      width: 250,
                       child: TextFormField(
                           autofocus: false,
                           controller: nameController,
@@ -276,7 +276,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       height: 10,
                     ),
                     SizedBox(
-                      width: 280,
+                      width: 250,
                       child: TextFormField(
                           autofocus: false,
                           controller: soprannomeController,
@@ -296,7 +296,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       height: 10,
                     ),
                     SizedBox(
-                        width: 280,
+                        width: 250,
                         child: TextFormField(
                           autofocus: false,
                           controller: dataController,
@@ -327,7 +327,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       height: 10,
                     ),
                     SizedBox(
-                      width: 280,
+                      width: 250,
                       child: TextFormField(
                           autofocus: false,
                           controller: specieController,
@@ -348,7 +348,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       height: 10,
                     ),
                     SizedBox(
-                      width: 280,
+                      width: 250,
                       child: TextFormField(
                           autofocus: false,
                           controller: razzaController,
@@ -369,7 +369,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       height: 10,
                     ),
                     SizedBox(
-                      width: 280,
+                      width: 250,
                       child: TextFormField(
                           autofocus: false,
                           controller: coloreController,
@@ -390,7 +390,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       height: 10,
                     ),
                     SizedBox(
-                      width: 280,
+                      width: 250,
                       child: TextFormField(
                           autofocus: false,
                           controller: veterinarioController,
@@ -411,7 +411,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       height: 20,
                     ),
                     SizedBox(
-                      width: 260,
+                      width: 250,
                       child: Row(
                         children: [
                           Text(
@@ -552,7 +552,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                     child: ListBody(
                                       children: [
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: tipoVaccinoController,
@@ -575,7 +575,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                             autofocus: false,
                                             controller: dataSommController,
@@ -609,7 +609,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: farmacoSommController,
@@ -633,7 +633,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: nomeVeterController,
@@ -791,7 +791,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                               child: ListBody(
                                                 children: [
                                                   SizedBox(
-                                                    width: 280,
+                                                    width: 250,
                                                     child: TextFormField(
                                                         autofocus: false,
                                                         controller:
@@ -820,7 +820,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                     height: 10,
                                                   ),
                                                   SizedBox(
-                                                    width: 280,
+                                                    width: 250,
                                                     child: TextFormField(
                                                       autofocus: false,
                                                       controller:
@@ -870,7 +870,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                     height: 10,
                                                   ),
                                                   SizedBox(
-                                                    width: 280,
+                                                    width: 250,
                                                     child: TextFormField(
                                                         autofocus: false,
                                                         controller:
@@ -899,7 +899,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                                     height: 10,
                                                   ),
                                                   SizedBox(
-                                                    width: 280,
+                                                    width: 250,
                                                     child: TextFormField(
                                                         autofocus: false,
                                                         controller:
@@ -1121,7 +1121,7 @@ class _addInfoState extends State<NavigatorAdd> {
                         height: 20,
                       ),
                       SizedBox(
-                        width: 280,
+                        width: 250,
                         child: TextFormField(
                             autofocus: false,
                             controller: descrizioneController,
@@ -1143,7 +1143,7 @@ class _addInfoState extends State<NavigatorAdd> {
                         height: 10,
                       ),
                       SizedBox(
-                        width: 280,
+                        width: 250,
                         child: TextFormField(
                             autofocus: false,
                             controller: microchipController,
@@ -1165,7 +1165,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       ),
 
                       SizedBox(
-                        width: 280,
+                        width: 250,
                         child: TextFormField(
                           autofocus: false,
                           controller: dataMicrochipController,
@@ -1198,7 +1198,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       ),
 
                       SizedBox(
-                        width: 280,
+                        width: 250,
                         child: TextFormField(
                             autofocus: false,
                             controller: enteController,
@@ -1377,7 +1377,7 @@ class _addInfoState extends State<NavigatorAdd> {
       backgroundColor: Colors.grey.shade100,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: Text(
           "Aggiungi un nuovo animale",
           style: TextStyle(

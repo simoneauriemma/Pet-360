@@ -375,7 +375,7 @@ class _DashboardState extends State<Dashboard> {
                                   "Benvenuto\\a",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.questrial(
-                                    fontSize: 35,
+                                    fontSize: 32,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

@@ -257,18 +257,18 @@ class _viewInfoState extends State<NavigatorView> {
                               ],
                             )),
                         SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: nameController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                nameController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
-                              //Nome
-                              decoration: InputDecoration(
-                                filled: true,
+                          width: 250,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: nameController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              nameController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
+                            //Nome
+                            decoration: InputDecoration(
+                              filled: true,
                                 fillColor: Colors.transparent,
                                 labelText: "Nome",
                               )),
@@ -277,18 +277,18 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 10,
                         ),
                         SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: soprannomeController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                soprannomeController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
-                              //Nome
-                              decoration: InputDecoration(
-                                filled: true,
+                          width: 250,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: soprannomeController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              soprannomeController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
+                            //Nome
+                            decoration: InputDecoration(
+                              filled: true,
                                 fillColor: Colors.transparent,
                                 labelText: "Soprannome",
                               )),
@@ -297,18 +297,18 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 10,
                         ),
                         SizedBox(
-                            width: 280,
-                            child: TextFormField(
-                              autofocus: false,
-                              controller: dataController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                dataController.text = value!;
-                              },
+                            width: 250,
+                          child: TextFormField(
+                            autofocus: false,
+                            controller: dataController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              dataController.text = value!;
+                            },
 
-                              textInputAction: TextInputAction.next,
+                            textInputAction: TextInputAction.next,
 
-                              //DataNascita
+                            //DataNascita
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.transparent,
@@ -328,18 +328,18 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 10,
                         ),
                         SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: specieController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                specieController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                          width: 250,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: specieController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              specieController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                              //Specie
-                              decoration: InputDecoration(
+                            //Specie
+                            decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.transparent,
                                 labelText: "Specie",
@@ -349,18 +349,18 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 10,
                         ),
                         SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: razzaController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                razzaController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                          width: 250,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: razzaController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              razzaController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                              //Razza
-                              decoration: InputDecoration(
+                            //Razza
+                            decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.transparent,
                                 labelText: "Razza",
@@ -370,18 +370,18 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 10,
                         ),
                         SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: coloreController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                coloreController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                          width: 250,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: coloreController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              coloreController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                              //Colore
-                              decoration: InputDecoration(
+                            //Colore
+                            decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.transparent,
                                 labelText: "Colore",
@@ -391,18 +391,18 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 10,
                         ),
                         SizedBox(
-                          width: 280,
-                          child: TextFormField(
-                              autofocus: false,
-                              controller: veterinarioController,
-                              keyboardType: TextInputType.name,
-                              onSaved: (value) {
-                                veterinarioController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
+                          width: 250,
+                        child: TextFormField(
+                            autofocus: false,
+                            controller: veterinarioController,
+                            keyboardType: TextInputType.name,
+                            onSaved: (value) {
+                              veterinarioController.text = value!;
+                            },
+                            textInputAction: TextInputAction.next,
 
-                              //NomeVeterinario
-                              decoration: InputDecoration(
+                            //NomeVeterinario
+                            decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.transparent,
                                 labelText: "Nome veterinario",
@@ -412,18 +412,18 @@ class _viewInfoState extends State<NavigatorView> {
                           height: 20,
                         ),
                         SizedBox(
-                          width: 260,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Sesso",
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black54),
-                              ),
-                              Radio(
-                                activeColor: Colors.black54,
-                                value: 1,
-                                groupValue: _value,
+                          width: 250,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Sesso",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.black54),
+                            ),
+                            Radio(
+                              activeColor: Colors.black54,
+                              value: 1,
+                              groupValue: _value,
                                 onChanged: (value) {
                                   setState(() {
                                     _value = 1;
@@ -546,7 +546,7 @@ class _viewInfoState extends State<NavigatorView> {
                                     child: ListBody(
                                       children: [
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: tipoVaccinoController,
@@ -569,7 +569,7 @@ class _viewInfoState extends State<NavigatorView> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                             autofocus: false,
                                             controller: dataSommController,
@@ -603,7 +603,7 @@ class _viewInfoState extends State<NavigatorView> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: farmacoSommController,
@@ -627,7 +627,7 @@ class _viewInfoState extends State<NavigatorView> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 280,
+                                          width: 250,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: nomeVeterController,
@@ -800,7 +800,7 @@ class _viewInfoState extends State<NavigatorView> {
                                             child: ListBody(
                                               children: [
                                                 SizedBox(
-                                                  width: 280,
+                                                  width: 250,
                                                   child: TextFormField(
                                                       autofocus: false,
                                                       controller:
@@ -828,7 +828,7 @@ class _viewInfoState extends State<NavigatorView> {
                                                   height: 10,
                                                 ),
                                                 SizedBox(
-                                                  width: 280,
+                                                  width: 250,
                                                   child: TextFormField(
                                                     autofocus: false,
                                                     controller:
@@ -874,7 +874,7 @@ class _viewInfoState extends State<NavigatorView> {
                                                   height: 10,
                                                 ),
                                                 SizedBox(
-                                                  width: 280,
+                                                  width: 250,
                                                   child: TextFormField(
                                                       autofocus: false,
                                                       controller:
@@ -902,7 +902,7 @@ class _viewInfoState extends State<NavigatorView> {
                                                   height: 10,
                                                 ),
                                                 SizedBox(
-                                                  width: 280,
+                                                  width: 250,
                                                   child: TextFormField(
                                                       autofocus: false,
                                                       controller:
@@ -1117,18 +1117,18 @@ class _viewInfoState extends State<NavigatorView> {
                             ],
                           )),
                       SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                          autofocus: false,
-                          controller: descrizioneController,
-                          keyboardType: TextInputType.name,
-                          onSaved: (value) {
-                            descrizioneController.text = value!;
-                          },
-                          textInputAction: TextInputAction.next,
+                        width: 250,
+                      child: TextFormField(
+                        autofocus: false,
+                        controller: descrizioneController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          descrizioneController.text = value!;
+                        },
+                        textInputAction: TextInputAction.next,
 
-                          //Descrizione animale
-                          decoration: InputDecoration(
+                        //Descrizione animale
+                        decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
                             labelText: "Descrizione animale",
@@ -1140,18 +1140,18 @@ class _viewInfoState extends State<NavigatorView> {
                         height: 10,
                       ),
                       SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: microchipController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              microchipController.text = value!;
-                            },
-                            textInputAction: TextInputAction.next,
+                        width: 250,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: microchipController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            microchipController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
 
-                            //Numero microchip
-                            decoration: InputDecoration(
+                          //Numero microchip
+                          decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.transparent,
                               labelText: "N° microchip",
@@ -1162,18 +1162,18 @@ class _viewInfoState extends State<NavigatorView> {
                       ),
 
                       SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                          autofocus: false,
-                          controller: dataMicrochipController,
-                          keyboardType: TextInputType.name,
-                          onSaved: (value) {
-                            dataMicrochipController.text = value!;
-                          },
-                          textInputAction: TextInputAction.next,
+                        width: 250,
+                      child: TextFormField(
+                        autofocus: false,
+                        controller: dataMicrochipController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          dataMicrochipController.text = value!;
+                        },
+                        textInputAction: TextInputAction.next,
 
-                          //Data applicazione microchip
-                          decoration: InputDecoration(
+                        //Data applicazione microchip
+                        decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
                             labelText: "Data applicazione microchip",
@@ -1195,18 +1195,18 @@ class _viewInfoState extends State<NavigatorView> {
                       ),
 
                       SizedBox(
-                        width: 280,
-                        child: TextFormField(
-                            autofocus: false,
-                            controller: enteController,
-                            keyboardType: TextInputType.name,
-                            onSaved: (value) {
-                              enteController.text = value!;
-                            },
-                            textInputAction: TextInputAction.next,
+                        width: 250,
+                      child: TextFormField(
+                          autofocus: false,
+                          controller: enteController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            enteController.text = value!;
+                          },
+                          textInputAction: TextInputAction.next,
 
-                            //Ente rilasciante
-                            decoration: InputDecoration(
+                          //Ente rilasciante
+                          decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.transparent,
                               labelText: "Ente rilasciante",
@@ -1362,9 +1362,9 @@ class _viewInfoState extends State<NavigatorView> {
             backgroundColor: Colors.grey.shade100,
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
               title: Text(
-                "Modifica animale",
+                "Modifica dati animale",
                 style: TextStyle(
                   fontSize: 18,
                 ),
