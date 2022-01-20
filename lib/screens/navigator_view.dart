@@ -171,91 +171,10 @@ class _viewInfoState extends State<NavigatorView> {
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
-                /*child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  //Center Row contents horizontally,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  //Center Row contents vertically,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext ctx) {
-                              return AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(32.0))),
-                                title: Text(
-                                  'Eliminazione animale',
-                                  textAlign: TextAlign.center,
-                                ),
-                                content: Text(
-                                  'Sei sicuro di voler eliminare?',
-                                  textAlign: TextAlign.center,
-                                ),
-                                actions: [
-                                  // The "Yes" button
-                                  TextButton(
-                                    onPressed: () {
-                                      // Remove the animal
-                                      removeAnimal();
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomeScreen()));
-                                    },
-                                    child: Text(
-                                      'Sì',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ),
-                                  TextButton(
-                                      onPressed: () {
-                                        // Close the dialog
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text(
-                                        'No',
-                                        style: TextStyle(fontSize: 20),
-                                      ))
-                                ],
-                              );
-                            });
-                      },*/
-                /*child: Row(
-                        children: [
-                          Text(
-                            "Elimina animale ",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Image.asset("assets/icons/delete.png",
-                              width: 20, height: 20, color: Colors.black),
-                        ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        onPrimary: Colors.black,
-                        primary: Colors.white,
-                        //onSurface: Colors.grey,
-                        //side: BorderSide(color: Colors.lightGreen, width: 2),
-                        //elevation: 5,
-                        minimumSize: Size(120, 40),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                    ),
-                  ],
-                ),*/
               ),
               Container(
                     //padding: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width / 1.1,
-                    //height: MediaQuery.of(context).size.height * 1.0,
-                    //sfondo con sfocatura
                     decoration: BoxDecoration(
                       color: Colors.white,
                     borderRadius: const BorderRadius.only(
@@ -281,9 +200,9 @@ class _viewInfoState extends State<NavigatorView> {
                           "DATI LIBRETTO ANIMALE",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.questrial(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                            fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                         ),
                         SizedBox(
                           height: 30,
@@ -588,7 +507,7 @@ class _viewInfoState extends State<NavigatorView> {
                     "LISTA VACCINI",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.questrial(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -1144,9 +1063,9 @@ class _viewInfoState extends State<NavigatorView> {
                         "PASSAPORTO ANIMALE",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.questrial(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                          fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                       ),
 
                       SizedBox(
@@ -1329,10 +1248,10 @@ class _viewInfoState extends State<NavigatorView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "DISPOSITIVI PER LA GEOLOCALIZZAZIONE",
+                        "DISPOSITIVI PER LA \nGEOLOCALIZZAZIONE",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.questrial(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -1444,7 +1363,12 @@ class _viewInfoState extends State<NavigatorView> {
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
-              title: Text("Modifica animale"),
+              title: Text(
+                "Modifica animale",
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
               centerTitle: true,
               elevation: 0,
               leading: IconButton(

@@ -908,8 +908,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Container(
                                   width:
                                       MediaQuery.of(context).size.width * 1.2,
-                                  height:
-                                      MediaQuery.of(context).size.width * 2.4,
                                   //sfondo con sfocatura
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -1101,8 +1099,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Container(
                                   width:
                                       MediaQuery.of(context).size.width * 1.2,
-                                  height:
-                                      MediaQuery.of(context).size.width * 2.4,
                                   //sfondo con sfocatura
                                   decoration: BoxDecoration(
                                     color: Colors.white,

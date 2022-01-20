@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -198,7 +199,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       "DATI LIBRETTO ANIMALE",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.questrial(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -1251,10 +1252,10 @@ class _addInfoState extends State<NavigatorAdd> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "DISPOSITIVI PER LA GEOLOCALIZZAZIONE",
+                          "DISPOSITIVI PER LA \nGEOLOCALIZZAZIONE",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.questrial(
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -1377,7 +1378,13 @@ class _addInfoState extends State<NavigatorAdd> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text("Aggiungi un nuovo animale"),
+        title: Text(
+          "Aggiungi un nuovo animale",
+          style: TextStyle(
+            fontSize: 18,
+            //fontFamily: 'PatuaOne'
+          ),
+        ),
         centerTitle: true,
         elevation: 0,
         leading: IconButton(

@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:pet360/components/show_message.dart';
 import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
@@ -131,85 +127,88 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       ConstrainedBox(
                         constraints:
                             BoxConstraints.tightFor(width: 100, height: 40),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext ctx) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(32.0))),
-                                    title: Text(
-                                      'Conferma',
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    content: Text(
-                                        'Sei sicuro di voler lasciare la chat?'),
-                                    actions: [
-                                      //"Si" button
-                                      TextButton(
-                                          onPressed: () {
-                                            if (UserSharedPreferences
-                                                        .getTypeOfUser()
-                                                    .toString() ==
-                                                "Utente") {
-                                              deleteChat();
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ReviewChat()));
-                                            } else {
-                                              deleteChat();
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ChatScreen()));
-                                            }
-                                          },
-                                          child: Text(
-                                            'Sì',
-                                            style: TextStyle(fontSize: 20),
-                                          )),
-                                      TextButton(
-                                          onPressed: () {
-                                            // Close the dialog
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Text(
-                                            'No',
-                                            style: TextStyle(fontSize: 20),
-                                          ))
-                                    ],
-                                  );
-                                });
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const [
-                              Text(
-                                "Lascia chat",
-                                style: TextStyle(
-                                  fontSize: 12,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(32.0))),
+                                      title: Text(
+                                        'Conferma',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      content: Text(
+                                          'Sei sicuro di voler lasciare la chat?'),
+                                      actions: [
+                                        //"Si" button
+                                        TextButton(
+                                            onPressed: () {
+                                              if (UserSharedPreferences
+                                                          .getTypeOfUser()
+                                                      .toString() ==
+                                                  "Utente") {
+                                                deleteChat();
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ReviewChat()));
+                                              } else {
+                                                deleteChat();
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ChatScreen()));
+                                              }
+                                            },
+                                            child: Text(
+                                              'Sì',
+                                              style: TextStyle(fontSize: 20),
+                                            )),
+                                        TextButton(
+                                            onPressed: () {
+                                              // Close the dialog
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              'No',
+                                              style: TextStyle(fontSize: 20),
+                                            ))
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "Lascia chat",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
-                              /*ImageIcon(
+                                /*ImageIcon(
                             AssetImage(
                                 "assets/icons/save.png"),
                             color: Colors.black,
                             size: 15,
                           ), */
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.black,
-                            primary: Colors.white,
-                            alignment: Alignment.center,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
+                              ],
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              onPrimary: Colors.black,
+                              primary: Colors.white,
+                              alignment: Alignment.center,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                            ),
                           ),
                         ),
                       ),
@@ -221,13 +220,19 @@ class _Chatting_screenState extends State<Chatting_screen> {
             body: Stack(
               children: <Widget>[
                 //Image.asset("assets/icons/background.jpg",fit: BoxFit.cover),
-                Container(                  
-                  decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage("assets/icons/background.jpg"), fit: BoxFit.cover),
-                  ),
-                    height: MediaQuery.of(context).size.height,
-                    child: SingleChildScrollView(
-                        reverse: true, child: ShowMessages())),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 60),
+                  child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/icons/background.jpg"),
+                            fit: BoxFit.cover),
+                      ),
+                      height: MediaQuery.of(context).size.height,
+                      child: SingleChildScrollView(
+                          reverse: true, child: ShowMessages())),
+                ),
+
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
@@ -237,7 +242,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                     color: Colors.white,
                     child: Row(
                       children: <Widget>[
-                        GestureDetector(
+                        /* GestureDetector(
                           onTap: () {},
                           child: Container(
                             height: 30,
@@ -252,7 +257,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                               size: 20,
                             ),
                           ),
-                        ),
+                        ), */
                         SizedBox(
                           width: 15,
                         ),
@@ -446,11 +451,13 @@ class _Chatting_screenState extends State<Chatting_screen> {
           ),
           body: Stack(
             children: <Widget>[
-             Container(                  
+              Container(
                   decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage("assets/icons/background.jpg"), fit: BoxFit.cover),
+                    image: DecorationImage(
+                        image: AssetImage("assets/icons/background.jpg"),
+                        fit: BoxFit.cover),
                   ),
-                    height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height,
                   child: SingleChildScrollView(
                       reverse: true, child: ShowMessages())),
               Align(
