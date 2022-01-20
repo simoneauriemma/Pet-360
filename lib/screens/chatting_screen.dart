@@ -1,12 +1,11 @@
-
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:pet360/components/show_message.dart';
-import 'package:pet360/screens/chat_screen.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
@@ -156,18 +155,21 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                                       .toString() ==
                                                   "Utente") {
                                                 deleteChat();
+                                                Navigator.pop(context);
+
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            ReviewChat()));
+                                                            HomeScreen()));
                                               } else {
                                                 deleteChat();
+                                                Navigator.pop(context);
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            ChatScreen()));
+                                                            HomeScreen()));
                                               }
                                             },
                                             child: Text(
@@ -546,6 +548,24 @@ class _Chatting_screenState extends State<Chatting_screen> {
     }
     //print("group id chat...." + groupId.toString());
     await _firestore.collection("Messages").doc(groupId.toString()).delete();
+
+    var querySnapshot = await _firestore
+        .collection("Messages")
+        .doc(groupId.toString())
+        .collection(groupId.toString())
+        .get();
+
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    //print(allData[0]["time"]);
+    // print(snapshot);
+    for (int i = 0; i < allData.length; i++) {
+      _firestore
+          .collection("Messages")
+          .doc(groupId.toString())
+          .collection(groupId.toString())
+          .doc(allData[i]["time"])
+          .delete();
+    }
   }
 
   void sendMessage() async {
