@@ -1,4 +1,7 @@
 
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -516,7 +519,21 @@ class _Chatting_screenState extends State<Chatting_screen> {
       });
 
   Future<bool> downloadFoto() async {
-    return true;
+    var url = Uri.parse(
+        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
+            UserSharedPreferences.getTypeOfUserChat().toString() +
+            "//" +
+            UserSharedPreferences.getUIDOfUser().toString() +
+            ".json?");
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonBody = json.decode(response.body);
+      String path = jsonBody['photo'];
+      pickedImage = File(path);
+      return true;
+    } else {
+      throw Exception('Failed to load album');
+    }
   }
 
   void deleteChat() async {
