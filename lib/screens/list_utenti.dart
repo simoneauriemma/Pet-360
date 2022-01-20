@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/widget_list2.dart';
 import 'package:pet360/model/user_model.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ListUtenti extends StatefulWidget {
   const ListUtenti({Key? key}) : super(key: key);
@@ -65,6 +67,7 @@ class _ListUtentiState extends State<ListUtenti> {
                         itemBuilder: (_, int index) => WidgetList2(
                           name: snapshot.data![index].firstName!,
                           surname: snapshot.data![index].surnameName!,
+                          photo: snapshot.data![index].photo!,
                           UID: snapshot.data![index].uid!,
                           typeOfUserChat: "Utente",
                         ),
@@ -119,6 +122,18 @@ class _ListUtentiState extends State<ListUtenti> {
         );
       });
 
+  Future<void> downloadFileExample(String path) async {
+    File downloadToFile = File(path);
+    if (downloadToFile.existsSync()) {
+      return;
+    }
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads/' + path.split("/").last)
+          .writeToFile(downloadToFile);
+    } on firebase_storage.FirebaseException catch (e) {}
+  }
+
   Future<List<UserModel>> getUserList(
       String typeOfUser, String uidUser, String path) async {
     var snapshot = await FirebaseFirestore.instance
@@ -148,12 +163,14 @@ class _ListUtentiState extends State<ListUtenti> {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<UserModel> list = List.empty(growable: true);
-      jsonDecode(response.body).forEach((key, value) {
+      jsonDecode(response.body).forEach((key, value) async {
         if (chatOn.contains(key.toString())) {
           UserModel user = UserModel();
           user.uid = key.toString();
           user.firstName = value['firstName'];
           user.surnameName = value['surnameName'];
+          user.photo = value['photo'];
+          await downloadFileExample(value['photo']);
           list.add(user);
         }
       });

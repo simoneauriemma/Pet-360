@@ -35,6 +35,7 @@ class _DashboardState extends State<Dashboard> {
         UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
     downloadFileExample("/data/user/0/com.example.pet360/cache/dog.png");
     downloadFileExample("/data/user/0/com.example.pet360/cache/passport.png");
+    downloadFileExample("/data/user/0/com.example.pet360/cache/user_default.png");
     _firstName = UserSharedPreferences.getNameOfUser()!;
   }
 

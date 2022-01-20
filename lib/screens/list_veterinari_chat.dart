@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/widget_list.dart';
 import 'package:pet360/model/veterinary_model.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ListVeterinariChat extends StatefulWidget {
   const ListVeterinariChat({Key? key}) : super(key: key);
@@ -145,6 +147,18 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
         },
       );
 
+  Future<void> downloadFileExample(String path) async {
+    File downloadToFile = File(path);
+    if (downloadToFile.existsSync()) {
+      return;
+    }
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads/' + path.split("/").last)
+          .writeToFile(downloadToFile);
+    } on firebase_storage.FirebaseException catch (e) {}
+  }
+
   Future<List<VeterinaryModel>> getVeterinaryList(
       String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
@@ -158,7 +172,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<VeterinaryModel> list = List.empty(growable: true);
-      jsonDecode(response.body).forEach((key, value) {
+      jsonDecode(response.body).forEach((key, value) async {
         VeterinaryModel user = VeterinaryModel();
         user.uid = key.toString();
         user.nameShop = value['nameShop'];
@@ -168,6 +182,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
         user.addressShop = value['addressShop'];
         user.voto = double.parse(double.parse(value['votes'].toString()).toStringAsFixed(2));
         user.photo = value['photo'];
+        await downloadFileExample(value['photo']);
         list.add(user);
       });
       return list;

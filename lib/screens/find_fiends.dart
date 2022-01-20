@@ -310,18 +310,6 @@ class _FindFriendsState extends State<FindFriends> {
     return await bitmapIcon.future;
   }
 
-  Future<void> downloadFileExample(String path) async {
-    File downloadToFile = File(path);
-    if (downloadToFile.existsSync()) {
-      return;
-    }
-    try {
-      await firebase_storage.FirebaseStorage.instance
-          .ref('uploads/' + path.split("/").last)
-          .writeToFile(downloadToFile);
-    } on firebase_storage.FirebaseException catch (e) {}
-  }
-
   Future<List<ViewAnimalsHome>> fetchAnimals(
       String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
@@ -336,7 +324,6 @@ class _FindFriendsState extends State<FindFriends> {
     List<ViewAnimalsHome> list = List.empty(growable: true);
     if (response.statusCode == 200) {
       jsonDecode(response.body).forEach((key, value) async {
-        await downloadFileExample(value["Libretto"]["animalFoto"]);
         ViewAnimalsHome animal = ViewAnimalsHome();
         animal.animalName = key;
         animal.pathImg = value["Libretto"]["animalFoto"];

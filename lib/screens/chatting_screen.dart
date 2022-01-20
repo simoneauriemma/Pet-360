@@ -508,35 +508,8 @@ class _Chatting_screenState extends State<Chatting_screen> {
         );
       });
 
-  Future<void> downloadFileExample(String path) async {
-    File downloadToFile = File(path);
-    pickedImage = downloadToFile;
-    if (downloadToFile.existsSync()) {
-      return;
-    }
-    try {
-      await firebase_storage.FirebaseStorage.instance
-          .ref('uploads/' + path.split("/").last)
-          .writeToFile(downloadToFile);
-    } on firebase_storage.FirebaseException catch (e) {}
-  }
-
   Future<bool> downloadFoto() async {
-    var url = Uri.parse(
-        "https://pet360-43dfe-default-rtdb.europe-west1.firebasedatabase.app//" +
-            UserSharedPreferences.getTypeOfUserChat().toString() +
-            "//" +
-            UserSharedPreferences.getUIDOfUser().toString() +
-            ".json?");
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      var jsonBody = json.decode(response.body);
-      String path = jsonBody['photo'];
-      await downloadFileExample(path);
-      return true;
-    } else {
-      throw Exception('Failed to load album');
-    }
+    return true;
   }
 
   void deleteChat() async {

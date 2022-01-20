@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/widget_list.dart';
 import 'package:pet360/model/trainer_model.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ListAddestratoriChat extends StatefulWidget {
   const ListAddestratoriChat({Key? key}) : super(key: key);
@@ -142,6 +144,18 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
         },
       );
 
+  Future<void> downloadFileExample(String path) async {
+    File downloadToFile = File(path);
+    if (downloadToFile.existsSync()) {
+      return;
+    }
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads/' + path.split("/").last)
+          .writeToFile(downloadToFile);
+    } on firebase_storage.FirebaseException catch (e) {}
+  }
+
   Future<List<TrainerModel>> getAddestratoriList(
       String typeOfUser, String uidUser, String path) async {
     var url = Uri.parse(
@@ -155,7 +169,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       List<TrainerModel> list = List.empty(growable: true);
-      jsonDecode(response.body).forEach((key, value) {
+      jsonDecode(response.body).forEach((key, value) async {
         TrainerModel user = TrainerModel();
         //print(key.toString());
         user.uid = key.toString();
@@ -165,6 +179,7 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
         user.numberPhone = value['numberPhone'];
         user.addressShop = value['addressShop'];
         user.photo = value['photo'];
+        await downloadFileExample(value['photo']);
         user.voto = double.parse(double.parse(value['votes'].toString()).toStringAsFixed(2));
         list.add(user);
       });
