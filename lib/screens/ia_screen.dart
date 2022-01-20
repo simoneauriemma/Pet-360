@@ -34,8 +34,13 @@ class _IAscreenState extends State<IAscreen> {
   Row textAccuratezza = Row(
     children: [
       Text(
-        "Ciao sono Bobby! Ti aiuterò a capire \n qual è la razza del tuo animale",
-      )
+        "Ciao sono Pepper!\n Ti aiuterò a capire qual è la razza\n del tuo animale.",
+        textAlign: TextAlign.center,
+        style: GoogleFonts.questrial(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     ],
   );
 
@@ -68,9 +73,14 @@ class _IAscreenState extends State<IAscreen> {
       textAccuratezza = Row(
         children: [
           Text(
-            "Non sono affatto sicuro\n della razza del tuo animale!\n Ma ho provato ad indovinare",
+            "Non sono affatto sicuro\n di aver capito la razza del tuo animale!\n Ho provato comuqnue ad indovinare.",
             textAlign: TextAlign.center,
+            style: GoogleFonts.questrial(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+
           //Icon(Icons.sentiment_dissatisfied_outlined),
         ],
       );
@@ -78,9 +88,14 @@ class _IAscreenState extends State<IAscreen> {
       textAccuratezza = Row(
         children: [
           Text(
-            "Sono mediamente sicuro di aver\n azzeccato  la razza del tuo animale!\n Potrei aver sbagliato",
+            "Sono mediamente sicuro di aver\n capito la razza del tuo animale!\n Potrei aver sbagliato.",
             textAlign: TextAlign.center,
+            style: GoogleFonts.questrial(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+
           //Icon(Icons.sentiment_neutral_outlined ),
         ],
       );
@@ -88,9 +103,14 @@ class _IAscreenState extends State<IAscreen> {
       textAccuratezza = Row(
         children: [
           Text(
-            "Sono abbastanza sicuro di aver\n indovinato la razza del tuo animale!\n Ho indovinato, vero?",
+            "Sono abbastanza sicuro di aver\n capito la razza del tuo animale!",
             textAlign: TextAlign.center,
+            style: GoogleFonts.questrial(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+
           //Icon(Icons.sentiment_satisfied ),
         ],
       );
@@ -100,7 +120,12 @@ class _IAscreenState extends State<IAscreen> {
           Text(
             "Sono sicuro di aver azzeccato\n la razza del tuo aniamale!",
             textAlign: TextAlign.center,
+            style: GoogleFonts.questrial(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+
           //Icon(Icons.sentiment_satisfied_alt_rounded ),
         ],
       );
@@ -115,7 +140,7 @@ class _IAscreenState extends State<IAscreen> {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Sezione intelligenza artificiale"),
+        title: Text("Riconosci la razza del tuo animale"),
         centerTitle: true,
         elevation: 4,
         leading: IconButton(
@@ -131,41 +156,36 @@ class _IAscreenState extends State<IAscreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              /*Text(
-                "RICONOSCI LA RAZZA DEL\n TUO ANIMALE",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.questrial(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),*/
+              SizedBox(
+                height: 30,
+              ),
               Stack(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 50),
+                    padding: EdgeInsets.only(right: 40, top: 60),
                     child: Image.asset(
                       "assets/storyset/robot.png",
-                      height: size.width / 2,
-                      width: size.width / 2,
+                      height: size.width / 2.1,
+                      width: size.width / 2.1,
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.only(left: 30, top: 0),
                     child: Container(
-                        width: 280,
-                        padding: EdgeInsets.all(20),
+                        width: 300,
+                        padding: EdgeInsets.all(21),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
+                              bottomLeft: Radius.circular(0),
+                              bottomRight: Radius.circular(40)),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.1),
                               spreadRadius: 5,
-                              blurRadius: 7,
+                              blurRadius: 3,
                               offset:
                                   Offset(0, 3), // changes position of shadow
                             ),
@@ -173,7 +193,10 @@ class _IAscreenState extends State<IAscreen> {
                         ),
                         child: Column(
                           children: [
-                            textAccuratezza,
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: textAccuratezza,
+                            )
                           ],
                         )),
                   )
@@ -191,11 +214,11 @@ class _IAscreenState extends State<IAscreen> {
                           //height: MediaQuery.of(context).size.height * 0.6,
                           //margin: EdgeInsets.all(25),
                           padding: EdgeInsets.only(
-                              left: 25, right: 25, top: 25, bottom: 25),
+                              left: 20, right: 20, bottom: 20, top: 20),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
-                              Radius.circular(15),
+                              Radius.circular(20),
                             ),
                             border: Border.all(color: Colors.white),
                             boxShadow: [
@@ -215,18 +238,18 @@ class _IAscreenState extends State<IAscreen> {
                                         children: [
                                           SizedBox(height: 73),
                                           Text(
-                                            'Seleziona un\'immagine!',
+                                            'Clicca qui per selezionare un\'immagine!',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontSize: 18,
+                                                fontSize: 15,
                                                 fontStyle: FontStyle.italic),
                                           ),
                                           Align(
                                             alignment: Alignment.bottomCenter,
                                             child: Image.asset(
                                               "assets/storyset/set_img.png",
-                                              height: size.width / 1.8,
-                                              width: size.width / 1.8,
+                                              height: size.width / 1.9,
+                                              width: size.width / 1.9,
                                             ),
                                           ),
                                         ],
@@ -237,19 +260,12 @@ class _IAscreenState extends State<IAscreen> {
                                     )
                                   : InkWell(
                                       child: Container(
-                                        /*constraints: BoxConstraints(
-                                              maxHeight: MediaQuery.of(context)
-                                                      .size
-                                                      .height / 2),*/
                                         child: _imageWidget,
                                       ),
                                       onTap: () {
                                         getImage();
                                       },
                                     ),
-                              SizedBox(
-                                height: 15,
-                              ),
                               Text(
                                 category != null ? category!.label : '',
                                 style: GoogleFonts.questrial(
@@ -271,7 +287,7 @@ class _IAscreenState extends State<IAscreen> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 50),
                       ],
                     ),
                   ),

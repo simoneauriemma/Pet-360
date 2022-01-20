@@ -96,12 +96,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Row(children: [
-                      Icon(Icons.remove_circle, color: Colors.red),
+                      Icon(Icons.remove_circle, color: Colors.black),
                       Padding(
                         padding: EdgeInsets.only(right: 10),
                       ),
                       Text("Rimuovi immagine",
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.black)),
                     ]),
                     onTap: () {
                       setState(() {
@@ -666,8 +666,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20),
+                                        topLeft: Radius.circular(35),
+                                        topRight: Radius.circular(35),
                                         bottomLeft: Radius.circular(10),
                                         bottomRight: Radius.circular(10)),
                                     boxShadow: [
@@ -914,8 +914,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10),
+                                        topLeft: Radius.circular(35),
+                                        topRight: Radius.circular(35),
                                         bottomLeft: Radius.circular(10),
                                         bottomRight: Radius.circular(10)),
                                     boxShadow: [
@@ -1107,8 +1107,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10),
+                                        topLeft: Radius.circular(35),
+                                        topRight: Radius.circular(35),
                                         bottomLeft: Radius.circular(10),
                                         bottomRight: Radius.circular(10)),
                                     boxShadow: [
