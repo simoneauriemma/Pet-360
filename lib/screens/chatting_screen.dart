@@ -161,7 +161,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            HomeScreen()));
+                                                            ReviewChat()));
                                               } else {
                                                 deleteChat();
                                                 Navigator.pop(context);
