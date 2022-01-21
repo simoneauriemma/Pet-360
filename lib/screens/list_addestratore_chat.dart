@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/widget_list.dart';
 import 'package:pet360/model/trainer_model.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ListAddestratoriChat extends StatefulWidget {
   const ListAddestratoriChat({Key? key}) : super(key: key);
@@ -116,14 +116,14 @@ class _ListAddestratoriChatState extends State<ListAddestratoriChat> {
                       children: [
                         const Align(
                           alignment: Alignment.bottomCenter,
-                          child: Text(
+                          /* child: Text(
                             "Non ci sono addestratori disponibili!",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 15,
                                 fontStyle: FontStyle.italic,
                                 color: Colors.black),
-                          ),
+                          ),*/
                         ),
                         Align(
                           alignment: Alignment.topCenter,

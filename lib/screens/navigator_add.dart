@@ -72,7 +72,9 @@ class _addInfoState extends State<NavigatorAdd> {
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            title: Text("Scegli immagine da: "),
+            title: Text(
+              "Scegli immagine da: ",
+            ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
@@ -107,9 +109,9 @@ class _addInfoState extends State<NavigatorAdd> {
                   Divider(
                     color: Colors.black,
                     //height: 20,
-                    thickness: 2,
-                    indent: 3,
-                    endIndent: 3,
+                    thickness: 1,
+                    indent: 2,
+                    endIndent: 2,
                   ),
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(

@@ -181,7 +181,11 @@ class WidgetList extends StatelessWidget {
                                                   EdgeInsets.only(bottom: 30)),
                                           Row(
                                             children: [
-                                              Text("Nome negozio: ",
+                                              Icon(
+                                                Icons.shop,
+                                                size: 15,
+                                              ),
+                                              Text("  Nome negozio: ",
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                     fontWeight: FontWeight.bold,
@@ -195,11 +199,15 @@ class WidgetList extends StatelessWidget {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 5,
+                                            height: 8,
                                           ),
                                           Row(
                                             children: [
-                                              Text("Cellulare: ",
+                                              Icon(
+                                                Icons.local_phone_rounded,
+                                                size: 15,
+                                              ),
+                                              Text("  Cellulare: ",
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                     fontWeight: FontWeight.bold,
@@ -213,11 +221,15 @@ class WidgetList extends StatelessWidget {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 5,
+                                            height: 8,
                                           ),
                                           Row(
                                             children: [
-                                              Text("Indirizzo: ",
+                                              Icon(
+                                                Icons.apartment_rounded,
+                                                size: 15,
+                                              ),
+                                              Text("  Indirizzo: ",
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                     fontWeight: FontWeight.bold,
@@ -231,11 +243,15 @@ class WidgetList extends StatelessWidget {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 5,
+                                            height: 8,
                                           ),
                                           Row(
                                             children: [
-                                              Text("Voto: ",
+                                              Icon(
+                                                Icons.star,
+                                                size: 15,
+                                              ),
+                                              Text("  Voto: ",
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                     fontWeight: FontWeight.bold,

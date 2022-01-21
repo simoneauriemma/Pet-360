@@ -141,9 +141,10 @@ class _IAscreenState extends State<IAscreen> {
       appBar: AppBar(
         backgroundColor: Colors.grey.shade100,
         title: Text(
-          "Riconosci la razza del tuo animale",
+          "Riconoscimento razza animale",
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 18,
+            //fontFamily: 'Texta',
           ),
         ),
         centerTitle: true,
@@ -230,10 +231,11 @@ class _IAscreenState extends State<IAscreen> {
                             border: Border.all(color: Colors.white),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black12,
-                                offset: Offset(2, 2),
-                                spreadRadius: 2,
-                                blurRadius: 1,
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -245,7 +247,7 @@ class _IAscreenState extends State<IAscreen> {
                                         children: [
                                           SizedBox(height: 73),
                                           Text(
-                                            'Clicca qui per selezionare un\'immagine!',
+                                            'Clicca qui per selezionare\n un\'immagine!',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,

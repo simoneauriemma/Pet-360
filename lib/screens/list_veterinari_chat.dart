@@ -125,7 +125,7 @@ class _ListVeterinariChatState extends State<ListVeterinariChat> {
                             style: TextStyle(
                                 fontSize: 15,
                                 fontStyle: FontStyle.italic,
-                                color: Colors.black),
+                                color: Colors.grey.shade100),
                           ),
                         ),
                         Align(

@@ -56,7 +56,7 @@ class _ReviewChatState extends State<ReviewChat> {
                     "Lascia un voto a",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.questrial(
-                      fontSize: 25,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -64,7 +64,7 @@ class _ReviewChatState extends State<ReviewChat> {
                     UserSharedPreferences.getNameChat().toString(),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.questrial(
-                      fontSize: 25,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.lightGreen,
                     ),
@@ -119,8 +119,7 @@ class _ReviewChatState extends State<ReviewChat> {
                         ),
                         Text(
                           'VOTO: $rating',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 18, fontFamily: 'Texta'),
                         ),
                         SizedBox(
                           height: 30,

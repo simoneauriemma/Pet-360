@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:pet360/screens/find_fiends.dart';
 import 'package:pet360/screens/navigator_add.dart';
 import 'package:pet360/screens/profile_screen.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
+
 import 'dashboard.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -61,30 +63,101 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.lightGreen.shade200,
                 backgroundColor: Colors.transparent,
                 items: <Widget>[
-                  Icon(
-                    Icons.home,
-                    size: 30,
-                    color: Colors.white,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.home,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Home",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  ImageIcon(
-                    AssetImage("assets/icons/location.png"),
-                    color: Colors.white,
-                    size: 25,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ImageIcon(
+                        AssetImage("assets/icons/location.png"),
+                        color: Colors.white,
+                        size: 23,
+                      ),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Text(
+                        "Gps",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  Icon(
-                    Icons.add_circle_rounded,
-                    size: 30,
-                    color: Colors.white,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add_circle_rounded,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Aggiungi",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  ImageIcon(
-                    AssetImage("assets/icons/bubble-chat.png"),
-                    color: Colors.white,
-                    size: 25,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ImageIcon(
+                        AssetImage("assets/icons/bubble-chat.png"),
+                        color: Colors.white,
+                        size: 23,
+                      ),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Text(
+                        "Chat",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  Icon(
-                    Icons.account_circle,
-                    size: 30,
-                    color: Colors.white,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.account_circle,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Profilo",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ],
                 animationCurve: Curves.easeInOut,

@@ -89,9 +89,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Divider(
                     color: Colors.black,
                     //height: 20,
-                    thickness: 2,
-                    indent: 3,
-                    endIndent: 3,
+                    thickness: 1,
+                    indent: 2,
+                    endIndent: 2,
                   ),
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
@@ -273,25 +273,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       actions: [
                         //"Si" button
-                        TextButton(
-                          onPressed: () {
-                            eliminateAccount();
-                          },
-                          child: Text(
-                            'Sì',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Close the dialog
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'No',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                eliminateAccount();
+                              },
+                              child: Text(
+                                'Sì',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Close the dialog
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                'No',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     );
                   },

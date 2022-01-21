@@ -107,13 +107,16 @@ class _Chatting_screenState extends State<Chatting_screen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              UserSharedPreferences.getNameChat().toString() +
-                                  " " +
-                                  UserSharedPreferences.getSurnameChat()
-                                      .toString(),
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                UserSharedPreferences.getNameChat().toString() +
+                                    " " +
+                                    UserSharedPreferences.getSurnameChat()
+                                        .toString(),
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600),
+                              ),
                             ),
                             SizedBox(
                               height: 6,
@@ -148,43 +151,53 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                           'Sei sicuro di voler lasciare la chat?'),
                                       actions: [
                                         //"Si" button
-                                        TextButton(
-                                            onPressed: () {
-                                              if (UserSharedPreferences
-                                                          .getTypeOfUser()
-                                                      .toString() ==
-                                                  "Utente") {
-                                                deleteChat();
-                                                Navigator.pop(context);
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  if (UserSharedPreferences
+                                                              .getTypeOfUser()
+                                                          .toString() ==
+                                                      "Utente") {
+                                                    deleteChat();
+                                                    Navigator.pop(context);
 
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ReviewChat()));
-                                              } else {
-                                                deleteChat();
-                                                Navigator.pop(context);
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            HomeScreen()));
-                                              }
-                                            },
-                                            child: Text(
-                                              'Sì',
-                                              style: TextStyle(fontSize: 20),
-                                            )),
-                                        TextButton(
-                                            onPressed: () {
-                                              // Close the dialog
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text(
-                                              'No',
-                                              style: TextStyle(fontSize: 20),
-                                            ))
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ReviewChat()));
+                                                  } else {
+                                                    deleteChat();
+                                                    Navigator.pop(context);
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                HomeScreen()));
+                                                  }
+                                                },
+                                                child: Text(
+                                                  'Sì',
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                )),
+                                            TextButton(
+                                                onPressed: () {
+                                                  // Close the dialog
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  'No',
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ))
+                                          ],
+                                        ),
                                       ],
                                     );
                                   });
@@ -197,14 +210,9 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                   "Lascia chat",
                                   style: TextStyle(
                                     fontSize: 12,
+                                    //fontFamily: 'Texta',
                                   ),
                                 ),
-                                /*ImageIcon(
-                            AssetImage(
-                                "assets/icons/save.png"),
-                            color: Colors.black,
-                            size: 15,
-                          ), */
                               ],
                             ),
                             style: ElevatedButton.styleFrom(
@@ -360,13 +368,16 @@ class _Chatting_screenState extends State<Chatting_screen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            UserSharedPreferences.getNameChat().toString() +
-                                " " +
-                                UserSharedPreferences.getSurnameChat()
-                                    .toString(),
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Text(
+                              UserSharedPreferences.getNameChat().toString() +
+                                  " " +
+                                  UserSharedPreferences.getSurnameChat()
+                                      .toString(),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
                           ),
                           SizedBox(
                             height: 6,

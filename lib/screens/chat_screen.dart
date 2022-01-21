@@ -21,7 +21,13 @@ class _ChatScreenState extends State<ChatScreen> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Chat"),
+            centerTitle: true,
+            title: Text(
+              "Chat",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {

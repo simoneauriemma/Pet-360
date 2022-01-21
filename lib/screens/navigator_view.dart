@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -193,20 +194,18 @@ class _viewInfoState extends State<NavigatorView> {
                   ),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "DATI LIBRETTO ANIMALE",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.questrial(
-                            fontSize: 18,
+                      Padding(padding: EdgeInsets.only(top: 40)),
+                      Text(
+                        "DATI LIBRETTO ANIMALE",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.questrial(
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
                         Align(
                             alignment: Alignment.center,
                             child: Stack(
@@ -1247,6 +1246,7 @@ class _viewInfoState extends State<NavigatorView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Padding(padding: EdgeInsets.only(top: 40)),
                       Text(
                         "DISPOSITIVI PER LA \nGEOLOCALIZZAZIONE",
                         textAlign: TextAlign.center,
