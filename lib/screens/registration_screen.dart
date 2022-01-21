@@ -247,7 +247,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: const Align(
           alignment: Alignment.center,
           child: Text(
-            "Registrazione",
+            "Registrati",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18),
           ),

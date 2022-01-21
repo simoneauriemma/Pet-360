@@ -96,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Row(children: [
-                      Icon(Icons.remove_circle, color: Colors.black),
+                      Icon(Icons.remove_circle, color: Colors.red.shade800),
                       Padding(
                         padding: EdgeInsets.only(right: 10),
                       ),
