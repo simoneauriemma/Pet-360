@@ -69,7 +69,14 @@ class _viewInfoState extends State<NavigatorView> {
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            title: Text("Scegli immagine da: "),
+            title: Text(
+              "Scegli immagine da ",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.questrial(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
@@ -77,16 +84,16 @@ class _viewInfoState extends State<NavigatorView> {
                     child: Row(children: [
                       Icon(Icons.camera_alt_rounded),
                       Padding(
-                        padding: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.only(right: 5),
                       ),
                       Text("Camera"),
                     ]),
                     onTap: () {
-                      getImage(ImageSource.camera,animalOrPassport);
+                      getImage(ImageSource.camera, animalOrPassport);
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   GestureDetector(
                     child: Row(children: [
                       Icon(Icons.photo),
@@ -96,7 +103,7 @@ class _viewInfoState extends State<NavigatorView> {
                       Text("Galleria"),
                     ]),
                     onTap: () {
-                      getImage(ImageSource.gallery,animalOrPassport);
+                      getImage(ImageSource.gallery, animalOrPassport);
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
@@ -1365,8 +1372,9 @@ class _viewInfoState extends State<NavigatorView> {
               backgroundColor: Colors.white,
               title: Text(
                 "Modifica dati animale",
-                style: TextStyle(
+                style: GoogleFonts.questrial(
                   fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               centerTitle: true,

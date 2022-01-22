@@ -74,6 +74,11 @@ class _addInfoState extends State<NavigatorAdd> {
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text(
               "Scegli immagine da: ",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.questrial(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -105,7 +110,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   Divider(
                     color: Colors.black,
                     //height: 20,
@@ -113,7 +118,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     indent: 2,
                     endIndent: 2,
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   GestureDetector(
                     child: Row(children: [
                       Icon(Icons.remove_circle, color: Colors.red.shade800),
@@ -554,7 +559,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                     child: ListBody(
                                       children: [
                                         SizedBox(
-                                          width: 250,
+                                          width: 220,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: tipoVaccinoController,
@@ -577,7 +582,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 250,
+                                          width: 220,
                                           child: TextFormField(
                                             autofocus: false,
                                             controller: dataSommController,
@@ -611,7 +616,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 250,
+                                          width: 220,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: farmacoSommController,
@@ -635,7 +640,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                           height: 10,
                                         ),
                                         SizedBox(
-                                          width: 250,
+                                          width: 220,
                                           child: TextFormField(
                                               autofocus: false,
                                               controller: nomeVeterController,
@@ -1382,9 +1387,9 @@ class _addInfoState extends State<NavigatorAdd> {
         backgroundColor: Colors.white,
         title: Text(
           "Aggiungi un nuovo animale",
-          style: TextStyle(
+          style: GoogleFonts.questrial(
             fontSize: 18,
-            //fontFamily: 'PatuaOne'
+            fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,

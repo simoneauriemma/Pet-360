@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TerminiCodizioni_screen extends StatefulWidget {
   const TerminiCodizioni_screen({Key? key}) : super(key: key);
@@ -14,7 +15,13 @@ class _TerminiCodizioni_screenState extends State<TerminiCodizioni_screen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Termini & Condizioni"),
+        title: Text(
+          "Termini & Condizioni",
+          style: GoogleFonts.questrial(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         elevation: 4,
         leading: IconButton(

@@ -270,6 +270,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       title: Text(
                         "Sei sicuro/a di voler eliminare questo account?",
                         textAlign: TextAlign.center,
+                        style: GoogleFonts.questrial(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       actions: [
                         //"Si" button
@@ -508,6 +512,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       title: Text(
                         "Impostazioni",
                         textAlign: TextAlign.center,
+                        style: GoogleFonts.questrial(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       content: Container(
                           //height: MediaQuery.of(context).size.height * 0.6,
@@ -579,7 +587,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   elevation: 2,
                   title: Text(
                     "Profilo",
-                    style: TextStyle(fontSize: 18),
+                    style: GoogleFonts.questrial(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   centerTitle: true,
                   actions: <Widget>[
@@ -823,7 +834,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   elevation: 2,
                   title: Text(
                     "Profilo",
-                    style: TextStyle(fontSize: 18),
+                    style: GoogleFonts.questrial(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   centerTitle: true,
                   actions: <Widget>[
@@ -1017,7 +1031,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   elevation: 2,
                   title: Text(
                     "Profilo",
-                    style: TextStyle(fontSize: 18),
+                    style: GoogleFonts.questrial(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   centerTitle: true,
                   actions: <Widget>[

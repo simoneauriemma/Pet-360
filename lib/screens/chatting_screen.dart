@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/components/show_message.dart';
 import 'package:pet360/screens/review_chat_screen.dart';
@@ -146,6 +147,10 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                       title: Text(
                                         'Conferma',
                                         textAlign: TextAlign.center,
+                                        style: GoogleFonts.questrial(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       content: Text(
                                           'Sei sicuro di voler lasciare la chat?'),

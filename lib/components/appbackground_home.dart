@@ -11,12 +11,23 @@ class AppBackgroundHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Image.asset("assets/icons/background.jpg"),
+      color: Colors.grey.shade100,
+      child: CustomPaint(
+        painter: CurvePainter(
+          firstColor: Colors.lightGreen.shade200,
+          secondColor: Colors.lightGreen.shade100,
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: child,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        ),
+      ),
     );
   }
 }
 
-/*class CurvePainter extends CustomPainter {
+class CurvePainter extends CustomPainter {
   final Color firstColor;
   final Color secondColor;
 
@@ -31,9 +42,9 @@ class AppBackgroundHome extends StatelessWidget {
 
     final path = Path();
 
-    path.moveTo(0, size.height / 3.9);
+    path.moveTo(0, size.height / 2.5);
     path.quadraticBezierTo(
-        size.width * 2, size.height * 1, size.width, size.height * 3);
+        size.width / 1, size.height / 3, size.width, size.height / 9);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
 
@@ -46,9 +57,9 @@ class AppBackgroundHome extends StatelessWidget {
 
     final secondPath = Path();
 
-    secondPath.moveTo(0, size.height / 4.4);
+    secondPath.moveTo(0, size.height / 4);
     secondPath.quadraticBezierTo(
-        size.width / 0.8, size.height / 3, size.width, size.height / 7);
+        size.width / 1, size.height / 3, size.width, size.height / 30);
     secondPath.lineTo(size.width, 0);
     secondPath.lineTo(0, 0);
 
@@ -58,4 +69,5 @@ class AppBackgroundHome extends StatelessWidget {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
-  } */
+  }
+}

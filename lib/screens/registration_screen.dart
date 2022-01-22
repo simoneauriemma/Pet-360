@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet360/components/appbackground.dart';
 import 'package:pet360/model/trainer_model.dart';
 import 'package:pet360/model/user_model.dart';
@@ -375,7 +376,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text("Registrazione"),
+          title: Text(
+            "Registrazione",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.questrial(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,

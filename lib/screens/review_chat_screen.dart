@@ -31,7 +31,10 @@ class _ReviewChatState extends State<ReviewChat> {
         backgroundColor: Colors.white,
         title: Text(
           "Valuta la conversazione",
-          style: TextStyle(fontSize: 18),
+          style: GoogleFonts.questrial(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
         elevation: 2,

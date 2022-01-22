@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet360/components/appbackground_home.dart';
 import 'package:pet360/model/view_animals_home.dart';
 import 'package:pet360/utils/usersharedpreferences.dart';
 
@@ -336,19 +337,21 @@ class _DashboardState extends State<Dashboard> {
           );
         }
         Size size = MediaQuery.of(context).size;
-        return Scaffold(
-          backgroundColor: Colors.grey.shade100,
-          body: Center(
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.lightGreen.shade200,
-                        Colors.lightGreen.shade100,
-                      ],
-                      begin: const FractionalOffset(0.0, 0.0),
+
+        return AppBackgroundHome(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Center(
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.transparent,
+                          Colors.transparent,
+                        ],
+                        begin: const FractionalOffset(0.0, 0.0),
                       end: const FractionalOffset(1.0, 0.0),
                       stops: [0.0, 1.0],
                       tileMode: TileMode.clamp,
@@ -493,18 +496,19 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 Spacer(),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Image.asset(
-                    "assets/storyset/homeimg.png",
-                    height: size.width / 2,
-                    width: size.width / 2,
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Image.asset(
+                      "assets/storyset/homeimg.png",
+                      height: size.width / 2,
+                      width: size.width / 2,
+                    ),
                   ),
-                ),
-                const Padding(
-                    padding:
-                        EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 80)),
-              ],
+                  const Padding(
+                      padding: EdgeInsets.only(
+                          left: 0, right: 0, top: 0, bottom: 80)),
+                ],
+              ),
             ),
           ),
         );

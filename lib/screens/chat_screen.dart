@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet360/screens/list_addestratore_chat.dart';
 import 'package:pet360/screens/list_utenti.dart';
 import 'package:pet360/screens/list_veterinari_chat.dart';
@@ -24,8 +25,9 @@ class _ChatScreenState extends State<ChatScreen> {
             centerTitle: true,
             title: Text(
               "Chat",
-              style: TextStyle(
-                fontSize: 18,
+              style: GoogleFonts.questrial(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
             leading: IconButton(
@@ -39,14 +41,26 @@ class _ChatScreenState extends State<ChatScreen> {
             backgroundColor: Colors.white,
             bottom: TabBar(tabs: [
               Tab(
-                  text: 'Veterinari',
+                  child: Text(
+                    "Veterinari",
+                    style: GoogleFonts.questrial(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   icon: Image.asset(
                     "assets/icons/veterinario.png",
                     height: 25,
                     width: 25,
                   )),
               Tab(
-                  text: 'Addestratori',
+                  child: Text(
+                    "Addestratori",
+                    style: GoogleFonts.questrial(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   icon: Image.asset(
                     "assets/icons/addestratore.png",
                     height: 25,

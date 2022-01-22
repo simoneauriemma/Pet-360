@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PrivacyPolicy_screen extends StatefulWidget {
   const PrivacyPolicy_screen({Key? key}) : super(key: key);
@@ -13,7 +14,13 @@ class _PrivacyPolicy_screenState extends State<PrivacyPolicy_screen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Privacy & Policy"),
+        title: Text(
+          "Privacy & Policy",
+          style: GoogleFonts.questrial(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         elevation: 4,
         leading: IconButton(

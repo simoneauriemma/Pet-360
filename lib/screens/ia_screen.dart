@@ -88,7 +88,7 @@ class _IAscreenState extends State<IAscreen> {
       textAccuratezza = Row(
         children: [
           Text(
-            "Sono mediamente sicuro di aver\n capito la razza del tuo animale!\n Potrei aver sbagliato.",
+            "Sono mediamente sicuro di aver\n capito la razza del tuo animale,\n ma potrei aver sbagliato.",
             textAlign: TextAlign.center,
             style: GoogleFonts.questrial(
               fontSize: 15,
@@ -142,9 +142,9 @@ class _IAscreenState extends State<IAscreen> {
         backgroundColor: Colors.grey.shade100,
         title: Text(
           "Riconoscimento razza animale",
-          style: TextStyle(
+          style: GoogleFonts.questrial(
             fontSize: 18,
-            //fontFamily: 'Texta',
+            fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
@@ -315,11 +315,25 @@ class _IAscreenState extends State<IAscreen> {
         //child: Icon(Icons.add_a_photo, color: Colors.white,),
         elevation: 5,
         child: Container(
-          width: 60,
-          height: 60,
-          child: Icon(
-            Icons.add_a_photo,
-            color: Colors.black87,
+          width: 100,
+          height: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.add_a_photo,
+                size: 30,
+                color: Colors.grey.shade800,
+              ),
+              Text(
+                "Foto",
+                style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey.shade800,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
           ),
           decoration: BoxDecoration(
             shape: BoxShape.circle,

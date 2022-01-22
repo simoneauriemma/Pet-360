@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet360/model/map_style.dart';
@@ -61,7 +62,10 @@ class _FindFriendsState extends State<FindFriends> {
                 backgroundColor: Colors.white,
                 title: Text(
                   "Geolocalizza i tuoi animali",
-                  style: TextStyle(fontSize: 18),
+                  style: GoogleFonts.questrial(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 centerTitle: true,
                 elevation: 4,
@@ -166,7 +170,10 @@ class _FindFriendsState extends State<FindFriends> {
                 backgroundColor: Colors.white,
                 title: Text(
                   "Geolocalizza i tuoi animali",
-                  style: TextStyle(fontSize: 18),
+                  style: GoogleFonts.questrial(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 centerTitle: true,
                 elevation: 4,
