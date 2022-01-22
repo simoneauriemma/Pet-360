@@ -434,13 +434,13 @@ class _DashboardState extends State<Dashboard> {
                                                   IAscreen()));
                                     },
                                     // Image tapped
-                                    child: Image.asset(
+                                    /*child: Image.asset(
                                       "assets/icons/ped-id.png",
                                       width: 55,
                                       height: 50,
                                       colorBlendMode: BlendMode.multiply,
+                                    ), */
                                     ),
-                                  ),
                                 ),
                               ],
                             ),

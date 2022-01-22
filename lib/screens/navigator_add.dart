@@ -1024,7 +1024,7 @@ class _addInfoState extends State<NavigatorAdd> {
                                     icon: Image.asset("assets/icons/delete.png",
                                         width: 25,
                                         height: 25,
-                                        color: Colors.red.shade400)),
+                                        color: Colors.red.shade800)),
                               ],
                             ),
                           ),

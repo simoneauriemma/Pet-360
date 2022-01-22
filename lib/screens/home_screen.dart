@@ -63,116 +63,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.lightGreen.shade200,
                 backgroundColor: Colors.transparent,
                 items: <Widget>[
-                  Container(
-                    width: 80,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.home,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          "Home",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                  Icon(
+                    Icons.home,
+                    size: 30,
+                    color: Colors.white,
                   ),
-                  Container(
-                    width: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.location_on_rounded,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          "Gps",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                  /*ImageIcon(
+                AssetImage("assets/icons/location.png"),
+                color: Colors.white,
+                size: 25,
+              ),*/
+                  Icon(
+                    Icons.location_on_rounded,
+                    size: 30,
+                    color: Colors.white,
                   ),
-                  Container(
-                    height: 50,
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.add_circle_rounded,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          "Aggiungi",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                  Icon(
+                    Icons.add_circle_rounded,
+                    size: 30,
+                    color: Colors.white,
                   ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ImageIcon(
-                          AssetImage("assets/icons/bubble-chat.png"),
-                          color: Colors.white,
-                          size: 23,
-                        ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                          "Chat",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                  ImageIcon(
+                    AssetImage("assets/icons/bubble-chat.png"),
+                    color: Colors.white,
+                    size: 25,
                   ),
-                  Container(
-                    width: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.account_circle,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          "Profilo",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                  Icon(
+                    Icons.account_circle,
+                    size: 30,
+                    color: Colors.white,
                   ),
                 ],
-                animationCurve: Curves.easeOutCubic,
-                animationDuration: Duration(milliseconds: 400),
+                animationCurve: Curves.easeInOut,
+                animationDuration: Duration(milliseconds: 600),
                 onTap: (index) {
                   setState(() {
                     this.index = index;
