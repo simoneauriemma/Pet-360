@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pet360/model/interface_model.dart';
 
 class ViewAnimalsHome implements InterfaceModel {
@@ -5,19 +6,24 @@ class ViewAnimalsHome implements InterfaceModel {
   String? pathImg;
   String? pathPassaport;
   List<ViewAnimalsHome> animalsList = [];
+  LatLng latLng = LatLng(37.42796133580664, -122.085749655962);
 
-  ViewAnimalsHome({this.animalName, this.pathImg, this.pathPassaport});
+  ViewAnimalsHome({this.animalName, this.pathImg, this.pathPassaport, latLng});
 
   factory ViewAnimalsHome.fromJson(Map<String, dynamic> json) {
     return ViewAnimalsHome(animalName: json.keys.first, pathImg: "");
   }
 
   factory ViewAnimalsHome.fromMap(map) {
-    return ViewAnimalsHome(animalName: map['name'], pathImg: map['pathImg'], pathPassaport: map['pathPassaport']);
+    return ViewAnimalsHome(animalName: map['name'], pathImg: map['pathImg'], pathPassaport: map['pathPassaport'], latLng: map['latLng']);
   }
 
   Map<String, dynamic> toMap() {
-    return {'name': animalName, 'pathImg': pathImg, 'pathPassaport': pathPassaport};
+    return {'name': animalName, 'pathImg': pathImg, 'pathPassaport': pathPassaport,'latLng': latLng};
+  }
+
+  getLatLng(){
+    return latLng;
   }
 
   @override

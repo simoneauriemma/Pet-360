@@ -35,6 +35,7 @@ class _FindFriendsState extends State<FindFriends> {
   late CameraPosition _kGooglePlex;
   bool aBool1=false,aBool2 = false;
   bool aBool3 = true;
+  List<LatLng> cash = List.empty(growable: true);
 
   @override
   void initState() {
@@ -45,7 +46,6 @@ class _FindFriendsState extends State<FindFriends> {
           UserSharedPreferences.getTypeOfUser().toString(), uid, "Animali");
       aBool3 = false;
     }
-    _getUserLocation();
   }
 
   @override
@@ -54,7 +54,7 @@ class _FindFriendsState extends State<FindFriends> {
       builder: (context, snapshot) {
         _kGooglePlex = CameraPosition(
           target: _initialPosition,
-          zoom: 14.4746,
+          zoom: 18,
         );
         if (snapshot.hasData) {
           return Scaffold(
@@ -101,31 +101,11 @@ class _FindFriendsState extends State<FindFriends> {
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
-                            double convertedX = 0;
-                            double convertedY = 0;
-                            Random random = Random();
-                            String doubleNumberX = "0.00000"+random.nextInt(10).toString();
-                            String doubleNumberY = "0.00000"+random.nextInt(10).toString();
-                            aBool1 = random.nextBool();
-                            aBool2 = random.nextBool();
-                            if(!aBool1){
-                              doubleNumberX = "-0.00000"+random.nextInt(10).toString();
-                            } else {
-                              doubleNumberX = "0.00000"+random.nextInt(10).toString();
-                            }
-                            if(!aBool2){
-                              doubleNumberY = "-0.00000"+random.nextInt(10).toString();
-                            } else {
-                              doubleNumberY = "0.00000"+random.nextInt(10).toString();
-                            }
-                            convertedX = double.parse(doubleNumberX);
-                            convertedY = double.parse(doubleNumberY);
-                            _initialPosition = LatLng(_initialPosition.latitude+convertedX, _initialPosition.longitude+convertedY);
-                            setMarker(context,snapshot.data![index],_initialPosition.latitude,_initialPosition.longitude);
+                            setMarker(context,snapshot.data![index],snapshot.data![index].latLng.latitude,snapshot.data![index].latLng.longitude);
                             return GestureDetector(
                               onTap: () {
                                 _controller.moveCamera(
-                                    CameraUpdate.newLatLng(_initialPosition));
+                                    CameraUpdate.newLatLng(snapshot.data![index].latLng));
                               },
                               child: Container(
                                 width: 100,
@@ -237,7 +217,7 @@ class _FindFriendsState extends State<FindFriends> {
         }
       });
 
-  void _getUserLocation() async {
+  _getUserLocation() async {
     Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     _initialPosition = LatLng(position.latitude, position.longitude);
@@ -262,14 +242,12 @@ class _FindFriendsState extends State<FindFriends> {
   setMarker(context,data,x,y) async{
     String street = await _getAddressFromLatLng(x,y);
 
-    final Uint8List? markerIcon = await _getText(200, 100, data.animalName);
+    final Uint8List? markerIcon = await _getText(250, 150, data.animalName);
     Marker marker;
     marker = Marker(
       markerId: MarkerId(data.animalName.toString()),
       position: LatLng(x, y),
       icon: BitmapDescriptor.fromBytes(markerIcon!),
-      /*icon: await _getAssetIcon(context, data.pathImg.toString())
-          .then((value) => value),*/
       infoWindow: InfoWindow(
         title: data.animalName.toString(),
         snippet: street,
@@ -297,31 +275,13 @@ class _FindFriendsState extends State<FindFriends> {
     TextPainter painter = TextPainter(textDirection: TextDirection.ltr);
     painter.text = TextSpan(
       text: animalName,
-      style: TextStyle(fontSize: 25.0, color: Colors.white),
+      style: TextStyle(fontSize: 45.0, color: Colors.white),
     );
     painter.layout();
     painter.paint(canvas, Offset((width * 0.5) - painter.width * 0.5, (height * 0.5) - painter.height * 0.5));
     final img = await pictureRecorder.endRecording().toImage(width, height);
     final data = await img.toByteData(format: ui.ImageByteFormat.png);
     return data?.buffer.asUint8List();
-  }
-
-  Future<BitmapDescriptor> _getAssetIcon(
-      BuildContext context, String icon) async {
-    final Completer<BitmapDescriptor> bitmapIcon = Completer<BitmapDescriptor>();
-    final ImageConfiguration config = createLocalImageConfiguration(context, size: Size(5, 5));
-
-    FileImage(File(icon))
-        .resolve(config)
-        .addListener(ImageStreamListener((ImageInfo image, bool sync) async {
-      final ByteData? bytes = await image.image.toByteData(format: ui.ImageByteFormat.png);
-      ui.Codec codec = await ui.instantiateImageCodec(bytes!.buffer.asUint8List(), targetWidth: 200);
-      ui.FrameInfo fi = await codec.getNextFrame();
-      final BitmapDescriptor bitmap = BitmapDescriptor.fromBytes((await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List());
-      bitmapIcon.complete(bitmap);
-    }));
-
-    return await bitmapIcon.future;
   }
 
   Future<List<ViewAnimalsHome>> fetchAnimals(
@@ -336,13 +296,54 @@ class _FindFriendsState extends State<FindFriends> {
             ".json?");
     final response = await http.get(url);
     List<ViewAnimalsHome> list = List.empty(growable: true);
+    await _getUserLocation();
     if (response.statusCode == 200) {
       jsonDecode(response.body).forEach((key, value) async {
         ViewAnimalsHome animal = ViewAnimalsHome();
         animal.animalName = key;
         animal.pathImg = value["Libretto"]["animalFoto"];
+        double convertedX = 0;
+        double convertedY = 0;
+        Random random = Random();
+        String doubleNumberX = "0.00009"+random.nextInt(10).toString();
+        String doubleNumberY = "0.00009"+random.nextInt(10).toString();
+        aBool1 = random.nextBool();
+        aBool2 = random.nextBool();
+        if(!aBool1){
+          doubleNumberX = "-0.00009"+random.nextInt(10).toString();
+        } else {
+          doubleNumberX = "0.00009"+random.nextInt(10).toString();
+        }
+        if(!aBool2){
+          doubleNumberY = "-0.00009"+random.nextInt(10).toString();
+        } else {
+          doubleNumberY = "0.00009"+random.nextInt(10).toString();
+        }
+        convertedX = double.parse(doubleNumberX);
+        convertedY = double.parse(doubleNumberY);
+        if(!cash.contains(LatLng(_initialPosition.latitude+convertedX, _initialPosition.longitude+convertedY))){
+          animal.latLng = LatLng(_initialPosition.latitude+convertedX, _initialPosition.longitude+convertedY);
+        } else {
+          aBool1 = random.nextBool();
+          aBool2 = random.nextBool();
+          if(!aBool1){
+            doubleNumberX = "-0.00009"+random.nextInt(10).toString();
+          } else {
+            doubleNumberX = "0.00009"+random.nextInt(10).toString();
+          }
+          if(!aBool2){
+            doubleNumberY = "-0.00009"+random.nextInt(10).toString();
+          } else {
+            doubleNumberY = "0.00009"+random.nextInt(10).toString();
+          }
+          convertedX = double.parse(doubleNumberX);
+          convertedY = double.parse(doubleNumberY);
+          animal.latLng = LatLng(_initialPosition.latitude+convertedX, _initialPosition.longitude+convertedY);
+        }
         list.add(animal);
+        cash.add(animal.latLng);
       });
+      cash.removeRange(0, cash.length);
       return list;
     } else {
       throw Exception('Failed to load album');
