@@ -563,7 +563,6 @@ class _Chatting_screenState extends State<Chatting_screen> {
           _auth.currentUser!.uid.toString();
     }
     //print("group id chat...." + groupId.toString());
-    await _firestore.collection("Messages").doc(groupId.toString()).delete();
 
     var querySnapshot = await _firestore
         .collection("Messages")
@@ -575,13 +574,15 @@ class _Chatting_screenState extends State<Chatting_screen> {
     //print(allData[0]["time"]);
     // print(snapshot);
     for (int i = 0; i < allData.length; i++) {
-      _firestore
+      await _firestore
           .collection("Messages")
           .doc(groupId.toString())
           .collection(groupId.toString())
           .doc(allData[i]["time"])
           .delete();
     }
+
+    await _firestore.collection("Messages").doc(groupId.toString()).delete();
   }
 
   void sendMessage() async {
