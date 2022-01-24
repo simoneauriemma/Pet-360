@@ -485,16 +485,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       SizedBox(height: 30),
                                       Text(
                                         "Informazioni aggiuntive",
-                                        style: TextStyle(
-                                          fontSize: 18,
+                                        style: GoogleFonts.questrial(
+                                          fontSize: 20,
                                           fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                              blurRadius: 10.0,
-                                              color: Colors.lightGreen.shade100,
-                                              offset: Offset(5.0, 5.0),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                       SizedBox(height: 30),

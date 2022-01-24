@@ -213,7 +213,7 @@ class WidgetList extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey[800],
                                                   )),
-                                              Text(phonenum,
+                                              Text("+39 " + phonenum,
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                     color: Colors.grey[800],

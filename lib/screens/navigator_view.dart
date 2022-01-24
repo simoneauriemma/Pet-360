@@ -203,7 +203,7 @@ class _viewInfoState extends State<NavigatorView> {
                       children: [
                       Padding(padding: EdgeInsets.only(top: 40)),
                       Text(
-                        "DATI LIBRETTO ANIMALE",
+                        "LIBRETTO ANIMALE",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.questrial(
                           fontSize: 18,

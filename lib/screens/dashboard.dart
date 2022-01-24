@@ -71,287 +71,290 @@ class _DashboardState extends State<Dashboard> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Size size = MediaQuery.of(context).size;
-          return Scaffold(
-            backgroundColor: Colors.grey.shade100,
-            body: Center(
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.lightGreen.shade200,
-                          Colors.lightGreen.shade100,
+          return AppBackgroundHome(
+            child: Scaffold(
+              //backgroundColor: Colors.grey.shade100,
+              backgroundColor: Colors.transparent,
+              body: Center(
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            //Colors.lightGreen.shade200,
+                            //Colors.lightGreen.shade100,
+                            Colors.transparent,
+                            Colors.transparent,
+                          ],
+                          begin: const FractionalOffset(0.0, 0.0),
+                          end: const FractionalOffset(1.0, 0.0),
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(0),
+                            topRight: Radius.circular(0),
+                            bottomLeft: Radius.circular(35),
+                            bottomRight: Radius.circular(35)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
                         ],
-                        begin: const FractionalOffset(0.0, 0.0),
-                        end: const FractionalOffset(1.0, 0.0),
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp,
                       ),
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(0),
-                          topRight: Radius.circular(0),
-                          bottomLeft: Radius.circular(35),
-                          bottomRight: Radius.circular(35)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    height: size.height * 0.25,
-                    child: Stack(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                          ),
-                          height: size.height * 0.3 - 27,
-                          child: Row(
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(padding: EdgeInsets.only(top: 70)),
-                                  Text(
-                                    "Bentornato\\a",
-                                    textAlign: TextAlign.left,
-                                    style: GoogleFonts.questrial(
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    _firstName,
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(fontSize: 22),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(40),
-                                        topRight: Radius.circular(40),
-                                        bottomLeft: Radius.circular(40),
-                                        bottomRight: Radius.circular(40),
+                      height: size.height * 0.25,
+                      child: Stack(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                              right: 20,
+                            ),
+                            height: size.height * 0.3 - 27,
+                            child: Row(
+                              children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(padding: EdgeInsets.only(top: 70)),
+                                    Text(
+                                      "Bentornato\\a",
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.questrial(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          spreadRadius: 5,
-                                          blurRadius: 7,
-                                          offset: Offset(0,
-                                              3), // changes position of shadow
+                                    ),
+                                    Text(
+                                      _firstName,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: 22),
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                          bottomLeft: Radius.circular(40),
+                                          bottomRight: Radius.circular(40),
                                         ),
-                                      ],
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    IAscreen()));
-                                      },
-                                      // Image tapped
-                                      child: Image.asset(
-                                        "assets/icons/ped-id.png",
-                                        width: 55,
-                                        height: 50,
-                                        colorBlendMode: BlendMode.multiply,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 55,
-                  ),
-                  Text(
-                    "Lista dei tuoi animali",
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.questrial(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    height: 140,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => NavigatorView()));
-                            UserSharedPreferences.setAnimalName(
-                                snapshot.data![index].animalName!);
-                          },
-                          onLongPress: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext ctx) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(32.0))),
-                                    title: Text(
-                                      'Eliminazione animale',
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    content: Text(
-                                      'Sei sicuro di voler eliminare questo animale?',
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    actions: [
-                                      // The "Yes" button
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          TextButton(
-                                            onPressed: () {
-                                              // Remove the animal
-                                              removeAnimal(
-                                                  snapshot
-                                                      .data![index].animalName!,
-                                                  snapshot.data![index]
-                                                      .pathPassaport!);
-                                              setState(() {
-                                                snapshot.data!.removeAt(index);
-                                                Navigator.of(context).pop();
-                                              });
-                                            },
-                                            child: Text(
-                                              'Sì',
-                                              style: TextStyle(fontSize: 20),
-                                            ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.2),
+                                            spreadRadius: 5,
+                                            blurRadius: 7,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
                                           ),
-                                          TextButton(
-                                              onPressed: () {
-                                                // Close the dialog
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text(
-                                                'No',
-                                                style: TextStyle(fontSize: 20),
-                                              ))
                                         ],
                                       ),
-                                    ],
-                                  );
-                                });
-                          },
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            margin: EdgeInsets.only(left: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ClipOval(
-                                  child: Image.file(
-                                    File(snapshot.data![index].pathImg
-                                        .toString()),
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                  ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      IAscreen()));
+                                        },
+                                        // Image tapped
+                                        child: Image.asset(
+                                          "assets/icons/ped-id.png",
+                                          width: 55,
+                                          height: 50,
+                                          colorBlendMode: BlendMode.multiply,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-
-                                //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
-
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  snapshot.data![index].animalName.toString(),
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600),
-                                )
                               ],
                             ),
                           ),
-                        );
-                      },
+                        ],
+                      ),
                     ),
-                  ),
-                  Spacer(),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Image.asset(
-                      "assets/storyset/homeimg.png",
-                      height: size.width / 2,
-                      width: size.width / 2,
+                    Padding(padding: EdgeInsets.only(bottom: 120)),
+                    Text(
+                      "Lista dei tuoi animali",
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.questrial(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const Padding(
-                      padding: EdgeInsets.only(
-                          left: 0, right: 0, top: 0, bottom: 80)),
-                ],
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 1.1,
+                      height: 140,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => NavigatorView()));
+                              UserSharedPreferences.setAnimalName(
+                                  snapshot.data![index].animalName!);
+                            },
+                            onLongPress: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(32.0))),
+                                      title: Text(
+                                        'Eliminazione animale',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      content: Text(
+                                        'Sei sicuro di voler eliminare questo animale?',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      actions: [
+                                        // The "Yes" button
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                // Remove the animal
+                                                removeAnimal(
+                                                    snapshot.data![index]
+                                                        .animalName!,
+                                                    snapshot.data![index]
+                                                        .pathPassaport!);
+                                                setState(() {
+                                                  snapshot.data!
+                                                      .removeAt(index);
+                                                  Navigator.of(context).pop();
+                                                });
+                                              },
+                                              child: Text(
+                                                'Sì',
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                            ),
+                                            TextButton(
+                                                onPressed: () {
+                                                  // Close the dialog
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  'No',
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ))
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              margin: EdgeInsets.only(left: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipOval(
+                                    child: Image.file(
+                                      File(snapshot.data![index].pathImg
+                                          .toString()),
+                                      width: 80,
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+
+                                  //child: Image.asset("assets/icons/download.jpeg", width: 50, height: 50, fit: BoxFit.cover),
+
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    snapshot.data![index].animalName.toString(),
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Spacer(),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/storyset/homeimg.png",
+                        height: size.width / 2.5,
+                        width: size.width / 2.5,
+                      ),
+                    ),
+                    const Padding(
+                        padding: EdgeInsets.only(
+                            left: 0, right: 0, top: 0, bottom: 80)),
+                  ],
+                ),
               ),
             ),
           );
         }
         Size size = MediaQuery.of(context).size;
-
         return AppBackgroundHome(
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Center(
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.transparent,
-                          Colors.transparent,
-                        ],
-                        begin: const FractionalOffset(0.0, 0.0),
+            body: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.transparent,
+                        Colors.transparent,
+                      ],
+                      begin: const FractionalOffset(0.0, 0.0),
                       end: const FractionalOffset(1.0, 0.0),
                       stops: [0.0, 1.0],
                       tileMode: TileMode.clamp,
@@ -434,13 +437,13 @@ class _DashboardState extends State<Dashboard> {
                                                   IAscreen()));
                                     },
                                     // Image tapped
-                                    /*child: Image.asset(
+                                    child: Image.asset(
                                       "assets/icons/ped-id.png",
                                       width: 55,
                                       height: 50,
                                       colorBlendMode: BlendMode.multiply,
-                                    ), */
                                     ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -450,16 +453,20 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 55,
-                ),
-                Text(
-                  "Lista dei tuoi animali",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.questrial(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Padding(padding: EdgeInsets.only(bottom: 120)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Lista dei tuoi animali",
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.questrial(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 5,
@@ -470,10 +477,10 @@ class _DashboardState extends State<Dashboard> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -486,7 +493,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   child: const Center(
                     child: Text(
-                      "Clicca su '+' per aggiungere un animale\n da gestire!",
+                      "Clicca su '+' per aggiungere un animale da gestire!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 18,
@@ -496,19 +503,18 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 Spacer(),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Image.asset(
-                      "assets/storyset/homeimg.png",
-                      height: size.width / 2,
-                      width: size.width / 2,
-                    ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Image.asset(
+                    "assets/storyset/homeimg.png",
+                    height: size.width / 2.5,
+                    width: size.width / 2.5,
                   ),
-                  const Padding(
-                      padding: EdgeInsets.only(
-                          left: 0, right: 0, top: 0, bottom: 80)),
-                ],
-              ),
+                ),
+                const Padding(
+                    padding:
+                        EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 60)),
+              ],
             ),
           ),
         );

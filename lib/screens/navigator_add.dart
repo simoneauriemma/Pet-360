@@ -203,7 +203,7 @@ class _addInfoState extends State<NavigatorAdd> {
                 child: Column(
                   children: [
                     Text(
-                      "DATI LIBRETTO ANIMALE",
+                      "LIBRETTO ANIMALE",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.questrial(
                         fontSize: 18,

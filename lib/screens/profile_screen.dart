@@ -968,9 +968,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                       Text(
                                         "Informazioni aggiuntive",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
+                                        style: GoogleFonts.questrial(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 10,
@@ -1165,9 +1166,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                       Text(
                                         "Informazioni aggiuntive",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
+                                        style: GoogleFonts.questrial(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 10,
