@@ -54,7 +54,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            title: Text("Scegli immagine da: "),
+            title: Text("Scegli immagine da: ",
+            textAlign: TextAlign.center,
+              style: GoogleFonts.questrial(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [

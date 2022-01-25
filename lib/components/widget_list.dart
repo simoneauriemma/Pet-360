@@ -268,7 +268,7 @@ class WidgetList extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 30,
+                                      height: 25,
                                     ),
                                     ConstrainedBox(
                                       constraints:
