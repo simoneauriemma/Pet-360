@@ -7,7 +7,6 @@ import 'dart:ui' as ui;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -261,7 +260,7 @@ class _FindFriendsState extends State<FindFriends> {
   Future<Uint8List?> _getText(int width, int height, String animalName) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
-    final Paint paint = Paint()..color = Colors.blue;
+    final Paint paint = Paint()..color = Colors.lightGreen.shade200;
     final Radius radius = Radius.circular(20.0);
     canvas.drawRRect(
         RRect.fromRectAndCorners(
@@ -275,7 +274,7 @@ class _FindFriendsState extends State<FindFriends> {
     TextPainter painter = TextPainter(textDirection: TextDirection.ltr);
     painter.text = TextSpan(
       text: animalName,
-      style: TextStyle(fontSize: 45.0, color: Colors.white),
+      style: TextStyle(fontSize: 45.0, color: Colors.black),
     );
     painter.layout();
     painter.paint(canvas, Offset((width * 0.5) - painter.width * 0.5, (height * 0.5) - painter.height * 0.5));

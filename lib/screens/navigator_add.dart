@@ -534,7 +534,7 @@ class _addInfoState extends State<NavigatorAdd> {
                         const Text(
                           "Aggiungi un vaccino",
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 17,
                               color: Colors.black54,
                               fontStyle: FontStyle.italic),
                         ),
@@ -1273,7 +1273,9 @@ class _addInfoState extends State<NavigatorAdd> {
                           "Dispositivi disponibili:",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 16, fontStyle: FontStyle.italic),
+                              fontSize: 17, 
+                              color: Colors.black54,
+                              fontStyle: FontStyle.italic),
                         ),
                         SizedBox(
                           height: 30,
@@ -1422,7 +1424,14 @@ class _addInfoState extends State<NavigatorAdd> {
                 return Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
+                    children: <Widget>[                      
+                    Text("AVANTI",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.questrial(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightGreen
+                    ),),
                       IconButton(
                         onPressed: controls.onStepContinue,
                         icon: Image.asset(
@@ -1440,7 +1449,7 @@ class _addInfoState extends State<NavigatorAdd> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         IconButton(
-                          padding: EdgeInsets.only(top: 15),
+                          //padding: EdgeInsets.only(top: 15),
                           onPressed: controls.onStepCancel,
                           icon: Image.asset(
                             "assets/icons/arrow-left.png",
@@ -1448,41 +1457,49 @@ class _addInfoState extends State<NavigatorAdd> {
                             height: 40,
                           ),
                         ),
-                      ]),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      saveData(
-                          nameController.text,
-                          dataController.text,
-                          specieController.text,
-                          razzaController.text,
-                          coloreController.text,
-                          veterinarioController.text,
-                          descrizioneController.text,
-                          microchipController.text,
-                          dataMicrochipController.text,
-                          enteController.text,
-                          soprannomeController.text,
-                          _value);
-                      nameController.text = "";
-                      dataController.text = "";
-                      specieController.text = "";
-                      razzaController.text = "";
-                      coloreController.text = "";
-                      veterinarioController.text = "";
-                      descrizioneController.text = "";
-                      microchipController.text = "";
-                      dataMicrochipController.text = "";
-                      enteController.text = "";
-                      soprannomeController.text = "";
-                    },
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints.tightFor(
+                        Text("INDIETRO",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.questrial(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.lightGreen
+                          ),
+                          ),
+                          ]),
+                        SizedBox(
+                          height: 50,
+                          ),
+                        ElevatedButton(
+                          onPressed: () {
+                          saveData(
+                            nameController.text,
+                            dataController.text,
+                            specieController.text,
+                            razzaController.text,
+                            coloreController.text,
+                            veterinarioController.text,
+                            descrizioneController.text,
+                            microchipController.text,
+                            dataMicrochipController.text,
+                            enteController.text,
+                            soprannomeController.text,
+                            _value);
+                          nameController.text = "";
+                          dataController.text = "";
+                          specieController.text = "";
+                          razzaController.text = "";
+                          coloreController.text = "";
+                          veterinarioController.text = "";
+                          descrizioneController.text = "";
+                          microchipController.text = "";
+                          dataMicrochipController.text = "";
+                          enteController.text = "";
+                          soprannomeController.text = "";
+                          },
+                        child: ConstrainedBox(
+                        constraints: BoxConstraints.tightFor(
                           width: MediaQuery.of(context).size.width, height: 50),
-                      child: const Align(
+                        child: const Align(
                         alignment: Alignment.center,
                         child: Text(
                           "Salva tutto",
@@ -1509,8 +1526,11 @@ class _addInfoState extends State<NavigatorAdd> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      padding: EdgeInsets.only(top: 15),
+                    Row(
+                    children: [
+                      Padding(padding: EdgeInsets.only(top:17)),
+                      IconButton(
+                      //padding: EdgeInsets.only(top: 15),
                       onPressed: controls.onStepCancel,
                       icon: Image.asset(
                         "assets/icons/arrow-left.png",
@@ -1518,14 +1538,36 @@ class _addInfoState extends State<NavigatorAdd> {
                         height: 40,
                       ),
                     ),
+                    Text("INDIETRO",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.questrial(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightGreen
+                    ),),
+                    ]
+                    ),
+                    Row(
+                    children: [
+                      Padding(padding: EdgeInsets.only(top:17)),
+                      Text("AVANTI",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.questrial(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightGreen
+                    ),),
                     IconButton(
-                      padding: EdgeInsets.only(top: 15),
+                      //padding: EdgeInsets.only(top: 15),
                       onPressed: controls.onStepContinue,
                       icon: Image.asset(
                         "assets/icons/arrow-right.png",
                         width: 40,
                         height: 40,
                       ),
+                    ),
+                    
+                    ]
                     ),
                   ],
                 );
