@@ -132,7 +132,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                       ),
                       ConstrainedBox(
                         constraints:
-                            BoxConstraints.tightFor(width: 100, height: 40),
+                            BoxConstraints.tightFor(width: 70, height: 40),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: ElevatedButton(
@@ -207,17 +207,18 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                     );
                                   });
                             },
-                            child: Row(
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Text(
+                              children: const [                               
+                                Icon(Icons.exit_to_app_sharp),
+                                /* Text(
                                   "Lascia chat",
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     //fontFamily: 'Texta',
                                   ),
-                                ),
+                                ),*/
                               ],
                             ),
                             style: ElevatedButton.styleFrom(
@@ -438,7 +439,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                                 );
                               });
                         },
-                        child: Row(
+                        /*child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: const [
@@ -447,15 +448,23 @@ class _Chatting_screenState extends State<Chatting_screen> {
                               style: TextStyle(
                                 fontSize: 12,
                               ),
-                            ),
-                            /*ImageIcon(
-                            AssetImage(
-                                "assets/icons/save.png"),
-                            color: Colors.black,
-                            size: 15,
-                          ), */
+                            ),                           
                           ],
-                        ),
+                        ),*/
+                         child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [                               
+                                Icon(Icons.exit_to_app_sharp),
+                                /* Text(
+                                  "Lascia chat",
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    //fontFamily: 'Texta',
+                                  ),
+                                ),*/
+                              ],
+                            ),
                         style: ElevatedButton.styleFrom(
                           onPrimary: Colors.black,
                           primary: Colors.white,

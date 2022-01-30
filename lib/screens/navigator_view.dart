@@ -70,7 +70,7 @@ class _viewInfoState extends State<NavigatorView> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text(
-              "Scegli immagine da ",
+              "Scegli immagine da",
               textAlign: TextAlign.center,
               style: GoogleFonts.questrial(
                 fontSize: 20,
@@ -84,7 +84,7 @@ class _viewInfoState extends State<NavigatorView> {
                     child: Row(children: [
                       Icon(Icons.camera_alt_rounded),
                       Padding(
-                        padding: EdgeInsets.only(right: 5),
+                        padding: EdgeInsets.only(right: 7),
                       ),
                       Text("Camera"),
                     ]),
@@ -98,7 +98,7 @@ class _viewInfoState extends State<NavigatorView> {
                     child: Row(children: [
                       Icon(Icons.photo),
                       Padding(
-                        padding: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.only(right: 7),
                       ),
                       Text("Galleria"),
                     ]),
@@ -107,15 +107,15 @@ class _viewInfoState extends State<NavigatorView> {
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   Divider(
                     color: Colors.black,
                     //height: 20,
-                    thickness: 2,
-                    indent: 3,
-                    endIndent: 3,
+                    thickness: 1,
+                    indent: 2,
+                    endIndent: 2,
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   GestureDetector(
                     child: Row(children: [
                       Icon(Icons.remove_circle, color: Colors.red.shade800),
@@ -527,7 +527,7 @@ class _viewInfoState extends State<NavigatorView> {
                         const Text(
                           "Aggiungi un nuovo vaccino",
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 17,
                               color: Colors.black54,
                               fontStyle: FontStyle.italic),
                         ),
@@ -1269,8 +1269,10 @@ class _viewInfoState extends State<NavigatorView> {
                         "Dispositivi collegati:",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 15, fontStyle: FontStyle.italic),
-                      ),
+                              fontSize: 17, 
+                              color: Colors.black54,
+                              fontStyle: FontStyle.italic),
+                        ),
                       SizedBox(
                         height: 30,
                       ),
@@ -1318,41 +1320,7 @@ class _viewInfoState extends State<NavigatorView> {
                             ],
                           ),
                         ),
-                      ),
-
-                      /*Stack(
-                              alignment: AlignmentDirectional.topCenter,
-                              children: [
-                                ElevatedButton(
-                                  child: Text("AirTag2"),
-                                  style: ElevatedButton.styleFrom(
-                                    onPrimary: Colors.black,
-                                    primary: Colors.white,
-                                    elevation: 5,
-                                    minimumSize: Size(140, 40),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                  ),
-                                  onPressed: () {
-                                    if(airTags.length == 2){
-                                      airTags[1] == "2 dispositivo";
-                                    }
-                                  },
-                                ),
-                                Positioned(
-                                    bottom: 5,
-                                    left: 105,
-                                    //child: CircleAvatar(radius: 12, backgroundColor: Colors.red)
-                                    child: IconButton(
-                                        onPressed: () {
-                                          if(airTags.length == 2){
-                                            airTags.removeLast();
-                                          }
-                                        },
-                                        icon: Icon(Icons.remove_circle,
-                                            size: 25, color: Colors.black54))),
-                              ]),*/
+                      ),                      
                     ],
                   ),
                 ),
@@ -1371,7 +1339,7 @@ class _viewInfoState extends State<NavigatorView> {
             appBar: AppBar(
               backgroundColor: Colors.white,
               title: Text(
-                "Modifica dati animale",
+                "Dati animale",
                 style: GoogleFonts.questrial(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -1387,8 +1355,7 @@ class _viewInfoState extends State<NavigatorView> {
                 },
               ),
             ),
-            body: Container(
-              padding: EdgeInsets.only(bottom: 50),
+            body: Container(              
               child: Theme(
                 data: ThemeData(
                   colorScheme: ColorScheme.light(
@@ -1405,36 +1372,51 @@ class _viewInfoState extends State<NavigatorView> {
                       (BuildContext context, ControlsDetails controls) {
                     if (currentStep == 0) {
                       return Row(
-                          mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: controls.onStepContinue,
-                            icon: Image.asset(
-                              "assets/icons/arrow-right.png",
-                              width: 40,
-                              height: 40,
-                            ),
-                          ),
-                        ],
-                      );
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[                      
+                    Text("AVANTI",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.questrial(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightGreen
+                    ),),
+                      IconButton(
+                        onPressed: controls.onStepContinue,
+                        icon: Image.asset(
+                          "assets/icons/arrow-right.png",
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                    ]);
                     }
 
                     if (currentStep == 3) {
                       return Column(children: [
                         Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              IconButton(
-                                onPressed: controls.onStepCancel,
-                                icon: Image.asset(
-                                  "assets/icons/arrow-left.png",
-                                  width: 40,
-                                  height: 40,
-                                ),
-                              ),
-                            ]),
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        IconButton(
+                          //padding: EdgeInsets.only(top: 15),
+                          onPressed: controls.onStepCancel,
+                          icon: Image.asset(
+                            "assets/icons/arrow-left.png",
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
+                        Text("INDIETRO",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.questrial(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.lightGreen
+                          ),
+                          ),
+                          ]),
                         SizedBox(
                           height: 50,
                         ),
@@ -1484,26 +1466,48 @@ class _viewInfoState extends State<NavigatorView> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          IconButton(
-                            padding: EdgeInsets.only(top: 15),
-                            onPressed: controls.onStepCancel,
-                            icon: Image.asset(
-                              "assets/icons/arrow-left.png",
-                              width: 40,
-                              height: 40,
-                            ),
-                          ),
-                          IconButton(
-                            padding: EdgeInsets.only(top: 15),
-                            onPressed: controls.onStepContinue,
-                            icon: Image.asset(
-                              "assets/icons/arrow-right.png",
-                              width: 40,
-                              height: 40,
-                            ),
-                          ),
-                        ],
-                      );
+                         Row(
+                    children: [
+                      Padding(padding: EdgeInsets.only(top:17)),
+                      IconButton(
+                      //padding: EdgeInsets.only(top: 15),
+                      onPressed: controls.onStepCancel,
+                      icon: Image.asset(
+                        "assets/icons/arrow-left.png",
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                    Text("INDIETRO",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.questrial(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightGreen
+                    ),),
+                    ]
+                    ),
+                    Row(
+                    children: [
+                      Padding(padding: EdgeInsets.only(top:17)),
+                      Text("AVANTI",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.questrial(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightGreen
+                    ),),
+                    IconButton(
+                      //padding: EdgeInsets.only(top: 15),
+                      onPressed: controls.onStepContinue,
+                      icon: Image.asset(
+                        "assets/icons/arrow-right.png",
+                        width: 40,
+                        height: 40,
+                        ),
+                      )]
+                      )],
+                    );
                   },
                   onStepContinue: () {
                     setState(() {

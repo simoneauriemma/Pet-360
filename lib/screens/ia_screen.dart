@@ -326,13 +326,13 @@ class _IAscreenState extends State<IAscreen> {
                 size: 30,
                 color: Colors.grey.shade800,
               ),
-              Text(
+              /*Text(
                 "Foto",
                 style: TextStyle(
                     fontSize: 10,
                     color: Colors.grey.shade800,
                     fontWeight: FontWeight.bold),
-              ),
+              ),*/
             ],
           ),
           decoration: BoxDecoration(

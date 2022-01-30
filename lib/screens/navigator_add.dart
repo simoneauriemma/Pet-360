@@ -73,7 +73,7 @@ class _addInfoState extends State<NavigatorAdd> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text(
-              "Scegli immagine da: ",
+              "Scegli immagine da",
               textAlign: TextAlign.center,
               style: GoogleFonts.questrial(
                 fontSize: 20,
@@ -87,7 +87,7 @@ class _addInfoState extends State<NavigatorAdd> {
                     child: Row(children: [
                       Icon(Icons.camera_alt_rounded),
                       Padding(
-                        padding: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.only(right: 7),
                       ),
                       Text("Camera"),
                     ]),
@@ -96,12 +96,12 @@ class _addInfoState extends State<NavigatorAdd> {
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   GestureDetector(
                     child: Row(children: [
                       Icon(Icons.photo),
                       Padding(
-                        padding: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.only(right: 7),
                       ),
                       Text("Galleria"),
                     ]),

@@ -54,21 +54,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            title: Text("Scegli immagine da: ",
+            title: Text("Scegli immagine da",
             textAlign: TextAlign.center,
               style: GoogleFonts.questrial(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
-            ),
+            ),            
             content: SingleChildScrollView(
               child: ListBody(
-                children: [
+                children: [                 
                   GestureDetector(
                     child: Row(children: [
                       Icon(Icons.camera_alt_rounded),
                       Padding(
-                        padding: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.only(right: 7),
                       ),
                       Text("Camera"),
                     ]),
@@ -77,12 +77,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   GestureDetector(
                     child: Row(children: [
                       Icon(Icons.photo),
                       Padding(
-                        padding: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.only(right: 7),
                       ),
                       Text("Galleria"),
                     ]),
@@ -91,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.of(context, rootNavigator: true).pop();
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   Divider(
                     color: Colors.black,
                     //height: 20,
@@ -99,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     indent: 2,
                     endIndent: 2,
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(5)),
                   GestureDetector(
                     child: Row(children: [
                       Icon(Icons.remove_circle, color: Colors.red.shade800),
@@ -333,29 +333,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
 
-            /*final logoutButton = GestureDetector(
-              onTap: () {
-                LogOut();
-              },
-              child: Row(
-                children: const [
-                  Text(
-                    "Logout",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  ImageIcon(
-                    AssetImage("assets/icons/logout.png"),
-                    color: Colors.black,
-                    size: 18,
-                  ),
-                ],
-              ),
-            ); */
-
+            
             final logoutButton = ConstrainedBox(
               constraints: BoxConstraints.tightFor(width: 120, height: 40),
               child: ElevatedButton(
@@ -701,8 +679,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         color: Colors.grey.withOpacity(0.1),
                                         spreadRadius: 5,
                                         blurRadius: 7,
-                                        offset: Offset(
-                                            0, 3), // changes position of shadow
+                                        offset: Offset(0, 3), // changes position of shadow
                                       ),
                                     ],
                                   ),
