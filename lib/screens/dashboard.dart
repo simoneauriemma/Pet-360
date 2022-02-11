@@ -493,7 +493,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   child: const Center(
                     child: Text(
-                      "Clicca su '+' per aggiungere un animale da gestire!",
+                      "Clicca su '+' per aggiungere un\n animale da gestire!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 18,

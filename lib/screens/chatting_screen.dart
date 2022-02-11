@@ -211,14 +211,14 @@ class _Chatting_screenState extends State<Chatting_screen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: const [
-                                Icon(Icons.exit_to_app_sharp),
-                                /* Text(
-                                  "Lascia chat",
+                                Icon(Icons.exit_to_app_rounded),
+                                Text(
+                                  "Lascia",
                                   style: TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     //fontFamily: 'Texta',
                                   ),
-                                ),*/
+                                ),
                               ],
                             ),
                             style: ElevatedButton.styleFrom(
@@ -455,14 +455,14 @@ class _Chatting_screenState extends State<Chatting_screen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: const [
-                            Icon(Icons.exit_to_app_sharp),
-                            /* Text(
-                                  "Lascia chat",
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    //fontFamily: 'Texta',
-                                  ),
-                                ),*/
+                            Icon(Icons.exit_to_app_rounded),
+                            Text(
+                              "Lascia",
+                              style: TextStyle(
+                                fontSize: 10,
+                                //fontFamily: 'Texta',
+                              ),
+                            ),
                           ],
                         ),
                         style: ElevatedButton.styleFrom(
