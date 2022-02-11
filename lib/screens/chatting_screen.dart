@@ -210,7 +210,7 @@ class _Chatting_screenState extends State<Chatting_screen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [                               
+                              children: const [
                                 Icon(Icons.exit_to_app_sharp),
                                 /* Text(
                                   "Lascia chat",
@@ -448,23 +448,23 @@ class _Chatting_screenState extends State<Chatting_screen> {
                               style: TextStyle(
                                 fontSize: 12,
                               ),
-                            ),                           
+                            ),
                           ],
                         ),*/
-                         child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [                               
-                                Icon(Icons.exit_to_app_sharp),
-                                /* Text(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.exit_to_app_sharp),
+                            /* Text(
                                   "Lascia chat",
                                   style: TextStyle(
                                     fontSize: 11,
                                     //fontFamily: 'Texta',
                                   ),
                                 ),*/
-                              ],
-                            ),
+                          ],
+                        ),
                         style: ElevatedButton.styleFrom(
                           onPrimary: Colors.black,
                           primary: Colors.white,
@@ -582,13 +582,40 @@ class _Chatting_screenState extends State<Chatting_screen> {
     final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
     //print(allData[0]["time"]);
     // print(snapshot);
+    print(allData.length);
     for (int i = 0; i < allData.length; i++) {
-      await _firestore
-          .collection("Messages")
-          .doc(groupId.toString())
-          .collection(groupId.toString())
-          .doc(allData[i]["time"])
-          .delete();
+      await Future.delayed(Duration(milliseconds: 250), () async {
+        print(i);
+        await _firestore
+            .collection("Messages")
+            .doc(groupId.toString())
+            .collection(groupId.toString())
+            .doc(allData[i]["time"])
+            .delete();
+      });
+    }
+
+    var querySnapshotRemaining = await _firestore
+        .collection("Messages")
+        .doc(groupId.toString())
+        .collection(groupId.toString())
+        .get();
+
+    final allDataRemaining =
+        querySnapshotRemaining.docs.map((doc) => doc.data()).toList();
+    //print(allData[0]["time"]);
+    // print(snapshot);
+    //print(allDataRemaining.length);
+    for (int z = 0; z < allDataRemaining.length; z++) {
+      await Future.delayed(Duration(milliseconds: 250), () async {
+        //print(z);
+        await _firestore
+            .collection("Messages")
+            .doc(groupId.toString())
+            .collection(groupId.toString())
+            .doc(allDataRemaining[z]["time"])
+            .delete();
+      });
     }
 
     await _firestore.collection("Messages").doc(groupId.toString()).delete();
