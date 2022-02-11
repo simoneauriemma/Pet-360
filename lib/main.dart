@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
