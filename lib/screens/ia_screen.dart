@@ -30,6 +30,7 @@ class _IAscreenState extends State<IAscreen> {
   img.Image? fox;
 
   Category? category;
+  late double percentual;
 
   Row textAccuratezza = Row(
     children: [
@@ -68,7 +69,9 @@ class _IAscreenState extends State<IAscreen> {
     setState(() {
       this.category = pred;
     });
+    var stringTemp = category!.score.toStringAsFixed(4);
 
+    percentual = (double.parse(stringTemp) * 100);
     if (category!.score <= 0.4) {
       textAccuratezza = Row(
         children: [
@@ -291,7 +294,8 @@ class _IAscreenState extends State<IAscreen> {
                               ),
                               Text(
                                 category != null
-                                    ? 'ACCURATEZZA: ${category!.score.toStringAsFixed(3)}'
+                                    //? 'ACCURATEZZA: ${category!.score.toStringAsFixed(3)}'
+                                    ? 'ACCURATEZZA: $percentual %'
                                     : '',
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
