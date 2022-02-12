@@ -121,7 +121,7 @@ class _IAscreenState extends State<IAscreen> {
       textAccuratezza = Row(
         children: [
           Text(
-            "Sono sicuro di aver azzeccato\n la razza del tuo aniamale!",
+            "Sono sicuro di aver azzeccato\n la razza del tuo animale!",
             textAlign: TextAlign.center,
             style: GoogleFonts.questrial(
               fontSize: 15,
